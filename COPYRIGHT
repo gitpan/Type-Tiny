@@ -44,10 +44,16 @@ Files: CONTRIBUTING
  Makefile.PL
  README
  TODO
+ examples/datetimes-from-manual.pl
  examples/lib1.pl
  inc/Test/Fatal.pm
  inc/Test/Requires.pm
  inc/Try/Tiny.pm
+ lib/Type/Tiny/Manual.pod
+ lib/Type/Tiny/Manual/Libraries.pod
+ lib/Type/Tiny/Manual/UsingWithMoo.pod
+ lib/Type/Tiny/Manual/UsingWithMoose.pod
+ lib/Type/Tiny/Manual/UsingWithMouse.pod
  meta/changes.pret
  meta/doap.pret
  meta/makefile.pret

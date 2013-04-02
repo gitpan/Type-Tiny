@@ -2,6 +2,7 @@ Changes
 CONTRIBUTING
 COPYRIGHT
 CREDITS
+examples/datetimes-from-manual.pl
 examples/lib1.pl
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
@@ -31,6 +32,11 @@ lib/Type/Tiny/Class.pm
 lib/Type/Tiny/Duck.pm
 lib/Type/Tiny/Enum.pm
 lib/Type/Tiny/Intersection.pm
+lib/Type/Tiny/Manual.pod
+lib/Type/Tiny/Manual/Libraries.pod
+lib/Type/Tiny/Manual/UsingWithMoo.pod
+lib/Type/Tiny/Manual/UsingWithMoose.pod
+lib/Type/Tiny/Manual/UsingWithMouse.pod
 lib/Type/Tiny/Role.pm
 lib/Type/Tiny/Union.pm
 lib/Type/Utils.pm

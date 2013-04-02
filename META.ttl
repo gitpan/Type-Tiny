@@ -44,6 +44,7 @@ dist:project
 	doap:maintainer   cpan:tobyink;
 	doap:programming-language "Perl";
 	doap:release      dist:v_0-000_01;
+	doap:release      dist:v_0-000_02;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -59,6 +60,37 @@ dist:v_0-000_01
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_01.tar.gz>;
 	doap:revision     "0.000_01"^^xsd:string.
+
+dist:v_0-000_02
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_02"^^xsd:string;
+	dc:issued         "2013-04-02"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Beginnings of Type::Tiny::Manual.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Anchor enum regexps to beginning and end of string.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "StrMatch added to Type::Standard.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "use Type::Library -base";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "use Type::Library -declare";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_02.tar.gz>;
+	doap:revision     "0.000_02"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;
