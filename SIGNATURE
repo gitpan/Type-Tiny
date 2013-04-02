@@ -1,0 +1,88 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.70.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 f983c18fdb491c4b733235d54e8ca7563b67a6a3 CONTRIBUTING
+SHA1 ae4adac8870afa6fa03913344524b7bb4e8df0f4 COPYRIGHT
+SHA1 9e307a5415ca4fa0a76a08bd7236f23f15544ea8 CREDITS
+SHA1 c718b40fdf95538c04bee3d6ed427ad348f1d198 Changes
+SHA1 937d452c5c4069f4cda9ffaf45a33f1eb5f060e8 LICENSE
+SHA1 1a6a23a3b404072bc84c05241f4f1e83cabdb928 MANIFEST
+SHA1 e0dfd5abff35a9b1b269a3459ac6ed8dd4556e04 META.ttl
+SHA1 acae87b4f967eecfd9e7b19729b758100d6f0cc8 META.yml
+SHA1 e1bc19b712df138f9088b140d73a5372e0c3ba12 Makefile.PL
+SHA1 3d036f466dadc8853314bf80b4f26649e83e3169 README
+SHA1 db45ab4918b1e1c566b05fdf027e75e7d4269c41 TODO
+SHA1 ab1a6a2aa5fb2b6678623089ef29f05de61cba4a examples/lib1.pl
+SHA1 06c410f05488c1612ed66b06d3a86b2580581e4a inc/Module/AutoInstall.pm
+SHA1 8a924add836b60fb23b25c8506d45945e02f42f4 inc/Module/Install.pm
+SHA1 61ab1dd37e33ddbe155907ce51df8a3e56ac8bbf inc/Module/Install/AutoInstall.pm
+SHA1 c04f94f91fa97b9f8cfb5a36071098ab0e6c78e3 inc/Module/Install/AutoManifest.pm
+SHA1 2d0fad3bf255f8c1e7e1e34eafccc4f595603ddc inc/Module/Install/Base.pm
+SHA1 f0e01fff7d73cd145fbf22331579918d4628ddb0 inc/Module/Install/Can.pm
+SHA1 7328966e4fda0c8451a6d3850704da0b84ac1540 inc/Module/Install/Fetch.pm
+SHA1 66d3d335a03492583a3be121a7d888f63f08412c inc/Module/Install/Include.pm
+SHA1 b62ca5e2d58fa66766ccf4d64574f9e1a2250b34 inc/Module/Install/Makefile.pm
+SHA1 1aa925be410bb3bfcd84a16985921f66073cc1d2 inc/Module/Install/Metadata.pm
+SHA1 3b9281ddf7dd6d6f5de0a9642c69333023193c80 inc/Module/Install/Package.pm
+SHA1 41f76ff6b39368a65da86377e43b34bacc2fb0eb inc/Module/Install/TrustMetaYml.pm
+SHA1 e4196994fa75e98bdfa2be0bdeeffef66de88171 inc/Module/Install/Win32.pm
+SHA1 c3a6d0d5b84feb3280622e9599e86247d58b0d18 inc/Module/Install/WriteAll.pm
+SHA1 26d58a041cd6b3d21db98b32e8fd1841aae21204 inc/Module/Package.pm
+SHA1 5a2f84a7a82eee0d1e5ed3628fe503a608efc10f inc/Module/Package/Dist/RDF.pm
+SHA1 85872fcf275a7868f858ca6ccc0e15cdaff8f8ac inc/Test/Fatal.pm
+SHA1 95d4da14025622f3a45f5e9b75b7b6860148f415 inc/Test/Requires.pm
+SHA1 75dd349355aff420c46d9e37802e39712b6309c2 inc/Try/Tiny.pm
+SHA1 feb933cefe2e3762e8322bd6071a2499f3440da1 inc/YAML/Tiny.pm
+SHA1 53e69e5d5cd6b01e8e0160f6061e33661f8e1f6b lib/Type/Coercion.pm
+SHA1 e3d1b4f467fc671e0cf9faa8a2a9b5bbbb88997a lib/Type/Library.pm
+SHA1 46fea127af46d5edfcddbb7cba53246da30ad3da lib/Type/Standard.pm
+SHA1 056e00f96953d63c2e34d43d298e00934e65c1b0 lib/Type/Tiny.pm
+SHA1 16acf7cde7b420875b869ad96da5059aad9449eb lib/Type/Tiny/Class.pm
+SHA1 1187cbff85d667d33c5e92fb2e18e0d572b2644f lib/Type/Tiny/Duck.pm
+SHA1 df799610b485435711da24260aeeed6c960921be lib/Type/Tiny/Enum.pm
+SHA1 7455b20983bbbbac5ae3c5238425b28c54ffc2b6 lib/Type/Tiny/Intersection.pm
+SHA1 b896784a0b7f3c936d10a7e7624deb3b13ed328c lib/Type/Tiny/Role.pm
+SHA1 2a58c94892ee98f8e1c97e75f6b05f4b3ca92176 lib/Type/Tiny/Union.pm
+SHA1 6dd8158dd10ae10da140a4265833718bd2253624 lib/Type/Utils.pm
+SHA1 2e7bd414bef2e74b1a46797aeb88abcce4b8af40 meta/changes.pret
+SHA1 d4abb9a0a9d3f44122fc0a65bdb815b5492c403d meta/doap.pret
+SHA1 49944647c1c4695a769cb5bdc577f8e63ec8857e meta/makefile.pret
+SHA1 a151cff74b5f29c00381a14d4ec8726e3763b6b2 meta/people.pret
+SHA1 83a7c80a33c9ef18a9ddafe1573890f34d3f3090 t/00-compile.t
+SHA1 53aeb10f3f0dae450294981cf2c3167e1528efa4 t/BiggerLib.pm
+SHA1 a2396d638af3b1374b9dee7a4a34c385f859ff3c t/DemoLib.pm
+SHA1 06708d11762e8b4a4de648c13de3adf777dd5dd4 t/arithmetic.t
+SHA1 70a27ea8931669bd5387e971968760c7709e7a03 t/basic-assertion.t
+SHA1 ac16006058ed9cbbe52bf4941d2614c1f4a8e71a t/basic-check.t
+SHA1 de0e6076c45a5015dadcbecb8f9ad97acb9751b5 t/basic-coercion.t
+SHA1 985295b24cf41ea44fcaedbc1bcb714799ad2e81 t/basic.t
+SHA1 d3e180707c017b6f68eb8d8e51f7507f013f2fa5 t/class.t
+SHA1 a0a7550de68160e627d223a8b7c43e031bc4c371 t/duck.t
+SHA1 f58dccc8fb4b7c23270939bfb708a2a26816c649 t/moo-inflation.t
+SHA1 151732e3e34a48835c5b61bac6690a6d2c6a9533 t/moo.t
+SHA1 5a69bc1561fb65590fffeda62571b73739cc7cd1 t/moose.t
+SHA1 e50168521e8c7e7188bcf037eec1e0148aeb4ab2 t/mouse.t
+SHA1 167758268315a8de46a4b5dd10375d003ee3145a t/role.t
+SHA1 92c494e96835dc17a83b681df303a06425b87f7b t/stdlib-inlined.t
+SHA1 08c2facc75d88d721ecd9e23ef9510370af9e541 t/stdlib-structures.t
+SHA1 912871cd67059bf65605a00e9b0a669090a65931 t/stdlib.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAlFalw8ACgkQzr+BKGoqfTlyBQCeINNWVXWEk/G9i4e0WgpdZfCU
+t+AAn3UNMD5KqgOMT0fyHj26RKK/5ubA
+=3Y75
+-----END PGP SIGNATURE-----

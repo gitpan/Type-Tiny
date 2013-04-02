@@ -1,0 +1,232 @@
+NAME
+    Type::Tiny - tiny, yet Moo(se)-compatible type constraint
+
+SYNOPSIS
+       use Scalar::Util qw(looks_like_number);
+       use Type::Tiny;
+   
+       my $NUM = "Type::Tiny"->new(
+          name       => "Number",
+          constraint => sub { looks_like_number($_) },
+          message    => sub { "$_ ain't a number" },
+       );
+   
+       package Ermintrude {
+          use Moo;
+          has favourite_number => (is => "ro", isa => $NUM);
+       }
+   
+       package Bullwinkle {
+          use Moose;
+          has favourite_number => (is => "ro", isa => $NUM->moose_type);
+       }
+
+DESCRIPTION
+    Type::Tiny is a tiny class for creating Moose-like type constraint
+    objects which are compatible with Moo, Moose and Mouse.
+
+    Maybe now we won't need to have separate MooseX, MouseX and MooX
+    versions of everything? We can but hope...
+
+    If you're reading this because you want to create a type library, then
+    you're probably better off reading Type::Tiny::Manual.
+
+  Constructor
+    "new(%attributes)"
+        Moose-style constructor function.
+
+  Attributes
+    "name"
+        The name of the type constraint. These need to conform to certain
+        naming rules. Optional; if not supplied will be an anonymous type
+        constraint.
+
+    "display_name"
+        A name to display for the type constraint when stringified. These
+        don't have to conform to any naming rules. Optional.
+
+    "parent"
+        Optional attribute; parent type constraint. For example, an
+        "Integer" type constraint might have a parent "Number".
+
+        If provided, must be a Type::Tiny object.
+
+    "constraint"
+        Coderef to validate a value ($_) against the type constraint. The
+        coderef will not be called unless the value is known to pass any
+        parent type constraint.
+
+        Defaults to "sub { 1 }" - i.e. a coderef that passes all values.
+
+    "message"
+        Coderef that returns an error message when $_ does not validate
+        against the type constraint. Optional (there's a vaguely sensible
+        default.)
+
+    "inlined"
+        A coderef which returns a string of Perl code suitable for inlining
+        this type. Optional.
+
+    "library"
+        The package name of the type library this type is associated with.
+        Optional. Informational only: setting this attribute does not
+        install the type into the package.
+
+    "coercion"
+        A Type::Coercion object associated with this type.
+
+        Generally speaking this attribute should not be passed to the
+        constructor; you should rely on the default lazily-built coercion
+        object.
+
+    "complementary_type"
+        A complementary type for this type. For example, the complementary
+        type for an integer type would be all things that are not integers,
+        including floating point numbers, but also alphabetic strings,
+        arrayrefs, filehandles, etc.
+
+        Generally speaking this attribute should not be passed to the
+        constructor; you should rely on the default lazily-built
+        complementary type.
+
+    "moose_type", "mouse_type"
+        Objects equivalent to this type constraint, but as a
+        Moose::Meta::TypeConstraint or Mouse::Meta::TypeConstraint.
+
+        Generally speaking this attribute should not be passed to the
+        constructor; you should rely on the default lazily-built objects.
+
+    The following additional attributes are used for parameterizable (e.g.
+    "ArrayRef") and parameterized (e.g. "ArrayRef[Int]") type constraints.
+    Unlike Moose, these aren't handled by separate subclasses.
+
+    "parameters"
+        In parameterized types, returns an arrayref of the parameters.
+
+    "name_generator"
+        A coderef which generates a new display_name based on parameters.
+
+    "constraint_generator"
+        Coderef that generates a new constraint coderef based on parameters.
+        Optional.
+
+    "inline_generator"
+        A coderef which generates a new inlining coderef based on
+        parameters.
+
+  Methods
+    "has_parent", "has_coercion", "has_library", "has_constraint_generator",
+    "has_inlined", "has_inline_generator", "has_parameters"
+        Predicate methods.
+
+    "is_anon"
+        Returns true iff the type constraint does not have a "name".
+
+    "is_parameterized", "is_parameterizable"
+        Indicates whether a type has been parameterized (e.g.
+        "ArrayRef[Int]") or could potentially be (e.g. "ArrayRef").
+
+    "qualified_name"
+        For non-anonymous type constraints that have a library, returns a
+        qualified "Library::Type" sort of name. Otherwise, returns the same
+        as "name".
+
+    "parents"
+        Returns a list of all this type constraint's all ancestor
+        constraints.
+
+    "check($value)"
+        Returns true iff the value passes the type constraint.
+
+    "validate($value)"
+        Returns the error message for the value; returns an explicit undef
+        if the value passes the type constraint.
+
+    "assert_valid($value)"
+        Like "check($value)" but dies if the value does not pass the type
+        constraint.
+
+        Yes, that's three very similar methods. Blame
+        Moose::Meta::TypeConstraint whose API I'm attempting to emulate. :-)
+
+    "get_message($value)"
+        Returns the error message for the value; even if the value passes
+        the type constraint.
+
+    "coerce($value)"
+        Attempt to coerce $value to this type.
+
+    "assert_coerce($value)"
+        Attempt to coerce $value to this type. Throws an exception if this
+        is not possible.
+
+    "can_be_inlined"
+        Returns boolean indicating if this type can be inlined.
+
+    "inline_check($varname)"
+        Creates a type constraint check for a particular variable as a
+        string of Perl code. For example:
+
+                print( Type::Standard::Num->inline_check('$foo') );
+
+        prints the following output:
+
+                (!ref($foo) && Scalar::Util::looks_like_number($foo))
+
+        For Moose-compat, there is an alias "_inline_check" for this method.
+
+    "parameterize(@parameters)"
+        Creates a new parameterized type; throws an exception if called on a
+        non-parameterizable type.
+
+    "create_child_type(%attributes)"
+        Construct a new Type::Tiny object with this object as its parent.
+
+    "child_type_class"
+        The class that create_child_type will construct.
+
+  Overloading
+    *   Stringification is overloaded to return the qualified name.
+
+    *   Boolification is overloaded to always return true.
+
+    *   Coderefification is overloaded to call "assert_value".
+
+    *   On Perl 5.10.1 and above, smart match is overloaded to call "check".
+
+    *   The "~" operator is overloaded to call "complementary_type".
+
+    *   The "|" operator is overloaded to build a union of two type
+        constraints. See Type::Tiny::Union.
+
+    *   The "&" operator is overloaded to build the intersection of two type
+        constraints. See Type::Tiny::Intersection.
+
+BUGS
+    Please report any bugs to
+    <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
+
+SEE ALSO
+    Type::Tiny::Manual.
+
+    Type::Library, Type::Utils, Type::Standard, Type::Coercion.
+
+    Type::Tiny::Class, Type::Tiny::Role, Type::Tiny::Duck, Type::Tiny::Enum,
+    Type::Tiny::Union.
+
+    Moose::Meta::TypeConstraint, Mouse::Meta::TypeConstraint.
+
+AUTHOR
+    Toby Inkster <tobyink@cpan.org>.
+
+COPYRIGHT AND LICENCE
+    This software is copyright (c) 2013 by Toby Inkster.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
+DISCLAIMER OF WARRANTIES
+    THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+    WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+    MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
