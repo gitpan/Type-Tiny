@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.000_03';
+	$Type::Coercion::VERSION   = '0.000_04';
 }
 
 use Scalar::Util qw< blessed >;
@@ -39,35 +39,64 @@ sub new
 sub type_constraint     { $_[0]{type_constraint} }
 sub type_coercion_map   { $_[0]{type_coercion_map} ||= [] }
 sub moose_coercion      { $_[0]{moose_coercion}    ||= $_[0]->_build_moose_coercion }
+sub compiled_coercion   { $_[0]{compiled_coercion} ||= $_[0]->_build_compiled_coercion }
 
-sub has_type_constraint { exists $_[0]{type_constraint} }
+sub has_type_constraint { defined $_[0]{type_constraint} } # sic
+
+sub _clear_compiled_coercion { delete $_[0]{compiled_coercion} }
+
+# Some Type::Tiny objects for internal use!
+my ($_isStr, $_isCode);
+
+sub _isStr {
+	require Type::Utils;
+	require Type::Standard;
+	$_isStr ||= Type::Utils::union([
+		Type::Standard::Overload([q[""]]),
+		Type::Standard::Str(),
+	]);
+	$_isStr->compiled_check->(@_);
+}
+
+sub _isCode {
+	require Type::Utils;
+	require Type::Standard;
+	$_isCode ||= Type::Utils::union([
+		Type::Standard::Overload([q[&{}]]),
+		Type::Standard::Ref(["CODE"]),
+	]);
+	$_isCode->compiled_check->(@_);
+}
 
 sub coerce
 {
 	my $self = shift;
-	my $c = $self->type_coercion_map;
-	local $_ = $_[0];
-	for (my $i = 0; $i <= $#$c; $i += 2)
-	{
-		return scalar $c->[$i+1]->(@_) if $c->[$i]->check(@_);
-	}
-	return $_[0];
+	return $self->compiled_coercion->(@_);
 }
 
 sub assert_coerce
 {
 	my $self = shift;
 	my $r = $self->coerce(@_);
-	if ($self->has_type_constraint)
-	{
-		$self->type_constraint->assert_valid($r);
-	}
+	$self->type_constraint->assert_valid($r)
+		if $self->has_type_constraint;
 	return $r;
 }
 
 sub has_coercion_for_type
 {
-	die "not implemented";
+	my $self = shift;
+	my $type = $_[0];
+	
+	for my $has (@{$self->type_coercion_map})
+	{
+		if (blessed($has) and $has->isa("Type::Tiny"))
+		{
+			return !!1 if $type->is_a_type_of($has);
+		}
+	}
+	
+	return;
 }
 
 sub has_coercion_for_value
@@ -95,12 +124,54 @@ sub add_type_coercions
 		_confess "types must be blessed Type::Tiny objects"
 			unless blessed($type) && $type->isa("Type::Tiny");
 		_confess "coercions must be code references"
-			unless ref($coercion);  # really want: does($coercion, "&{}")
+			unless _isStr($coercion) || _isCode($coercion);
 		
 		push @{$self->type_coercion_map}, $type, $coercion;
 	}
 	
+	$self->_clear_compiled_coercion;
 	return $self;
+}
+
+sub _build_compiled_coercion
+{
+	my $self = shift;
+	
+	my @mishmash = @{$self->type_coercion_map};
+	return sub { $_[0] } unless @mishmash;
+	
+	# These arrays will be closed over.
+	my (@types, @codes);
+	while (@mishmash)
+	{
+		push @types, shift @mishmash;
+		push @codes, shift @mishmash;
+	}
+	if ($self->has_type_constraint)
+	{
+		unshift @types, $self->type_constraint;
+		unshift @codes, undef;
+	}
+	
+	my @sub;
+	
+	for my $i (0..$#types)
+	{
+		push @sub,
+			$types[$i]->can_be_inlined ? sprintf('if (%s)', $types[$i]->inline_check('$_[0]')) :
+			sprintf('if ($types[%d]->check(@_))', $i);
+		push @sub,
+			!defined($codes[$i]) ? sprintf('  { return $_[0] }') :
+			_isStr($codes[$i])   ? sprintf('  { local $_ = $_[0]; return( %s ) }', $codes[$i]) :
+			sprintf('  { local $_ = $_[0]; return $codes[%d]->(@_) }', $i);
+	}
+	
+	push @sub, 'return $_[0];';
+	
+	local $@;
+	my $sub = eval sprintf('sub ($) { %s }', join qq[\n], @sub);
+	die "Failed to compile coercion: $@\n\nCODE: @sub" if $@;
+	return $sub;
 }
 
 sub _build_moose_coercion
@@ -155,8 +226,16 @@ the output of coercion coderefs is expected to conform to).
 
 =item C<type_coercion_map>
 
-Arrayref of source-type/coercion-coderef pairs. Don't set this in the
-constructor; use the C<add_type_coercions> method instead.
+Arrayref of source-type/code pairs. Don't set this in the constructor; use
+the C<add_type_coercions> method instead.
+
+=item C<< compiled_coercion >>
+
+Coderef to coerce a value (C<< $_[0] >>).
+
+The general point of this attribute is that you should not set it, and
+rely on the lazily-built default. Type::Coerce will usually generate a
+pretty fast coderef, inlining all type constraint checks, etc.
 
 =item C<moose_coercion>
 
@@ -175,8 +254,13 @@ Predicate method.
 
 =item C<< add_type_coercions($type1, $code1, ...) >>
 
-Takes one or more pairs of L<Type::Tiny> objects and coderefs, creating an
-ordered list of source types and coercion coderefs.
+Takes one or more pairs of L<Type::Tiny> constraints and coercion code,
+creating an ordered list of source types and coercion codes.
+
+Coercion codes can be expressed as either a string of Perl code (this
+includes objects which overload stringification), or a coderef (or object
+that overloads coderefification). In either case, the value to be coerced
+is C<< $_ >>.
 
 =item C<< coerce($value) >>
 

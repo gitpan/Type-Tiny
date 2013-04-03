@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.000_03';
+	$Type::Tiny::Union::VERSION   = '0.000_04';
 }
 
 use Scalar::Util qw< blessed >;
@@ -62,7 +62,7 @@ sub can_be_inlined
 sub inline_check
 {
 	my $self = shift;
-	sub { join " or ", map $_->inline_check($_[1]), @$self };
+	join " or ", map $_->inline_check($_[0]), @$self;
 }
 
 1;

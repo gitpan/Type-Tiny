@@ -46,6 +46,7 @@ dist:project
 	doap:release      dist:v_0-000_01;
 	doap:release      dist:v_0-000_02;
 	doap:release      dist:v_0-000_03;
+	doap:release      dist:v_0-000_04;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -131,6 +132,37 @@ dist:v_0-000_03
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_03.tar.gz>;
 	doap:revision     "0.000_03"^^xsd:string.
+
+dist:v_0-000_04
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_04"^^xsd:string;
+	dc:issued         "2013-04-03"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Create and use compiled coercions; somewhat faster.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Tiny plus_coercions/minus_coercions/no_coercions methods for creating subtypes with different sets of coercions.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Tiny equals/is_subtype_of/is_supertype_of/is_a_type_of methods for type constraint comparisons.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Finally implement Type::Coercion's has_coercion_for_type method.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Allow coercion code to be expressed as a string; quite a bit faster.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_04.tar.gz>;
+	doap:revision     "0.000_04"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;

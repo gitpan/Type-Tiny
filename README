@@ -149,6 +149,12 @@ DESCRIPTION
         Returns a list of all this type constraint's all ancestor
         constraints.
 
+    "equals($other)", "is_subtype_of($other)", "is_supertype_of($other)", ,
+    "is_a_type_of($other)"
+        Compare two types. See Moose::Meta::TypeConstraint for what these
+        all mean. (OK, Moose doesn't define "is_supertype_of", but you get
+        the idea, right?)
+
     "check($value)"
         Returns true iff the value passes the type constraint.
 
@@ -199,6 +205,19 @@ DESCRIPTION
     "child_type_class"
         The class that create_child_type will construct.
 
+    "plus_coercions($type1, $code1, ...)"
+        Shorthand for creating a new child type constraint with the same
+        coercions as this one, but then adding some extra coercions (at a
+        higher priority than the existing ones).
+
+    "minus_coercions($type1, ...)"
+        Shorthand for creating a new child type constraint with fewer type
+        coercions.
+
+    "no_coercions"
+        Shorthand for creating a new child type constraint with no coercions
+        at all.
+
   Overloading
     *   Stringification is overloaded to return the qualified name.
 
@@ -207,6 +226,11 @@ DESCRIPTION
     *   Coderefification is overloaded to call "assert_value".
 
     *   On Perl 5.10.1 and above, smart match is overloaded to call "check".
+
+    *   The "==" operator is overloaded to call "equals".
+
+    *   The "<" and ">" operators are overloaded to call "is_subtype_of" and
+        "is_supertype_of".
 
     *   The "~" operator is overloaded to call "complementary_type".
 

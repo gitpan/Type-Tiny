@@ -6,10 +6,10 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_03';
+	$Type::Tiny::VERSION   = '0.000_04';
 }
 
-use Scalar::Util qw< blessed weaken >;
+use Scalar::Util qw< blessed weaken refaddr >;
 
 sub _confess ($;@)
 {
@@ -24,9 +24,14 @@ use overload
 	q("")      => sub { caller eq 'Moo::HandleMoose' ? "Type::Tiny~~$_[0]{uniq}" : $_[0]->display_name },
 	q(bool)    => sub { 1 },
 	q(&{})     => sub { my $t = shift; sub { $t->assert_valid(@_) } },
-	q(|)       => sub { my @tc = _swap(@_); require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@tc) },
-	q(&)       => sub { my @tc = _swap(@_); require Type::Tiny::Intersection; "Type::Tiny::Intersection"->new(type_constraints => \@tc) },
+	q(|)       => sub { my @tc = _swap @_; require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@tc) },
+	q(&)       => sub { my @tc = _swap @_; require Type::Tiny::Intersection; "Type::Tiny::Intersection"->new(type_constraints => \@tc) },
 	q(~)       => sub { shift->complementary_type },
+	q(==)      => sub { $_[0]->equals($_[1]) },
+	q(<)       => sub { my $m = $_[0]->can('is_subtype_of'); $m->(_swap @_) },
+	q(>)       => sub { my $m = $_[0]->can('is_subtype_of'); $m->(reverse _swap @_) },
+	q(<=)      => sub { my $m = $_[0]->can('is_a_type_of');  $m->(_swap @_) },
+	q(>=)      => sub { my $m = $_[0]->can('is_a_type_of');  $m->(reverse _swap @_) },
 	fallback   => 1,
 ;
 use if ($] >= 5.010001), overload =>
@@ -58,6 +63,14 @@ sub new
 	return $self;
 }
 
+sub _clone
+{
+	my $self = shift;
+	my %opts;
+	$opts{$_} = $self->{$_} for qw< name display_name message >;
+	$self->create_child_type(%opts);
+}
+
 sub name                     { $_[0]{name} }
 sub display_name             { $_[0]{display_name}   ||= $_[0]->_build_display_name }
 sub parent                   { $_[0]{parent} }
@@ -85,7 +98,8 @@ sub has_parameters           { exists $_[0]{parameters} }
 sub _assert_coercion
 {
 	my $self = shift;
-	$self->has_coercion or _confess "no coercion for this type constraint";
+	_confess "no coercion for this type constraint"
+		unless $self->has_coercion && @{$self->coercion->type_coercion_map};
 	return $self->coercion;
 }
 
@@ -159,6 +173,53 @@ sub _build_compiled_check
 		}
 		return !!1;
 	};
+}
+
+sub equals
+{
+	my ($self, $other) = @_;
+	
+	return unless blessed($other) && $other->isa("Type::Tiny");
+	
+	return !!1 if refaddr($self) == refaddr($other);
+	
+	return !!1 if $self->has_parent  && $self->_is_null_constraint  && $self->parent==$other;
+	return !!1 if $other->has_parent && $other->_is_null_constraint && $other->parent==$self;
+	
+	return $self->qualified_name eq $other->qualified_name
+		if $self->has_library && !$self->is_anon && $other->has_library && !$other->is_anon;
+	
+	return $self->inline_check('$x') eq $other->inline_check('$x')
+		if $self->can_be_inlined && $other->can_be_inlined;
+	
+	return;
+}
+
+sub is_subtype_of
+{
+	my ($self, $other) = @_;
+	return unless blessed($other) && $other->isa("Type::Tiny");
+
+	my $this = $self;
+	while (my $parent = $this->parent)
+	{
+		return !!1 if $parent->equals($other);
+		$this = $parent;
+	}
+	return;
+}
+
+sub is_supertype_of
+{
+	my ($self, $other) = @_;
+	return unless blessed($other) && $other->isa("Type::Tiny");
+	$other->is_subtype_of($self);
+}
+
+sub is_a_type_of
+{
+	my ($self, $other) = @_;
+	$self->equals($other) or $self->is_subtype_of($other);
 }
 
 sub qualified_name
@@ -365,6 +426,57 @@ sub _build_mouse_type
 	return $r;
 }
 
+sub plus_coercions
+{
+	my $self = shift;
+	
+	my @more = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
+		? @{ $_[0]->type_coercion_map }
+		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
+	
+	my $new = $self->_clone;
+	$new->coercion->add_type_coercions(
+		@more,
+		@{$self->coercion->type_coercion_map},
+	);
+	return $new;
+}
+
+sub minus_coercions
+{
+	my $self = shift;
+	
+	my @not = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
+		? grep(blessed($_)&&$_->isa("Type::Tiny"), @{ $_[0]->type_coercion_map })
+		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
+	
+	my @keep;
+	my $c = $self->coercion->type_coercion_map;
+	for (my $i = 0; $i <= $#$c; $i += 2)
+	{
+		my $keep_this = 1;
+		NOT: for my $n (@not)
+		{
+			if ($c->[$i] == $n)
+			{
+				$keep_this = 0;
+				last NOT;
+			}
+		}
+		
+		push @keep, $c->[$i], $c->[$i+1] if $keep_this;
+	}
+
+	my $new = $self->_clone;
+	$new->coercion->add_type_coercions(@keep);
+	return $new;
+}
+
+sub no_coercions
+{
+	shift->_clone;
+}
+
 1;
 
 __END__
@@ -557,6 +669,11 @@ C<< "Library::Type" >> sort of name. Otherwise, returns the same as C<name>.
 
 Returns a list of all this type constraint's all ancestor constraints.
 
+=item C<< equals($other) >>, C<< is_subtype_of($other) >>, C<< is_supertype_of($other) >>, , C<< is_a_type_of($other) >>
+
+Compare two types. See L<Moose::Meta::TypeConstraint> for what these all mean.
+(OK, Moose doesn't define C<is_supertype_of>, but you get the idea, right?)
+
 =item C<< check($value) >>
 
 Returns true iff the value passes the type constraint.
@@ -618,6 +735,20 @@ Construct a new Type::Tiny object with this object as its parent.
 
 The class that create_child_type will construct.
 
+=item C<< plus_coercions($type1, $code1, ...) >>
+
+Shorthand for creating a new child type constraint with the same coercions
+as this one, but then adding some extra coercions (at a higher priority than
+the existing ones).
+
+=item C<< minus_coercions($type1, ...) >>
+
+Shorthand for creating a new child type constraint with fewer type coercions.
+
+=item C<< no_coercions >>
+
+Shorthand for creating a new child type constraint with no coercions at all.
+
 =back
 
 =head2 Overloading
@@ -639,6 +770,15 @@ Coderefification is overloaded to call C<assert_value>.
 =item *
 
 On Perl 5.10.1 and above, smart match is overloaded to call C<check>.
+
+=item *
+
+The C<< == >> operator is overloaded to call C<equals>.
+
+=item *
+
+The C<< < >> and C<< > >> operators are overloaded to call C<is_subtype_of>
+and C<is_supertype_of>.
 
 =item *
 
