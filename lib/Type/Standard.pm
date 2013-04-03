@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Type::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Standard::VERSION   = '0.000_02';
+	$Type::Standard::VERSION   = '0.000_03';
 }
 
 use base "Type::Library";
@@ -28,57 +28,69 @@ sub _is_class_loaded {
 }
 
 declare "Any",
+	_is_core => 1,
 	inline_as { "!!1" };
 
 declare "Item",
+	_is_core => 1,
 	inline_as { "!!1" };
 
 declare "Bool",
+	_is_core => 1,
 	as "Item",
 	where { !defined $_ or $_ eq q() or $_ eq '0' or $_ eq '1' },
 	inline_as { "!defined $_ or $_ eq q() or $_ eq '0' or $_ eq '1'" };
 
 declare "Undef",
+	_is_core => 1,
 	as "Item",
 	where { !defined $_ },
 	inline_as { "!defined($_)" };
 
 declare "Defined",
+	_is_core => 1,
 	as "Item",
 	where { defined $_ },
 	inline_as { "defined($_)" };
 
 declare "Value",
+	_is_core => 1,
 	as "Defined",
 	where { not ref $_ },
 	inline_as { "defined($_) and not ref($_)" };
 
 declare "Str",
+	_is_core => 1,
 	as "Value",
 	where { ref(\$_) eq 'SCALAR' or ref(\(my $val = $_)) eq 'SCALAR' },
 	inline_as { "defined($_) and (ref(\\$_) eq 'SCALAR' or ref(\\(my \$val = $_)) eq 'SCALAR')" };
 
 declare "Num",
+	_is_core => 1,
 	as "Str",
 	where { looks_like_number $_ },
 	inline_as { "!ref($_) && Scalar::Util::looks_like_number($_)" };
 
 declare "Int",
+	_is_core => 1,
 	as "Num",
 	where { /\A-?[0-9]+\z/ },
 	inline_as { "defined $_ and $_ =~ /\\A-?[0-9]+\\z/" };
 
 declare "ClassName",
+	_is_core => 1,
 	as "Str",
 	where { goto \&_is_class_loaded },
 	inline_as { "Type::Standard::_is_class_loaded($_)" };
 
 declare "RoleName",
+	_is_core => 1,
 	as "ClassName",
 	where { not $_->can("new") },
 	inline_as { "Type::Standard::_is_class_loaded($_) and not $_->can('new')" };
 
 declare "Ref",
+	_is_core => 1,
 	as "Defined",
 	where { ref $_ },
 	inline_as { "!!ref($_)" },
@@ -99,21 +111,25 @@ declare "Ref",
 	};
 
 declare "CodeRef",
+	_is_core => 1,
 	as "Ref",
 	where { ref $_ eq "CODE" },
 	inline_as { "ref($_) eq 'CODE'" };
 
 declare "RegexpRef",
+	_is_core => 1,
 	as "Ref",
 	where { ref $_ eq "Regexp" },
 	inline_as { "ref($_) eq 'Regexp'" };
 
 declare "GlobRef",
+	_is_core => 1,
 	as "Ref",
 	where { ref $_ eq "GLOB" },
 	inline_as { "ref($_) eq 'GLOB'" };
 
 declare "FileHandle",
+	_is_core => 1,
 	as "Ref",
 	where {
 		(ref($_) eq "GLOB" && Scalar::Util::openhandle($_))
@@ -125,6 +141,7 @@ declare "FileHandle",
 	};
 
 declare "ArrayRef",
+	_is_core => 1,
 	as "Ref",
 	where { ref $_ eq "ARRAY" },
 	inline_as { "ref($_) eq 'ARRAY'" },
@@ -155,6 +172,7 @@ declare "ArrayRef",
 	};
 
 declare "HashRef",
+	_is_core => 1,
 	as "Ref",
 	where { ref $_ eq "HASH" },
 	inline_as { "ref($_) eq 'HASH'" },
@@ -185,6 +203,7 @@ declare "HashRef",
 	};
 
 declare "ScalarRef",
+	_is_core => 1,
 	as "Ref",
 	where { ref $_ eq "SCALAR" or ref $_ eq "REF" },
 	inline_as { "ref($_) eq 'SCALAR' or ref($_) eq 'REF'" },
@@ -201,26 +220,21 @@ declare "ScalarRef",
 	inline_generator => sub {
 		my $param = shift;
 		return unless $param->can_be_inlined;
-		my $param_check = $param->inline_check('$i');
-		# kinda clumsy, but it does the job...
 		return sub {
 			my $v = $_[1];
-			"ref($v) eq 'SCALAR' or ref($v) eq 'REF' and do { "
-			.  "my \$ok = 1; "
-			.  "for my \$i (${$v}) { "
-			.    "\$ok = 0 unless $param_check "
-			.  "}; "
-			.  "\$ok "
-			."}"
+			my $param_check = $param->inline_check("\${$v}");
+			"(ref($v) eq 'SCALAR' or ref($v) eq 'REF') and $param_check";
 		};
 	};
 
 declare "Object",
+	_is_core => 1,
 	as "Ref",
 	where { blessed $_ },
 	inline_as { "Scalar::Util::blessed($_)" };
 
 declare "Maybe",
+	_is_core => 1,
 	as "Item",
 	constraint_generator => sub
 	{
@@ -283,6 +297,15 @@ declare "Optional",
 	{
 		my $param = shift;
 		sub { exists($_[0]) ? $param->check($_[0]) : !!1 }
+	},
+	inline_generator => sub {
+		my $param = shift;
+		return unless $param->can_be_inlined;
+		return sub {
+			my $v = $_[1];
+			my $param_check = $param->inline_check($v);
+			"!exists($v) or $param_check";
+		};
 	};
 
 sub slurpy ($) { +{ slurpy => $_[0] } }
@@ -319,6 +342,30 @@ declare "Tuple",
 			}
 			return !!1;
 		};
+	},
+	inline_generator => sub
+	{
+		my @constraints = @_;
+		my $slurpy;
+		if (exists $constraints[-1] and ref $constraints[-1] eq "HASH")
+		{
+			$slurpy = pop(@constraints)->{slurpy};
+		}
+		
+		return if grep { not $_->can_be_inlined } @constraints;
+		return if defined $slurpy && !$slurpy->can_be_inlined;
+		
+		return sub
+		{
+			my $v = $_[1];
+			join " and ",
+				"ref($v) eq 'ARRAY'",
+				($slurpy
+					? sprintf("do { my \$tmp = [\@{$v}[%d..\$#{$v}]]; %s }", $#constraints+1, $slurpy->inline_check('$tmp'))
+					: sprintf("\@{$v} <= %d", scalar @constraints)
+				),
+				map { $constraints[$_]->inline_check("$v\->[$_]") } 0 .. $#constraints;
+		};
 	};
 
 declare "Dict",
@@ -340,6 +387,31 @@ declare "Dict",
 			$constraints{$_}->check(exists $value->{$_} ? $value->{$_} : ()) || return for sort keys %constraints;
 			return !!1;
 		};
+	},
+	inline_generator => sub
+	{
+		# We can only inline a parameterized Dict if all the
+		# constraints inside can be inlined.
+		my %constraints = @_;
+		for my $c (values %constraints)
+		{
+			next if $c->can_be_inlined;
+			return;
+		}
+		my $regexp = join "|", map quotemeta, sort keys %constraints;
+		return sub
+		{
+			require B;
+			my $h = $_[1];
+			join " and ",
+				"ref($h) eq 'HASH'",
+				"not(grep !/^($regexp)\$/, keys \%{$h})",
+				map {
+					my $k = B::perlstring($_);
+					$constraints{$_}->inline_check("$h\->{$k}");
+				}
+				sort keys %constraints;
+		}
 	};
 
 use overload ();
@@ -385,6 +457,37 @@ declare "StrMatch",
 				!ref($value) and $value =~ $regexp;
 			}
 		;
+	},
+	inline_generator => sub
+	{
+		require B;
+		my ($regexp, $checker) = @_;
+		my $regexp_string = "$regexp";
+		$regexp_string =~ s/\\\//\\\\\//g; # toothpicks
+		if ($checker)
+		{
+			return unless $checker->can_be_inlined;
+			return sub
+			{
+				my $v = $_[1];
+				sprintf
+					"!ref($v) and do { my \$m = [$v =~ /%s/]; %s }",
+					$regexp_string,
+					$checker->inline_check('$m'),
+				;
+			};
+		}
+		else
+		{
+			return sub
+			{
+				my $v = $_[1];
+				sprintf
+					"!ref($v) and $v =~ /%s/",
+					$regexp_string,
+				;
+			};
+		}
 	};
 
 1;
@@ -505,7 +608,7 @@ A string that matches a regular exception:
 	declare "Distance",
 		as StrMatch[ qr{^([0-9]+)\s*(mm|cm|m|km)$} ];
 
-You can provide a type constraint for the array of subexpressions:
+You can optionally provide a type constraint for the array of subexpressions:
 
 	declare "Distance",
 		as StrMatch[

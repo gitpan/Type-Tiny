@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.000_02';
+	$Type::Coercion::VERSION   = '0.000_03';
 }
 
 use Scalar::Util qw< blessed >;
@@ -20,6 +20,7 @@ sub _confess ($;@)
 
 use overload
 	q(&{})     => sub { my $t = shift; sub { $t->coerce(@_) } },
+	q(bool)    => sub { !!1 },
 	fallback   => 1,
 ;
 use if ($] >= 5.010001), overload =>
@@ -193,6 +194,24 @@ Not implemented yet.
 =item C<< has_coercion_for_value($value) >>
 
 Returns true iff the value could be coerced by this coercion.
+
+=back
+
+=head2 Overloading
+
+=over
+
+=item *
+
+Boolification is overloaded to always return true.
+
+=item *
+
+Coderefification is overloaded to call C<coerce>.
+
+=item *
+
+On Perl 5.10.1 and above, smart match is overloaded to call C<has_coercion_for_value>.
 
 =back
 

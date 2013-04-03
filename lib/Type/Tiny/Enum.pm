@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.000_02';
+	$Type::Tiny::Enum::VERSION   = '0.000_03';
 }
 
 sub _confess ($;@)
@@ -57,7 +57,7 @@ sub inline_check
 {
 	my $self = shift;
 	my $regexp = join "|", map quotemeta, @$self;
-	"$_[0] =~ m{^(?:$regexp)$}"
+	"$_[0] =~ m{^(?:$regexp)\$}";
 }
 
 1;

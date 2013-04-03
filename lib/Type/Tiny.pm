@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_02';
+	$Type::Tiny::VERSION   = '0.000_03';
 }
 
 use Scalar::Util qw< blessed weaken >;
@@ -21,7 +21,7 @@ sub _confess ($;@)
 sub _swap { $_[2] ? @_[1,0] : @_[0,1] }
 
 use overload
-	q("")      => sub { $_[0]->display_name },
+	q("")      => sub { caller eq 'Moo::HandleMoose' ? "Type::Tiny~~$_[0]{uniq}" : $_[0]->display_name },
 	q(bool)    => sub { 1 },
 	q(&{})     => sub { my $t = shift; sub { $t->assert_valid(@_) } },
 	q(|)       => sub { my @tc = _swap(@_); require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@tc) },
@@ -33,6 +33,7 @@ use if ($] >= 5.010001), overload =>
 	q(~~)      => sub { $_[0]->check($_[1]) },
 ;
 
+my $uniq = 1;
 sub new
 {
 	my $class  = shift;
@@ -45,12 +46,13 @@ sub new
 	}
 	
 	$params{name} = "__ANON__" unless exists $params{name};
+	$params{uniq} = $uniq++;
 	
 	my $self = bless \%params, $class;
 	
 	if ($self->has_library and not $self->is_anon)
 	{
-		$Moo::HandleMoose::TYPE_MAP{"$self"} = sub { $self->moose_type };
+		$Moo::HandleMoose::TYPE_MAP{"Type::Tiny~~$self->{uniq}"} = sub { $self->moose_type };
 	}
 	
 	return $self;
@@ -60,6 +62,7 @@ sub name                     { $_[0]{name} }
 sub display_name             { $_[0]{display_name}   ||= $_[0]->_build_display_name }
 sub parent                   { $_[0]{parent} }
 sub constraint               { $_[0]{constraint}     ||= $_[0]->_build_constraint }
+sub compiled_check           { $_[0]{compiled_check} ||= $_[0]->_build_compiled_check }
 sub coercion                 { $_[0]{coercion}       ||= $_[0]->_build_coercion }
 sub message                  { $_[0]{message}        ||= $_[0]->_build_message }
 sub library                  { $_[0]{library} }
@@ -127,6 +130,37 @@ sub _build_name_generator
 	};
 }
 
+sub _build_compiled_check
+{
+	my $self = shift;
+	
+	if ($self->can_be_inlined)
+	{
+		local $@;
+		my $sub = eval sprintf('sub ($) { %s }', $self->inline_check('$_[0]'));
+		die "Failed to compile check for $self: $@\n\nCODE: ".$self->inline_check('$_[0]') if $@;
+		return $sub;
+	}
+	
+	my @constraints =
+		reverse
+		map  { $_->constraint }
+		grep { not $_->_is_null_constraint }
+		($self, $self->parents);
+	
+	return $null_constraint unless @constraints;
+	
+	return sub ($)
+	{
+		local $_ = $_[0];
+		for my $c (@constraints)
+		{
+			return unless $c->(@_);
+		}
+		return !!1;
+	};
+}
+
 sub qualified_name
 {
 	my $self = shift;
@@ -152,25 +186,10 @@ sub parents
 	return ($self->parent, $self->parent->parents);
 }
 
-sub _get_failure_level
-{
-	my $self = shift;
-	
-	if ($self->has_parent)
-	{
-		my $failed_at = $self->parent->_get_failure_level(@_);
-		return $failed_at if defined $failed_at;
-	}
-	
-	local $_ = $_[0];
-	return if $self->constraint->(@_);
-	return $self;
-}
-
 sub check
 {
 	my $self = shift;
-	return !$self->_get_failure_level(@_);
+	$self->compiled_check->(@_);
 }
 
 sub get_message
@@ -183,22 +202,20 @@ sub validate
 {
 	my $self = shift;
 	
-	my $failed_at = $self->_get_failure_level(@_);
-	return undef unless defined $failed_at;
+	return undef if $self->compiled_check->(@_);
 	
 	local $_ = $_[0];
-	return $failed_at->get_message(@_);
+	return $self->get_message(@_);
 }
 
 sub assert_valid
 {
 	my $self = shift;
 	
-	my $failed_at = $self->_get_failure_level(@_);
-	return !!1 unless defined $failed_at;
+	return !!1 if $self->compiled_check->(@_);
 	
 	local $_ = $_[0];
-	_confess $failed_at->get_message(@_);
+	_confess $self->get_message(@_);
 }
 
 sub can_be_inlined
@@ -303,14 +320,23 @@ sub _build_moose_type
 {
 	my $self = shift;
 	
-	my %options = (name => $self->qualified_name);
-	$options{parent}     = $self->parent->moose_type if $self->has_parent;
-	$options{constraint} = $self->constraint         unless $self->_is_null_constraint;
-	$options{message}    = $self->message;
-	$options{inlined}    = $self->inlined            if $self->has_inlined;
-	
-	require Moose::Meta::TypeConstraint;
-	my $r = "Moose::Meta::TypeConstraint"->new(%options);
+	my $r;
+	if ($self->{_is_core})
+	{
+		require Moose::Util::TypeConstraints;
+		return Moose::Util::TypeConstraints::find_type_constraint($self->name);
+	}
+	else
+	{
+		my %options = (name => $self->qualified_name);
+		$options{parent}     = $self->parent->moose_type if $self->has_parent;
+		$options{constraint} = $self->constraint         unless $self->_is_null_constraint;
+		$options{message}    = $self->message;
+		$options{inlined}    = $self->inlined            if $self->has_inlined;
+		
+		require Moose::Meta::TypeConstraint;
+		$r = "Moose::Meta::TypeConstraint"->new(%options);
+	}
 	
 	$self->{moose_type} = $r;  # prevent recursion
 	$r->coercion($self->coercion->moose_coercion) if $self->has_coercion;
@@ -329,8 +355,12 @@ sub _build_mouse_type
 		
 	require Mouse::Meta::TypeConstraint;
 	my $r = "Mouse::Meta::TypeConstraint"->new(%options);
-		
-	# XXX - coercions
+	
+	$self->{mouse_type} = $r;  # prevent recursion
+	$r->_add_type_coercions(
+		map { blessed($_) and $_->can('mouse_type') ? $_->mouse_type : $_ }
+		@{ $self->coercion->type_coercion_map }
+	) if $self->has_coercion;
 	
 	return $r;
 }
@@ -422,6 +452,16 @@ coderef will not be called unless the value is known to pass any parent
 type constraint.
 
 Defaults to C<< sub { 1 } >> - i.e. a coderef that passes all values.
+
+=item C<< compiled_check >>
+
+Coderef to validate a value (C<< $_[0] >>) against the type constraint.
+This coderef is expected to also handle all validation for the parent
+type constraints.
+
+The general point of this attribute is that you should not set it, and
+rely on the lazily-built default. Type::Tiny will usually generate a
+pretty fast coderef.
 
 =item C<< message >>
 

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.000_02';
+	$Type::Tiny::Intersection::VERSION   = '0.000_03';
 }
 
 use Scalar::Util qw< blessed >;
@@ -62,7 +62,7 @@ sub can_be_inlined
 sub inline_check
 {
 	my $self = shift;
-	join " and ", map $_->inline_check(@_), @$self;
+	sub { join " and ", map $_->inline_check($_[1]), @$self };
 }
 
 1;

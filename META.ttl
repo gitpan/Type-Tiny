@@ -45,6 +45,7 @@ dist:project
 	doap:programming-language "Perl";
 	doap:release      dist:v_0-000_01;
 	doap:release      dist:v_0-000_02;
+	doap:release      dist:v_0-000_03;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -91,6 +92,45 @@ dist:v_0-000_02
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_02.tar.gz>;
 	doap:revision     "0.000_02"^^xsd:string.
+
+dist:v_0-000_03
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_03"^^xsd:string;
+	dc:issued         "2013-04-03"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Use more unique stringification for %Moo::HandleMoose::TYPE_MAP keys.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Make sure Type::Standard's Moose-like built-ins get inflated to real Moose built-in types.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document Type::Coercion's overloading.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Create and use compiled type constraint checks; much faster!";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Inlined type constraints for all of Type::Standard.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Test cases for ScalarRef[`a].";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix the crashing t/moo-inflation.t test case.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_03.tar.gz>;
+	doap:revision     "0.000_03"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;

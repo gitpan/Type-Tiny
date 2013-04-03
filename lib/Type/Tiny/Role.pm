@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.000_02';
+	$Type::Tiny::Role::VERSION   = '0.000_03';
 }
 
 use Scalar::Util qw< blessed >;
@@ -43,8 +43,10 @@ sub _build_inlined
 {
 	my $self = shift;
 	my $role = $self->role;
-	my $var  = $_[0];
-	return qq{blessed($var) and do { my \$method = $var->can('DOES')||$var->can('isa'); $var->\$method(q[$role]) }};
+	sub {
+		my $var = $_[1];
+		qq{blessed($var) and do { my \$method = $var->can('DOES')||$var->can('isa'); $var->\$method(q[$role]) }};
+	};
 }
 
 sub _build_message
