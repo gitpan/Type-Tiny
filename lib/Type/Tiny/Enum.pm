@@ -6,14 +6,14 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.000_04';
+	$Type::Tiny::Enum::VERSION   = '0.000_05';
 }
 
-sub _confess ($;@)
+sub _croak ($;@)
 {
 	require Carp;
 	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::confess;
+	goto \&Carp::croak;
 }
 
 use overload q[@{}] => 'values';
@@ -24,7 +24,7 @@ sub new
 {
 	my $proto = shift;
 	my %opts = @_;
-	_confess "need to supply list of values" unless exists $opts{values};
+	_croak "need to supply list of values" unless exists $opts{values};
 	my %tmp =
 		map { $_ => 1 }
 		@{ ref $opts{values} eq "ARRAY" ? $opts{values} : [$opts{values}] };
@@ -97,6 +97,16 @@ constructor. Instead rely on the default.
 
 Unlike Type::Tiny, you should generally I<not> pass an inlining coderef to
 the constructor. Instead rely on the default.
+
+=back
+
+=head2 Overloading
+
+=over
+
+=item *
+
+Arrayrefification calls C<values>.
 
 =back
 

@@ -6,16 +6,17 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.000_04';
+	$Type::Coercion::VERSION   = '0.000_05';
 }
 
 use Scalar::Util qw< blessed >;
+use Types::TypeTiny qw< CodeLike StringLike TypeTiny >;
 
-sub _confess ($;@)
+sub _croak ($;@)
 {
 	require Carp;
 	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::confess;
+	goto \&Carp::croak;
 }
 
 use overload
@@ -45,29 +46,6 @@ sub has_type_constraint { defined $_[0]{type_constraint} } # sic
 
 sub _clear_compiled_coercion { delete $_[0]{compiled_coercion} }
 
-# Some Type::Tiny objects for internal use!
-my ($_isStr, $_isCode);
-
-sub _isStr {
-	require Type::Utils;
-	require Type::Standard;
-	$_isStr ||= Type::Utils::union([
-		Type::Standard::Overload([q[""]]),
-		Type::Standard::Str(),
-	]);
-	$_isStr->compiled_check->(@_);
-}
-
-sub _isCode {
-	require Type::Utils;
-	require Type::Standard;
-	$_isCode ||= Type::Utils::union([
-		Type::Standard::Overload([q[&{}]]),
-		Type::Standard::Ref(["CODE"]),
-	]);
-	$_isCode->compiled_check->(@_);
-}
-
 sub coerce
 {
 	my $self = shift;
@@ -90,10 +68,7 @@ sub has_coercion_for_type
 	
 	for my $has (@{$self->type_coercion_map})
 	{
-		if (blessed($has) and $has->isa("Type::Tiny"))
-		{
-			return !!1 if $type->is_a_type_of($has);
-		}
+		return !!1 if TypeTiny->check($has) && $type->is_a_type_of($has);
 	}
 	
 	return;
@@ -121,10 +96,10 @@ sub add_type_coercions
 		my $type     = shift @args;
 		my $coercion = shift @args;
 		
-		_confess "types must be blessed Type::Tiny objects"
-			unless blessed($type) && $type->isa("Type::Tiny");
-		_confess "coercions must be code references"
-			unless _isStr($coercion) || _isCode($coercion);
+		_croak "types must be blessed Type::Tiny objects"
+			unless TypeTiny->check($type);
+		_croak "coercions must be code references"
+			unless StringLike->check($coercion) || CodeLike->check($coercion);
 		
 		push @{$self->type_coercion_map}, $type, $coercion;
 	}
@@ -161,8 +136,8 @@ sub _build_compiled_coercion
 			$types[$i]->can_be_inlined ? sprintf('if (%s)', $types[$i]->inline_check('$_[0]')) :
 			sprintf('if ($types[%d]->check(@_))', $i);
 		push @sub,
-			!defined($codes[$i]) ? sprintf('  { return $_[0] }') :
-			_isStr($codes[$i])   ? sprintf('  { local $_ = $_[0]; return( %s ) }', $codes[$i]) :
+			!defined($codes[$i])          ? sprintf('  { return $_[0] }') :
+			StringLike->check($codes[$i]) ? sprintf('  { local $_ = $_[0]; return( %s ) }', $codes[$i]) :
 			sprintf('  { local $_ = $_[0]; return $codes[%d]->(@_) }', $i);
 	}
 	
@@ -179,16 +154,43 @@ sub _build_moose_coercion
 	my $self = shift;
 	
 	my %options = ();
-	$options{type_coercion_map} = [
-		map { blessed($_) && $_->can("moose_type") ? $_->moose_type : $_ }
-		@{ $self->type_coercion_map }
-	];
-	$options{type_constraint} = $self->type_constraint if $self->has_type_constraint;
+	$options{type_coercion_map} = [ $self->_codelike_type_coercion_map('moose_type') ];
+	$options{type_constraint}   = $self->type_constraint if $self->has_type_constraint;
 	
 	require Moose::Meta::TypeCoercion;
 	my $r = "Moose::Meta::TypeCoercion"->new(%options);
 	
 	return $r;
+}
+
+sub _codelike_type_coercion_map
+{
+	my $self = shift;
+	my $modifier = $_[0];
+	
+	my @orig = @{ $self->type_coercion_map };
+	my @new;
+	
+	while (@orig)
+	{
+		my ($type, $converter) = splice(@orig, 0, 2);
+		
+		push @new, $modifier ? $type->$modifier : $type;
+		
+		if (CodeLike->check($converter))
+		{
+			push @new, $converter;
+		}
+		else
+		{
+			local $@;
+			my $r = eval sprintf('sub { local $_ = $_[0]; %s }', $converter);
+			die $@ if $@;
+			push @new, $r;
+		}
+	}
+	
+	return @new;
 }
 
 1;
@@ -308,7 +310,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 L<Type::Tiny::Manual>.
 
-L<Type::Tiny>, L<Type::Library>, L<Type::Utils>, L<Type::Standard>.
+L<Type::Tiny>, L<Type::Library>, L<Type::Utils>, L<Types::Standard>.
 
 L<Moose::Meta::TypeCoercion>.
 

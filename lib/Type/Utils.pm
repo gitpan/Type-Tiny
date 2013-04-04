@@ -6,18 +6,19 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.000_04';
+	$Type::Utils::VERSION   = '0.000_05';
 }
 
-sub _confess ($;@) {
+sub _croak ($;@) {
 	require Carp;
 	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::confess;
+	goto \&Carp::croak;
 }
 
 use Scalar::Util qw< blessed >;
 use Type::Library;
 use Type::Tiny;
+use Types::TypeTiny qw< TypeTiny >;
 
 use Exporter qw< import >;
 our @EXPORT = qw<
@@ -29,12 +30,12 @@ our @EXPORT_OK = (@EXPORT, qw< type subtype >);
 
 sub extends
 {
-	_confess "not a type library" unless caller->isa("Type::Library");
+	_croak "not a type library" unless caller->isa("Type::Library");
 	my $caller = caller->meta;
 	
 	foreach my $lib (@_)
 	{
-		eval "require $lib" or _confess "could not load library '$lib': $@";
+		eval "require $lib" or _croak "could not load library '$lib': $@";
 		$caller->add_type($lib->get_type($_)) for $lib->meta->type_names;
 	}
 }
@@ -49,19 +50,19 @@ sub declare
 	else
 	{
 		(my($name), %opts) = @_;
-		_confess "cannot provide two names for type" if exists $opts{name};
+		_croak "cannot provide two names for type" if exists $opts{name};
 		$opts{name} = $name;
 	}
 
 	my $caller = caller($opts{_caller_level} || 0);
 	$opts{library} = $caller;
 
-	if (defined $opts{parent} and not blessed $opts{parent})
+	if (defined $opts{parent} and not TypeTiny->check($opts{parent}))
 	{
 		$caller->isa("Type::Library")
-			or _confess "parent type cannot be a string";
+			or _croak "parent type cannot be a string";
 		$opts{parent} = $caller->meta->get_type($opts{parent})
-			or _confess "could not find parent type";
+			or _croak "could not find parent type";
 	}
 		
 	my $type;
@@ -240,12 +241,12 @@ Type::Utils - utility functions to make defining type constraints a little easie
 
 =head1 SYNOPSIS
 
-   package MyTypes;
+   package Types::Mine;
    
    use Type::Library -base;
    use Type::Utils;
    
-   extends "Type::Standard";
+   extends "Types::Standard";
    
    declare "AllCaps",
       as "Str",
@@ -350,7 +351,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 L<Type::Tiny::Manual>.
 
-L<Type::Tiny>, L<Type::Library>, L<Type::Standard>, L<Type::Coercion>.
+L<Type::Tiny>, L<Type::Library>, L<Types::Standard>, L<Type::Coercion>.
 
 L<Type::Tiny::Class>, L<Type::Tiny::Role>, L<Type::Tiny::Duck>,
 L<Type::Tiny::Enum>, L<Type::Tiny::Union>.

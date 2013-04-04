@@ -6,6 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.000_05  2013-04-04
+
+ - (Addition) Factor out some functions from test suite into a new module:
+   Test::TypeTiny.
+ - (Bugfix) Fix is_parameterized.
+ - (Bugfix) Get Mouse coercions working.
+ - (Packaging) Rearrange test suite slightly.
+ - Allow null type constraints with no parent type (e.g. 'Any' in
+   Types::Standard) to be inlined.
+ - Don't die with full stack trace.
+ - Rename Type::Standard module to Types::Standard.
+ - Sanity checks for type constraint names.
+ - Types::TypeTiny bootstrapping library now takes care of vaious internal
+   type checking requirements.
+
 0.000_04  2013-04-03
 
  - (Addition) Finally implement Type::Coercion's has_coercion_for_type

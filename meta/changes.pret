@@ -35,3 +35,17 @@
 		item "Finally implement Type::Coercion's has_coercion_for_type method."^^Addition;
 		item "Allow coercion code to be expressed as a string; quite a bit faster."^^Change;
 	].
+
+`Type-Tiny 0.000_05 cpan:TOBYINK`
+	issued  2013-04-04;
+	changeset [
+		item "Factor out some functions from test suite into a new module: Test::TypeTiny."^^Addition;
+		item "Rearrange test suite slightly."^^Packaging;
+		item "Rename Type::Standard module to Types::Standard."^^Change;
+		item "Types::TypeTiny bootstrapping library now takes care of vaious internal type checking requirements."^^Change;
+		item "Sanity checks for type constraint names."^^Change;
+		item "Fix is_parameterized."^^Bugfix;
+		item "Allow null type constraints with no parent type (e.g. 'Any' in Types::Standard) to be inlined."^^Change;
+		item "Don't die with full stack trace."^^Change;
+		item "Get Mouse coercions working."^^Bugfix;
+	].

@@ -47,6 +47,7 @@ dist:project
 	doap:release      dist:v_0-000_02;
 	doap:release      dist:v_0-000_03;
 	doap:release      dist:v_0-000_04;
+	doap:release      dist:v_0-000_05;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -163,6 +164,53 @@ dist:v_0-000_04
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_04.tar.gz>;
 	doap:revision     "0.000_04"^^xsd:string.
+
+dist:v_0-000_05
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_05"^^xsd:string;
+	dc:issued         "2013-04-04"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Factor out some functions from test suite into a new module: Test::TypeTiny.";
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Rearrange test suite slightly.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Rename Type::Standard module to Types::Standard.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Types::TypeTiny bootstrapping library now takes care of vaious internal type checking requirements.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Sanity checks for type constraint names.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix is_parameterized.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Allow null type constraints with no parent type (e.g. 'Any' in Types::Standard) to be inlined.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Don't die with full stack trace.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Get Mouse coercions working.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_05.tar.gz>;
+	doap:revision     "0.000_05"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;

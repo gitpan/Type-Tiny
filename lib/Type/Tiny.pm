@@ -6,10 +6,11 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_04';
+	$Type::Tiny::VERSION   = '0.000_05';
 }
 
 use Scalar::Util qw< blessed weaken refaddr >;
+use Types::TypeTiny qw< StringLike CodeLike TypeTiny >;
 
 sub _confess ($;@)
 {
@@ -55,11 +56,17 @@ sub new
 	
 	my $self = bless \%params, $class;
 	
+	unless ($self->is_anon)
+	{
+		$self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm
+			or _confess '%s is not a valid type name', $self->name;
+	}
+
 	if ($self->has_library and not $self->is_anon)
 	{
 		$Moo::HandleMoose::TYPE_MAP{"Type::Tiny~~$self->{uniq}"} = sub { $self->moose_type };
 	}
-	
+		
 	return $self;
 }
 
@@ -284,6 +291,8 @@ sub can_be_inlined
 	my $self = shift;
 	return $self->parent->can_be_inlined
 		if $self->has_parent && $self->_is_null_constraint;
+	return !!1
+		if !$self->has_parent && $self->_is_null_constraint;
 	return $self->has_inlined;
 }
 
@@ -294,6 +303,8 @@ sub inline_check
 		unless $self->can_be_inlined;
 	return $self->parent->inline_check(@_)
 		if $self->has_parent && $self->_is_null_constraint;
+	return '(!!1)'
+		if !$self->has_parent && $self->_is_null_constraint;
 	my $r = $self->inlined->($self, @_);
 	$r =~ /[;{}]/ ? "(do { $r })" : "($r)";
 }
@@ -322,7 +333,7 @@ sub is_parameterizable
 
 sub is_parameterized
 {
-	!shift->has_parameters;
+	shift->has_parameters;
 }
 
 sub parameterize
@@ -419,8 +430,7 @@ sub _build_mouse_type
 	
 	$self->{mouse_type} = $r;  # prevent recursion
 	$r->_add_type_coercions(
-		map { blessed($_) and $_->can('mouse_type') ? $_->mouse_type : $_ }
-		@{ $self->coercion->type_coercion_map }
+		$self->coercion->_codelike_type_coercion_map('mouse_type')
 	) if $self->has_coercion;
 	
 	return $r;
@@ -543,12 +553,16 @@ Moose-style constructor function.
 =item C<< name >>
 
 The name of the type constraint. These need to conform to certain naming
-rules. Optional; if not supplied will be an anonymous type constraint.
+rules (they must begin with an uppercase letter and continue using only
+letters, digits 0-9 and underscores).
+
+Optional; if not supplied will be an anonymous type constraint.
 
 =item C<< display_name >>
 
 A name to display for the type constraint when stringified. These don't
-have to conform to any naming rules. Optional.
+have to conform to any naming rules. Optional; a default name will be
+calculated from the C<name>.
 
 =item C<< parent >>
 
@@ -714,7 +728,7 @@ Returns boolean indicating if this type can be inlined.
 Creates a type constraint check for a particular variable as a string of
 Perl code. For example:
 
-	print( Type::Standard::Num->inline_check('$foo') );
+	print( Types::Standard::Num->inline_check('$foo') );
 
 prints the following output:
 
@@ -805,7 +819,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 L<Type::Tiny::Manual>.
 
-L<Type::Library>, L<Type::Utils>, L<Type::Standard>, L<Type::Coercion>.
+L<Type::Library>, L<Type::Utils>, L<Types::Standard>, L<Type::Coercion>.
 
 L<Type::Tiny::Class>, L<Type::Tiny::Role>, L<Type::Tiny::Duck>,
 L<Type::Tiny::Enum>, L<Type::Tiny::Union>.

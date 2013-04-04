@@ -43,12 +43,15 @@ DESCRIPTION
   Attributes
     "name"
         The name of the type constraint. These need to conform to certain
-        naming rules. Optional; if not supplied will be an anonymous type
-        constraint.
+        naming rules (they must begin with an uppercase letter and continue
+        using only letters, digits 0-9 and underscores).
+
+        Optional; if not supplied will be an anonymous type constraint.
 
     "display_name"
         A name to display for the type constraint when stringified. These
-        don't have to conform to any naming rules. Optional.
+        don't have to conform to any naming rules. Optional; a default name
+        will be calculated from the "name".
 
     "parent"
         Optional attribute; parent type constraint. For example, an
@@ -187,7 +190,7 @@ DESCRIPTION
         Creates a type constraint check for a particular variable as a
         string of Perl code. For example:
 
-                print( Type::Standard::Num->inline_check('$foo') );
+                print( Types::Standard::Num->inline_check('$foo') );
 
         prints the following output:
 
@@ -247,7 +250,7 @@ BUGS
 SEE ALSO
     Type::Tiny::Manual.
 
-    Type::Library, Type::Utils, Type::Standard, Type::Coercion.
+    Type::Library, Type::Utils, Types::Standard, Type::Coercion.
 
     Type::Tiny::Class, Type::Tiny::Role, Type::Tiny::Duck, Type::Tiny::Enum,
     Type::Tiny::Union.
