@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.000_05';
+	$Type::Tiny::Union::VERSION   = '0.000_06';
 }
 
 use Scalar::Util qw< blessed >;
@@ -63,6 +63,20 @@ sub inline_check
 {
 	my $self = shift;
 	join " or ", map $_->inline_check($_[0]), @$self;
+}
+
+sub _instantiate_moose_type
+{
+	my $self = shift;
+	my %opts = @_;
+	delete $opts{parent};
+	delete $opts{constraint};
+	delete $opts{inlined};
+	
+	my @tc = map $_->moose_type, @{$self->type_constraints};
+	
+	require Moose::Meta::TypeConstraint::Union;
+	return "Moose::Meta::TypeConstraint::Union"->new(%opts, type_constraints => \@tc);
 }
 
 1;

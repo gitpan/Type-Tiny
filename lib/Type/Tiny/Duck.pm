@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Duck::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Duck::VERSION   = '0.000_05';
+	$Type::Tiny::Duck::VERSION   = '0.000_06';
 }
 
 use Scalar::Util qw< blessed >;
@@ -57,6 +57,18 @@ sub _build_message
 	return sub { sprintf 'value "%s" did not pass type constraint', $_[0] } if $self->is_anon;
 	my $name = "$self";
 	return sub { sprintf 'value "%s" did not pass type constraint "%s"', $_[0], $name };
+}
+
+sub _instantiate_moose_type
+{
+	my $self = shift;
+	my %opts = @_;
+	delete $opts{parent};
+	delete $opts{constraint};
+	delete $opts{inlined};
+	
+	require Moose::Meta::TypeConstraint::DuckType;
+	return "Moose::Meta::TypeConstraint::DuckType"->new(%opts, methods => $self->methods);
 }
 
 1;

@@ -122,10 +122,12 @@ DESCRIPTION
 
     "name_generator"
         A coderef which generates a new display_name based on parameters.
+        Optional; the default is reasonable.
 
     "constraint_generator"
         Coderef that generates a new constraint coderef based on parameters.
-        Optional.
+        Optional; providing a generator makes this type into a
+        parameterizable type constraint.
 
     "inline_generator"
         A coderef which generates a new inlining coderef based on
@@ -152,7 +154,7 @@ DESCRIPTION
         Returns a list of all this type constraint's all ancestor
         constraints.
 
-    "equals($other)", "is_subtype_of($other)", "is_supertype_of($other)", ,
+    "equals($other)", "is_subtype_of($other)", "is_supertype_of($other)",
     "is_a_type_of($other)"
         Compare two types. See Moose::Meta::TypeConstraint for what these
         all mean. (OK, Moose doesn't define "is_supertype_of", but you get
@@ -190,13 +192,21 @@ DESCRIPTION
         Creates a type constraint check for a particular variable as a
         string of Perl code. For example:
 
-                print( Types::Standard::Num->inline_check('$foo') );
+           print( Types::Standard::Num->inline_check('$foo') );
 
         prints the following output:
 
-                (!ref($foo) && Scalar::Util::looks_like_number($foo))
+           (!ref($foo) && Scalar::Util::looks_like_number($foo))
 
         For Moose-compat, there is an alias "_inline_check" for this method.
+
+    "inline_assert($varname)"
+        Much like "inline_check" but outputs a statement of the form:
+
+           die ... unless ...;
+
+        Note that if this type has a custom error message, the inlined code
+        will *ignore* this custom message!!
 
     "parameterize(@parameters)"
         Creates a new parameterized type; throws an exception if called on a

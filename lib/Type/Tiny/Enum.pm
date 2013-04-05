@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.000_05';
+	$Type::Tiny::Enum::VERSION   = '0.000_06';
 }
 
 sub _croak ($;@)
@@ -58,6 +58,17 @@ sub inline_check
 	my $self = shift;
 	my $regexp = join "|", map quotemeta, @$self;
 	"$_[0] =~ m{^(?:$regexp)\$}";
+}
+
+sub _instantiate_moose_type
+{
+	my $self = shift;
+	my %opts = @_;
+	delete $opts{parent};
+	delete $opts{constraint};
+	delete $opts{inlined};
+	require Moose::Meta::TypeConstraint::Enum;
+	return "Moose::Meta::TypeConstraint::Enum"->new(%opts, values => $self->values);
 }
 
 1;

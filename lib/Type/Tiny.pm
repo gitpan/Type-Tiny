@@ -6,25 +6,26 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_05';
+	$Type::Tiny::VERSION   = '0.000_06';
 }
 
 use Scalar::Util qw< blessed weaken refaddr >;
+use Sub::Quote; #XXX
 use Types::TypeTiny qw< StringLike CodeLike TypeTiny >;
 
-sub _confess ($;@)
+sub _croak ($;@)
 {
 	require Carp;
 	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::confess;
+	goto \&Carp::croak;
 }
 
 sub _swap { $_[2] ? @_[1,0] : @_[0,1] }
 
 use overload
-	q("")      => sub { caller eq 'Moo::HandleMoose' ? "Type::Tiny~~$_[0]{uniq}" : $_[0]->display_name },
+	q("")      => sub { caller =~ m{^(Moo::HandleMoose|Sub::Quote)} ? overload::StrVal($_[0]) : $_[0]->display_name },
 	q(bool)    => sub { 1 },
-	q(&{})     => sub { my $t = shift; sub { $t->assert_valid(@_) } },
+	q(&{})     => "_overload_coderef",
 	q(|)       => sub { my @tc = _swap @_; require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@tc) },
 	q(&)       => sub { my @tc = _swap @_; require Type::Tiny::Intersection; "Type::Tiny::Intersection"->new(type_constraints => \@tc) },
 	q(~)       => sub { shift->complementary_type },
@@ -35,9 +36,22 @@ use overload
 	q(>=)      => sub { my $m = $_[0]->can('is_a_type_of');  $m->(reverse _swap @_) },
 	fallback   => 1,
 ;
-use if ($] >= 5.010001), overload =>
-	q(~~)      => sub { $_[0]->check($_[1]) },
-;
+BEGIN {
+	overload->import(q(~~) => sub { $_[0]->check($_[1]) })
+		if $] >= 5.010001;
+}
+
+sub _overload_coderef
+{
+	my $self = shift;
+	$self->_build_message unless exists $self->{message};
+	$self->{_overload_coderef} ||=
+		$self->has_parent && $self->_is_null_constraint
+			? $self->parent->_overload_coderef :
+		$self->{_default_message} && "Sub::Quote"->can("quote_sub") && $self->can_be_inlined
+			? Sub::Quote::quote_sub($self->inline_assert('$_[0]')) :
+		sub { $self->assert_valid(@_) }
+}
 
 my $uniq = 1;
 sub new
@@ -47,7 +61,7 @@ sub new
 	
 	if (exists $params{parent})
 	{
-		_confess "parent must be an instance of %s", __PACKAGE__
+		_croak "parent must be an instance of %s", __PACKAGE__
 			unless blessed($params{parent}) && $params{parent}->isa(__PACKAGE__);
 	}
 	
@@ -58,13 +72,15 @@ sub new
 	
 	unless ($self->is_anon)
 	{
-		$self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm
-			or _confess '%s is not a valid type name', $self->name;
+		# First try a fast ASCII-only expression, but fall back to Unicode
+		$self->name =~ /^[A-Z][A-Za-z0-9_]+$/sm
+			or eval q( $self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm )
+			or _croak '"%s" is not a valid type name', $self->name;
 	}
 
 	if ($self->has_library and not $self->is_anon)
 	{
-		$Moo::HandleMoose::TYPE_MAP{"Type::Tiny~~$self->{uniq}"} = sub { $self->moose_type };
+		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self->moose_type };
 	}
 		
 	return $self;
@@ -105,7 +121,7 @@ sub has_parameters           { exists $_[0]{parameters} }
 sub _assert_coercion
 {
 	my $self = shift;
-	_confess "no coercion for this type constraint"
+	_croak "no coercion for this type constraint"
 		unless $self->has_coercion && @{$self->coercion->type_coercion_map};
 	return $self->coercion;
 }
@@ -137,6 +153,7 @@ sub _build_coercion
 sub _build_message
 {
 	my $self = shift;
+	$self->{_default_message}++;
 	return sub { sprintf 'value "%s" did not pass type constraint', $_[0] } if $self->is_anon;
 	my $name = "$self";
 	return sub { sprintf 'value "%s" did not pass type constraint "%s"', $_[0], $name };
@@ -154,6 +171,11 @@ sub _build_name_generator
 sub _build_compiled_check
 {
 	my $self = shift;
+	
+	if ($self->_is_null_constraint and $self->has_parent)
+	{
+		return $self->parent->compiled_check;
+	}
 	
 	if ($self->can_be_inlined)
 	{
@@ -192,6 +214,8 @@ sub equals
 	
 	return !!1 if $self->has_parent  && $self->_is_null_constraint  && $self->parent==$other;
 	return !!1 if $other->has_parent && $other->_is_null_constraint && $other->parent==$self;
+	
+	return !!1 if refaddr($self->compiled_check) == refaddr($other->compiled_check);
 	
 	return $self->qualified_name eq $other->qualified_name
 		if $self->has_library && !$self->is_anon && $other->has_library && !$other->is_anon;
@@ -283,7 +307,7 @@ sub assert_valid
 	return !!1 if $self->compiled_check->(@_);
 	
 	local $_ = $_[0];
-	_confess $self->get_message(@_);
+	_croak $self->get_message(@_);
 }
 
 sub can_be_inlined
@@ -299,7 +323,7 @@ sub can_be_inlined
 sub inline_check
 {
 	my $self = shift;
-	_confess "cannot inline type constraint check for %s", $self
+	_croak "cannot inline type constraint check for %s", $self
 		unless $self->can_be_inlined;
 	return $self->parent->inline_check(@_)
 		if $self->has_parent && $self->_is_null_constraint;
@@ -307,6 +331,19 @@ sub inline_check
 		if !$self->has_parent && $self->_is_null_constraint;
 	my $r = $self->inlined->($self, @_);
 	$r =~ /[;{}]/ ? "(do { $r })" : "($r)";
+}
+
+sub inline_assert
+{
+	my $self = shift;
+	my $varname = $_[0];
+	my $code = sprintf(
+		q[die qq(value "%s" did not pass type constraint "%s") unless %s;],
+		$varname,
+		"$self",
+		$self->inline_check(@_),
+	);
+	return $code;
 }
 
 sub _inline_check
@@ -341,7 +378,7 @@ sub parameterize
 	my $self = shift;
 	return $self unless @_;
 	$self->is_parameterizable
-		or _confess "type '%s' does not accept parameters", $self;
+		or _croak "type '%s' does not accept parameters", $self;
 	
 	local $_ = $_[0];
 	my %options = (
@@ -388,31 +425,42 @@ sub _build_complementary_type
 	return "Type::Tiny"->new(%opts);
 }
 
+sub _instantiate_moose_type
+{
+	my $self = shift;
+	my %opts = @_;
+	require Moose::Meta::TypeConstraint;
+	return "Moose::Meta::TypeConstraint"->new(%opts);
+}
+
+my $trick_done = 0;
 sub _build_moose_type
 {
 	my $self = shift;
+	
+	_MONKEY_MAGIC() unless $trick_done;
 	
 	my $r;
 	if ($self->{_is_core})
 	{
 		require Moose::Util::TypeConstraints;
-		return Moose::Util::TypeConstraints::find_type_constraint($self->name);
+		$r = Moose::Util::TypeConstraints::find_type_constraint($self->name);
+		$r->_set_tt_type($self);
 	}
 	else
 	{
-		my %options = (name => $self->qualified_name);
-		$options{parent}     = $self->parent->moose_type if $self->has_parent;
-		$options{constraint} = $self->constraint         unless $self->_is_null_constraint;
-		$options{message}    = $self->message;
-		$options{inlined}    = $self->inlined            if $self->has_inlined;
+		my %opts = (name => $self->qualified_name);
+		$opts{parent}     = $self->parent->moose_type if $self->has_parent;
+		$opts{constraint} = $self->constraint         unless $self->_is_null_constraint;
+		$opts{message}    = $self->message;
+		$opts{inlined}    = $self->inlined            if $self->has_inlined;
 		
-		require Moose::Meta::TypeConstraint;
-		$r = "Moose::Meta::TypeConstraint"->new(%options);
+		$r = $self->_instantiate_moose_type(%opts);
+		$r->_set_tt_type($self);
+		$self->{moose_type} = $r;  # prevent recursion
+		$r->coercion($self->coercion->moose_coercion) if $self->has_coercion;
 	}
-	
-	$self->{moose_type} = $r;  # prevent recursion
-	$r->coercion($self->coercion->moose_coercion) if $self->has_coercion;
-	
+		
 	return $r;
 }
 
@@ -485,6 +533,37 @@ sub minus_coercions
 sub no_coercions
 {
 	shift->_clone;
+}
+
+# Monkey patch Moose::Meta::TypeConstraint to make
+# plus_coercions/minus_coercions/no_coercions available
+sub _MONKEY_MAGIC
+{
+	return if $trick_done;
+	$trick_done++;
+	
+	eval q{
+		package #
+		Moose::Meta::TypeConstraint;
+		__PACKAGE__->meta->make_mutable;
+		__PACKAGE__->meta->add_attribute(
+			tt_type => (reader => "tt_type", writer => "_set_tt_type", predicate => "has_tt_type"),
+		);
+		__PACKAGE__->meta->make_immutable(inline_constructor => 0);
+		sub plus_coercions {
+			shift->tt_type->plus_coercions(@_)->moose_type;
+		}
+		sub minus_coercions {
+			shift->tt_type->minus_coercions(@_)->moose_type;
+		}
+		sub no_coercions {
+			shift->tt_type->no_coercions->moose_type;
+		}
+		sub complementary_type {
+			shift->tt_type->complementary_type->moose_type;
+		}
+		1;
+	} or _croak("could not perform magic Moose trick: $@");
 }
 
 1;
@@ -645,11 +724,13 @@ In parameterized types, returns an arrayref of the parameters.
 =item C<< name_generator >>
 
 A coderef which generates a new display_name based on parameters.
+Optional; the default is reasonable.
 
 =item C<< constraint_generator >>
 
 Coderef that generates a new constraint coderef based on parameters.
-Optional.
+Optional; providing a generator makes this type into a parameterizable
+type constraint.
 
 =item C<< inline_generator >>
 
@@ -683,7 +764,7 @@ C<< "Library::Type" >> sort of name. Otherwise, returns the same as C<name>.
 
 Returns a list of all this type constraint's all ancestor constraints.
 
-=item C<< equals($other) >>, C<< is_subtype_of($other) >>, C<< is_supertype_of($other) >>, , C<< is_a_type_of($other) >>
+=item C<< equals($other) >>, C<< is_subtype_of($other) >>, C<< is_supertype_of($other) >>, C<< is_a_type_of($other) >>
 
 Compare two types. See L<Moose::Meta::TypeConstraint> for what these all mean.
 (OK, Moose doesn't define C<is_supertype_of>, but you get the idea, right?)
@@ -728,13 +809,22 @@ Returns boolean indicating if this type can be inlined.
 Creates a type constraint check for a particular variable as a string of
 Perl code. For example:
 
-	print( Types::Standard::Num->inline_check('$foo') );
+   print( Types::Standard::Num->inline_check('$foo') );
 
 prints the following output:
 
-	(!ref($foo) && Scalar::Util::looks_like_number($foo))
+   (!ref($foo) && Scalar::Util::looks_like_number($foo))
 
 For Moose-compat, there is an alias C<< _inline_check >> for this method.
+
+=item C<< inline_assert($varname) >>
+
+Much like C<inline_check> but outputs a statement of the form:
+
+   die ... unless ...;
+
+Note that if this type has a custom error message, the inlined code will
+I<ignore> this custom message!!
 
 =item C<< parameterize(@parameters) >>
 

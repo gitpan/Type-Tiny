@@ -23,6 +23,7 @@ Files: lib/Test/TypeTiny.pm
  lib/Types/TypeTiny.pm
  t/00-compile.t
  t/arithmetic.t
+ t/coercion-inlining.t
  t/coercion-modifiers.t
  t/coercion.t
  t/lib/BiggerLib.pm
@@ -39,6 +40,7 @@ Files: lib/Test/TypeTiny.pm
  t/mouse-coercion.t
  t/mouse.t
  t/stdlib-inlined.t
+ t/stdlib-overload.t
  t/stdlib-strmatch.t
  t/stdlib-structures.t
  t/stdlib.t
@@ -57,7 +59,7 @@ Files: CONTRIBUTING
  META.ttl
  Makefile.PL
  README
- TODO
+ TODO.mm
  examples/datetimes-from-manual.pl
  examples/lib1.pl
  inc/Test/Fatal.pm

@@ -54,6 +54,7 @@ meta/people.pret
 README
 t/00-compile.t
 t/arithmetic.t
+t/coercion-inlining.t
 t/coercion-modifiers.t
 t/coercion.t
 t/lib/BiggerLib.pm
@@ -70,6 +71,7 @@ t/moose.t
 t/mouse-coercion.t
 t/mouse.t
 t/stdlib-inlined.t
+t/stdlib-overload.t
 t/stdlib-strmatch.t
 t/stdlib-structures.t
 t/stdlib.t
@@ -77,5 +79,5 @@ t/type-class.t
 t/type-duck.t
 t/type-role.t
 t/type.t
-TODO
+TODO.mm
 SIGNATURE                                Public-key signature (added by MakeMaker)

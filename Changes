@@ -6,6 +6,24 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.000_06  2013-04-05
+
+ - (Addition) In Moo, type assertions and coercions are now inlined.
+ - (Addition) Monkey patch Moose::Meta::TypeConstraint to be able to
+   retrieve Type::Tiny constraints from inflated Moose constraints.
+ - (Addition) Type::Tiny now has an 'inline_assert' function.
+ - (Documentation) Improved documentation of parameterization attributes.
+ - (Documentation) Section in manual comparing Type::Tiny with various
+   other type library frameworks.
+ - (Documentation) Using Type::Tiny with Moo added to manual.
+ - (Packaging) More test cases.
+ - Footprint reduction: Type::Tiny and Type::Coercion no longer use if.pm.
+ - Footprint reduction: Type::Tiny no longer triggers Perl to load its
+   Unicode tables (unless you create a type constraint with a non-ASCII
+   type name).
+ - Footprint reduction: Type::Tiny, Type::Library and Type::Coerce no
+   longer automatically load Types::Standard and Type::Utils.
+
 0.000_05  2013-04-04
 
  - (Addition) Factor out some functions from test suite into a new module:

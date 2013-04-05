@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.000_05';
+	$Type::Utils::VERSION   = '0.000_06';
 }
 
 sub _croak ($;@) {
@@ -205,14 +205,13 @@ sub intersection
 
 sub coerce
 {
-	my $meta = (scalar caller)->meta;
-	
 	if ((scalar caller)->isa("Type::Library"))
 	{
-		my ($type, @opts) = map { ref($_) ? $_ : $meta->get_type($_) } @_;
+		my $meta = (scalar caller)->meta;
+		my ($type, @opts) = map { ref($_) ? $_ : $meta->get_type($_)||$_ } @_;
 		return $type->coercion->add_type_coercions(@opts);
 	}
-
+	
 	my ($type, @opts) = @_;
 	return $type->coercion->add_type_coercions(@opts);
 }
