@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.000_06';
+	$Type::Tiny::Intersection::VERSION   = '0.000_07';
 }
 
 use Scalar::Util qw< blessed >;
@@ -62,7 +62,7 @@ sub can_be_inlined
 sub inline_check
 {
 	my $self = shift;
-	sub { join " and ", map $_->inline_check($_[1]), @$self };
+	return join " and ", map $_->inline_check($_[0]), @$self;
 }
 
 1;
@@ -91,6 +91,10 @@ Major differences are listed below:
 =item C<type_constraints>
 
 Arrayref of type constraints.
+
+When passed to the constructor, if any of the type constraints in the
+intersection is itself an intersection type constraint, this is "exploded"
+into the new intersection.
 
 =item C<constraint>
 

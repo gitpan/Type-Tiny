@@ -26,6 +26,7 @@ inc/Try/Tiny.pm
 inc/YAML/Tiny.pm
 lib/Test/TypeTiny.pm
 lib/Type/Coercion.pm
+lib/Type/Coercion/Union.pm
 lib/Type/Library.pm
 lib/Type/Tiny.pm
 lib/Type/Tiny/Class.pm
@@ -56,6 +57,7 @@ t/00-compile.t
 t/arithmetic.t
 t/coercion-inlining.t
 t/coercion-modifiers.t
+t/coercion-union.t
 t/coercion.t
 t/lib/BiggerLib.pm
 t/lib/DemoLib.pm
@@ -77,7 +79,10 @@ t/stdlib-structures.t
 t/stdlib.t
 t/type-class.t
 t/type-duck.t
+t/type-enum.t
+t/type-intersection.t
 t/type-role.t
+t/type-union.t
 t/type.t
 TODO.mm
 SIGNATURE                                Public-key signature (added by MakeMaker)

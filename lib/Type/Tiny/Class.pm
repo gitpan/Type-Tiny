@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.000_06';
+	$Type::Tiny::Class::VERSION   = '0.000_07';
 }
 
 use Scalar::Util qw< blessed >;
@@ -89,6 +89,25 @@ Type constraints of the general form C<< { $_->isa("Some::Class") } >>.
 
 This package inherits from L<Type::Tiny>; see that for most documentation.
 Major differences are listed below:
+
+=head2 Constructor
+
+=over
+
+=item C<new>
+
+When the constructor is called on an I<instance> of Type::Tiny::Class, it
+passes the call through to the constructor of the class for the constraint.
+So for example:
+
+   my $type = Type::Tiny::Class->new(class => "Foo::Bar");
+   my $obj  = $type->new(hello => "World");
+   say ref($obj);   # prints "Foo::Bar"
+
+This little bit of DWIM was borrowed from L<MooseX::Types::TypeDecorator>,
+but Type::Tiny doesn't take the idea quite as far.
+
+=back
 
 =head2 Attributes
 

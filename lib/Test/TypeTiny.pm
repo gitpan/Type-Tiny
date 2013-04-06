@@ -4,7 +4,7 @@ use Test::More ();
 use base "Exporter";
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.000_06';
+our $VERSION   = '0.000_07';
 
 our @EXPORT = qw( should_pass should_fail ok_subtype );
 
@@ -74,8 +74,7 @@ Test::TypeTiny - useful functions for testing the efficacy of type constraints
 
 =head1 DESCRIPTION
 
-L<Test::TypeTiny> provides a couple of handy functions for testing type
-constraints.
+L<Test::TypeTiny> provides a few handy functions for testing type constraints.
 
 =head2 Functions
 

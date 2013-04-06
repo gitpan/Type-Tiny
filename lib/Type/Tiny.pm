@@ -6,11 +6,10 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_06';
+	$Type::Tiny::VERSION   = '0.000_07';
 }
 
 use Scalar::Util qw< blessed weaken refaddr >;
-use Sub::Quote; #XXX
 use Types::TypeTiny qw< StringLike CodeLike TypeTiny >;
 
 sub _croak ($;@)
@@ -44,7 +43,7 @@ BEGIN {
 sub _overload_coderef
 {
 	my $self = shift;
-	$self->_build_message unless exists $self->{message};
+	$self->message unless exists $self->{message};
 	$self->{_overload_coderef} ||=
 		$self->has_parent && $self->_is_null_constraint
 			? $self->parent->_overload_coderef :

@@ -5,6 +5,7 @@ Source: https://metacpan.org/release/Type-Tiny
 
 Files: lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
+ lib/Type/Coercion/Union.pm
  lib/Type/Library.pm
  lib/Type/Tiny.pm
  lib/Type/Tiny/Class.pm
@@ -25,6 +26,7 @@ Files: lib/Test/TypeTiny.pm
  t/arithmetic.t
  t/coercion-inlining.t
  t/coercion-modifiers.t
+ t/coercion-union.t
  t/coercion.t
  t/lib/BiggerLib.pm
  t/lib/DemoLib.pm
@@ -46,7 +48,10 @@ Files: lib/Test/TypeTiny.pm
  t/stdlib.t
  t/type-class.t
  t/type-duck.t
+ t/type-enum.t
+ t/type-intersection.t
  t/type-role.t
+ t/type-union.t
  t/type.t
 Copyright: This software is copyright (c) 2013 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0

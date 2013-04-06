@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.000_06';
+	$Type::Tiny::Union::VERSION   = '0.000_07';
 }
 
 use Scalar::Util qw< blessed >;
@@ -30,7 +30,9 @@ sub new {
 		map { $_->isa(__PACKAGE__) ? @$_ : $_ }
 		@{ ref $opts{type_constraints} eq "ARRAY" ? $opts{type_constraints} : [$opts{type_constraints}] }
 	];
-	return $proto->SUPER::new(%opts);
+	my $self = $proto->SUPER::new(%opts);
+	$self->coercion if grep $_->has_coercion, @$self;
+	return $self;
 }
 
 sub type_constraints { $_[0]{type_constraints} }
@@ -40,6 +42,13 @@ sub _build_display_name
 {
 	my $self = shift;
 	join q[|], @$self;
+}
+
+sub _build_coercion
+{
+	require Type::Coercion::Union;
+	my $self = shift;
+	return "Type::Coercion::Union"->new(type_constraint => $self);
 }
 
 sub _build_constraint
@@ -106,6 +115,9 @@ Major differences are listed below:
 
 Arrayref of type constraints.
 
+When passed to the constructor, if any of the type constraints in the union
+is itself a union type constraint, this is "exploded" into the new union.
+
 =item C<constraint>
 
 Unlike Type::Tiny, you should generally I<not> pass a constraint to the
@@ -115,6 +127,10 @@ constructor. Instead rely on the default.
 
 Unlike Type::Tiny, you should generally I<not> pass an inlining coderef to
 the constructor. Instead rely on the default.
+
+=item C<coercion>
+
+Will typically be a L<Type::Coercion::Union>.
 
 =back
 

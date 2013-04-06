@@ -49,6 +49,7 @@ dist:project
 	doap:release      dist:v_0-000_04;
 	doap:release      dist:v_0-000_05;
 	doap:release      dist:v_0-000_06;
+	doap:release      dist:v_0-000_07;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -260,6 +261,38 @@ dist:v_0-000_06
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_06.tar.gz>;
 	doap:revision     "0.000_06"^^xsd:string.
+
+dist:v_0-000_07
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_07"^^xsd:string;
+	dc:issued         "2013-04-06"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [ a dcs:Packaging; rdfs:label "More test cases." ];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document constructor for Type::Tiny::Class.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix inlining for Type::Tiny::Intersection.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Types within libraries, if accessed directly rather than exported, did not accept parameters.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Coercion::Union - automatically handles coercion to union types.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix inlining of certain conditionals into coercion code.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_07.tar.gz>;
+	doap:revision     "0.000_07"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;

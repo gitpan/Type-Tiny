@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.000_07  2013-04-06
+
+ - (Addition) Type::Coercion::Union - automatically handles coercion to
+   union types.
+ - (Bugfix) Fix inlining for Type::Tiny::Intersection.
+ - (Bugfix) Fix inlining of certain conditionals into coercion code.
+ - (Bugfix) Types within libraries, if accessed directly rather than
+   exported, did not accept parameters.
+ - (Documentation) Document constructor for Type::Tiny::Class.
+ - (Packaging) More test cases.
+
 0.000_06  2013-04-05
 
  - (Addition) In Moo, type assertions and coercions are now inlined.
