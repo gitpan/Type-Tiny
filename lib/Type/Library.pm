@@ -6,12 +6,12 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_07';
+	$Type::Tiny::VERSION   = '0.000_08';
 }
 
 use Scalar::Util qw< blessed >;
 use Type::Tiny;
-use Types::TypeTiny qw< TypeTiny >;
+use Types::TypeTiny qw< TypeTiny to_TypeTiny >;
 
 sub _croak ($;@)
 {
@@ -93,19 +93,71 @@ sub _export
 	my $export_to        = $opts->{caller};
 	
 	if ($sub->{sub} =~ /^(is|to|assert)_/ and my $coderef = $class->can($sub->{sub}))
-		{ $export_coderef = $coderef }
+	{
+		$export_coderef = $coderef;
+	}
+	
 	elsif ($opts->{declare} and $export_to->isa("Type::Library"))
-		{ $export_coderef = sub (;$) { $export_to->get_type($sub->{sub}) || $sub->{sub} } }
+	{
+		$export_coderef = sub (;@)
+		{
+			my $params; $params = shift if ref($_[0]) eq "ARRAY";
+			my $type = $export_to->get_type($sub->{sub});
+			unless ($type)
+			{
+				_croak "cannot parameterize a non-existant type" if $params;
+				$type = $sub->{sub};
+			}
+			
+			my $t = $params ? $type->parameterize(@$params) : $type;
+			@_ && wantarray ? return($t, @_) : return $t;
+		};
+	}
+	
 	elsif ($opts->{moose} and $type = $meta->get_type($sub->{sub}))
-		{ $export_coderef = _subname $type->qualified_name, sub (;$) { (@_ ? $type->parameterize(@{$_[0]}) : $type)->moose_type } }
+	{
+		$export_coderef = _subname $type->qualified_name, sub (;@)
+		{
+			my $params; $params = shift if ref($_[0]) eq "ARRAY";
+			my $t = $params ? $type->parameterize(@$params) : $type;
+			@_ && wantarray ? return($t->moose_type, @_) : return $t->moose_type;
+		}
+	}
+	
 	elsif ($opts->{mouse} and $type = $meta->get_type($sub->{sub}))
-		{ $export_coderef = _subname $type->qualified_name, sub (;$) { (@_ ? $type->parameterize(@{$_[0]}) : $type)->mouse_type } }
+	{
+		$export_coderef = _subname $type->qualified_name, sub (;@)
+		{
+			my $params; $params = shift if ref($_[0]) eq "ARRAY";
+			my $t = $params ? $type->parameterize(@$params) : $type;
+			@_ && wantarray ? return($t->mouse_type, @_) : return $t->mouse_type;
+		}
+	}
+	
 	elsif ($type = $meta->get_type($sub->{sub}))
-		{ $export_coderef = _subname $type->qualified_name, sub (;$) { (@_ ? $type->parameterize(@{$_[0]}) : $type) } }
+	{
+		$export_coderef = _subname $type->qualified_name, sub (;@)
+		{
+			my $params; $params = shift if ref($_[0]) eq "ARRAY";
+			my $t = $params ? $type->parameterize(@$params) : $type;
+			@_ && wantarray ? return($t, @_) : return $t;
+		}
+	}
+	
 	elsif (scalar grep($_ eq $sub->{sub}, $class->_EXPORT_OK) and my $additional = $class->can($sub->{sub}))
-		{ $export_coderef = $additional }
+	{
+		$export_coderef = $additional;
+	}
+	
 	else
-		{ _croak "'%s' is not exported by '%s'", $sub->{sub}, $class }
+	{
+		_croak "'%s' is not exported by '%s'", $sub->{sub}, $class;
+	}
+	
+	if ($type and not $type->is_parameterizable)
+	{
+		$export_coderef = &Scalar::Util::set_prototype($export_coderef, '');
+	}
 	
 	$export_as = $sub->{-as}                if exists $sub->{-as};
 	$export_as = $sub->{-prefix}.$export_as if exists $sub->{-prefix};
@@ -128,7 +180,7 @@ sub meta
 sub add_type
 {
 	my $meta = shift->meta;
-	my $type = TypeTiny->check($_[0]) ? $_[0] : "Type::Tiny"->new(@_);
+	my $type = blessed($_[0]) ? to_TypeTiny($_[0]) : "Type::Tiny"->new(@_);
 	my $name = $type->name;
 	
 	$meta->{types} ||= {};
@@ -138,11 +190,37 @@ sub add_type
 	
 	no strict "refs";
 	no warnings "redefine";
+	
 	my $class = blessed($meta);
-	*{"$class\::$name"   }     = _subname $type->qualified_name, sub (;$) { (@_ ? $type->parameterize(@{$_[0]}) : $type) };
-	*{"$class\::is_$name"}     = _subname $type->qualified_name, $type->compiled_check;
-	*{"$class\::to_$name"}     = _subname $type->qualified_name, sub ($)  { $type->coerce($_[0]) };
-	*{"$class\::assert_$name"} = _subname $type->qualified_name, sub ($)  { $type->assert_valid($_[0]) };
+	
+	*{"$class\::$name"} = _subname $type->qualified_name, sub (;@)
+	{
+		my $params; $params = shift if ref($_[0]) eq "ARRAY";
+		my $t = $params ? $type->parameterize(@$params) : $type;
+		@_ && wantarray ? return($t, @_) : return $t;
+	};
+	
+	if ($type and not $type->is_parameterizable)
+	{
+		&Scalar::Util::set_prototype(\&{"$class\::$name"}, '');
+	}
+	
+	*{"$class\::is_$name"} = _subname $type->qualified_name, $type->compiled_check;
+	
+	# There is an inlined version available, but don't use that because
+	# additional coercions can be added *after* the type has been installed
+	# into the library.
+	#
+	*{"$class\::to_$name"} = _subname $type->qualified_name, sub ($)
+	{
+		$type->coerce($_[0]);
+	};
+	
+	*{"$class\::assert_$name"} = _subname $type->qualified_name, sub ($)
+	{
+		$type->assert_valid($_[0]);
+	};
+	
 	return $type;
 }
 

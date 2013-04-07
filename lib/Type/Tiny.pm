@@ -6,11 +6,11 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_07';
+	$Type::Tiny::VERSION   = '0.000_08';
 }
 
-use Scalar::Util qw< blessed weaken refaddr >;
-use Types::TypeTiny qw< StringLike CodeLike TypeTiny >;
+use Scalar::Util qw< blessed weaken refaddr isweak >;
+use Types::TypeTiny qw< StringLike CodeLike TypeTiny to_TypeTiny >;
 
 sub _croak ($;@)
 {
@@ -60,6 +60,8 @@ sub new
 	
 	if (exists $params{parent})
 	{
+		$params{parent} = to_TypeTiny($params{parent});
+		
 		_croak "parent must be an instance of %s", __PACKAGE__
 			unless blessed($params{parent}) && $params{parent}->isa(__PACKAGE__);
 	}
@@ -205,8 +207,8 @@ sub _build_compiled_check
 
 sub equals
 {
-	my ($self, $other) = @_;
-	
+	my ($self, $other) = map to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
 	return unless blessed($other) && $other->isa("Type::Tiny");
 	
 	return !!1 if refaddr($self) == refaddr($other);
@@ -227,7 +229,8 @@ sub equals
 
 sub is_subtype_of
 {
-	my ($self, $other) = @_;
+	my ($self, $other) = map to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
 	return unless blessed($other) && $other->isa("Type::Tiny");
 
 	my $this = $self;
@@ -241,14 +244,19 @@ sub is_subtype_of
 
 sub is_supertype_of
 {
-	my ($self, $other) = @_;
+	my ($self, $other) = map to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
 	return unless blessed($other) && $other->isa("Type::Tiny");
+	
 	$other->is_subtype_of($self);
 }
 
 sub is_a_type_of
 {
-	my ($self, $other) = @_;
+	my ($self, $other) = map to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
+	return unless blessed($other) && $other->isa("Type::Tiny");
+	
 	$self->equals($other) or $self->is_subtype_of($other);
 }
 
@@ -377,7 +385,9 @@ sub parameterize
 	my $self = shift;
 	return $self unless @_;
 	$self->is_parameterizable
-		or _croak "type '%s' does not accept parameters", $self;
+		or _croak "type '%s' does not accept parameters", "$self";
+	
+	@_ = map to_TypeTiny($_), @_;
 	
 	local $_ = $_[0];
 	my %options = (
@@ -407,7 +417,7 @@ sub complementary_type
 {
 	my $self = shift;
 	my $r    = ($self->{complementary_type} ||= $self->_build_complementary_type);
-	weaken($self->{complementary_type});
+	weaken($self->{complementary_type}) unless isweak($self->{complementary_type});
 	return $r;
 }
 
@@ -419,7 +429,7 @@ sub _build_complementary_type
 		display_name => sprintf("~%s", $self),
 	);
 	$opts{display_name} =~ s/^\~{2}//;
-	$opts{inlined} = sub { shift; "not ".$self->inline_check(@_) }
+	$opts{inlined} = sub { shift; "not(".$self->inline_check(@_).")" }
 		if $self->can_be_inlined;
 	return "Type::Tiny"->new(%opts);
 }

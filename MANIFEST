@@ -68,6 +68,7 @@ t/library-types.t
 t/moo-coercion.t
 t/moo-inflation.t
 t/moo.t
+t/moose-autott.t
 t/moose-coercion.t
 t/moose.t
 t/mouse-coercion.t
@@ -77,6 +78,7 @@ t/stdlib-overload.t
 t/stdlib-strmatch.t
 t/stdlib-structures.t
 t/stdlib.t
+t/syntax.t
 t/type-class.t
 t/type-duck.t
 t/type-enum.t

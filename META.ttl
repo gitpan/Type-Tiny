@@ -50,6 +50,7 @@ dist:project
 	doap:release      dist:v_0-000_05;
 	doap:release      dist:v_0-000_06;
 	doap:release      dist:v_0-000_07;
+	doap:release      dist:v_0-000_08;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -293,6 +294,29 @@ dist:v_0-000_07
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_07.tar.gz>;
 	doap:revision     "0.000_07"^^xsd:string.
+
+dist:v_0-000_08
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_08"^^xsd:string;
+	dc:issued         "2013-04-07"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Rewrite most of the functions exported by Type::Library-based type libraries to cope better with being used mid-list.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Most parts of the API that accept Type::Tiny objects (e.g. Type::Utils::from()) now also accept Moose::Meta::TypeConstraint objects.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Types::TypeTiny::to_TypeTiny can be used to coerce a Moose type constraint object to Type::Tiny.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_08.tar.gz>;
+	doap:revision     "0.000_08"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;
