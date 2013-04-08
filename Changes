@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.000_09  2013-04-08
+
+ - (Addition) Bundle benchmarking scripts.
+ - (Documentation) Fill in the Usage with Moose section of the fine manual.
+ - (Packaging) Tidy up the 'examples' directory.
+ - (Packaging) When generating Moose/Mouse constraints from Type::Tiny
+   objects, prefer to generate anonymous ones.
+
 0.000_08  2013-04-07
 
  - (Addition) Types::TypeTiny::to_TypeTiny can be used to coerce a Moose

@@ -3,7 +3,10 @@ Upstream-Name: Type-Tiny
 Upstream-Contact: Toby Inkster <tobyink@cpan.org>
 Source: https://metacpan.org/release/Type-Tiny
 
-Files: lib/Test/TypeTiny.pm
+Files: examples/benchmark-coercions.pl
+ examples/benchmark-constraints.pl
+ examples/datetime-coercions.pl
+ lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
  lib/Type/Coercion/Union.pm
  lib/Type/Library.pm
@@ -65,10 +68,9 @@ Files: CONTRIBUTING
  MANIFEST.SKIP
  META.ttl
  Makefile.PL
+ NEWS
  README
  TODO.mm
- examples/datetimes-from-manual.pl
- examples/lib1.pl
  inc/Test/Fatal.pm
  inc/Test/Requires.pm
  inc/Try/Tiny.pm

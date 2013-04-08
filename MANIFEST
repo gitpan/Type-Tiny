@@ -2,8 +2,9 @@ Changes
 CONTRIBUTING
 COPYRIGHT
 CREDITS
-examples/datetimes-from-manual.pl
-examples/lib1.pl
+examples/benchmark-coercions.pl
+examples/benchmark-constraints.pl
+examples/datetime-coercions.pl
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
 inc/Module/Install/AutoInstall.pm
@@ -52,6 +53,7 @@ meta/changes.pret
 meta/doap.pret
 meta/makefile.pret
 meta/people.pret
+NEWS
 README
 t/00-compile.t
 t/arithmetic.t
