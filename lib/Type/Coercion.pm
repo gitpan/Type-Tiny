@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.000_09';
+	$Type::Coercion::VERSION   = '0.000_10';
 }
 
 use Scalar::Util qw< blessed >;
@@ -78,6 +78,9 @@ sub has_coercion_for_type
 	my $self = shift;
 	my $type = to_TypeTiny($_[0]);
 	
+	return "0 but true"
+		if $self->has_type_constraint && $type->is_a_type_of($self->type_constraint);
+	
 	for my $has (@{$self->type_coercion_map})
 	{
 		return !!1 if TypeTiny->check($has) && $type->is_a_type_of($has);
@@ -89,8 +92,12 @@ sub has_coercion_for_type
 sub has_coercion_for_value
 {
 	my $self = shift;
-	my $c = $self->type_coercion_map;
 	local $_ = $_[0];
+	
+	return "0 but true"
+		if $self->has_type_constraint && $self->type_constraint->check(@_);
+	
+	my $c = $self->type_coercion_map;
 	for (my $i = 0; $i <= $#$c; $i += 2)
 	{
 		return !!1 if $c->[$i]->check(@_);
@@ -173,6 +180,9 @@ sub can_be_inlined
 {
 	my $self = shift;
 	my @mishmash = @{$self->type_coercion_map};
+	return
+		if $self->has_type_constraint
+		&& !$self->type_constraint->can_be_inlined;
 	while (@mishmash)
 	{
 		my ($type, $converter) = splice(@mishmash, 0, 2);
@@ -345,11 +355,18 @@ does not validate against the target type constraint.
 
 =item C<< has_coercion_for_type($source_type) >>
 
-Not implemented yet.
+Returns true iff this coercion has a coercion from the source type.
+
+Returns the special string C<< "0 but true" >> if no coercion would be
+actually be necessary for this type.
 
 =item C<< has_coercion_for_value($value) >>
 
 Returns true iff the value could be coerced by this coercion.
+
+Returns the special string C<< "0 but true" >> if no coercion would be
+actually be necessary for this value (due to it already meeting the target
+type constraint).
 
 =item C<< can_be_inlined >>
 

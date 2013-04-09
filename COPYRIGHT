@@ -70,6 +70,7 @@ Files: CONTRIBUTING
  Makefile.PL
  NEWS
  README
+ TODO
  TODO.mm
  inc/Test/Fatal.pm
  inc/Test/Requires.pm

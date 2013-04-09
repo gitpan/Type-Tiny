@@ -52,6 +52,7 @@ dist:project
 	doap:release      dist:v_0-000_07;
 	doap:release      dist:v_0-000_08;
 	doap:release      dist:v_0-000_09;
+	doap:release      dist:v_0-000_10;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -345,6 +346,25 @@ dist:v_0-000_09
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_09.tar.gz>;
 	doap:revision     "0.000_09"^^xsd:string.
+
+dist:v_0-000_10
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_10"^^xsd:string;
+	dc:issued         "2013-04-09"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Improvements to has_coercion_for_{type,value} from Type::Coercion.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix incorrect Test::Requires line in 'mouse-coercion.t'.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_10.tar.gz>;
+	doap:revision     "0.000_10"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;
