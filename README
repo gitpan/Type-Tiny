@@ -231,6 +231,10 @@ DESCRIPTION
         Shorthand for creating a new child type constraint with no coercions
         at all.
 
+    "isa($class)", "can($method)", "AUTOLOAD(@args)"
+        If Moose is loaded, then the combination of these methods is used to
+        mock a Moose::Meta::TypeConstraint.
+
   Overloading
     *   Stringification is overloaded to return the qualified name.
 

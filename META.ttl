@@ -53,6 +53,7 @@ dist:project
 	doap:release      dist:v_0-000_08;
 	doap:release      dist:v_0-000_09;
 	doap:release      dist:v_0-000_10;
+	doap:release      dist:v_0-000_11;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -365,6 +366,25 @@ dist:v_0-000_10
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_10.tar.gz>;
 	doap:revision     "0.000_10"^^xsd:string.
+
+dist:v_0-000_11
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_11"^^xsd:string;
+	dc:issued         "2013-04-11"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix prototype for Type::Utils::as.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "BIG, AWESOME CHANGE: no longer need to pass '-moose' parameter when importing a library into a Moose class; only Mouse needs that treatment now.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_11.tar.gz>;
+	doap:revision     "0.000_11"^^xsd:string.
 
 cpan:tobyink
 	a                 foaf:Person;
