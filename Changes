@@ -6,6 +6,10 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.000_12  2013-04-12
+
+ - (Documentation) Fix minor typo.
+
 0.000_11  2013-04-11
 
  - (Bugfix) Fix prototype for Type::Utils::as.
@@ -50,6 +54,7 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 0.000_06  2013-04-05
 
  - (Addition) In Moo, type assertions and coercions are now inlined.
+   ++$MSTROUT
  - (Addition) Monkey patch Moose::Meta::TypeConstraint to be able to
    retrieve Type::Tiny constraints from inflated Moose constraints.
  - (Addition) Type::Tiny now has an 'inline_assert' function.

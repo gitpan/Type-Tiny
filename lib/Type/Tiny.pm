@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_11';
+	$Type::Tiny::VERSION   = '0.000_12';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -968,6 +968,10 @@ L<Mouse::Meta::TypeConstraint>.
 =head1 AUTHOR
 
 Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
+
+=head1 THANKS
+
+Thanks to Matt S Trout for advice on L<Moo> integration.
 
 =head1 COPYRIGHT AND LICENCE
 

@@ -54,6 +54,7 @@ dist:project
 	doap:release      dist:v_0-000_09;
 	doap:release      dist:v_0-000_10;
 	doap:release      dist:v_0-000_11;
+	doap:release      dist:v_0-000_12;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -247,10 +248,6 @@ dist:v_0-000_06
 		];
 		dcs:item [
 			a dcs:Addition;
-			rdfs:label "In Moo, type assertions and coercions are now inlined.";
-		];
-		dcs:item [
-			a dcs:Addition;
 			rdfs:label "Type::Tiny now has an 'inline_assert' function.";
 		];
 		dcs:item [
@@ -260,6 +257,11 @@ dist:v_0-000_06
 		dcs:item [
 			a dcs:Documentation;
 			rdfs:label "Section in manual comparing Type::Tiny with various other type library frameworks.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "In Moo, type assertions and coercions are now inlined.";
+			dcs:thanks cpan:mstrout;
 		];
 	];
 	dcs:released-by   cpan:tobyink;
@@ -385,6 +387,27 @@ dist:v_0-000_11
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_11.tar.gz>;
 	doap:revision     "0.000_11"^^xsd:string.
+
+dist:v_0-000_12
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.000_12"^^xsd:string;
+	dc:issued         "2013-04-12"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Fix minor typo.";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_12.tar.gz>;
+	doap:revision     "0.000_12"^^xsd:string.
+
+cpan:mstrout
+	a                 foaf:Person;
+	foaf:name         "Matt S Trout";
+	foaf:nick         "MSTROUT";
+	foaf:page         <https://metacpan.org/author/MSTROUT>.
 
 cpan:tobyink
 	a                 foaf:Person;

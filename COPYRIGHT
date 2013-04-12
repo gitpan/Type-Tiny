@@ -6,6 +6,7 @@ Source: https://metacpan.org/release/Type-Tiny
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
+ inc/Module/Install/Contributors.pm
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
  lib/Type/Coercion/Union.pm

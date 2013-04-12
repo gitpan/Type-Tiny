@@ -30,4 +30,6 @@ resources:
   homepage: https://metacpan.org/release/Type-Tiny
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-type-tiny
-version: 0.000_11
+version: 0.000_12
+x_contributors:
+  - 'Matt S Trout <MSTROUT@cpan.org>'

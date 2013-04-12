@@ -274,6 +274,9 @@ SEE ALSO
 AUTHOR
     Toby Inkster <tobyink@cpan.org>.
 
+THANKS
+    Thanks to Matt S Trout for advice on Moo integration.
+
 COPYRIGHT AND LICENCE
     This software is copyright (c) 2013 by Toby Inkster.
 
