@@ -10,7 +10,15 @@ configure_requires:
 distribution_type: module
 dynamic_config: 0
 generated_by: 'Module::Install version 1.06'
-keywords: []
+keywords:
+  - Moo
+  - Moose
+  - Mouse
+  - Schema
+  - 'Type Coercion'
+  - 'Type Constraint'
+  - 'Type Library'
+  - Validation
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,6 +38,4 @@ resources:
   homepage: https://metacpan.org/release/Type-Tiny
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-type-tiny
-version: 0.000_12
-x_contributors:
-  - 'Matt S Trout <MSTROUT@cpan.org>'
+version: 0.001

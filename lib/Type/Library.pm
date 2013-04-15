@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_12';
+	$Type::Tiny::VERSION   = '0.001';
 }
 
 use Scalar::Util qw< blessed >;
@@ -328,15 +328,15 @@ Returns the Type::Tiny object.
 
 =item C<< is_Foo($value) >>
 
-Returns true iff $value passes the type contraint.
+Returns true iff $value passes the type constraint.
 
 =item C<< assert_Foo($value) >>
 
-Returns true iff $value passes the type contraint. Dies otherwise.
+Returns true iff $value passes the type constraint. Dies otherwise.
 
 =item C<< to_Foo($value) >>
 
-Coerces the value to the type. (Not implemented yet.)
+Coerces the value to the type.
 
 =back
 

@@ -18,7 +18,7 @@ SYNOPSIS
    
        package Bullwinkle {
           use Moose;
-          has favourite_number => (is => "ro", isa => $NUM->moose_type);
+          has favourite_number => (is => "ro", isa => $NUM);
        }
    
        package Maisy {
@@ -112,6 +112,11 @@ DESCRIPTION
 
         Generally speaking this attribute should not be passed to the
         constructor; you should rely on the default lazily-built objects.
+
+        It should rarely be necessary to obtain a
+        Moose::Meta::TypeConstraint object from Type::Tiny because the
+        Type::Tiny object itself should be usable pretty much anywhere a
+        Moose::Meta::TypeConstraint is expected.
 
     The following additional attributes are used for parameterizable (e.g.
     "ArrayRef") and parameterized (e.g. "ArrayRef[Int]") type constraints.
@@ -267,7 +272,7 @@ SEE ALSO
     Type::Library, Type::Utils, Types::Standard, Type::Coercion.
 
     Type::Tiny::Class, Type::Tiny::Role, Type::Tiny::Duck, Type::Tiny::Enum,
-    Type::Tiny::Union.
+    Type::Tiny::Union, Type::Tiny::Intersection.
 
     Moose::Meta::TypeConstraint, Mouse::Meta::TypeConstraint.
 

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.000_12';
+	$Type::Coercion::VERSION   = '0.001';
 }
 
 use Scalar::Util qw< blessed >;
@@ -452,6 +452,8 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 L<Type::Tiny::Manual>.
 
 L<Type::Tiny>, L<Type::Library>, L<Type::Utils>, L<Types::Standard>.
+
+L<Type::Coercion::Union>.
 
 L<Moose::Meta::TypeCoercion>.
 

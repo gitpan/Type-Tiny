@@ -6,7 +6,6 @@ Source: https://metacpan.org/release/Type-Tiny
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
- inc/Module/Install/Contributors.pm
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
  lib/Type/Coercion/Union.pm
@@ -66,22 +65,19 @@ Files: CONTRIBUTING
  CREDITS
  Changes
  LICENSE
- MANIFEST.SKIP
  META.ttl
  Makefile.PL
  NEWS
  README
  TODO
  TODO.mm
- inc/Test/Fatal.pm
- inc/Test/Requires.pm
- inc/Try/Tiny.pm
  meta/changes.pret
  meta/doap.pret
  meta/makefile.pret
  meta/people.pret
-Copyright: Unknown
-License: Unknown
+ meta/rights.pret
+Copyright: Copyright 2013 Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Module/Install.pm
  inc/Module/Install/Include.pm
@@ -98,6 +94,10 @@ Files: inc/Module/Install/Makefile.pm
 Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: COPYRIGHT
 Copyright: None
 License: public-domain
@@ -107,8 +107,20 @@ Files: inc/Module/Install/Package.pm
 Copyright: Copyright (c) 2011. Ingy doet Net.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: inc/Module/Install/Base.pm
 Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: MANIFEST.SKIP
+Copyright: Copyright 2013 Ingy döt Net.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/YAML/Tiny.pm

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Duck::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Duck::VERSION   = '0.000_12';
+	$Type::Tiny::Duck::VERSION   = '0.001';
 }
 
 use Scalar::Util qw< blessed >;
@@ -47,7 +47,7 @@ sub _build_inlined
 	sub {
 		my $var = $_[1];
 		local $" = q{ };
-		qq{ blessed($var) and not grep(!$var->can(\$_), qw/@methods/) };
+		qq{ Scalar::Util::blessed($var) and not grep(!$var->can(\$_), qw/@methods/) };
 	};
 }
 

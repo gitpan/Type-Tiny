@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.000_12';
+	$Type::Tiny::VERSION   = '0.001';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -558,11 +558,17 @@ sub _MONKEY_MAGIC
 		Moose::Meta::TypeConstraint;
 		my $meta = __PACKAGE__->meta;
 		$meta->make_mutable;
-		$meta->add_attribute(tt_type => (
-			reader    => "tt_type",
-			writer    => "_set_tt_type",
-			predicate => "has_tt_type"
-		));
+		$meta->add_attribute(
+			"Moose::Meta::Attribute"->new(
+				tt_type => (
+					reader    => "tt_type",
+					writer    => "_set_tt_type",
+					predicate => "has_tt_type",
+					weak_ref  => 1,
+					Class::MOP::_definition_context(),
+				),
+			),
+		);
 		$meta->make_immutable(inline_constructor => 0);
 		1;
 	} or _croak("could not perform magic Moose trick: $@");
@@ -639,7 +645,7 @@ Type::Tiny - tiny, yet Moo(se)-compatible type constraint
    
    package Bullwinkle {
       use Moose;
-      has favourite_number => (is => "ro", isa => $NUM->moose_type);
+      has favourite_number => (is => "ro", isa => $NUM);
    }
    
    package Maisy {
@@ -751,6 +757,10 @@ L<Moose::Meta::TypeConstraint> or L<Mouse::Meta::TypeConstraint>.
 
 Generally speaking this attribute should not be passed to the constructor;
 you should rely on the default lazily-built objects.
+
+It should rarely be necessary to obtain a L<Moose::Meta::TypeConstraint>
+object from L<Type::Tiny> because the L<Type::Tiny> object itself should
+be usable pretty much anywhere a L<Moose::Meta::TypeConstraint> is expected.
 
 =back
 
@@ -960,7 +970,7 @@ L<Type::Tiny::Manual>.
 L<Type::Library>, L<Type::Utils>, L<Types::Standard>, L<Type::Coercion>.
 
 L<Type::Tiny::Class>, L<Type::Tiny::Role>, L<Type::Tiny::Duck>,
-L<Type::Tiny::Enum>, L<Type::Tiny::Union>.
+L<Type::Tiny::Enum>, L<Type::Tiny::Union>, L<Type::Tiny::Intersection>.
 
 L<Moose::Meta::TypeConstraint>,
 L<Mouse::Meta::TypeConstraint>.

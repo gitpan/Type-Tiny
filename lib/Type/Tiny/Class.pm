@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.000_12';
+	$Type::Tiny::Class::VERSION   = '0.001';
 }
 
 use Scalar::Util qw< blessed >;
@@ -47,7 +47,7 @@ sub _build_inlined
 	my $class = $self->class;
 	sub {
 		my $var = $_[1];
-		qq{blessed($var) and $var->isa(q[$class])};
+		qq{Scalar::Util::blessed($var) and $var->isa(q[$class])};
 	};
 }
 
