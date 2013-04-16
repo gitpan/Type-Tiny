@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.001';
+	$Type::Tiny::VERSION   = '0.003_01';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -25,6 +25,7 @@ use overload
 	q("")      => sub { caller =~ m{^(Moo::HandleMoose|Sub::Quote)} ? overload::StrVal($_[0]) : $_[0]->display_name },
 	q(bool)    => sub { 1 },
 	q(&{})     => "_overload_coderef",
+	q(+)       => sub { $_[2] ? $_[1]->plus_coercions($_[0]) : $_[0]->plus_fallback_coercions($_[1]) },
 	q(|)       => sub { my @tc = _swap @_; require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@tc) },
 	q(&)       => sub { my @tc = _swap @_; require Type::Tiny::Intersection; "Type::Tiny::Intersection"->new(type_constraints => \@tc) },
 	q(~)       => sub { shift->complementary_type },
@@ -69,6 +70,14 @@ sub new
 	$params{name} = "__ANON__" unless exists $params{name};
 	$params{uniq} = $uniq++;
 	
+	if (exists $params{coercion} and !ref $params{coercion} and $params{coercion})
+	{
+		$params{parent}->has_coercion
+			or _croak "coercion => 1 requires type to have a direct parent with a coercion";
+		
+		$params{coercion} = $params{parent}->coercion;
+	}
+	
 	my $self = bless \%params, $class;
 	
 	unless ($self->is_anon)
@@ -78,8 +87,8 @@ sub new
 			or eval q( $self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm )
 			or _croak '"%s" is not a valid type name', $self->name;
 	}
-
-	if ($self->has_library and not $self->is_anon)
+	
+	if ($self->has_library and !$self->is_anon and !$params{tmp})
 	{
 		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self->moose_type };
 	}
@@ -107,6 +116,7 @@ sub inlined                  { $_[0]{inlined} }
 sub constraint_generator     { $_[0]{constraint_generator} }
 sub inline_generator         { $_[0]{inline_generator} }
 sub name_generator           { $_[0]{name_generator} ||= $_[0]->_build_name_generator }
+sub coercion_generator       { $_[0]{coercion_generator} }
 sub parameters               { $_[0]{parameters} }
 sub moose_type               { $_[0]{moose_type}     ||= $_[0]->_build_moose_type }
 sub mouse_type               { $_[0]{mouse_type}     ||= $_[0]->_build_mouse_type }
@@ -117,6 +127,7 @@ sub has_coercion             { exists $_[0]{coercion} }
 sub has_inlined              { exists $_[0]{inlined} }
 sub has_constraint_generator { exists $_[0]{constraint_generator} }
 sub has_inline_generator     { exists $_[0]{inline_generator} }
+sub has_coercion_generator   { exists $_[0]{coercion_generator} }
 sub has_parameters           { exists $_[0]{parameters} }
 
 sub _assert_coercion
@@ -397,9 +408,17 @@ sub parameterize
 	);
 	$options{inlined} = $self->inline_generator->(@_)
 		if $self->has_inline_generator;
-	delete $options{inlined} unless defined $options{inlined};
+	exists $options{$_} && !defined $options{$_} && delete $options{$_}
+		for keys %options;
 	
-	return $self->create_child_type(%options);
+	my $P = $self->create_child_type(%options);
+
+	my $coercion = $self->coercion_generator->($self, $P, @_)
+		if $self->has_coercion_generator;
+	$P->coercion->add_type_coercions( @{$coercion->type_coercion_map} )
+		if $coercion;
+	
+	return $P;
 }
 
 sub child_type_class
@@ -489,7 +508,7 @@ sub _build_mouse_type
 	
 	$self->{mouse_type} = $r;  # prevent recursion
 	$r->_add_type_coercions(
-		$self->coercion->_codelike_type_coercion_map('mouse_type')
+		$self->coercion->freeze->_codelike_type_coercion_map('mouse_type')
 	) if $self->has_coercion;
 	
 	return $r;
@@ -507,6 +526,22 @@ sub plus_coercions
 	$new->coercion->add_type_coercions(
 		@more,
 		@{$self->coercion->type_coercion_map},
+	);
+	return $new;
+}
+
+sub plus_fallback_coercions
+{
+	my $self = shift;
+	
+	my @more = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
+		? @{ $_[0]->type_coercion_map }
+		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
+	
+	my $new = $self->_clone;
+	$new->coercion->add_type_coercions(
+		@{$self->coercion->type_coercion_map},
+		@more,
 	);
 	return $new;
 }
@@ -740,6 +775,10 @@ A L<Type::Coercion> object associated with this type.
 Generally speaking this attribute should not be passed to the constructor;
 you should rely on the default lazily-built coercion object.
 
+You may pass C<< coercion => 1 >> to the constructor to inherit coercions
+from the constraint's parent. (This requires the parent constraint to have
+a coercion.)
+
 =item C<< complementary_type >>
 
 A complementary type for this type. For example, the complementary type
@@ -789,13 +828,17 @@ type constraint.
 
 A coderef which generates a new inlining coderef based on parameters.
 
+=item C<< coercion_generator >>
+
+A coderef which generates a new L<Type::Coercion> object based on parameters.
+
 =back
 
 =head2 Methods
 
 =over
 
-=item C<has_parent>, C<has_coercion>, C<has_library>, C<has_constraint_generator>, C<has_inlined>, C<has_inline_generator>, C<has_parameters>
+=item C<has_parent>, C<has_coercion>, C<has_library>, C<has_inlined>, C<has_constraint_generator>, C<has_inline_generator>, C<has_coercion_generator>, C<has_parameters>
 
 Predicate methods.
 
@@ -898,6 +941,10 @@ Shorthand for creating a new child type constraint with the same coercions
 as this one, but then adding some extra coercions (at a higher priority than
 the existing ones).
 
+=item C<< plus_fallback_coercions($type1, $code1, ...) >>
+
+Like C<plus_coercions>, but added at a lower priority.
+
 =item C<< minus_coercions($type1, ...) >>
 
 Shorthand for creating a new child type constraint with fewer type coercions.
@@ -955,6 +1002,11 @@ See L<Type::Tiny::Union>.
 
 The C<< & >> operator is overloaded to build the intersection of two type
 constraints. See L<Type::Tiny::Intersection>.
+
+=item *
+
+The C<< + >> operator is overloaded to call C<plus_coercions> or
+C<plus_fallback_coercions> as appropriate.
 
 =back
 

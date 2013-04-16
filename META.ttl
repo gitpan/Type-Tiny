@@ -64,6 +64,7 @@ dist:project
 	doap:release      dist:v_0-000_11;
 	doap:release      dist:v_0-000_12;
 	doap:release      dist:v_0-001;
+	doap:release      dist:v_0-003_01;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -450,6 +451,41 @@ dist:v_0-001
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.001.tar.gz>;
 	doap:revision     "0.001"^^xsd:string.
+
+dist:v_0-003_01
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_01"^^xsd:string;
+	dc:issued         "2013-04-16"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Link from Test::TypeTiny to Test::Deep::Type.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Allow a Type::Tiny object to \"freeze\" its coercions. This prevents a Type::Tiny object from becoming out of sync with its equivalent Mouse or Moose constraint objects.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Library packages can now include \"standalone\" Type::Coercion objects, not attached to a type constraint. These can be exported on request.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Overload \"+\" operator for Type::Coercion and Type::Tiny allows coercions to be added to each other, and added to type constraints.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Build coercions automatically for certain type parameterized constraints. Say there's a Num->Int coercion defined; then we should be able to coerce ArrayRef[Num]->ArrayRef[Int].";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Allow subtypes to inherit coercions from their parent type constraint. (They do not by default.)";
+		];
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_01.tar.gz>;
+	doap:revision     "0.003_01"^^xsd:string.
 
 cpan:ingy
 	a                 foaf:Person;

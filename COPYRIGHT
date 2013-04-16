@@ -24,9 +24,12 @@ Files: examples/benchmark-coercions.pl
  lib/Type/Tiny/Union.pm
  lib/Type/Utils.pm
  lib/Types/Standard.pm
+ lib/Types/Standard/AutomaticCoercion.pm
  lib/Types/TypeTiny.pm
  t/00-compile.t
  t/arithmetic.t
+ t/coercion-automatic.t
+ t/coercion-frozen.t
  t/coercion-inlining.t
  t/coercion-modifiers.t
  t/coercion-union.t

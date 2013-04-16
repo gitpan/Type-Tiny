@@ -6,6 +6,24 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_01  2013-04-16
+
+ - (Addition) Allow subtypes to inherit coercions from their parent type
+   constraint. (They do not by default.)
+ - (Addition) Build coercions automatically for certain type parameterized
+   constraints. Say there's a Num->Int coercion defined; then we should be
+   able to coerce ArrayRef[Num]->ArrayRef[Int].
+ - (Addition) Overload "+" operator for Type::Coercion and Type::Tiny
+   allows coercions to be added to each other, and added to type
+   constraints.
+ - (Addition) Type::Library packages can now include "standalone"
+   Type::Coercion objects, not attached to a type constraint. These can be
+   exported on request.
+ - (Documentation) Link from Test::TypeTiny to Test::Deep::Type.
+ - Allow a Type::Tiny object to "freeze" its coercions. This prevents a
+   Type::Tiny object from becoming out of sync with its equivalent Mouse or
+   Moose constraint objects.
+
 0.001  2013-04-15  # First public release
 
  - (Addition) More test cases for Optional[`a] within Dict[`a].

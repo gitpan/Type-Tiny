@@ -4,7 +4,7 @@ use Test::More ();
 use base "Exporter";
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.001';
+our $VERSION   = '0.003_01';
 
 our @EXPORT = qw( should_pass should_fail ok_subtype );
 
@@ -115,6 +115,9 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 =head1 SEE ALSO
 
 L<Type::Tiny>.
+
+For an alternative to C<should_pass>, see L<Test::Deep::Type> which will
+happily accept a Type::Tiny type constraint instead of a MooseX::Types one.
 
 =head1 AUTHOR
 
