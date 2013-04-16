@@ -6,6 +6,12 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_02  2013-04-16
+
+ - (Documentation) Document how to process sub parameters with Type::Tiny,
+   and point people towards Type::Params.
+ - Avoid unnecessarily regenerating parameterized type constraints.
+
 0.003_01  2013-04-16
 
  - (Addition) Allow subtypes to inherit coercions from their parent type

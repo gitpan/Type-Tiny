@@ -36,6 +36,7 @@ lib/Type/Tiny/Enum.pm
 lib/Type/Tiny/Intersection.pm
 lib/Type/Tiny/Manual.pod
 lib/Type/Tiny/Manual/Libraries.pod
+lib/Type/Tiny/Manual/Params.pod
 lib/Type/Tiny/Manual/UsingWithMoo.pod
 lib/Type/Tiny/Manual/UsingWithMoose.pod
 lib/Type/Tiny/Manual/UsingWithMouse.pod
@@ -79,6 +80,7 @@ t/moose-coercion.t
 t/moose.t
 t/mouse-coercion.t
 t/mouse.t
+t/parameterization.t
 t/stdlib-inlined.t
 t/stdlib-overload.t
 t/stdlib-strmatch.t

@@ -291,6 +291,8 @@ SEE ALSO
 
     Moose::Meta::TypeConstraint, Mouse::Meta::TypeConstraint.
 
+    Type::Params.
+
 AUTHOR
     Toby Inkster <tobyink@cpan.org>.
 

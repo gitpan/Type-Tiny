@@ -17,6 +17,7 @@ Files: examples/benchmark-coercions.pl
  lib/Type/Tiny/Intersection.pm
  lib/Type/Tiny/Manual.pod
  lib/Type/Tiny/Manual/Libraries.pod
+ lib/Type/Tiny/Manual/Params.pod
  lib/Type/Tiny/Manual/UsingWithMoo.pod
  lib/Type/Tiny/Manual/UsingWithMoose.pod
  lib/Type/Tiny/Manual/UsingWithMouse.pod
@@ -48,6 +49,7 @@ Files: examples/benchmark-coercions.pl
  t/moose.t
  t/mouse-coercion.t
  t/mouse.t
+ t/parameterization.t
  t/stdlib-inlined.t
  t/stdlib-overload.t
  t/stdlib-strmatch.t

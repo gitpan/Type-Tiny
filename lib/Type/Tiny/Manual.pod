@@ -39,6 +39,10 @@ L<Using with Moo|Type::Tiny::Manual::UsingWithMoo> - how to use Type::Tiny and T
 
 Type::Tiny and friends don't need to be used within an OO framework. See L<FreeMind::Node> for an example that does not.
 
+=item *
+
+L<Processing arguments to subs|Type::Tiny::Manual::Params> - coerce and validate arguments to functions and methods.
+
 =back
 
 =head1 TYPE::TINY VERSUS X
@@ -58,6 +62,18 @@ use Type::Tiny pretty easily.
 =head2 MooX::Types::MooseLike
 
 Type::Tiny is faster and supports coercions.
+
+=head1 BUGS
+
+Please report any bugs to
+L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
+
+=head1 SUPPORT
+
+B<< IRC: >> support is available through in the I<< #moose >> channel
+on L<irc.perl.org|http://www.irc.perl.org/channels.html>. If Type::Tiny
+discussion there becomes overwhelming (unlikely) then I'll move it
+to a separate channel.
 
 =head1 AUTHOR
 
