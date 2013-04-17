@@ -51,6 +51,7 @@ Files: examples/benchmark-coercions.pl
  t/mouse.t
  t/parameterization.t
  t/stdlib-inlined.t
+ t/stdlib-optlist.t
  t/stdlib-overload.t
  t/stdlib-strmatch.t
  t/stdlib-structures.t

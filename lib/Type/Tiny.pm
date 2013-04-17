@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_02';
+	$Type::Tiny::VERSION   = '0.003_03';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -90,7 +90,7 @@ sub new
 	
 	if ($self->has_library and !$self->is_anon and !$params{tmp})
 	{
-		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self->moose_type };
+		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self };
 	}
 		
 	return $self;
@@ -123,7 +123,7 @@ sub mouse_type               { $_[0]{mouse_type}     ||= $_[0]->_build_mouse_typ
 
 sub has_parent               { exists $_[0]{parent} }
 sub has_library              { exists $_[0]{library} }
-sub has_coercion             { exists $_[0]{coercion} }
+sub has_coercion             { exists $_[0]{coercion} and !!@{ $_[0]{coercion}->type_coercion_map } }
 sub has_inlined              { exists $_[0]{inlined} }
 sub has_constraint_generator { exists $_[0]{constraint_generator} }
 sub has_inline_generator     { exists $_[0]{inline_generator} }
@@ -856,9 +856,14 @@ A coderef which generates a new L<Type::Coercion> object based on parameters.
 
 =over
 
-=item C<has_parent>, C<has_coercion>, C<has_library>, C<has_inlined>, C<has_constraint_generator>, C<has_inline_generator>, C<has_coercion_generator>, C<has_parameters>
+=item C<has_parent>, C<has_library>, C<has_inlined>, C<has_constraint_generator>, C<has_inline_generator>, C<has_coercion_generator>, C<has_parameters>
 
 Predicate methods.
+
+=item C<has_coercion>
+
+Predicate method with a little extra DWIM. Returns false if the coercion is
+a no-op.
 
 =item C<< is_anon >>
 
