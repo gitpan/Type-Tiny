@@ -100,6 +100,10 @@ Files: inc/Module/Install/Makefile.pm
 Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: lib/Exporter/TypeTiny.pm
+Copyright: Unknown
+License: Unknown
+
 Files: inc/Try/Tiny.pm
 Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0

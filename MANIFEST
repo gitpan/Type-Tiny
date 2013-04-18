@@ -25,6 +25,7 @@ inc/Test/Fatal.pm
 inc/Test/Requires.pm
 inc/Try/Tiny.pm
 inc/YAML/Tiny.pm
+lib/Exporter/TypeTiny.pm
 lib/Test/TypeTiny.pm
 lib/Type/Coercion.pm
 lib/Type/Coercion/Union.pm

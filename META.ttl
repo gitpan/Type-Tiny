@@ -67,6 +67,7 @@ dist:project
 	doap:release      dist:v_0-003_01;
 	doap:release      dist:v_0-003_02;
 	doap:release      dist:v_0-003_03;
+	doap:release      dist:v_0-003_04;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -545,6 +546,22 @@ dist:v_0-003_03
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_03.tar.gz>;
 	doap:revision     "0.003_03"^^xsd:string.
+
+dist:v_0-003_04
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_04"^^xsd:string;
+	dc:issued         "2013-04-18"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Factor out the sub exporting code scattered around (in Type::Utils, Types::TypeTiny and Type::Library) into a single module.";
+		];
+		dcs:versus dist:v_0-003_03;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_04.tar.gz>;
+	doap:revision     "0.003_04"^^xsd:string.
 
 cpan:ingy
 	a                 foaf:Person;

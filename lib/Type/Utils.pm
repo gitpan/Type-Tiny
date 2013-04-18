@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.003_03';
+	$Type::Utils::VERSION   = '0.003_04';
 }
 
 sub _croak ($;@) {
@@ -20,7 +20,6 @@ use Type::Library;
 use Type::Tiny;
 use Types::TypeTiny qw< TypeTiny to_TypeTiny HashLike >;
 
-use Exporter qw< import >;
 our @EXPORT = qw<
 	extends declare as where message inline_as
 	class_type role_type duck_type union intersection enum
@@ -28,6 +27,8 @@ our @EXPORT = qw<
 	declare_coercion to_type
 >;
 our @EXPORT_OK = (@EXPORT, qw< type subtype >);
+
+use base qw< Exporter::TypeTiny >;
 
 sub extends
 {

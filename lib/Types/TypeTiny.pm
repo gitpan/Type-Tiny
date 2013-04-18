@@ -4,11 +4,11 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003_03';
+our $VERSION   = '0.003_04';
 
 use Scalar::Util qw< blessed >;
 
-use base "Exporter";
+use base qw< Exporter::TypeTiny >;
 our @EXPORT_OK = qw( CodeLike StringLike TypeTiny HashLike to_TypeTiny );
 
 my %cache;

@@ -38,4 +38,4 @@ resources:
   homepage: https://metacpan.org/release/Type-Tiny
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-type-tiny
-version: 0.003_03
+version: 0.003_04
