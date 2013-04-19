@@ -68,6 +68,7 @@ dist:project
 	doap:release      dist:v_0-003_02;
 	doap:release      dist:v_0-003_03;
 	doap:release      dist:v_0-003_04;
+	doap:release      dist:v_0-003_05;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -555,13 +556,53 @@ dist:v_0-003_04
 	dcs:changeset     [
 		dcs:item [
 			a dcs:Change;
-			rdfs:label "Factor out the sub exporting code scattered around (in Type::Utils, Types::TypeTiny and Type::Library) into a single module.";
+			rdfs:label "Factor out the sub exporting code scattered around (in Type::Utils, Types::TypeTiny and Type::Library) into a single module, Exporter::TypeTiny.";
 		];
 		dcs:versus dist:v_0-003_03;
 	];
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_04.tar.gz>;
 	doap:revision     "0.003_04"^^xsd:string.
+
+dist:v_0-003_05
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_05"^^xsd:string;
+	dc:issued         "2013-04-19"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Chars and Bytes types added to Types::Standard.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Allow coercions to accept parameters.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Encode, Decide, Join and Split coercions added to Types::Standard.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Prevent warnings (about 'my $val' masking a previously declared variable) when several Str checks are being inlined in close proximity, such as Tuple[Str,Str]";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Tiny::Class now has a plus_constructors method.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Type::Tiny::Manual::Coercions.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document Exporter::TypeTiny.";
+		];
+		dcs:versus dist:v_0-003_04;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_05.tar.gz>;
+	doap:revision     "0.003_05"^^xsd:string.
 
 cpan:ingy
 	a                 foaf:Person;
@@ -608,6 +649,12 @@ cpan:tokuhirom
 	dc:license        <http://dev.perl.org/licenses/>;
 	dc:rightsHolder   cpan:tobyink;
 	nfo:fileName      "CONTRIBUTING".
+
+[]
+	a                 nfo:FileDataObject;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:ingy;
+	nfo:fileName      "MANIFEST.SKIP".
 
 []
 	a                 nfo:FileDataObject;
@@ -723,10 +770,4 @@ cpan:tokuhirom
 	dc:rightsHolder   cpan:nuffin;
 	nfo:fileName      "inc/Try/Tiny.pm";
 	nfo:programmingLanguage "Perl".
-
-[]
-	a                 nfo:FileDataObject;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:ingy;
-	nfo:fileName      "MANIFEST.SKIP".
 

@@ -6,10 +6,24 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_05  2013-04-19
+
+ - (Addition) Allow coercions to accept parameters.
+ - (Addition) Chars and Bytes types added to Types::Standard.
+ - (Addition) Encode, Decide, Join and Split coercions added to
+   Types::Standard.
+ - (Addition) Type::Tiny::Class now has a plus_constructors method.
+ - (Bugfix) Prevent warnings (about 'my $val' masking a previously declared
+   variable) when several Str checks are being inlined in close proximity,
+   such as Tuple[Str,Str]
+ - (Documentation) Document Exporter::TypeTiny.
+ - (Documentation) Type::Tiny::Manual::Coercions.
+
 0.003_04  2013-04-18
 
  - Factor out the sub exporting code scattered around (in Type::Utils,
-   Types::TypeTiny and Type::Library) into a single module.
+   Types::TypeTiny and Type::Library) into a single module,
+   Exporter::TypeTiny.
 
 0.003_03  2013-04-17
 

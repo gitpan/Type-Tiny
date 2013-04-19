@@ -4,6 +4,7 @@ COPYRIGHT
 CREDITS
 examples/benchmark-coercions.pl
 examples/benchmark-constraints.pl
+examples/benchmark-mkopt.pl
 examples/datetime-coercions.pl
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
@@ -36,6 +37,7 @@ lib/Type/Tiny/Duck.pm
 lib/Type/Tiny/Enum.pm
 lib/Type/Tiny/Intersection.pm
 lib/Type/Tiny/Manual.pod
+lib/Type/Tiny/Manual/Coercions.pod
 lib/Type/Tiny/Manual/Libraries.pod
 lib/Type/Tiny/Manual/Params.pod
 lib/Type/Tiny/Manual/UsingWithMoo.pod
@@ -62,11 +64,13 @@ README
 t/00-compile.t
 t/arithmetic.t
 t/coercion-automatic.t
+t/coercion-classy.t
 t/coercion-frozen.t
 t/coercion-inlining.t
 t/coercion-modifiers.t
 t/coercion-union.t
 t/coercion.t
+t/exporter.t
 t/lib/BiggerLib.pm
 t/lib/DemoLib.pm
 t/library-assert.t
@@ -85,6 +89,7 @@ t/parameterization.t
 t/stdlib-inlined.t
 t/stdlib-optlist.t
 t/stdlib-overload.t
+t/stdlib-str.t
 t/stdlib-strmatch.t
 t/stdlib-structures.t
 t/stdlib.t

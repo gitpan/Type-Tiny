@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_04';
+	$Type::Tiny::VERSION   = '0.003_05';
 }
 
 use Scalar::Util qw< blessed >;
@@ -97,6 +97,25 @@ sub _mksub
 	}
 	
 	return _subname $type->qualified_name, $coderef;
+}
+
+sub _exporter_permitted_regexp
+{
+	my $class = shift;
+	
+	my $inherited = $class->SUPER::_exporter_permitted_regexp(@_);
+	my $types = join "|", map quotemeta, sort {
+		length($b) <=> length($a) or $a cmp $b
+	} $class->type_names;
+	my $coercions = join "|", map quotemeta, sort {
+		length($b) <=> length($a) or $a cmp $b
+	} $class->coercion_names;
+	
+	qr{^(?:
+		$inherited
+		| (?: (?:is_|to_|assert_)? (?:$types) )
+		| (?:$coercions)
+	)$}xms;
 }
 
 sub _exporter_expand_sub
@@ -237,9 +256,10 @@ sub add_coercion
 	$meta->{coercions}{$name} = $c;
 
 	no strict "refs";
-	no warnings "redefine";
+	no warnings "redefine", "prototype";
+	
 	my $class = blessed($meta);
-	*{"$class\::$name"} = _subname $c->qualified_name, sub () { $c };
+	*{"$class\::$name"} = $class->_mksub($c);
 	
 	return $c;
 }

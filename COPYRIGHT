@@ -6,6 +6,7 @@ Source: https://metacpan.org/release/Type-Tiny
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
+ lib/Exporter/TypeTiny.pm
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
  lib/Type/Coercion/Union.pm
@@ -16,6 +17,7 @@ Files: examples/benchmark-coercions.pl
  lib/Type/Tiny/Enum.pm
  lib/Type/Tiny/Intersection.pm
  lib/Type/Tiny/Manual.pod
+ lib/Type/Tiny/Manual/Coercions.pod
  lib/Type/Tiny/Manual/Libraries.pod
  lib/Type/Tiny/Manual/Params.pod
  lib/Type/Tiny/Manual/UsingWithMoo.pod
@@ -30,11 +32,13 @@ Files: examples/benchmark-coercions.pl
  t/00-compile.t
  t/arithmetic.t
  t/coercion-automatic.t
+ t/coercion-classy.t
  t/coercion-frozen.t
  t/coercion-inlining.t
  t/coercion-modifiers.t
  t/coercion-union.t
  t/coercion.t
+ t/exporter.t
  t/lib/BiggerLib.pm
  t/lib/DemoLib.pm
  t/library-assert.t
@@ -53,6 +57,7 @@ Files: examples/benchmark-coercions.pl
  t/stdlib-inlined.t
  t/stdlib-optlist.t
  t/stdlib-overload.t
+ t/stdlib-str.t
  t/stdlib-strmatch.t
  t/stdlib-structures.t
  t/stdlib.t
@@ -100,13 +105,13 @@ Files: inc/Module/Install/Makefile.pm
 Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: lib/Exporter/TypeTiny.pm
-Copyright: Unknown
-License: Unknown
-
 Files: inc/Try/Tiny.pm
 Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
+
+Files: examples/benchmark-mkopt.pl
+Copyright: Unknown
+License: Unknown
 
 Files: COPYRIGHT
 Copyright: None

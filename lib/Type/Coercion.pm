@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.003_04';
+	$Type::Coercion::VERSION   = '0.003_05';
 }
 
 use Scalar::Util qw< blessed >;
@@ -51,17 +51,21 @@ sub new
 	return $self;
 }
 
-sub name                { $_[0]{name} }
-sub display_name        { $_[0]{display_name}      ||= $_[0]->_build_display_name }
-sub library             { $_[0]{library} }
-sub type_constraint     { $_[0]{type_constraint} }
-sub type_coercion_map   { $_[0]{type_coercion_map} ||= [] }
-sub moose_coercion      { $_[0]{moose_coercion}    ||= $_[0]->_build_moose_coercion }
-sub compiled_coercion   { $_[0]{compiled_coercion} ||= $_[0]->_build_compiled_coercion }
-sub frozen              { $_[0]{frozen}            ||= 0 }
+sub name                   { $_[0]{name} }
+sub display_name           { $_[0]{display_name}      ||= $_[0]->_build_display_name }
+sub library                { $_[0]{library} }
+sub type_constraint        { $_[0]{type_constraint} }
+sub type_coercion_map      { $_[0]{type_coercion_map} ||= [] }
+sub moose_coercion         { $_[0]{moose_coercion}    ||= $_[0]->_build_moose_coercion }
+sub compiled_coercion      { $_[0]{compiled_coercion} ||= $_[0]->_build_compiled_coercion }
+sub frozen                 { $_[0]{frozen}            ||= 0 }
+sub coercion_generator     { $_[0]{coercion_generator} }
+sub parameters             { $_[0]{parameters} }
 
-sub has_library         { exists $_[0]{library} }
-sub has_type_constraint { defined $_[0]{type_constraint} } # sic
+sub has_library            { exists $_[0]{library} }
+sub has_type_constraint    { defined $_[0]{type_constraint} } # sic
+sub has_coercion_generator { exists $_[0]{coercion_generator} }
+sub has_parameters         { exists $_[0]{parameters} }
 
 sub add
 {
@@ -359,6 +363,33 @@ sub _codelike_type_coercion_map
 	return @new;
 }
 
+sub is_parameterizable
+{
+	shift->has_coercion_generator;
+}
+
+sub is_parameterized
+{
+	shift->has_parameters;
+}
+
+sub parameterize
+{
+	my $self = shift;
+	return $self unless @_;
+	$self->is_parameterizable
+		or _croak "constraint '%s' does not accept parameters", "$self";
+	
+	@_ = map to_TypeTiny($_), @_;
+	
+	return ref($self)->new(
+		type_constraint    => $self->type_constraint,
+		type_coercion_map  => [ $self->coercion_generator->($self, $self->type_constraint, @_) ],
+		parameters         => \@_,
+		frozen             => 1,
+	);
+}
+
 sub isa
 {
 	my $self = shift;
@@ -542,6 +573,27 @@ L<Type::Tiny> sometimes.
 
 If Moose is loaded, then the combination of these methods is used to mock
 a Moose::Meta::TypeCoercion.
+
+=back
+
+The following methods are used for parameterized coercions, but are not
+fully documented because they may change in the near future:
+
+=over
+
+=item C<< coercion_generator >>
+
+=item C<< has_coercion_generator >>
+
+=item C<< has_parameters >>
+
+=item C<< is_parameterizable >>
+
+=item C<< is_parameterized >>
+
+=item C<< parameterize(@params) >>
+
+=item C<< parameters >>
 
 =back
 
