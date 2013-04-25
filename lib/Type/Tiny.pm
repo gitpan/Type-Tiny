@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_05';
+	$Type::Tiny::VERSION   = '0.003_06';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -110,7 +110,7 @@ sub parent                   { $_[0]{parent} }
 sub constraint               { $_[0]{constraint}     ||= $_[0]->_build_constraint }
 sub compiled_check           { $_[0]{compiled_check} ||= $_[0]->_build_compiled_check }
 sub coercion                 { $_[0]{coercion}       ||= $_[0]->_build_coercion }
-sub message                  { $_[0]{message}        ||= $_[0]->_build_message }
+sub message                  { $_[0]{message} }
 sub library                  { $_[0]{library} }
 sub inlined                  { $_[0]{inlined} }
 sub constraint_generator     { $_[0]{constraint_generator} }
@@ -129,6 +129,9 @@ sub has_constraint_generator { exists $_[0]{constraint_generator} }
 sub has_inline_generator     { exists $_[0]{inline_generator} }
 sub has_coercion_generator   { exists $_[0]{coercion_generator} }
 sub has_parameters           { exists $_[0]{parameters} }
+sub has_message              { exists $_[0]{message} }
+
+sub _default_message         { $_[0]{_default_message} ||= $_[0]->_build_default_message }
 
 sub _assert_coercion
 {
@@ -162,10 +165,9 @@ sub _build_coercion
 	return "Type::Coercion"->new(type_constraint => $self);
 }
 
-sub _build_message
+sub _build_default_message
 {
 	my $self = shift;
-	$self->{_default_message}++;
 	return sub { sprintf 'value "%s" did not pass type constraint', $_[0] } if $self->is_anon;
 	my $name = "$self";
 	return sub { sprintf 'value "%s" did not pass type constraint "%s"', $_[0], $name };
@@ -305,7 +307,10 @@ sub check
 sub get_message
 {
 	my $self = shift;
-	$self->message->(@_);
+	local $_ = $_[0];
+	$self->has_message
+		? $self->message->(@_)
+		: $self->_default_message->(@_);
 }
 
 sub validate
@@ -499,7 +504,7 @@ sub _build_moose_type
 		$opts{name}       = $self->qualified_name     if $self->has_library && !$self->is_anon;
 		$opts{parent}     = $self->parent->moose_type if $self->has_parent;
 		$opts{constraint} = $self->constraint         unless $self->_is_null_constraint;
-		$opts{message}    = $self->message;
+		$opts{message}    = $self->message            if $self->has_message;
 		$opts{inlined}    = $self->inlined            if $self->has_inlined;
 		
 		$r = $self->_instantiate_moose_type(%opts);
@@ -519,7 +524,7 @@ sub _build_mouse_type
 	$options{name}       = $self->qualified_name     if $self->has_library && !$self->is_anon;
 	$options{parent}     = $self->parent->mouse_type if $self->has_parent;
 	$options{constraint} = $self->constraint         unless $self->_is_null_constraint;
-	$options{message}    = $self->message;
+	$options{message}    = $self->message            if $self->has_message;
 		
 	require Mouse::Meta::TypeConstraint;
 	my $r = "Mouse::Meta::TypeConstraint"->new(%options);
@@ -599,8 +604,7 @@ sub no_coercions
 	shift->_clone;
 }
 
-# Monkey patch Moose::Meta::TypeConstraint to make
-# plus_coercions/minus_coercions/no_coercions available
+# Monkey patch Moose::Meta::TypeConstraint to refer to Type::Tiny
 sub _MONKEY_MAGIC
 {
 	return if $trick_done;
@@ -631,11 +635,21 @@ sub isa
 {
 	my $self = shift;
 	
-	if ($INC{"Moose.pm"} and blessed($self) and my $r = $self->moose_type->isa(@_))
+	if ($INC{"Moose.pm"} and blessed($self) and $_[0] eq 'Moose::Meta::TypeConstraint')
+	{
+		return !!1;
+	}
+	
+	if ($INC{"Moose.pm"} and blessed($self) and $_[0] =~ /^Moose/ and my $r = $self->moose_type->isa(@_))
 	{
 		return $r;
 	}
-	
+
+	if ($INC{"Mouse.pm"} and blessed($self) and $_[0] eq 'Mouse::Meta::TypeConstraint')
+	{
+		return !!1;
+	}
+
 	$self->SUPER::isa(@_);
 }
 
@@ -667,6 +681,18 @@ sub AUTOLOAD
 	
 	_croak q[Can't locate object method "%s" via package "%s"], $m, ref($self)||$self;
 }
+
+# fill out Moose-compatible API
+sub inline_environment { +{} }
+*_compiled_type_constraint = \&compiled_check;
+
+# some stuff for Mouse-compatible API
+*__is_parameterized = \&is_parameterized;
+sub _add_type_coercions { shift->coercion->add_type_coercions(@_) };
+*_as_string = \&qualified_name;
+sub _compiled_type_coercion { shift->coercion->compiled_coercion(@_) };
+sub _identify { refaddr(shift) };
+sub _unite { require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@_) };
 
 1;
 
@@ -703,7 +729,7 @@ Type::Tiny - tiny, yet Moo(se)-compatible type constraint
    
    package Maisy {
       use Mouse;
-      has favourite_number => (is => "ro", isa => $NUM->mouse_type);
+      has favourite_number => (is => "ro", isa => $NUM);
    }
 
 =head1 DESCRIPTION
@@ -856,7 +882,7 @@ A coderef which generates a new L<Type::Coercion> object based on parameters.
 
 =over
 
-=item C<has_parent>, C<has_library>, C<has_inlined>, C<has_constraint_generator>, C<has_inline_generator>, C<has_coercion_generator>, C<has_parameters>
+=item C<has_parent>, C<has_library>, C<has_inlined>, C<has_constraint_generator>, C<has_inline_generator>, C<has_coercion_generator>, C<has_parameters>, C<has_message>
 
 Predicate methods.
 
@@ -980,6 +1006,12 @@ Shorthand for creating a new child type constraint with no coercions at all.
 
 If Moose is loaded, then the combination of these methods is used to mock
 a Moose::Meta::TypeConstraint.
+
+If Mouse is loaded, then C<isa> mocks Mouse::Meta::TypeConstraint.
+
+=item C<< inline_environment >>
+
+Stub for Moose compatibility. Always returns an empty hashref.
 
 =back
 

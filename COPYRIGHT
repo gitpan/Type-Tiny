@@ -96,6 +96,11 @@ Files: inc/Module/Install.pm
 Copyright: Copyright 2002 - 2012 Brian Ingerson, Audrey Tang and Adam Kennedy.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: .travis.yml
+ examples/benchmark-mkopt.pl
+Copyright: Unknown
+License: Unknown
+
 Files: inc/Module/Install/TrustMetaYml.pm
  inc/Module/Package/Dist/RDF.pm
 Copyright: This software is copyright (c) 2011-2012 by Toby Inkster.
@@ -108,10 +113,6 @@ License: GPL-1.0+ or Artistic-1.0
 Files: inc/Try/Tiny.pm
 Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
-
-Files: examples/benchmark-mkopt.pl
-Copyright: Unknown
-License: Unknown
 
 Files: COPYRIGHT
 Copyright: None

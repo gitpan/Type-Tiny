@@ -1,28 +1,9 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1365159230192" ID="ID_28734446" MODIFIED="1365442318390" TEXT="Type-Tiny">
-<node CREATED="1365159476220" ID="ID_326312292" MODIFIED="1365441636185" POSITION="right" TEXT="documentation">
-<node CREATED="1365159650166" ID="ID_243763962" MODIFIED="1365534977362" TEXT="usage with Mouse">
-<node CREATED="1365159658261" ID="ID_537118133" MODIFIED="1365159664111" TEXT="using type constraints from libraries"/>
-<node CREATED="1365159668221" ID="ID_785265846" MODIFIED="1365159675666" TEXT="creating type constraints using Type::Utils"/>
-<node CREATED="1365159676662" ID="ID_1609293562" MODIFIED="1365159679179" TEXT="coercions"/>
-</node>
-<node CREATED="1365786239957" ID="ID_737542241" LINK="#ID_1260169838" MODIFIED="1365786264896" TEXT="better coercion docs"/>
-</node>
 <node CREATED="1365441709337" ID="ID_921538277" MODIFIED="1365534973445" POSITION="right" TEXT="new type constraints for Types::Standard">
 <node CREATED="1365441792858" ID="ID_393588377" MODIFIED="1365441880404" TEXT="Tied - i.e. references to tied variables. Parameterized: Tied[&quot;Some::Package&quot;]"/>
-<node CREATED="1365441884333" ID="ID_849860266" MODIFIED="1365441977843" TEXT="Varchar[length]"/>
-<node CREATED="1365441979900" ID="ID_1969541225" MODIFIED="1365442361862" TEXT="steal from MooseX-Types-Common?"/>
 <node CREATED="1365442342382" ID="ID_345593149" MODIFIED="1365442365283" TEXT="steal from MooseX-Types-Ro?"/>
-</node>
-<node CREATED="1365529954377" ID="ID_1288968569" MODIFIED="1365533825483" POSITION="left" TEXT="coercion">
-<node CREATED="1365442049043" ID="ID_1920269603" MODIFIED="1365534968825" TEXT="Auto-coercion">
-<font NAME="SansSerif" SIZE="12"/>
-<node CREATED="1365529844572" ID="ID_700685078" MODIFIED="1365529849044" TEXT="needs documenting"/>
-</node>
-<node CREATED="1365785679669" ID="ID_1746990787" MODIFIED="1365785688208" TEXT="First-class coercions">
-<node CREATED="1365785692572" ID="ID_1260169838" MODIFIED="1365785695730" TEXT="moar docs"/>
-</node>
 </node>
 <node CREATED="1365786093068" ID="ID_1062710536" MODIFIED="1366039141668" POSITION="left" TEXT="improve speed for non-inlineable type constraints and coercions">
 <node CREATED="1365786151311" ID="ID_213645694" LINK="#ID_962609536" MODIFIED="1365786201307" TEXT="maybe use eval context idea from Type::Check"/>
@@ -32,9 +13,11 @@
 </node>
 <node CREATED="1366312423802" ID="ID_956029313" MODIFIED="1366312426894" POSITION="right" TEXT="moar tests">
 <node CREATED="1366312442869" ID="ID_982807734" MODIFIED="1366312447777" TEXT="Exporter::TypeTiny"/>
-<node CREATED="1366312473788" ID="ID_1867370521" MODIFIED="1366312480008" TEXT="Types::Standard types">
-<node CREATED="1366312481165" ID="ID_1012337804" MODIFIED="1366312489022" TEXT="OptList"/>
 </node>
+<node CREATED="1366493405737" ID="ID_1537740588" MODIFIED="1366493410536" POSITION="right" TEXT="Types-XSD"/>
+<node CREATED="1366904774462" ID="ID_1574254872" MODIFIED="1366904780973" POSITION="left" TEXT="improved error messages">
+<node CREATED="1366904783424" ID="ID_854471961" MODIFIED="1366904804409" TEXT="an ArrayRef[Int] should be able to tell you what elements are not Ints"/>
+<node CREATED="1366904810438" ID="ID_1602844550" MODIFIED="1366904850449" TEXT="if something is not a number, then the Int error message should report that; not just report that it&apos;s not an Int"/>
 </node>
 </node>
 </map>

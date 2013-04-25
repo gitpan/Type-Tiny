@@ -6,6 +6,19 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_06  2013-04-25
+
+ - (Addition) Types::TypeTiny::to_TypeTiny can now coerce from a
+   Mouse::Meta::TypeConstraint.
+ - (Documentation) Add lots of stuff to Type::Tiny::Manual::UsingWithMouse.
+ - (Documentation) Document deep coercions (feature added in 0.003_01).
+ - Add a bunch of stub methods to Type::Tiny and Type::Coercion in order to
+   make it less necessary to inflate to Moose/Mouse meta objects.
+ - No longer need to add '-mouse' when importing types into Mouse
+   libraries. (Same change as what we did for Moose in 0.000_11.)
+ - Various minor changes to Exporter::TypeTiny to make it more
+   Sub::Exporter compatible.
+
 0.003_05  2013-04-19
 
  - (Addition) Allow coercions to accept parameters.

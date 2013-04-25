@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003_05';
+our $VERSION   = '0.003_06';
 
 use Scalar::Util qw< blessed >;
 
@@ -75,6 +75,18 @@ sub to_TypeTiny
 		return "Type::Tiny"->new(%opts);
 	}
 	
+	if (blessed($t) and ref($t)->isa("Mouse::Meta::TypeConstraint"))
+	{
+		my %opts;
+		$opts{name}       = $t->name;
+		$opts{constraint} = $t->constraint;
+		$opts{parent}     = to_TypeTiny($t->parent)              if $t->has_parent;
+		$opts{message}    = sub { $t->get_message($_) }          if $t->has_message;
+		
+		require Type::Tiny;
+		return "Type::Tiny"->new(%opts);
+	}
+
 	return $t;
 }
 

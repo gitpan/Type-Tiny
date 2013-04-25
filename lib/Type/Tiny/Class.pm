@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.003_05';
+	$Type::Tiny::Class::VERSION   = '0.003_06';
 }
 
 use Scalar::Util qw< blessed >;
@@ -51,7 +51,7 @@ sub _build_inlined
 	};
 }
 
-sub _build_message
+sub _build_default_message
 {
 	my $self = shift;
 	my $c = $self->class;
