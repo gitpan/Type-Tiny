@@ -1,5 +1,6 @@
 @prefix cpan:  <http://purl.org/NET/cpan-uri/person/> .
 @prefix cpant: <http://purl.org/NET/cpan-uri/terms#> .
+@prefix dbug:  <http://ontologi.es/doap-bugs#> .
 @prefix dc:    <http://purl.org/dc/terms/> .
 @prefix dcs:   <http://ontologi.es/doap-changeset#> .
 @prefix dist:  <http://purl.org/NET/cpan-uri/dist/Type-Tiny/> .
@@ -64,12 +65,7 @@ dist:project
 	doap:release      dist:v_0-000_11;
 	doap:release      dist:v_0-000_12;
 	doap:release      dist:v_0-001;
-	doap:release      dist:v_0-003_01;
-	doap:release      dist:v_0-003_02;
-	doap:release      dist:v_0-003_03;
-	doap:release      dist:v_0-003_04;
-	doap:release      dist:v_0-003_05;
-	doap:release      dist:v_0-003_06;
+	doap:release      dist:v_0-002;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -469,11 +465,10 @@ dist:v_0-001
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.001.tar.gz>;
 	doap:revision     "0.001"^^xsd:string.
 
-dist:v_0-003_01
-	a                 cpant:DeveloperRelease;
+dist:v_0-002
 	a                 doap:Version;
-	dc:identifier     "Type-Tiny-0.003_01"^^xsd:string;
-	dc:issued         "2013-04-16"^^xsd:date;
+	dc:identifier     "Type-Tiny-0.002"^^xsd:string;
+	dc:issued         "2013-04-26"^^xsd:date;
 	dcs:changeset     [
 		dcs:item [
 			a dcs:Documentation;
@@ -481,59 +476,7 @@ dist:v_0-003_01
 		];
 		dcs:item [
 			a dcs:Change;
-			rdfs:label "Allow a Type::Tiny object to \"freeze\" its coercions. This prevents a Type::Tiny object from becoming out of sync with its equivalent Mouse or Moose constraint objects.";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Type::Library packages can now include \"standalone\" Type::Coercion objects, not attached to a type constraint. These can be exported on request.";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Overload \"+\" operator for Type::Coercion and Type::Tiny allows coercions to be added to each other, and added to type constraints.";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Build coercions automatically for certain type parameterized constraints. Say there's a Num->Int coercion defined; then we should be able to coerce ArrayRef[Num]->ArrayRef[Int].";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Allow subtypes to inherit coercions from their parent type constraint. (They do not by default.)";
-		];
-		dcs:versus dist:v_0-001;
-	];
-	dcs:released-by   cpan:tobyink;
-	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_01.tar.gz>;
-	doap:revision     "0.003_01"^^xsd:string.
-
-dist:v_0-003_02
-	a                 cpant:DeveloperRelease;
-	a                 doap:Version;
-	dc:identifier     "Type-Tiny-0.003_02"^^xsd:string;
-	dc:issued         "2013-04-16"^^xsd:date;
-	dcs:changeset     [
-		dcs:item [
-			a dcs:Documentation;
-			rdfs:label "Document how to process sub parameters with Type::Tiny, and point people towards Type::Params.";
-		];
-		dcs:item [
-			a dcs:Change;
 			rdfs:label "Avoid unnecessarily regenerating parameterized type constraints.";
-		];
-		dcs:versus dist:v_0-003_01;
-	];
-	dcs:released-by   cpan:tobyink;
-	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_02.tar.gz>;
-	doap:revision     "0.003_02"^^xsd:string.
-
-dist:v_0-003_03
-	a                 cpant:DeveloperRelease;
-	a                 doap:Version;
-	dc:identifier     "Type-Tiny-0.003_03"^^xsd:string;
-	dc:issued         "2013-04-17"^^xsd:date;
-	dcs:changeset     [
-		dcs:item [
-			a dcs:Change;
-			rdfs:label "When inflating Moo type constraints to Moose, don't unnecessarily call 'moose_type' method.";
 		];
 		dcs:item [
 			a dcs:Change;
@@ -541,105 +484,29 @@ dist:v_0-003_03
 		];
 		dcs:item [
 			a dcs:Addition;
-			rdfs:label "Add OptList data type to Types::Standard, plus MkOpt coercion.";
-		];
-		dcs:versus dist:v_0-003_02;
-	];
-	dcs:released-by   cpan:tobyink;
-	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_03.tar.gz>;
-	doap:revision     "0.003_03"^^xsd:string.
-
-dist:v_0-003_04
-	a                 cpant:DeveloperRelease;
-	a                 doap:Version;
-	dc:identifier     "Type-Tiny-0.003_04"^^xsd:string;
-	dc:issued         "2013-04-18"^^xsd:date;
-	dcs:changeset     [
-		dcs:item [
-			a dcs:Change;
-			rdfs:label "Factor out the sub exporting code scattered around (in Type::Utils, Types::TypeTiny and Type::Library) into a single module, Exporter::TypeTiny.";
-		];
-		dcs:versus dist:v_0-003_03;
-	];
-	dcs:released-by   cpan:tobyink;
-	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_04.tar.gz>;
-	doap:revision     "0.003_04"^^xsd:string.
-
-dist:v_0-003_05
-	a                 cpant:DeveloperRelease;
-	a                 doap:Version;
-	dc:identifier     "Type-Tiny-0.003_05"^^xsd:string;
-	dc:issued         "2013-04-19"^^xsd:date;
-	dcs:changeset     [
-		dcs:item [
-			a dcs:Addition;
 			rdfs:label "Chars and Bytes types added to Types::Standard.";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Allow coercions to accept parameters.";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Encode, Decide, Join and Split coercions added to Types::Standard.";
 		];
 		dcs:item [
 			a dcs:Bugfix;
 			rdfs:label "Prevent warnings (about 'my $val' masking a previously declared variable) when several Str checks are being inlined in close proximity, such as Tuple[Str,Str]";
 		];
 		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Type::Tiny::Class now has a plus_constructors method.";
+			a dcs:Bugfix;
+			rdfs:label "Fix method conflicts when exporting type constraints to roles.";
+			dcs:fixes [ dbug:reporter cpan:bowtie ];
+			dcs:thanks cpan:bowtie;
 		];
-		dcs:item [
-			a dcs:Documentation;
-			rdfs:label "Type::Tiny::Manual::Coercions.";
-		];
-		dcs:item [
-			a dcs:Documentation;
-			rdfs:label "Document Exporter::TypeTiny.";
-		];
-		dcs:versus dist:v_0-003_04;
+		dcs:versus dist:v_0-001;
 	];
 	dcs:released-by   cpan:tobyink;
-	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_05.tar.gz>;
-	doap:revision     "0.003_05"^^xsd:string.
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.002.tar.gz>;
+	doap:revision     "0.002"^^xsd:string.
 
-dist:v_0-003_06
-	a                 cpant:DeveloperRelease;
-	a                 doap:Version;
-	dc:identifier     "Type-Tiny-0.003_06"^^xsd:string;
-	dc:issued         "2013-04-25"^^xsd:date;
-	dcs:changeset     [
-		dcs:item [
-			a dcs:Change;
-			rdfs:label "No longer need to add '-mouse' when importing types into Mouse libraries. (Same change as what we did for Moose in 0.000_11.)";
-		];
-		dcs:item [
-			a dcs:Documentation;
-			rdfs:label "Add lots of stuff to Type::Tiny::Manual::UsingWithMouse.";
-		];
-		dcs:item [
-			a dcs:Documentation;
-			rdfs:label "Document deep coercions (feature added in 0.003_01).";
-		];
-		dcs:item [
-			a dcs:Change;
-			rdfs:label "Add a bunch of stub methods to Type::Tiny and Type::Coercion in order to make it less necessary to inflate to Moose/Mouse meta objects.";
-		];
-		dcs:item [
-			a dcs:Change;
-			rdfs:label "Various minor changes to Exporter::TypeTiny to make it more Sub::Exporter compatible.";
-		];
-		dcs:item [
-			a dcs:Addition;
-			rdfs:label "Types::TypeTiny::to_TypeTiny can now coerce from a Mouse::Meta::TypeConstraint.";
-		];
-		dcs:versus dist:v_0-003_05;
-	];
-	dcs:released-by   cpan:tobyink;
-	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_06.tar.gz>;
-	doap:revision     "0.003_06"^^xsd:string.
+cpan:bowtie
+	a                 foaf:Person;
+	foaf:name         "Kevin Dawson";
+	foaf:nick         "BOWTIE";
+	foaf:page         <https://metacpan.org/author/BOWTIE>.
 
 cpan:ingy
 	a                 foaf:Person;
@@ -758,6 +625,12 @@ cpan:tokuhirom
 	a                 nfo:FileDataObject;
 	dc:license        <http://dev.perl.org/licenses/>;
 	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "meta/doap.pret".
+
+[]
+	a                 nfo:FileDataObject;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
 	nfo:fileName      "meta/makefile.pret".
 
 []
@@ -801,10 +674,4 @@ cpan:tokuhirom
 	dc:license        <http://dev.perl.org/licenses/>;
 	dc:rightsHolder   cpan:ingy;
 	nfo:fileName      "MANIFEST.SKIP".
-
-[]
-	a                 nfo:FileDataObject;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:tobyink;
-	nfo:fileName      "meta/doap.pret".
 

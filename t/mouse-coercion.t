@@ -37,7 +37,7 @@ use Test::Fatal;
 	package Local::Class;
 	
 	use Mouse;
-	use BiggerLib -all;
+	use BiggerLib -mouse, -all;
 	
 	::isa_ok(BigInteger, "Mouse::Meta::TypeConstraint");
 	

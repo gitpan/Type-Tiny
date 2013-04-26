@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.003_06';
+	$Type::Tiny::Class::VERSION   = '0.002';
 }
 
 use Scalar::Util qw< blessed >;
@@ -51,7 +51,7 @@ sub _build_inlined
 	};
 }
 
-sub _build_default_message
+sub _build_message
 {
 	my $self = shift;
 	my $c = $self->class;
@@ -69,38 +69,6 @@ sub _instantiate_moose_type
 	delete $opts{inlined};
 	require Moose::Meta::TypeConstraint::Class;
 	return "Moose::Meta::TypeConstraint::Class"->new(%opts, class => $self->class);
-}
-
-sub plus_constructors
-{
-	my $self = shift;
-	
-	unless (@_)
-	{
-		require Types::Standard;
-		push @_, Types::Standard::HashRef(), "new";
-	}
-	
-	require B;
-	require Types::TypeTiny;
-	
-	my $class = B::perlstring($self->class);
-	
-	my @r;
-	while (@_)
-	{
-		my $source = shift;
-		Types::TypeTiny::TypeTiny->check($source)
-			or _croak "Expected type constraint; got $source";
-		
-		my $constructor = shift;
-		Types::TypeTiny::StringLike->check($constructor)
-			or _croak "Expected string; got $constructor";
-		
-		push @r, $source, sprintf('%s->%s($_)', $class, $constructor);
-	}
-	
-	return $self->plus_coercions(\@r);
 }
 
 1;
@@ -158,58 +126,6 @@ constructor. Instead rely on the default.
 
 Unlike Type::Tiny, you should generally I<not> pass an inlining coderef to
 the constructor. Instead rely on the default.
-
-=back
-
-=head2 Methods
-
-=over
-
-=item C<< plus_constructors($source, $method_name) >>
-
-Much like C<plus_coercions> but adds coercions that go via a constructor.
-(In fact, this is implemented as a wrapper for C<plus_coercions>.)
-
-Example:
-
-   package MyApp::Minion;
-   
-   use Moose; extends "MyApp::Person";
-   
-   use Types::Standard qw( HashRef Str );
-   use Type::Utils qw( class_type );
-   
-   my $Person = class_type({ class => "MyApp::Person" });
-   
-   has boss => (
-      is     => "ro",
-      isa    => $Person->plus_constructors(
-         HashRef,     "new",
-         Str,         "_new_from_name",
-      ),
-      coerce => 1,
-   );
-   
-   package main;
-   
-   MyApp::Minion->new(
-      ...,
-      boss => "Bob",  ## via MyApp::Person->_new_from_name
-   );
-   
-   MyApp::Minion->new(
-      ...,
-      boss => { name => "Bob" },  ## via MyApp::Person->new
-   );
-
-Because coercing C<HashRef> via constructor is a common desire, if
-you call C<plus_constructors> with no arguments at all, this is the
-default.
-
-   $classtype->plus_constructors(Types::Standard::HashRef, "new")
-   $classtype->plus_constructors()  ## identical to above
-
-This is handy for Moose/Mouse/Moo-based classes.
 
 =back
 

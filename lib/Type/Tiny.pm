@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_06';
+	$Type::Tiny::VERSION   = '0.002';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -25,7 +25,6 @@ use overload
 	q("")      => sub { caller =~ m{^(Moo::HandleMoose|Sub::Quote)} ? overload::StrVal($_[0]) : $_[0]->display_name },
 	q(bool)    => sub { 1 },
 	q(&{})     => "_overload_coderef",
-	q(+)       => sub { $_[2] ? $_[1]->plus_coercions($_[0]) : $_[0]->plus_fallback_coercions($_[1]) },
 	q(|)       => sub { my @tc = _swap @_; require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@tc) },
 	q(&)       => sub { my @tc = _swap @_; require Type::Tiny::Intersection; "Type::Tiny::Intersection"->new(type_constraints => \@tc) },
 	q(~)       => sub { shift->complementary_type },
@@ -70,14 +69,6 @@ sub new
 	$params{name} = "__ANON__" unless exists $params{name};
 	$params{uniq} = $uniq++;
 	
-	if (exists $params{coercion} and !ref $params{coercion} and $params{coercion})
-	{
-		$params{parent}->has_coercion
-			or _croak "coercion => 1 requires type to have a direct parent with a coercion";
-		
-		$params{coercion} = $params{parent}->coercion;
-	}
-	
 	my $self = bless \%params, $class;
 	
 	unless ($self->is_anon)
@@ -87,10 +78,10 @@ sub new
 			or eval q( $self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm )
 			or _croak '"%s" is not a valid type name', $self->name;
 	}
-	
-	if ($self->has_library and !$self->is_anon and !$params{tmp})
+
+	if ($self->has_library and not $self->is_anon)
 	{
-		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self };
+		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self->moose_type };
 	}
 		
 	return $self;
@@ -110,13 +101,12 @@ sub parent                   { $_[0]{parent} }
 sub constraint               { $_[0]{constraint}     ||= $_[0]->_build_constraint }
 sub compiled_check           { $_[0]{compiled_check} ||= $_[0]->_build_compiled_check }
 sub coercion                 { $_[0]{coercion}       ||= $_[0]->_build_coercion }
-sub message                  { $_[0]{message} }
+sub message                  { $_[0]{message}        ||= $_[0]->_build_message }
 sub library                  { $_[0]{library} }
 sub inlined                  { $_[0]{inlined} }
 sub constraint_generator     { $_[0]{constraint_generator} }
 sub inline_generator         { $_[0]{inline_generator} }
 sub name_generator           { $_[0]{name_generator} ||= $_[0]->_build_name_generator }
-sub coercion_generator       { $_[0]{coercion_generator} }
 sub parameters               { $_[0]{parameters} }
 sub moose_type               { $_[0]{moose_type}     ||= $_[0]->_build_moose_type }
 sub mouse_type               { $_[0]{mouse_type}     ||= $_[0]->_build_mouse_type }
@@ -127,11 +117,7 @@ sub has_coercion             { exists $_[0]{coercion} and !!@{ $_[0]{coercion}->
 sub has_inlined              { exists $_[0]{inlined} }
 sub has_constraint_generator { exists $_[0]{constraint_generator} }
 sub has_inline_generator     { exists $_[0]{inline_generator} }
-sub has_coercion_generator   { exists $_[0]{coercion_generator} }
 sub has_parameters           { exists $_[0]{parameters} }
-sub has_message              { exists $_[0]{message} }
-
-sub _default_message         { $_[0]{_default_message} ||= $_[0]->_build_default_message }
 
 sub _assert_coercion
 {
@@ -165,9 +151,10 @@ sub _build_coercion
 	return "Type::Coercion"->new(type_constraint => $self);
 }
 
-sub _build_default_message
+sub _build_message
 {
 	my $self = shift;
+	$self->{_default_message}++;
 	return sub { sprintf 'value "%s" did not pass type constraint', $_[0] } if $self->is_anon;
 	my $name = "$self";
 	return sub { sprintf 'value "%s" did not pass type constraint "%s"', $_[0], $name };
@@ -307,10 +294,7 @@ sub check
 sub get_message
 {
 	my $self = shift;
-	local $_ = $_[0];
-	$self->has_message
-		? $self->message->(@_)
-		: $self->_default_message->(@_);
+	$self->message->(@_);
 }
 
 sub validate
@@ -425,15 +409,9 @@ sub parameterize
 	);
 	$options{inlined} = $self->inline_generator->(@_)
 		if $self->has_inline_generator;
-	exists $options{$_} && !defined $options{$_} && delete $options{$_}
-		for keys %options;
+	delete $options{inlined} unless defined $options{inlined};
 	
 	my $P = $self->create_child_type(%options);
-
-	my $coercion = $self->coercion_generator->($self, $P, @_)
-		if $self->has_coercion_generator;
-	$P->coercion->add_type_coercions( @{$coercion->type_coercion_map} )
-		if $coercion;
 	
 	if (defined $key)
 	{
@@ -504,7 +482,7 @@ sub _build_moose_type
 		$opts{name}       = $self->qualified_name     if $self->has_library && !$self->is_anon;
 		$opts{parent}     = $self->parent->moose_type if $self->has_parent;
 		$opts{constraint} = $self->constraint         unless $self->_is_null_constraint;
-		$opts{message}    = $self->message            if $self->has_message;
+		$opts{message}    = $self->message;
 		$opts{inlined}    = $self->inlined            if $self->has_inlined;
 		
 		$r = $self->_instantiate_moose_type(%opts);
@@ -524,14 +502,14 @@ sub _build_mouse_type
 	$options{name}       = $self->qualified_name     if $self->has_library && !$self->is_anon;
 	$options{parent}     = $self->parent->mouse_type if $self->has_parent;
 	$options{constraint} = $self->constraint         unless $self->_is_null_constraint;
-	$options{message}    = $self->message            if $self->has_message;
+	$options{message}    = $self->message;
 		
 	require Mouse::Meta::TypeConstraint;
 	my $r = "Mouse::Meta::TypeConstraint"->new(%options);
 	
 	$self->{mouse_type} = $r;  # prevent recursion
 	$r->_add_type_coercions(
-		$self->coercion->freeze->_codelike_type_coercion_map('mouse_type')
+		$self->coercion->_codelike_type_coercion_map('mouse_type')
 	) if $self->has_coercion;
 	
 	return $r;
@@ -549,22 +527,6 @@ sub plus_coercions
 	$new->coercion->add_type_coercions(
 		@more,
 		@{$self->coercion->type_coercion_map},
-	);
-	return $new;
-}
-
-sub plus_fallback_coercions
-{
-	my $self = shift;
-	
-	my @more = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
-		? @{ $_[0]->type_coercion_map }
-		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
-	
-	my $new = $self->_clone;
-	$new->coercion->add_type_coercions(
-		@{$self->coercion->type_coercion_map},
-		@more,
 	);
 	return $new;
 }
@@ -604,7 +566,8 @@ sub no_coercions
 	shift->_clone;
 }
 
-# Monkey patch Moose::Meta::TypeConstraint to refer to Type::Tiny
+# Monkey patch Moose::Meta::TypeConstraint to make
+# plus_coercions/minus_coercions/no_coercions available
 sub _MONKEY_MAGIC
 {
 	return if $trick_done;
@@ -635,21 +598,11 @@ sub isa
 {
 	my $self = shift;
 	
-	if ($INC{"Moose.pm"} and blessed($self) and $_[0] eq 'Moose::Meta::TypeConstraint')
-	{
-		return !!1;
-	}
-	
-	if ($INC{"Moose.pm"} and blessed($self) and $_[0] =~ /^Moose/ and my $r = $self->moose_type->isa(@_))
+	if ($INC{"Moose.pm"} and blessed($self) and my $r = $self->moose_type->isa(@_))
 	{
 		return $r;
 	}
-
-	if ($INC{"Mouse.pm"} and blessed($self) and $_[0] eq 'Mouse::Meta::TypeConstraint')
-	{
-		return !!1;
-	}
-
+	
 	$self->SUPER::isa(@_);
 }
 
@@ -681,18 +634,6 @@ sub AUTOLOAD
 	
 	_croak q[Can't locate object method "%s" via package "%s"], $m, ref($self)||$self;
 }
-
-# fill out Moose-compatible API
-sub inline_environment { +{} }
-*_compiled_type_constraint = \&compiled_check;
-
-# some stuff for Mouse-compatible API
-*__is_parameterized = \&is_parameterized;
-sub _add_type_coercions { shift->coercion->add_type_coercions(@_) };
-*_as_string = \&qualified_name;
-sub _compiled_type_coercion { shift->coercion->compiled_coercion(@_) };
-sub _identify { refaddr(shift) };
-sub _unite { require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@_) };
 
 1;
 
@@ -729,7 +670,7 @@ Type::Tiny - tiny, yet Moo(se)-compatible type constraint
    
    package Maisy {
       use Mouse;
-      has favourite_number => (is => "ro", isa => $NUM);
+      has favourite_number => (is => "ro", isa => $NUM->mouse_type);
    }
 
 =head1 DESCRIPTION
@@ -819,10 +760,6 @@ A L<Type::Coercion> object associated with this type.
 Generally speaking this attribute should not be passed to the constructor;
 you should rely on the default lazily-built coercion object.
 
-You may pass C<< coercion => 1 >> to the constructor to inherit coercions
-from the constraint's parent. (This requires the parent constraint to have
-a coercion.)
-
 =item C<< complementary_type >>
 
 A complementary type for this type. For example, the complementary type
@@ -872,17 +809,13 @@ type constraint.
 
 A coderef which generates a new inlining coderef based on parameters.
 
-=item C<< coercion_generator >>
-
-A coderef which generates a new L<Type::Coercion> object based on parameters.
-
 =back
 
 =head2 Methods
 
 =over
 
-=item C<has_parent>, C<has_library>, C<has_inlined>, C<has_constraint_generator>, C<has_inline_generator>, C<has_coercion_generator>, C<has_parameters>, C<has_message>
+=item C<has_parent>, C<has_library>, C<has_constraint_generator>, C<has_inlined>, C<has_inline_generator>, C<has_parameters>
 
 Predicate methods.
 
@@ -990,10 +923,6 @@ Shorthand for creating a new child type constraint with the same coercions
 as this one, but then adding some extra coercions (at a higher priority than
 the existing ones).
 
-=item C<< plus_fallback_coercions($type1, $code1, ...) >>
-
-Like C<plus_coercions>, but added at a lower priority.
-
 =item C<< minus_coercions($type1, ...) >>
 
 Shorthand for creating a new child type constraint with fewer type coercions.
@@ -1006,12 +935,6 @@ Shorthand for creating a new child type constraint with no coercions at all.
 
 If Moose is loaded, then the combination of these methods is used to mock
 a Moose::Meta::TypeConstraint.
-
-If Mouse is loaded, then C<isa> mocks Mouse::Meta::TypeConstraint.
-
-=item C<< inline_environment >>
-
-Stub for Moose compatibility. Always returns an empty hashref.
 
 =back
 
@@ -1058,11 +981,6 @@ See L<Type::Tiny::Union>.
 The C<< & >> operator is overloaded to build the intersection of two type
 constraints. See L<Type::Tiny::Intersection>.
 
-=item *
-
-The C<< + >> operator is overloaded to call C<plus_coercions> or
-C<plus_fallback_coercions> as appropriate.
-
 =back
 
 =head1 BUGS
@@ -1081,8 +999,6 @@ L<Type::Tiny::Enum>, L<Type::Tiny::Union>, L<Type::Tiny::Intersection>.
 
 L<Moose::Meta::TypeConstraint>,
 L<Mouse::Meta::TypeConstraint>.
-
-L<Type::Params>.
 
 =head1 AUTHOR
 

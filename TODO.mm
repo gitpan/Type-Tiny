@@ -1,23 +1,52 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1365159230192" ID="ID_28734446" MODIFIED="1365442318390" TEXT="Type-Tiny">
-<node CREATED="1365441709337" ID="ID_921538277" MODIFIED="1365534973445" POSITION="right" TEXT="new type constraints for Types::Standard">
-<node CREATED="1365441792858" ID="ID_393588377" MODIFIED="1365441880404" TEXT="Tied - i.e. references to tied variables. Parameterized: Tied[&quot;Some::Package&quot;]"/>
-<node CREATED="1365442342382" ID="ID_345593149" MODIFIED="1365442365283" TEXT="steal from MooseX-Types-Ro?"/>
+<node CREATED="1365159476220" ID="ID_326312292" MODIFIED="1365441636185" POSITION="right" TEXT="documentation">
+<node CREATED="1365159650166" ID="ID_243763962" MODIFIED="1365534977362" TEXT="usage with Mouse">
+<node CREATED="1365159658261" ID="ID_537118133" MODIFIED="1365159664111" TEXT="using type constraints from libraries"/>
+<node CREATED="1365159668221" ID="ID_785265846" MODIFIED="1365159675666" TEXT="creating type constraints using Type::Utils"/>
+<node CREATED="1365159676662" ID="ID_1609293562" MODIFIED="1365159679179" TEXT="coercions"/>
 </node>
-<node CREATED="1365786093068" ID="ID_1062710536" MODIFIED="1366039141668" POSITION="left" TEXT="improve speed for non-inlineable type constraints and coercions">
+<node CREATED="1365786239957" ID="ID_737542241" LINK="#ID_1260169838" MODIFIED="1365786264896" TEXT="better coercion docs"/>
+</node>
+<node CREATED="1365159705390" ID="ID_1309512802" MODIFIED="1365534983235" POSITION="left" TEXT="integration with MooX-late"/>
+<node CREATED="1365441709337" ID="ID_921538277" MODIFIED="1365534973445" POSITION="right" TEXT="new type constraints for Types::Standard">
+<node CREATED="1365441750514" ID="ID_411979884" MODIFIED="1365441790471" TEXT="Chars - i.e. strings where the UTF-8 bit is on"/>
+<node CREATED="1365441769529" ID="ID_944847020" MODIFIED="1365441781094" TEXT="Bytes - i.e. strings where the UTF-8 bit is off"/>
+<node CREATED="1365441792858" ID="ID_393588377" MODIFIED="1365441880404" TEXT="Tied - i.e. references to tied variables. Parameterized: Tied[&quot;Some::Package&quot;]"/>
+<node CREATED="1365441884333" ID="ID_849860266" MODIFIED="1365441977843" TEXT="Varchar[length]"/>
+<node CREATED="1365441979900" ID="ID_1969541225" MODIFIED="1365442361862" TEXT="steal from MooseX-Types-Common?"/>
+<node CREATED="1365442342382" ID="ID_345593149" MODIFIED="1365442365283" TEXT="steal from MooseX-Types-Ro?"/>
+<node CREATED="1365880922219" ID="ID_1091298812" MODIFIED="1365880934396" TEXT="OptList[Undef|Ref]"/>
+</node>
+<node CREATED="1365529954377" ID="ID_1288968569" MODIFIED="1365533825483" POSITION="left" TEXT="coercion">
+<node CREATED="1365442049043" ID="ID_1920269603" MODIFIED="1365534968825" TEXT="Auto-coercion">
+<font NAME="SansSerif" SIZE="12"/>
+<node CREATED="1365529844572" ID="ID_700685078" MODIFIED="1365529849044" TEXT="needs documenting"/>
+<node CREATED="1365529851374" ID="ID_1411816545" MODIFIED="1365529863215" TEXT="needs merge with tip"/>
+</node>
+<node CREATED="1365785679669" ID="ID_1746990787" MODIFIED="1365785688208" TEXT="First-class coercions">
+<node CREATED="1365785692572" ID="ID_1260169838" MODIFIED="1365785695730" TEXT="moar docs"/>
+<node CREATED="1365785699188" ID="ID_1246464660" MODIFIED="1365785701632" TEXT="moar tests"/>
+</node>
+</node>
+<node CREATED="1365785708936" ID="ID_1388226133" MODIFIED="1365785748089" POSITION="right" TEXT="new distribution: Params-Type (name?)">
+<node CREATED="1365785762582" ID="ID_962609536" MODIFIED="1365785782828" TEXT="already a first draft (called Type::Check) in p5-type-tiny"/>
+<node CREATED="1365785801395" ID="ID_1524020588" MODIFIED="1365785806092" TEXT="documentation"/>
+<node CREATED="1365785808269" ID="ID_307623283" MODIFIED="1365785811103" TEXT="test cases"/>
+<node CREATED="1365785814748" ID="ID_911344221" MODIFIED="1365805112338" TEXT="benchmark versus Params::Validate">
+<node CREATED="1365805120478" ID="ID_403602084" MODIFIED="1365805135628" TEXT="much faster, even compared to Params::Validate::XS"/>
+</node>
+</node>
+<node CREATED="1365786093068" ID="ID_1062710536" MODIFIED="1365786149491" POSITION="left" TEXT="improve speed for non-inlineable type constraints coercions">
 <node CREATED="1365786151311" ID="ID_213645694" LINK="#ID_962609536" MODIFIED="1365786201307" TEXT="maybe use eval context idea from Type::Check"/>
+</node>
+<node CREATED="1365786289535" ID="ID_460864965" MODIFIED="1365786296483" POSITION="right" TEXT="release 0.001">
+<node CREATED="1365786309321" ID="ID_79331969" MODIFIED="1365786324486" TEXT="Mon 15th April?"/>
+<node CREATED="1365786335877" ID="ID_42424261" MODIFIED="1365786342933" TEXT="publish intro blog article"/>
 </node>
 <node CREATED="1365786461715" ID="ID_1123916121" MODIFIED="1365786480681" POSITION="left" TEXT="Type-Tiny could be used as a backend for Scalar::Does?">
 <node CREATED="1365786482499" ID="ID_957202187" MODIFIED="1365786492545" TEXT="if not, certainly a SEE ALSO"/>
-</node>
-<node CREATED="1366312423802" ID="ID_956029313" MODIFIED="1366312426894" POSITION="right" TEXT="moar tests">
-<node CREATED="1366312442869" ID="ID_982807734" MODIFIED="1366312447777" TEXT="Exporter::TypeTiny"/>
-</node>
-<node CREATED="1366493405737" ID="ID_1537740588" MODIFIED="1366493410536" POSITION="right" TEXT="Types-XSD"/>
-<node CREATED="1366904774462" ID="ID_1574254872" MODIFIED="1366904780973" POSITION="left" TEXT="improved error messages">
-<node CREATED="1366904783424" ID="ID_854471961" MODIFIED="1366904804409" TEXT="an ArrayRef[Int] should be able to tell you what elements are not Ints"/>
-<node CREATED="1366904810438" ID="ID_1602844550" MODIFIED="1366904850449" TEXT="if something is not a number, then the Int error message should report that; not just report that it&apos;s not an Int"/>
 </node>
 </node>
 </map>

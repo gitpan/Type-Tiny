@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.003_06';
+	$Type::Tiny::Role::VERSION   = '0.002';
 }
 
 use Scalar::Util qw< blessed >;
@@ -49,7 +49,7 @@ sub _build_inlined
 	};
 }
 
-sub _build_default_message
+sub _build_message
 {
 	my $self = shift;
 	my $c = $self->role;

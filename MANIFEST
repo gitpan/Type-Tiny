@@ -4,7 +4,6 @@ COPYRIGHT
 CREDITS
 examples/benchmark-coercions.pl
 examples/benchmark-constraints.pl
-examples/benchmark-mkopt.pl
 examples/datetime-coercions.pl
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
@@ -26,7 +25,6 @@ inc/Test/Fatal.pm
 inc/Test/Requires.pm
 inc/Try/Tiny.pm
 inc/YAML/Tiny.pm
-lib/Exporter/TypeTiny.pm
 lib/Test/TypeTiny.pm
 lib/Type/Coercion.pm
 lib/Type/Coercion/Union.pm
@@ -37,9 +35,7 @@ lib/Type/Tiny/Duck.pm
 lib/Type/Tiny/Enum.pm
 lib/Type/Tiny/Intersection.pm
 lib/Type/Tiny/Manual.pod
-lib/Type/Tiny/Manual/Coercions.pod
 lib/Type/Tiny/Manual/Libraries.pod
-lib/Type/Tiny/Manual/Params.pod
 lib/Type/Tiny/Manual/UsingWithMoo.pod
 lib/Type/Tiny/Manual/UsingWithMoose.pod
 lib/Type/Tiny/Manual/UsingWithMouse.pod
@@ -47,7 +43,6 @@ lib/Type/Tiny/Role.pm
 lib/Type/Tiny/Union.pm
 lib/Type/Utils.pm
 lib/Types/Standard.pm
-lib/Types/Standard/AutomaticCoercion.pm
 lib/Types/TypeTiny.pm
 LICENSE
 Makefile.PL
@@ -63,14 +58,11 @@ NEWS
 README
 t/00-compile.t
 t/arithmetic.t
-t/coercion-automatic.t
-t/coercion-classy.t
-t/coercion-frozen.t
 t/coercion-inlining.t
 t/coercion-modifiers.t
 t/coercion-union.t
 t/coercion.t
-t/exporter.t
+t/exporter-roleconflict.t
 t/lib/BiggerLib.pm
 t/lib/DemoLib.pm
 t/library-assert.t
@@ -87,7 +79,6 @@ t/mouse-coercion.t
 t/mouse.t
 t/parameterization.t
 t/stdlib-inlined.t
-t/stdlib-optlist.t
 t/stdlib-overload.t
 t/stdlib-str.t
 t/stdlib-strmatch.t
