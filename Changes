@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_07  2013-04-26
+
+ - (Bugfix) Fix method conflicts when exporting type constraints to roles.
+   ++$BOWTIE
+ - (Documentation) Document usage with Class::InsideOut.
+ - (Documentation) Minor improvements to manual.
+
 0.002  2013-04-26
 
  - (Addition) Chars and Bytes types added to Types::Standard.
@@ -17,6 +24,70 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
  - (Documentation) Link from Test::TypeTiny to Test::Deep::Type.
  - Avoid unnecessarily regenerating parameterized type constraints.
  - Make Type::Tiny's has_coercion method more DWIM.
+
+0.003_06  2013-04-25
+
+ - (Addition) Types::TypeTiny::to_TypeTiny can now coerce from a
+   Mouse::Meta::TypeConstraint.
+ - (Documentation) Add lots of stuff to Type::Tiny::Manual::UsingWithMouse.
+ - (Documentation) Document deep coercions (feature added in 0.003_01).
+ - Add a bunch of stub methods to Type::Tiny and Type::Coercion in order to
+   make it less necessary to inflate to Moose/Mouse meta objects.
+ - No longer need to add '-mouse' when importing types into Mouse
+   libraries. (Same change as what we did for Moose in 0.000_11.)
+ - Various minor changes to Exporter::TypeTiny to make it more
+   Sub::Exporter compatible.
+
+0.003_05  2013-04-19
+
+ - (Addition) Allow coercions to accept parameters.
+ - (Addition) Chars and Bytes types added to Types::Standard.
+ - (Addition) Encode, Decode, Join and Split coercions added to
+   Types::Standard.
+ - (Addition) Type::Tiny::Class now has a plus_constructors method.
+ - (Bugfix) Prevent warnings (about 'my $val' masking a previously declared
+   variable) when several Str checks are being inlined in close proximity,
+   such as Tuple[Str,Str]
+ - (Documentation) Document Exporter::TypeTiny.
+ - (Documentation) Type::Tiny::Manual::Coercions.
+
+0.003_04  2013-04-18
+
+ - Factor out the sub exporting code scattered around (in Type::Utils,
+   Types::TypeTiny and Type::Library) into a single module,
+   Exporter::TypeTiny.
+
+0.003_03  2013-04-17
+
+ - (Addition) Add OptList data type to Types::Standard, plus MkOpt
+   coercion.
+ - Make Type::Tiny's has_coercion method more DWIM.
+ - When inflating Moo type constraints to Moose, don't unnecessarily call
+   'moose_type' method.
+
+0.003_02  2013-04-16
+
+ - (Documentation) Document how to process sub parameters with Type::Tiny,
+   and point people towards Type::Params.
+ - Avoid unnecessarily regenerating parameterized type constraints.
+
+0.003_01  2013-04-16
+
+ - (Addition) Allow subtypes to inherit coercions from their parent type
+   constraint. (They do not by default.)
+ - (Addition) Build coercions automatically for certain type parameterized
+   constraints. Say there's a Num->Int coercion defined; then we should be
+   able to coerce ArrayRef[Num]->ArrayRef[Int].
+ - (Addition) Overload "+" operator for Type::Coercion and Type::Tiny
+   allows coercions to be added to each other, and added to type
+   constraints.
+ - (Addition) Type::Library packages can now include "standalone"
+   Type::Coercion objects, not attached to a type constraint. These can be
+   exported on request.
+ - (Documentation) Link from Test::TypeTiny to Test::Deep::Type.
+ - Allow a Type::Tiny object to "freeze" its coercions. This prevents a
+   Type::Tiny object from becoming out of sync with its equivalent Mouse or
+   Moose constraint objects.
 
 0.001  2013-04-15  # First public release
 

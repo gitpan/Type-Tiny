@@ -5,10 +5,11 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.002';
+	$Types::Standard::VERSION   = '0.003_07';
 }
 
 use base "Type::Library";
+
 our @EXPORT_OK = qw( slurpy );
 
 use Scalar::Util qw( blessed looks_like_number );
@@ -162,6 +163,8 @@ declare "ArrayRef",
 	inline_as { "ref($_) eq 'ARRAY'" },
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my $param = Types::TypeTiny::to_TypeTiny(shift);
 		Types::TypeTiny::TypeTiny->check($param)
 			or _croak("Parameter to ArrayRef[`a] expected to be a type constraint; got $param");
@@ -196,6 +199,8 @@ declare "HashRef",
 	inline_as { "ref($_) eq 'HASH'" },
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my $param = Types::TypeTiny::to_TypeTiny(shift);
 		Types::TypeTiny::TypeTiny->check($param)
 			or _croak("Parameter to HashRef[`a] expected to be a type constraint; got $param");
@@ -230,6 +235,8 @@ declare "ScalarRef",
 	inline_as { "ref($_) eq 'SCALAR' or ref($_) eq 'REF'" },
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my $param = Types::TypeTiny::to_TypeTiny(shift);
 		Types::TypeTiny::TypeTiny->check($param)
 			or _croak("Parameter to ScalarRef[`a] expected to be a type constraint; got $param");
@@ -289,6 +296,8 @@ declare "Map",
 	inline_as { "ref($_) eq 'HASH'" },
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my ($keys, $values) = map Types::TypeTiny::to_TypeTiny($_), @_;
 		Types::TypeTiny::TypeTiny->check($keys)
 			or _croak("First parameter to Map[`k,`v] expected to be a type constraint; got $keys");
@@ -327,6 +336,8 @@ declare "Optional",
 	as "Item",
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my $param = Types::TypeTiny::to_TypeTiny(shift);
 		Types::TypeTiny::TypeTiny->check($param)
 			or _croak("Parameter to Optional[`a] expected to be a type constraint; got $param");
@@ -356,6 +367,8 @@ declare "Tuple",
 	},
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my @constraints = @_;
 		my $slurpy;
 		if (exists $constraints[-1] and ref $constraints[-1] eq "HASH")
@@ -423,6 +436,8 @@ declare "Dict",
 	},
 	constraint_generator => sub
 	{
+		require Types::Standard::AutomaticCoercion;
+		
 		my %constraints = @_;
 		
 		while (my ($k, $v) = each %constraints)
@@ -568,6 +583,81 @@ declare "Chars",
 	where { utf8::is_utf8($_) },
 	inline_as { "utf8::is_utf8($_)" };
 
+declare "OptList",
+	as ArrayRef( [ArrayRef()] ),
+	where {
+		for my $inner (@$_) {
+			return unless @$inner == 2;
+			return unless is_Str($inner->[0]);
+		}
+	},
+	inline_as {
+		my ($self, $var) = @_;
+		my $Str_check = __PACKAGE__->meta->get_type("Str")->inline_check('$inner->[0]');
+		my @code = 'do { my $ok = 1; ';
+		push @code,   sprintf('for my $inner (@{%s}) { no warnings; ', $var);
+		push @code,     '($ok=0) && last unless @$inner == 2; ';
+		push @code,     sprintf('($ok=0) && last unless (%s); ', $Str_check);
+		push @code,   '} ';
+		push @code, '$ok }';
+		sprintf(
+			'%s and %s',
+			$self->parent->inline_check($var),
+			join(" ", @code),
+		);
+	};
+
+declare_coercion "MkOpt",
+	to_type "OptList",
+	from    "ArrayRef", q{ Exporter::TypeTiny::mkopt($_) },
+	from    "HashRef",  q{ Exporter::TypeTiny::mkopt($_) },
+	from    "Undef",    q{ [] };
+
+declare_coercion "Decode", to_type "Chars" => {
+	coercion_generator => sub {
+		my ($self, $target, $encoding) = @_;
+		require Encode;
+		Encode::find_encoding($encoding)
+			or _croak("Parameter \"$encoding\" for Decode[`a] is not an encoding supported by this version of Perl");
+		require B;
+		$encoding = B::perlstring($encoding);
+		return (Bytes(), qq{ Encode::decode($encoding, \$_) });
+	},
+};
+
+declare_coercion "Encode", to_type "Bytes" => {
+	coercion_generator => sub {
+		my ($self, $target, $encoding) = @_;
+		require Encode;
+		Encode::find_encoding($encoding)
+			or _croak("Parameter \"$encoding\" for Encode[`a] is not an encoding supported by this version of Perl");
+		require B;
+		$encoding = B::perlstring($encoding);
+		return (Chars(), qq{ Encode::encode($encoding, \$_) });
+	},
+};
+
+declare_coercion "Join", to_type "Str" => {
+	coercion_generator => sub {
+		my ($self, $target, $sep) = @_;
+		Types::TypeTiny::StringLike->check($sep)
+			or _croak("Parameter to Join[`a] expected to be a string; got $sep");
+		require B;
+		$sep = B::perlstring($sep);
+		return (ArrayRef(), qq{ join($sep, \@\$_) });
+	},
+};
+
+declare_coercion "Split", to_type ArrayRef()->parameterize(Str()) => {
+	coercion_generator => sub {
+		my ($self, $target, $re) = @_;
+		ref($re) eq q(Regexp)
+			or _croak("Parameter to Split[`a] expected to be a regular expresssion; got $re");
+		my $regexp_string = "$re";
+		$regexp_string =~ s/\\\//\\\\\//g; # toothpicks
+		return (Str(), qq{ [split /$regexp_string/, \$_] });
+	},
+};
 
 1;
 
@@ -667,7 +757,7 @@ This module also exports a C<slurpy> function.
 
 =head2 More
 
-There are a couple of other types exported by this function:
+There are a few other types exported by this function:
 
 =over
 
@@ -705,6 +795,79 @@ Strings where C<< utf8::is_utf8() >> is false.
 =item C<< Chars >>
 
 Strings where C<< utf8::is_utf8() >> is true.
+
+=item C<< OptList >>
+
+An arrayref of arrayrefs in the style of L<Data::OptList> output.
+
+=back
+
+=head2 Coercions
+
+None of the types in this type library have any coercions by default.
+However some standalone coercions may be exported. These can be combined
+with type constraints using the C<< + >> operator.
+
+=over
+
+=item C<< MkOpt >>
+
+A coercion from C<ArrayRef>, C<HashRef> or C<Undef> to C<OptList>. Example
+usage in a Moose attribute:
+
+   use Types::Standard qw( OptList MkOpt );
+   
+   has options => (
+      is     => "ro",
+      isa    => OptList + MkOpt,
+      coerce => 1,
+   );
+
+=item C<< Encode[`a] >>
+
+Coercion to encode a character string to a byte string using
+C<< Encode::encode() >>. This is a parameterized type coercion, which
+expects a character set:
+
+   use Types::Standard qw( Bytes Encode );
+   
+   has filename => (
+      is     => "ro",
+      isa    => Bytes + Encode["utf-8"],
+      coerce => 1,
+   );
+
+=item C<< Decode[`a] >>
+
+Coercion to decode a byte string to a character string using
+C<< Encode::decode() >>. This is a parameterized type coercion, which
+expects a character set.
+
+=item C<< Split[`a] >>
+
+Split a string on a regexp.
+
+   use Types::Standard qw( ArrayRef Str Split );
+   
+   has name => (
+      is     => "ro",
+      isa    => (ArrayRef[Str]) + (Split[qr/\s/]),
+      coerce => 1,
+   );
+
+=item C<< Join[`a] >>
+
+Join an array of strings with a delimiter.
+
+   use Types::Standard qw( Bytes Join );
+   
+   my $FileLines = Bytes + Join["\n"];
+   
+   has file_contents => (
+      is     => "ro",
+      isa    => $FileLines,
+      coerce => 1,
+   );
 
 =back
 

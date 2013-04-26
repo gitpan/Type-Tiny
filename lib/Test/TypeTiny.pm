@@ -1,10 +1,10 @@
 package Test::TypeTiny;
 
 use Test::More ();
-use base "Exporter";
+use base qw< Exporter::TypeTiny >;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.002';
+our $VERSION   = '0.003_07';
 
 our @EXPORT = qw( should_pass should_fail ok_subtype );
 

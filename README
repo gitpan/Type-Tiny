@@ -23,7 +23,7 @@ SYNOPSIS
    
        package Maisy {
           use Mouse;
-          has favourite_number => (is => "ro", isa => $NUM->mouse_type);
+          has favourite_number => (is => "ro", isa => $NUM);
        }
 
 DESCRIPTION
@@ -96,6 +96,10 @@ DESCRIPTION
         constructor; you should rely on the default lazily-built coercion
         object.
 
+        You may pass "coercion => 1" to the constructor to inherit coercions
+        from the constraint's parent. (This requires the parent constraint
+        to have a coercion.)
+
     "complementary_type"
         A complementary type for this type. For example, the complementary
         type for an integer type would be all things that are not integers,
@@ -138,9 +142,14 @@ DESCRIPTION
         A coderef which generates a new inlining coderef based on
         parameters.
 
+    "coercion_generator"
+        A coderef which generates a new Type::Coercion object based on
+        parameters.
+
   Methods
-    "has_parent", "has_library", "has_constraint_generator", "has_inlined",
-    "has_inline_generator", "has_parameters"
+    "has_parent", "has_library", "has_inlined", "has_constraint_generator",
+    "has_inline_generator", "has_coercion_generator", "has_parameters",
+    "has_message"
         Predicate methods.
 
     "has_coercion"
@@ -232,6 +241,9 @@ DESCRIPTION
         coercions as this one, but then adding some extra coercions (at a
         higher priority than the existing ones).
 
+    "plus_fallback_coercions($type1, $code1, ...)"
+        Like "plus_coercions", but added at a lower priority.
+
     "minus_coercions($type1, ...)"
         Shorthand for creating a new child type constraint with fewer type
         coercions.
@@ -243,6 +255,11 @@ DESCRIPTION
     "isa($class)", "can($method)", "AUTOLOAD(@args)"
         If Moose is loaded, then the combination of these methods is used to
         mock a Moose::Meta::TypeConstraint.
+
+        If Mouse is loaded, then "isa" mocks Mouse::Meta::TypeConstraint.
+
+    "inline_environment"
+        Stub for Moose compatibility. Always returns an empty hashref.
 
   Overloading
     *   Stringification is overloaded to return the qualified name.
@@ -266,6 +283,9 @@ DESCRIPTION
     *   The "&" operator is overloaded to build the intersection of two type
         constraints. See Type::Tiny::Intersection.
 
+    *   The "+" operator is overloaded to call "plus_coercions" or
+        "plus_fallback_coercions" as appropriate.
+
 BUGS
     Please report any bugs to
     <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
@@ -279,6 +299,8 @@ SEE ALSO
     Type::Tiny::Union, Type::Tiny::Intersection.
 
     Moose::Meta::TypeConstraint, Mouse::Meta::TypeConstraint.
+
+    Type::Params.
 
 AUTHOR
     Toby Inkster <tobyink@cpan.org>.
