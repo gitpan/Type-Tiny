@@ -6,6 +6,19 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_08  2013-04-26
+
+ - (Addition) Test case using Exporter::TypeTiny with
+   Sub::Exporter::Lexical.
+ - (Documentation) More Exporter::TypeTiny docs, including usage with
+   Sub::Exporter::Lexical.
+ - ASCII-only strings are now accepted by the Chars constraint in
+   Types::Standard.
+ - Type::Tiny, Type::Coercion and their subclasses no longer call
+   Types::TypeTiny->import method.
+ - Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads
+   Exporter::TypeTiny when Types::TypeTiny->import is first called.
+
 0.003_07  2013-04-26
 
  - (Bugfix) Fix method conflicts when exporting type constraints to roles.

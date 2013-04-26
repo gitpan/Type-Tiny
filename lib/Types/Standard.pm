@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.003_07';
+	$Types::Standard::VERSION   = '0.003_08';
 }
 
 use base "Type::Library";
@@ -489,7 +489,7 @@ declare "Overload",
 	constraint_generator => sub
 	{
 		my @operations = map {
-			Type::Tiny::StringLike->check($_)
+			Types::TypeTiny::StringLike->check($_)
 				? "$_"
 				: _croak("Parameters to Overload[`a] expected to be a strings; got $_");
 		} @_;
@@ -523,8 +523,8 @@ declare "StrMatch",
 
 		if (@_ > 1)
 		{
-			$checker = Type::Tiny::to_TypeTiny($checker);
-			Type::Tiny::TypeTiny->check($checker)
+			$checker = Types::TypeTiny::to_TypeTiny($checker);
+			Types::TypeTiny::TypeTiny->check($checker)
 				or _croak("Second parameter to StrMatch[`a] expected to be a type constraint; got $checker")
 		}
 
@@ -578,10 +578,11 @@ declare "Bytes",
 	where { !utf8::is_utf8($_) },
 	inline_as { "!utf8::is_utf8($_)" };
 
+our $SevenBitSafe = qr{^[\x00-\x7F]*$}sm;
 declare "Chars",
 	as "Str",
-	where { utf8::is_utf8($_) },
-	inline_as { "utf8::is_utf8($_)" };
+	where { utf8::is_utf8($_) or $_ =~ $Types::Standard::SevenBitSafe },
+	inline_as { "utf8::is_utf8($_) or $_ =~ \$Types::Standard::SevenBitSafe" };
 
 declare "OptList",
 	as ArrayRef( [ArrayRef()] ),
@@ -794,7 +795,8 @@ Strings where C<< utf8::is_utf8() >> is false.
 
 =item C<< Chars >>
 
-Strings where C<< utf8::is_utf8() >> is true.
+Strings where either C<< utf8::is_utf8() >> is true, or each byte is
+below C<0x7F>.
 
 =item C<< OptList >>
 

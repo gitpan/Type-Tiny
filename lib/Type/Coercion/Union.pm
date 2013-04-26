@@ -6,11 +6,11 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::Union::VERSION   = '0.003_07';
+	$Type::Coercion::Union::VERSION   = '0.003_08';
 }
 
 use Scalar::Util qw< blessed >;
-use Types::TypeTiny qw< TypeTiny >;
+use Types::TypeTiny ();
 
 sub _croak ($;@)
 {
@@ -25,7 +25,7 @@ sub type_coercion_map
 {
 	my $self = shift;
 	
-	TypeTiny->assert_valid(my $type = $self->type_constraint);
+	Types::TypeTiny::TypeTiny->assert_valid(my $type = $self->type_constraint);
 	$type->isa('Type::Tiny::Union')
 		or _croak "Type::Coercion::Union must be used in conjunction with Type::Tiny::Union";
 	

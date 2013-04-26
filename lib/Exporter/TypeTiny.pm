@@ -5,7 +5,7 @@ use strict;   no strict qw(refs);
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003_07';
+our $VERSION   = '0.003_08';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) {
@@ -223,14 +223,15 @@ Its internal-facing interface is closer to Exporter.pm, with configuration
 done through the C<< @EXPORT >>, C<< @EXPORT_OK >> and C<< %EXPORT_TAGS >>
 package variables.
 
-Although builders are not an explicit part of the interface,
+Although generators are not an explicit part of the interface,
 Exporter::TypeTiny performs most of its internal duties (including resolution
 of tag names to function names, resolution of function names to coderefs, and
 installation of coderefs into the target package) as method calls, which
-means they can be overridden to provide interesting behaviour. These are not
-currently documented, and are still subject to change.
+means they can be overridden to provide interesting behaviour, including an
+equivalent to Sub::Exporter's generators. (Type::Library does this.) These
+methods are not currently documented, and are still subject to change.
 
-=head2 Functions
+=head2 Utility Functions
 
 These are really for internal use, but can be exported if you need them.
 
@@ -247,6 +248,123 @@ C<must_be> and C<name_test>) but runs about 50% faster.
 Similar to C<mkopt_hash> from L<Data::OptList>. See also C<mkopt>.
 
 =back
+
+=head1 TIPS AND TRICKS
+
+For the purposes of this discussion we'll assume we have a module called
+C<< MyUtils >> which exports one function, C<< frobnicate >>. C<< MyUtils >>
+inherits fom Exporter::TypeTiny.
+
+Many of these tricks may seem familiar from L<Sub::Exporter>. That is
+intentional. Exporter::TypeTiny doesn't attempt to provide every feature of
+Sub::Exporter, but where it does it usually uses a fairly similar API.
+
+=head2 Basic importing
+
+   # import "frobnicate" function
+   use MyUtils "frobnicate";
+
+   # import all functions that MyUtils offers
+   use MyUtils -all;
+
+=head2 Renaming imported functions
+
+   # call it "frob"
+   use MyUtils "frobnicate" => { -as => "frob" };
+
+   # call it "my_frobnicate"
+   use MyUtils "frobnicate" => { -prefix => "my_" };
+
+   # call it "frobnicate_util"
+   use MyUtils "frobnicate" => { -suffix => "_util" };
+
+   # import it twice with two different names
+   use MyUtils
+      "frobnicate" => { -as => "frob" },
+      "frobnicate" => { -as => "frbnct" };
+
+=head2 Lexical subs
+
+   {
+      use Sub::Exporter::Lexical lexical_installer => { -as => "lex" };
+      use MyUtils { installer => lex }, "frobnicate";
+      
+      frobnicate(...);  # ok
+   }
+   
+   frobnicate(...);  # not ok
+
+=head2 Import functions into another package
+
+   use MyUtils { into => "OtherPkg" }, "frobnicate";
+   
+   OtherPkg::frobincate(...);
+
+=head2 Import functions into a scalar
+
+   my $func;
+   use MyUtils "frobnicate" => { -as => \$func };
+   
+   $func->(...);
+
+=head2 Import functions into a hash
+
+OK, Sub::Exporter doesn't do this...
+
+   my %funcs;
+   use MyUtils { into => \%funcs }, "frobnicate";
+   
+   $funcs{frobnicate}->(...);
+
+=head1 OBLIGATORY EXPORTER COMPARISON
+
+Exporting is unlikely to be your application's performance bottleneck, but
+nonetheless here are some comparisons.
+
+B<< Comparative sizes according to L<Devel::SizeMe>: >>
+
+   Exporter                     217.1Kb
+   Sub::Exporter::Progressive   263.2Kb
+   Exporter::TypeTiny           267.7Kb
+   Exporter + Exporter::Heavy   281.5Kb
+   Exporter::Renaming           406.2Kb
+   Sub::Exporter                701.0Kb
+
+B<< Performance exporting a single sub: >>
+
+              Rate     SubExp      ExpTT SubExpProg      ExpPM
+SubExp      2489/s         --       -56%       -85%       -88%
+ExpTT       5635/s       126%         --       -67%       -72%
+SubExpProg 16905/s       579%       200%         --       -16%
+ExpPM      20097/s       707%       257%        19%         --
+
+(Exporter::Renaming globally changes the behaviour of Exporter.pm, so could
+not be included in the same benchmarks.)
+
+B<< (Non-Core) Depenendencies: >>
+
+   Exporter                    -1
+   Exporter::Renaming           0
+   Exporter::TypeTiny           0
+   Sub::Exporter::Progressive   0   
+   Sub::Exporter                3
+
+B<< Features: >>
+
+                                      ExpPM   ExpTT   SubExp  SubExpProg
+ Can export code symbols............. Yes     Yes     Yes     Yes      
+ Can export non-code symbols......... Yes                              
+ Groups/tags......................... Yes     Yes     Yes     Yes      
+ Config avoids package variables.....                 Yes              
+ Allows renaming of subs.............         Yes     Yes     Maybe    
+ Install code into scalar refs.......         Yes     Yes     Maybe    
+ Can be passed an "into" parameter...         Yes     Yes     Maybe    
+ Can be passed an "installer" sub....         Yes     Yes     Maybe    
+ Supports generators.................         Yes     Yes              
+ Sane API for generators.............                 Yes              
+
+(Certain Sub::Exporter::Progressive features are only available if
+Sub::Exporter is installed.)
 
 =head1 BUGS
 

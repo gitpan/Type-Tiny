@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_07';
+	$Type::Tiny::VERSION   = '0.003_08';
 }
 
 use Scalar::Util qw< blessed >;
@@ -482,6 +482,9 @@ assume that the C<Types::Mine> library defines types C<Number> and C<String>.
    # Exports everything.
    #
    use Types::Mine qw( :all );
+
+Type libraries automatically inherit from L<Exporter::TypeTiny>; see the
+documentation of that module for tips and tricks importing from libraries.
 
 =head1 BUGS
 

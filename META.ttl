@@ -73,6 +73,7 @@ dist:project
 	doap:release      dist:v_0-003_05;
 	doap:release      dist:v_0-003_06;
 	doap:release      dist:v_0-003_07;
+	doap:release      dist:v_0-003_08;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -707,6 +708,38 @@ dist:v_0-003_07
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_07.tar.gz>;
 	doap:revision     "0.003_07"^^xsd:string.
 
+dist:v_0-003_08
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_08"^^xsd:string;
+	dc:issued         "2013-04-26"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "ASCII-only strings are now accepted by the Chars constraint in Types::Standard.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "More Exporter::TypeTiny docs, including usage with Sub::Exporter::Lexical.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Test case using Exporter::TypeTiny with Sub::Exporter::Lexical.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Tiny, Type::Coercion and their subclasses no longer call Types::TypeTiny->import method.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads Exporter::TypeTiny when Types::TypeTiny->import is first called.";
+		];
+		dcs:versus dist:v_0-003_07;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_08.tar.gz>;
+	doap:revision     "0.003_08"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -755,6 +788,38 @@ cpan:tokuhirom
 
 []
 	a                 nfo:FileDataObject;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "CONTRIBUTING".
+
+[]
+	a                 nfo:FileDataObject;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "CREDITS".
+
+[]
+	a                 nfo:FileDataObject;
+	a                 nfo:TextDocument;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "Changes".
+
+[]
+	a                 nfo:FileDataObject;
+	a                 nfo:TextDocument;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "LICENSE".
+
+[]
+	a                 nfo:FileDataObject;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "META.ttl".
+
+[]
+	a                 nfo:FileDataObject;
 	a                 nfo:SourceCode;
 	dc:license        <http://dev.perl.org/licenses/>;
 	dc:rightsHolder   cpan:tobyink;
@@ -787,38 +852,6 @@ cpan:tokuhirom
 	dc:license        <http://dev.perl.org/licenses/>;
 	dc:rightsHolder   cpan:tobyink;
 	nfo:fileName      "TODO.mm".
-
-[]
-	a                 nfo:FileDataObject;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:tobyink;
-	nfo:fileName      "CONTRIBUTING".
-
-[]
-	a                 nfo:FileDataObject;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:tobyink;
-	nfo:fileName      "CREDITS".
-
-[]
-	a                 nfo:FileDataObject;
-	a                 nfo:TextDocument;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:tobyink;
-	nfo:fileName      "Changes".
-
-[]
-	a                 nfo:FileDataObject;
-	a                 nfo:TextDocument;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:tobyink;
-	nfo:fileName      "LICENSE".
-
-[]
-	a                 nfo:FileDataObject;
-	dc:license        <http://dev.perl.org/licenses/>;
-	dc:rightsHolder   cpan:tobyink;
-	nfo:fileName      "META.ttl".
 
 []
 	a                 nfo:FileDataObject;
