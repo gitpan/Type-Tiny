@@ -56,6 +56,7 @@ Files: examples/benchmark-coercions.pl
  t/moose.t
  t/mouse-coercion.t
  t/mouse.t
+ t/oo-objectaccessor.t
  t/parameterization.t
  t/stdlib-inlined.t
  t/stdlib-optlist.t
@@ -63,6 +64,7 @@ Files: examples/benchmark-coercions.pl
  t/stdlib-str.t
  t/stdlib-strmatch.t
  t/stdlib-structures.t
+ t/stdlib-tied.t
  t/stdlib.t
  t/syntax.t
  t/type-class.t

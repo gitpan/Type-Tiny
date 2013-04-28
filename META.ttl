@@ -74,6 +74,7 @@ dist:project
 	doap:release      dist:v_0-003_06;
 	doap:release      dist:v_0-003_07;
 	doap:release      dist:v_0-003_08;
+	doap:release      dist:v_0-003_09;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -739,6 +740,30 @@ dist:v_0-003_08
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_08.tar.gz>;
 	doap:revision     "0.003_08"^^xsd:string.
+
+dist:v_0-003_09
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_09"^^xsd:string;
+	dc:issued         "2013-04-28"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document usage with Params::Check and Object::Accessor.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "'Tied' type constraint added to Types::Standard.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "If Mouse is already in memory, Type::Tiny will use its super-fast XS subs to validate values when possible.";
+		];
+		dcs:versus dist:v_0-003_08;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_09.tar.gz>;
+	doap:revision     "0.003_09"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

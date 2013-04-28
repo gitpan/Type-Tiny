@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_09  2013-04-28
+
+ - (Addition) 'Tied' type constraint added to Types::Standard.
+ - (Documentation) Document usage with Params::Check and Object::Accessor.
+ - If Mouse is already in memory, Type::Tiny will use its super-fast XS
+   subs to validate values when possible.
+
 0.003_08  2013-04-26
 
  - (Addition) Test case using Exporter::TypeTiny with

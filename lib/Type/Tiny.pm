@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_08';
+	$Type::Tiny::VERSION   = '0.003_09';
 }
 
 use Scalar::Util qw< blessed weaken refaddr isweak >;
@@ -189,6 +189,23 @@ sub _build_compiled_check
 	if ($self->_is_null_constraint and $self->has_parent)
 	{
 		return $self->parent->compiled_check;
+	}
+	
+	if ($INC{'Mouse/Util.pm'} and Mouse::Util::MOUSE_XS())
+	{
+		require Mouse::Util::TypeConstraints;
+		
+		if ($self->{_is_core})
+		{
+			my $xs = "Mouse::Util::TypeConstraints"->can($self->name);
+			return $xs if $xs;
+		}
+		elsif ($self->is_parameterized and $self->has_parent
+		and $self->parent->{_is_core} and $self->parent->name =~ /^(ArrayRef|HashRef|Maybe)$/)
+		{
+			my $xs = "Mouse::Util::TypeConstraints"->can("_parameterize_".$self->parent->name."_for");
+			return $xs->($self->parameters->[0]) if $xs;
+		}
 	}
 	
 	if ($self->can_be_inlined)
