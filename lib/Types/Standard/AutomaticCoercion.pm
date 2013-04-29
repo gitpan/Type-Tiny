@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AutomaticCoercion::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::AutomaticCoercion::VERSION   = '0.003_09';
+	$Types::Standard::AutomaticCoercion::VERSION   = '0.003_10';
 }
 
 require Type::Coercion;
@@ -366,7 +366,7 @@ $lib->get_type("Tuple")->{coercion_generator} = sub
 				push @code, sprintf('my $tail = [ @{$orig}[%d .. $#$orig] ];', $size);
 				push @code, $slurpy->has_coercion
 					? sprintf('$tail = %s;', $slurpy->coercion->inline_coercion('$tail'))
-					: '';
+					: q();
 				push @code, sprintf(
 					'(%s) ? push(@new, @$tail) : ($return_orig++);',
 					$slurpy->inline_check('$tail'),

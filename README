@@ -286,6 +286,11 @@ DESCRIPTION
     *   The "+" operator is overloaded to call "plus_coercions" or
         "plus_fallback_coercions" as appropriate.
 
+  Constants
+    "Type::Tiny::SUPPORT_SMARTMATCH"
+        Indicates whether the smart match overload is supported on your
+        version of Perl.
+
 BUGS
     Please report any bugs to
     <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.

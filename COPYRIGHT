@@ -6,11 +6,13 @@ Source: https://metacpan.org/release/Type-Tiny
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
+ lib/Eval/TypeTiny.pm
  lib/Exporter/TypeTiny.pm
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
  lib/Type/Coercion/Union.pm
  lib/Type/Library.pm
+ lib/Type/Params.pm
  lib/Type/Tiny.pm
  lib/Type/Tiny/Class.pm
  lib/Type/Tiny/Duck.pm
@@ -58,6 +60,14 @@ Files: examples/benchmark-coercions.pl
  t/mouse.t
  t/oo-objectaccessor.t
  t/parameterization.t
+ t/params-coerce.t
+ t/params-methods.t
+ t/params-mixednamed.t
+ t/params-named.t
+ t/params-noninline.t
+ t/params-optional.t
+ t/params-positional.t
+ t/params-slurpy.t
  t/stdlib-inlined.t
  t/stdlib-optlist.t
  t/stdlib-overload.t
@@ -95,16 +105,17 @@ Files: CONTRIBUTING
 Copyright: Copyright 2013 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: .travis.yml
+ examples/benchmark-mkopt.pl
+ examples/benchmark-param-validation.pl
+Copyright: Unknown
+License: Unknown
+
 Files: inc/Module/Install.pm
  inc/Module/Install/Include.pm
  inc/Module/Install/Metadata.pm
 Copyright: Copyright 2002 - 2012 Brian Ingerson, Audrey Tang and Adam Kennedy.
 License: GPL-1.0+ or Artistic-1.0
-
-Files: .travis.yml
- examples/benchmark-mkopt.pl
-Copyright: Unknown
-License: Unknown
 
 Files: inc/Module/Install/TrustMetaYml.pm
  inc/Module/Package/Dist/RDF.pm

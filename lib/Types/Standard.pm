@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.003_09';
+	$Types::Standard::VERSION   = '0.003_10';
 }
 
 use base "Type::Library";
@@ -603,7 +603,7 @@ declare "OptList",
 		sprintf(
 			'%s and %s',
 			$self->parent->inline_check($var),
-			join(" ", @code),
+			join(q( ), @code),
 		);
 	};
 

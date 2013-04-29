@@ -4,7 +4,7 @@ author:
   - 'Toby Inkster <tobyink@cpan.org>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
-  Test::More: 0.88
+  Test::More: 0.96
 configure_requires:
   ExtUtils::MakeMaker: 6.59
 distribution_type: module
@@ -38,4 +38,4 @@ resources:
   homepage: https://metacpan.org/release/Type-Tiny
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/tobyink/p5-type-tiny
-version: 0.003_09
+version: 0.003_10

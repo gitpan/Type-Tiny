@@ -1,11 +1,11 @@
 package Exporter::TypeTiny;
 
 use 5.008001;
-use strict;   no strict qw(refs);
+use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003_09';
+our $VERSION   = '0.003_10';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) {
@@ -18,7 +18,7 @@ sub import
 {
 	my $class       = shift;
 	my $global_opts = +{ @_ && ref($_[0]) eq q(HASH) ? %{+shift} : () };
-	my @args        = @_ ? @_ : @{"$class\::EXPORT"};
+	my @args        = do { no strict qw(refs); @_ ? @_ : @{"$class\::EXPORT"} };
 	my $opts        = mkopt(\@args);
 	
 	$global_opts->{into} = caller unless exists $global_opts->{into};
@@ -61,6 +61,8 @@ sub _exporter_validate_opts
 # 
 sub _exporter_expand_tag
 {
+	no strict qw(refs);
+	
 	my $class = shift;
 	my ($name, $value, $globals) = @_;
 	my $tags  = \%{"$class\::EXPORT_TAGS"};
@@ -83,6 +85,7 @@ sub _exporter_expand_tag
 #
 sub _exporter_permitted_regexp
 {
+	no strict qw(refs);
 	my $class = shift;
 	my $re = join "|", map quotemeta, sort {
 		length($b) <=> length($a) or $a cmp $b
@@ -99,6 +102,7 @@ sub _exporter_expand_sub
 	my ($name, $value, $globals, $permitted) = @_;
 	$permitted ||= $class->_exporter_permitted_regexp($globals);
 	
+	no strict qw(refs);
 	exists &{"$class\::$name"} && $name =~ $permitted
 		? ($name => \&{"$class\::$name"})
 		: $class->_exporter_fail(@_);
@@ -128,8 +132,8 @@ sub _exporter_install_sub
 	$name = $value->{-as} || $name;
 	unless (ref($name) eq q(SCALAR))
 	{
-		my ($prefix) = grep defined, $value->{-prefix}, $globals->{prefix}, '';
-		my ($suffix) = grep defined, $value->{-suffix}, $globals->{suffix}, '';
+		my ($prefix) = grep defined, $value->{-prefix}, $globals->{prefix}, q();
+		my ($suffix) = grep defined, $value->{-suffix}, $globals->{suffix}, q();
 		$name = "$prefix$name$suffix";
 	}
 	
@@ -145,6 +149,7 @@ sub _exporter_install_sub
 			and _croak("Refusing to overwrite local sub '$name' with export from $class");
 	}
 	
+	no strict qw(refs);
 	*{"$into\::$name"} = $sym;
 }
 
@@ -191,33 +196,26 @@ __END__
 
 Exporter::TypeTiny - a small exporter used internally by Type::Library and friends
 
+=head1 SYNOPSIS
+
+   package MyUtils;
+   use base "Exporter::TypeTiny";
+   our @EXPORT = qw(frobnicate);
+   sub frobnicate { my $n = shift; ... }
+   1;
+
+   package MyScript;
+   use MyUtils "frobnicate" => { -as => "frob" };
+   print frob(42);
+   exit;
+
 =head1 DESCRIPTION
-
-B<< Y O Y O Y O Y O Y ??? >>
-
-B<< Why >> bundle an exporter with Type-Tiny?
-
-Well, it wasn't always that way. L<Type::Library> had a bunch of custom
-exporting code which poked coderefs into its caller's stash. It needed this
-so that it could switch between exporting Moose, Mouse and Moo-compatible
-objects on request.
-
-Meanwhile L<Type::Utils>, L<Types::TypeTiny> and L<Test::TypeTiny> each
-used the venerable L<Exporter.pm|Exporter>. However, this meant they were
-unable to use the features like L<Sub::Exporter>-style function renaming
-which I'd built into Type::Library:
-
-   ## import "Str" but rename it to "String".
-   use Types::Standard "Str" => { -as => "String" };
-
-And so I decided to factor out code that could be shared by all Type-Tiny's
-exporters into a single place.
 
 Exporter::TypeTiny supports many of Sub::Exporter's external-facing features
 including renaming imported functions with the C<< -as >>, C<< -prefix >> and
 C<< -suffix >> options; explicit destinations with the C<< into >> option;
 and alternative installers with the C<< installler >> option. But it's written
-in only about 40% as many lines of code and has with zero non-core dependencies.
+in only about 40% as many lines of code and with zero non-core dependencies.
 
 Its internal-facing interface is closer to Exporter.pm, with configuration
 done through the C<< @EXPORT >>, C<< @EXPORT_OK >> and C<< %EXPORT_TAGS >>
@@ -253,7 +251,7 @@ Similar to C<mkopt_hash> from L<Data::OptList>. See also C<mkopt>.
 
 For the purposes of this discussion we'll assume we have a module called
 C<< MyUtils >> which exports one function, C<< frobnicate >>. C<< MyUtils >>
-inherits fom Exporter::TypeTiny.
+inherits from Exporter::TypeTiny.
 
 Many of these tricks may seem familiar from L<Sub::Exporter>. That is
 intentional. Exporter::TypeTiny doesn't attempt to provide every feature of
@@ -315,6 +313,26 @@ OK, Sub::Exporter doesn't do this...
    use MyUtils { into => \%funcs }, "frobnicate";
    
    $funcs{frobnicate}->(...);
+
+=head1 HISTORY
+
+B<< Why >> bundle an exporter with Type-Tiny?
+
+Well, it wasn't always that way. L<Type::Library> had a bunch of custom
+exporting code which poked coderefs into its caller's stash. It needed this
+so that it could switch between exporting Moose, Mouse and Moo-compatible
+objects on request.
+
+Meanwhile L<Type::Utils>, L<Types::TypeTiny> and L<Test::TypeTiny> each
+used the venerable L<Exporter.pm|Exporter>. However, this meant they were
+unable to use the features like L<Sub::Exporter>-style function renaming
+which I'd built into Type::Library:
+
+   ## import "Str" but rename it to "String".
+   use Types::Standard "Str" => { -as => "String" };
+
+And so I decided to factor out code that could be shared by all Type-Tiny's
+exporters into a single place.
 
 =head1 OBLIGATORY EXPORTER COMPARISON
 
@@ -393,6 +411,6 @@ the same terms as the Perl 5 programming language system itself.
 =head1 DISCLAIMER OF WARRANTIES
 
 THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, WITHOUT LIMITAerTION, THE IMPLIED WARRANTIES OF
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 

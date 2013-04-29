@@ -6,9 +6,10 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_09';
+	$Type::Tiny::VERSION   = '0.003_10';
 }
 
+use Eval::TypeTiny ();
 use Scalar::Util qw< blessed weaken refaddr isweak >;
 use Types::TypeTiny ();
 
@@ -20,6 +21,12 @@ sub _croak ($;@)
 }
 
 sub _swap { $_[2] ? @_[1,0] : @_[0,1] }
+
+BEGIN {
+	($] > 5.010001)
+		? eval q{ sub SUPPORT_SMARTMATCH () { !!0 } }
+		: eval q{ sub SUPPORT_SMARTMATCH () { !!1 } }
+}
 
 use overload
 	q("")      => sub { caller =~ m{^(Moo::HandleMoose|Sub::Quote)} ? overload::StrVal($_[0]) : $_[0]->display_name },
@@ -38,7 +45,7 @@ use overload
 ;
 BEGIN {
 	overload->import(q(~~) => sub { $_[0]->check($_[1]) })
-		if $] >= 5.010001;
+		if Type::Tiny::SUPPORT_SMARTMATCH;
 }
 
 sub _overload_coderef
@@ -208,13 +215,9 @@ sub _build_compiled_check
 		}
 	}
 	
-	if ($self->can_be_inlined)
-	{
-		local $@;
-		my $sub = eval sprintf('sub ($) { %s }', $self->inline_check('$_[0]'));
-		die "Failed to compile check for $self: $@\n\nCODE: ".$self->inline_check('$_[0]') if $@;
-		return $sub;
-	}
+	return Eval::TypeTiny::eval_closure(
+		source      => sprintf('sub ($) { %s }', $self->inline_check('$_[0]')),
+	) if $self->can_be_inlined;
 	
 	my @constraints =
 		reverse
@@ -426,7 +429,7 @@ sub parameterize
 	# Generate a key for caching parameterized type constraints,
 	# but only if all the parameters are strings or type constraints.
 	my $key;
-	unless (grep(ref($_) && !Types::TypeTiny::TypeTiny->check($_), @_))
+	if ( not grep(ref($_) && !Types::TypeTiny::TypeTiny->check($_), @_) )
 	{
 		require B;
 		$key = join ":", map(Types::TypeTiny::TypeTiny->check($_) ? $_->{uniq} : B::perlstring($_), $self, @_);
@@ -447,7 +450,8 @@ sub parameterize
 	
 	my $P = $self->create_child_type(%options);
 
-	my $coercion = $self->coercion_generator->($self, $P, @_)
+	my $coercion;
+	$coercion = $self->coercion_generator->($self, $P, @_)
 		if $self->has_coercion_generator;
 	$P->coercion->add_type_coercions( @{$coercion->type_coercion_map} )
 		if $coercion;
@@ -1079,6 +1083,17 @@ constraints. See L<Type::Tiny::Intersection>.
 
 The C<< + >> operator is overloaded to call C<plus_coercions> or
 C<plus_fallback_coercions> as appropriate.
+
+=back
+
+=head2 Constants
+
+=over
+
+=item C<< Type::Tiny::SUPPORT_SMARTMATCH >>
+
+Indicates whether the smart match overload is supported on your
+version of Perl.
 
 =back
 
