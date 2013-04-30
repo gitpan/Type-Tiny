@@ -3,7 +3,7 @@
  - Contains over 2000 lines of code, over 3000 lines of documentation,
    and over 650 tests.
 
-2013-05-10 Type-Tiny version 0.004 released!
+2013-05-06 Type-Tiny version 0.004 released!
 
  - Improved manual.
  - Many improvements to coercions:
@@ -12,7 +12,11 @@
     - overload "+"
     - "deep" coercions
     - parameterizable coercions
+ - Type::Params is a new module providing ultra-fast parameter checking for
+   subroutines
  - Exporter::TypeTiny pulls all the weird exporting code from various
+   modules together into one place
+ - Eval::TypeTiny pulls all the weird string evaluation from various
    modules together into one place
  - OptList, Bytes and Chars types added to Types::Standard
  - MkOpt, Encode, Decode, Join and Split coercions added to Types::Standard

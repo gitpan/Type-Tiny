@@ -14,7 +14,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003_10';
+our $VERSION   = '0.003_11';
 our @EXPORT    = qw( eval_closure );
 
 sub _croak ($;@)
@@ -60,7 +60,7 @@ sub eval_closure
 		"package Eval::TypeTiny::Sandbox$sandbox;",
 		"sub {",
 		map(sprintf('my %s = %s{$_[%d]};', $_, substr($_, 0, 1), $i++), @keys),
-		"return $args{source}",
+		$args{source},
 		"}",
 	);
 	

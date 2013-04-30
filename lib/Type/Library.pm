@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_10';
+	$Type::Tiny::VERSION   = '0.003_11';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -100,7 +100,11 @@ sub _mksub
 	
 	return _subname(
 		$type->qualified_name,
-		eval_closure(source => $source, environment => {'$type' => \$type}),
+		eval_closure(
+			source      => $source,
+			description => sprintf("exportable function '%s'", $type),
+			environment => {'$type' => \$type},
+		),
 	);
 }
 
@@ -294,6 +298,8 @@ __END__
 =pod
 
 =encoding utf-8
+
+=for stopwords Moo(se)-compatible MooseX::Types-like
 
 =head1 NAME
 

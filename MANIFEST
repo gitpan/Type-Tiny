@@ -74,6 +74,7 @@ t/coercion-inlining.t
 t/coercion-modifiers.t
 t/coercion-union.t
 t/coercion.t
+t/eval.t
 t/exporter-installer.t
 t/exporter-roleconflict.t
 t/exporter.t

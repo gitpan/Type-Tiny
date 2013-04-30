@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.003_10';
+	$Type::Params::VERSION   = '0.003_11';
 }
 
 use Carp qw(croak);
@@ -130,11 +130,11 @@ sub compile
 	
 	push @code, '@R;';
 	
-	my $comment = sprintf('line 0 "parameter validation for %s"', [caller 1]->[3] || '__ANON__');
-	my $source  = "# $comment\nsub { no warnings; ".join("\n", @code)." };";
+	my $source  = "sub { no warnings; ".join("\n", @code)." };";
 	
 	return eval_closure(
 		source      => $source,
+		description => sprintf("parameter validation for '%s'", [caller 1]->[3] || '__ANON__'),
 		environment => \%env,
 	);
 }
