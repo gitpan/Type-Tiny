@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.003_11';
+	$Types::Standard::VERSION   = '0.003_12';
 }
 
 use base "Type::Library";
@@ -353,7 +353,10 @@ declare "Optional",
 		};
 	};
 
-sub slurpy ($) { +{ slurpy => $_[0] } }
+sub slurpy {
+	my $t = shift;
+	wantarray ? (+{ slurpy => $t }, @_) : +{ slurpy => $t };
+}
 
 declare "Tuple",
 	as "ArrayRef",

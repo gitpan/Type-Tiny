@@ -4,7 +4,7 @@
 
 =head1 PURPOSE
 
-Test usage with method calls.
+Test L<Type::Params> usage for method calls.
 
 =head1 AUTHOR
 
@@ -78,19 +78,19 @@ is(
 
 like(
 	exception { Silly::String::new() },
-	qr{does not meet type constraint "ClassName"},
+	qr{^Wrong number of parameters \(0\); expected 2},
 	'exception calling new() with no args',
 );
 
 like(
 	exception { Silly::String->new() },
-	qr{does not meet type constraint "Str"},
+	qr{^Wrong number of parameters \(1\); expected 2},
 	'exception calling ->new() with no args',
 );
 
 like(
 	exception { Silly::String::set() },
-	qr{does not meet type constraint},
+	qr{^Wrong number of parameters \(0\); expected 2},
 	'exception calling set() with no args',
 );
 

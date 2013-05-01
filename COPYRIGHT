@@ -61,6 +61,8 @@ Files: examples/benchmark-coercions.pl
  t/mouse.t
  t/oo-objectaccessor.t
  t/parameterization.t
+ t/params-badsigs.t
+ t/params-carping.t
  t/params-coerce.t
  t/params-methods.t
  t/params-mixednamed.t

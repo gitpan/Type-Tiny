@@ -77,6 +77,7 @@ dist:project
 	doap:release      dist:v_0-003_09;
 	doap:release      dist:v_0-003_10;
 	doap:release      dist:v_0-003_11;
+	doap:release      dist:v_0-003_12;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -832,6 +833,35 @@ dist:v_0-003_11
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_11.tar.gz>;
 	doap:revision     "0.003_11"^^xsd:string.
+
+dist:v_0-003_12
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_12"^^xsd:string;
+	dc:issued         "2013-05-01"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Allow people to use Carp::{confess,cluck,carp} with Type::Params validators; default is still croak.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Improved Type::Params documentation.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Sane behaviour for Types::Standard's 'slurpy' function when it appears mid-list.";
+		];
+		dcs:item [
+			rdfs:label "Type::Params validators now explicitly check the number of arguments passed to them.";
+			dcs:thanks cpan:mmcleric;
+			rdfs:seeAlso <http://play-perl.org/quest/517efcef53a418983f000012>;
+		];
+		dcs:versus dist:v_0-003_11;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_12.tar.gz>;
+	doap:revision     "0.003_12"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.003_11';
+	$Type::Params::VERSION   = '0.003_12';
 }
 
 use Carp qw(croak);
@@ -21,6 +21,36 @@ our @EXPORT = qw( compile );
 our @EXPORT_OK = qw( validate Invocant );
 
 use constant Invocant => union Invocant => [Object, ClassName];
+
+sub _exporter_expand_sub
+{
+	my $class = shift;
+	my ($name, $value, $globals, $permitted) = @_;
+	$permitted ||= $class->_exporter_permitted_regexp($globals);
+	
+	my %opts;
+	for (qw/ carp_level carp cluck confess /)
+	{
+		$opts{$_} = $globals->{$_} if exists $globals->{$_};
+		$opts{$_} = $value->{$_}   if exists $value->{$_};
+	}
+
+	if ($name eq 'compile' and keys %opts)
+	{
+		return compile => sub { unshift @_, \%opts; goto \&compile };
+	}
+	elsif ($name eq 'validate' and keys %opts)
+	{
+		my %compiled;
+		return validate => sub {
+			my $arr = shift;
+			($compiled{ join ":", map($_->{uniq}||"\@$_->{slurpy}", @_) } ||= compile(\%opts, @_))
+				->(@$arr);
+		};
+	}
+
+	return $class->SUPER::_exporter_expand_sub(@_);
+}
 
 sub _mkslurpy
 {
@@ -45,12 +75,22 @@ sub compile
 {
 	my (@code, %env);
 	@code = 'my (@R, %tmp, $tmp);';
-	$env{'$croaker'} = \sub {
-		local $Carp::CarpLevel = 4;
-		Carp::croak($_[0]);
-	};
-	my $arg = -1;
+	push @code, '#placeholder';   # $code[1]
 	
+	my %options    = (ref($_[0]) eq "HASH" && !$_[0]{slurpy}) ? %{+shift} : ();
+	my $arg        = -1;
+	my $saw_slurpy = 0;
+	my $min_args   = 0;
+	my $max_args   = 0;
+	my $saw_opt    = 0;
+	
+	my $level = 3 + ($options{'carp_level'} || 0);
+	$env{'$croaker'} =
+		$options{'carp'}    ? \sub { local $Carp::CarpLevel = $level; Carp::carp($_[0]) } :
+		$options{'cluck'}   ? \sub { local $Carp::CarpLevel = $level; Carp::cluck($_[0]) } :
+		$options{'confess'} ? \sub { local $Carp::CarpLevel = $level; Carp::confess($_[0]) } :
+		\sub { local $Carp::CarpLevel = $level; Carp::croak($_[0]) };
+
 	while (@_)
 	{
 		++$arg;
@@ -69,14 +109,25 @@ sub compile
 				$constraint->is_a_type_of(ArrayRef) ? _mkslurpy('$_', '@', ArrayRef => $arg) :
 				croak("Slurpy parameter not of type HashRef or ArrayRef");
 			$varname = '$_';
+			$saw_slurpy++;
 		}
 		else
 		{
+			croak("Parameter following slurpy parameter") if $saw_slurpy;
+			
 			$is_optional = grep $_->{uniq} == Optional->{uniq}, $constraint->parents;
 			
 			if ($is_optional)
 			{
 				push @code, sprintf 'return @R if $#_ < %d;', $arg;
+				$saw_opt++;
+				$max_args++;
+			}
+			else
+			{
+				croak("Non-Optional parameter following Optional parameter") if $saw_opt;
+				$min_args++;
+				$max_args++;
 			}
 			
 			$varname = sprintf '$_[%d]', $arg;
@@ -127,6 +178,33 @@ sub compile
 		
 		push @code, sprintf 'push @R, %s;', $varname;
 	}
+
+	if ($min_args == $max_args and not $saw_slurpy)
+	{
+		$code[1] = sprintf(
+			'$croaker->("Wrong number of parameters (${\scalar @_}); expected %d") if @_ != %d;',
+			$min_args,
+			$max_args,
+		);
+	}
+	elsif ($min_args < $max_args and not $saw_slurpy)
+	{
+		$code[1] = sprintf(
+			'$croaker->("Wrong number of parameters (${\scalar @_}); expected %d to %d") if @_ < %d || @_ > %d;',
+			$min_args,
+			$max_args,
+			$min_args,
+			$max_args,
+		);
+	}
+	elsif ($min_args and $saw_slurpy)
+	{
+		$code[1] = sprintf(
+			'$croaker->("Wrong number of parameters (${\scalar @_}); expected at least %d") if @_ < %d;',
+			$min_args,
+			$min_args,
+		);
+	}
 	
 	push @code, '@R;';
 	
@@ -143,9 +221,9 @@ my %compiled;
 sub validate
 {
 	my $arr = shift;
-	
-	($compiled{ join ":", map($_->{uniq}||"\@$_->{slurpy}", @_) } ||= compile @_)
-		->(@$arr);
+	my $sub = $compiled{ join ":", map($_->{uniq}||"\@$_->{slurpy}", @_) } ||= compile @_;
+	@_ = @$arr;
+	goto $sub;
 }
 
 1;
@@ -245,6 +323,25 @@ Dude, these functions are documented!
 =item Invocant
 
 =end trustme
+
+=head1 EXPORT
+
+It is possible to export versions of the C<compile> and C<validate> functions
+that use C<confess>, C<carp> or C<cluck> instead of the default C<croak> to
+report error messages:
+
+   use Params::Validate
+      compile  => { confess => 1 },
+      validate => { cluck   => 1 },
+   ;
+
+You can even export more than one copy of the functions with different
+configurations:
+
+   use Params::Validate
+      validate => { croak => 1, -as => "validate_strict" },
+      validate => { cluck => 1, -as => "validate_sloppy" },
+   ;
 
 =head1 COOKBOOK
 
@@ -427,6 +524,60 @@ Or maybe add an extra coercion:
 Note that the coercion is specified as a string of Perl code. This is usually
 the fastest way to do it, but a coderef is also accepted. Either way, the
 value to be coerced is C<< $_ >>.
+
+=head1 COMPARISON WITH PARAMS::VALIDATE
+
+L<Type::Params> is not really a drop-in replacement for L<Params::Validate>;
+the API differs far too much to claim that. Yet it performs a similar task,
+so it makes sense to compare them.
+
+=over
+
+=item *
+
+Type::Params will tend to be faster if you've got a sub which is called
+repeatedly, but may be a little slower than Params::Validate for subs that
+are only called a few times. This is because it does a bunch of work the
+first time your sub is called to make subsequent calls a lot faster.
+
+=item *
+
+Type::Params is mostly geared towards positional parameters, while
+Params::Validate seems to be primarily aimed at named parameters. (Though
+either works for either.) Params::Validate doesn't appear to have a
+particularly natural way of validating a mix of positional and named
+parameters.
+
+=item *
+
+Type::Utils allows you to coerce parameters. For example, if you expect
+a L<Path::Tiny> object, you could coerce it from a string.
+
+=item *
+
+Params::Validate allows you to supply defaults for missing parameters;
+Type::Params does not, but you may be able to use coercion from Undef.
+
+=item *
+
+If you are primarily writing object-oriented code, using Moose or similar,
+and you are using Type::Tiny type constraints for your attributes, then
+using Type::Params allows you to use the same constraints for method calls.
+
+=item *
+
+Type::Params comes bundled with Types::Standard, which provides a much
+richer vocabulary of types than the type validation constants that come
+with Params::Validate. For example, Types::Standard provides constraints
+like C<< ArrayRef[Int] >> (an arrayref of integers), while the closest from
+Params::Validate is C<< ARRAYREF >>, which you'd need to supplement with
+additional callbacks if you wanted to check that the arrayref contained
+integers.
+
+Whatsmore, Type::Params doesn't just work with Types::Standard, but also
+any other Type::Tiny type constraints.
+
+=back
 
 =head1 BUGS
 
