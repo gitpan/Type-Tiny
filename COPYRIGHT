@@ -89,6 +89,7 @@ Files: examples/benchmark-coercions.pl
  t/type-role.t
  t/type-union.t
  t/type.t
+ t/validationclass.t
 Copyright: This software is copyright (c) 2013 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 

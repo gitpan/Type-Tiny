@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.003_14';
+	$Type::Utils::VERSION   = '0.003_15';
 }
 
 sub _croak ($;@) {
@@ -66,9 +66,9 @@ sub declare
 		unless (TypeTiny->check($opts{parent}))
 		{
 			$caller->isa("Type::Library")
-				or _croak "Parent type cannot be a string";
+				or _croak("Parent type cannot be a %s", ref($opts{parent})||'non-reference scalar');
 			$opts{parent} = $caller->meta->get_type($opts{parent})
-				or _croak "Could not find parent type";
+				or _croak("Could not find parent type");
 		}
 	}
 		

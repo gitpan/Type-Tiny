@@ -123,6 +123,7 @@ t/type-intersection.t
 t/type-role.t
 t/type-union.t
 t/type.t
+t/validationclass.t
 TODO
 TODO.mm
 SIGNATURE                                Public-key signature (added by MakeMaker)
