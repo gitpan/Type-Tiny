@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_12';
+	$Type::Tiny::VERSION   = '0.003_13';
 }
 
 use Eval::TypeTiny ();
@@ -639,7 +639,7 @@ sub _MONKEY_MAGIC
 					writer    => "_set_tt_type",
 					predicate => "has_tt_type",
 					weak_ref  => 1,
-					Class::MOP::_definition_context(),
+					Class::MOP->can("_definition_context") ? Class::MOP::_definition_context() : (),
 				),
 			),
 		);
@@ -703,14 +703,20 @@ sub AUTOLOAD
 sub inline_environment         { +{} }
 sub _inline_check              { shift->inline_check(@_) }
 sub _compiled_type_constraint  { shift->compiled_check(@_) }
+sub meta                       { _croak("Not really a Moose::Meta::TypeConstraint. Sorry!") }
+sub compile_type_constraint    { shift->compiled_check }
+sub _actually_compile_type_constraint   { shift->_build_compiled_check }
+sub hand_optimized_type_constraint      { shift->{hand_optimized_type_constraint} }
+sub has_hand_optimized_type_constraint  { exists(shift->{hand_optimized_type_constraint}) }
 
 # some stuff for Mouse-compatible API
 sub __is_parameterized         { shift->is_parameterized(@_) }
 sub _add_type_coercions        { shift->coercion->add_type_coercions(@_) };
 sub _as_string                 { shift->qualified_name(@_) }
 sub _compiled_type_coercion    { shift->coercion->compiled_coercion(@_) };
-sub _identify                  { refaddr(shift) };
+sub _identity                  { refaddr(shift) };
 sub _unite                     { require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@_) };
+sub type_parameter             { my @p = @{ shift->parameters || [] }; @p==1 ? $p[0] : @p }
 
 1;
 
@@ -1029,9 +1035,24 @@ a Moose::Meta::TypeConstraint.
 
 If Mouse is loaded, then C<isa> mocks Mouse::Meta::TypeConstraint.
 
+=back
+
+The following methods exist for Moose/Mouse compatibility, but do not do
+anything useful.
+
+=over
+
+=item C<< compile_type_constraint >>
+
+=item C<< hand_optimized_type_constraint >>
+
+=item C<< has_hand_optimized_type_constraint >>
+
 =item C<< inline_environment >>
 
-Stub for Moose compatibility. Always returns an empty hashref.
+=item C<< meta >>
+
+=item C<< type_parameter >>
 
 =back
 

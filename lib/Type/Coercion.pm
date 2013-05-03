@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.003_12';
+	$Type::Coercion::VERSION   = '0.003_13';
 }
 
 use Eval::TypeTiny ();
@@ -445,6 +445,8 @@ sub AUTOLOAD
 }
 
 *_compiled_type_coercion = \&compiled_coercion;
+*compile_type_coercion = \&compiled_coercion;
+sub meta { _croak("Not really a Moose::Meta::TypeCoercion. Sorry!") }
 
 1;
 
@@ -609,6 +611,17 @@ fully documented because they may change in the near future:
 =item C<< parameterize(@params) >>
 
 =item C<< parameters >>
+
+=back
+
+The following methods exist for Moose/Mouse compatibility, but do not do
+anything useful.
+
+=over
+
+=item C<< compile_type_coercion >>
+
+=item C<< meta >>
 
 =back
 

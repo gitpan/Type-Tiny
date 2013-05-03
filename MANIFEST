@@ -13,6 +13,7 @@ inc/Module/Install/AutoInstall.pm
 inc/Module/Install/AutoManifest.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
+inc/Module/Install/Contributors.pm
 inc/Module/Install/Fetch.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
@@ -66,6 +67,7 @@ meta/rights.pret
 NEWS
 README
 t/00-compile.t
+t/01-api.t
 t/arithmetic.t
 t/coercion-automatic.t
 t/coercion-classy.t
@@ -92,6 +94,7 @@ t/moose-coercion.t
 t/moose.t
 t/mouse-coercion.t
 t/mouse.t
+t/oo-classinsideout.t
 t/oo-objectaccessor.t
 t/parameterization.t
 t/params-badsigs.t

@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_13  2013-05-03
+
+ - (Bugfix) Don't crash in old versions of Moose that have no
+   Class::MOP::_definition_context() function.
+ - BAIL_OUT in test suite if 00-compile.t or 01-api.t fail.
+ - Better documentation and tests of Moose/Mouse-compatible API.
+ - Fix typo in Type::Params documentation.
+   ++$DJERIUS
+
 0.003_12  2013-05-01
 
  - (Bugfix) Sane behaviour for Types::Standard's 'slurpy' function when it

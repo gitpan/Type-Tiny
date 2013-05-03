@@ -44,6 +44,10 @@ dist:project
 	doap:category     [ rdfs:label "Type Coercion" ];
 	doap:category     [ rdfs:label "Type Library" ];
 	doap:category     [ rdfs:label "Schema" ];
+	doap:category     [ rdfs:label "Parameter Validation" ];
+	doap:category     [ rdfs:label "Parameter Checking" ];
+	doap:category     [ rdfs:label "Argument Validation" ];
+	doap:category     [ rdfs:label "Argument Checking" ];
 	doap:category     [ rdfs:label "Validation" ];
 	doap:created      "2013-03-23"^^xsd:date;
 	doap:developer    cpan:tobyink;
@@ -78,6 +82,7 @@ dist:project
 	doap:release      dist:v_0-003_10;
 	doap:release      dist:v_0-003_11;
 	doap:release      dist:v_0-003_12;
+	doap:release      dist:v_0-003_13;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -863,11 +868,46 @@ dist:v_0-003_12
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_12.tar.gz>;
 	doap:revision     "0.003_12"^^xsd:string.
 
+dist:v_0-003_13
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_13"^^xsd:string;
+	dc:issued         "2013-05-03"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Don't crash in old versions of Moose that have no Class::MOP::_definition_context() function.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Better documentation and tests of Moose/Mouse-compatible API.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "BAIL_OUT in test suite if 00-compile.t or 01-api.t fail.";
+		];
+		dcs:item [
+			rdfs:label "Fix typo in Type::Params documentation.";
+			dcs:blame cpan:djerius;
+			rdfs:seeAlso <https://bitbucket.org/tobyink/p5-type-tiny/pull-request/1/fix-typo-in-docs/diff>;
+		];
+		dcs:versus dist:v_0-003_12;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_13.tar.gz>;
+	doap:revision     "0.003_13"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
 	foaf:nick         "BOWTIE";
 	foaf:page         <https://metacpan.org/author/BOWTIE>.
+
+cpan:djerius
+	a                 foaf:Person;
+	foaf:name         "Diab Jerius";
+	foaf:nick         "DJERIUS";
+	foaf:page         <https://metacpan.org/author/DJERIUS>.
 
 cpan:ingy
 	a                 foaf:Person;
@@ -981,6 +1021,22 @@ cpan:tokuhirom
 	dc:license        <http://dev.perl.org/licenses/>;
 	dc:rightsHolder   cpan:tobyink;
 	nfo:fileName      "TODO.mm".
+
+[]
+	a                 nfo:FileDataObject;
+	a                 nfo:SourceCode;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "examples/benchmark-mkopt.pl";
+	nfo:programmingLanguage "Perl".
+
+[]
+	a                 nfo:FileDataObject;
+	a                 nfo:SourceCode;
+	dc:license        <http://dev.perl.org/licenses/>;
+	dc:rightsHolder   cpan:tobyink;
+	nfo:fileName      "examples/benchmark-param-validation.pl";
+	nfo:programmingLanguage "Perl".
 
 []
 	a                 nfo:FileDataObject;

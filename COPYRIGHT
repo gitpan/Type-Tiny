@@ -6,6 +6,7 @@ Source: https://metacpan.org/release/Type-Tiny
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
+ inc/Module/Install/Contributors.pm
  lib/Eval/TypeTiny.pm
  lib/Exporter/TypeTiny.pm
  lib/Test/TypeTiny.pm
@@ -33,6 +34,7 @@ Files: examples/benchmark-coercions.pl
  lib/Types/Standard/AutomaticCoercion.pm
  lib/Types/TypeTiny.pm
  t/00-compile.t
+ t/01-api.t
  t/arithmetic.t
  t/coercion-automatic.t
  t/coercion-classy.t
@@ -100,6 +102,8 @@ Files: CONTRIBUTING
  README
  TODO
  TODO.mm
+ examples/benchmark-mkopt.pl
+ examples/benchmark-param-validation.pl
  meta/changes.pret
  meta/doap.pret
  meta/makefile.pret
@@ -107,12 +111,6 @@ Files: CONTRIBUTING
  meta/rights.pret
 Copyright: Copyright 2013 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
-
-Files: .travis.yml
- examples/benchmark-mkopt.pl
- examples/benchmark-param-validation.pl
-Copyright: Unknown
-License: Unknown
 
 Files: inc/Module/Install.pm
  inc/Module/Install/Include.pm
@@ -131,6 +129,14 @@ License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Try/Tiny.pm
 Copyright: Copyright 2013 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: .travis.yml
+Copyright: Unknown
+License: Unknown
+
+Files: t/oo-classinsideout.t
+Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: COPYRIGHT

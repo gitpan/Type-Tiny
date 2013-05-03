@@ -258,8 +258,15 @@ DESCRIPTION
 
         If Mouse is loaded, then "isa" mocks Mouse::Meta::TypeConstraint.
 
+    The following methods exist for Moose/Mouse compatibility, but do not do
+    anything useful.
+
+    "compile_type_constraint"
+    "hand_optimized_type_constraint"
+    "has_hand_optimized_type_constraint"
     "inline_environment"
-        Stub for Moose compatibility. Always returns an empty hashref.
+    "meta"
+    "type_parameter"
 
   Overloading
     *   Stringification is overloaded to return the qualified name.
