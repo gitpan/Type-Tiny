@@ -83,6 +83,7 @@ dist:project
 	doap:release      dist:v_0-003_11;
 	doap:release      dist:v_0-003_12;
 	doap:release      dist:v_0-003_13;
+	doap:release      dist:v_0-003_14;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -896,6 +897,16 @@ dist:v_0-003_13
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_13.tar.gz>;
 	doap:revision     "0.003_13"^^xsd:string.
+
+dist:v_0-003_14
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_14"^^xsd:string;
+	dc:issued         "2013-05-03"^^xsd:date;
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_14.tar.gz>;
+	doap:revision     "0.003_14"^^xsd:string;
+	rdfs:comment      "No functional changes.".
 
 cpan:bowtie
 	a                 foaf:Person;
