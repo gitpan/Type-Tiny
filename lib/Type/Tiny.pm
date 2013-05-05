@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.003_15';
+	$Type::Tiny::VERSION   = '0.003_16';
 }
 
 use Eval::TypeTiny ();
@@ -52,12 +52,22 @@ sub _overload_coderef
 {
 	my $self = shift;
 	$self->message unless exists $self->{message};
-	$self->{_overload_coderef} ||=
-		$self->has_parent && $self->_is_null_constraint
-			? $self->parent->_overload_coderef :
-		$self->{_default_message} && "Sub::Quote"->can("quote_sub") && $self->can_be_inlined
-			? Sub::Quote::quote_sub($self->inline_assert('$_[0]')) :
-		sub { $self->assert_valid(@_) }
+	
+	if ($self->has_parent && $self->_is_null_constraint)
+	{
+		$self->{_overload_coderef} ||= $self->parent->_overload_coderef;
+	}
+	elsif ($self->{_default_message} && "Sub::Quote"->can("quote_sub") && $self->can_be_inlined)
+	{
+		$self->{_overload_coderef} = Sub::Quote::quote_sub($self->inline_assert('$_[0]'))
+			if !$self->{_overload_coderef} || !$self->{_sub_quoted}++;
+	}
+	else
+	{
+		$self->{_overload_coderef} ||= sub { $self->assert_valid(@_) };
+	}
+	
+	$self->{_overload_coderef};
 }
 
 my $uniq = 1;
@@ -169,7 +179,9 @@ sub _build_coercion
 {
 	require Type::Coercion;
 	my $self = shift;
-	return "Type::Coercion"->new(type_constraint => $self);
+	my %opts = (type_constraint => $self);
+	$opts{display_name} = "to_$self" unless $self->is_anon;
+	return "Type::Coercion"->new(%opts);
 }
 
 sub _build_default_message

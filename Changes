@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.003_16  2013-05-05
+
+ - (Documentation) Document that Map[`k,`v] has a deep coercion.
+ - (Documentation) Improve Type::Coercion documentation.
+ - Minor updates to coderef overloading following Moo 1.002000 release.
+ - Rename Types::Standard::AutomaticCoercion ->
+   Types::Standard::DeepCoercion.
+ - Type::Params produces nicer error messages.
+
 0.003_15  2013-05-03
 
  - (Addition) Improvements to to_TypeTiny function, including accepting

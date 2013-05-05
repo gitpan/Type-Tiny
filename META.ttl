@@ -85,6 +85,7 @@ dist:project
 	doap:release      dist:v_0-003_13;
 	doap:release      dist:v_0-003_14;
 	doap:release      dist:v_0-003_15;
+	doap:release      dist:v_0-003_16;
 	doap:repository   [
 		a doap:HgRepository;
 		doap:browse <https://bitbucket.org/tobyink/p5-type-tiny>;
@@ -924,6 +925,38 @@ dist:v_0-003_15
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_15.tar.gz>;
 	doap:revision     "0.003_15"^^xsd:string.
+
+dist:v_0-003_16
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.003_16"^^xsd:string;
+	dc:issued         "2013-05-05"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Rename Types::Standard::AutomaticCoercion -> Types::Standard::DeepCoercion.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Params produces nicer error messages.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document that Map[`k,`v] has a deep coercion.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Improve Type::Coercion documentation.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Minor updates to coderef overloading following Moo 1.002000 release.";
+		];
+		dcs:versus dist:v_0-003_15;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_16.tar.gz>;
+	doap:revision     "0.003_16"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;
