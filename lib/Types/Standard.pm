@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.003_16';
+	$Types::Standard::VERSION   = '0.004';
 }
 
 use base "Type::Library";
@@ -719,6 +719,8 @@ __END__
 
 =encoding utf-8
 
+=for stopwords datetimes
+
 =head1 NAME
 
 Types::Standard - bundled set of built-in types for Type::Tiny
@@ -974,6 +976,10 @@ L<Type::Tiny>, L<Type::Library>, L<Type::Utils>, L<Type::Coercion>.
 L<Moose::Util::TypeConstraints>,
 L<Mouse::Util::TypeConstraints>,
 L<MooseX::Types::Structured>.
+
+L<Types::XSD> provides some type constraints based on XML Schema's data
+types; this includes constraints for ISO8601-formatted datetimes, integer
+ranges (e.g. C<< PositiveInteger[maxInclusive=>10] >> and so on.
 
 =head1 AUTHOR
 
