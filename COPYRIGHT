@@ -14,6 +14,7 @@ Files: examples/benchmark-coercions.pl
  lib/Type/Coercion/Union.pm
  lib/Type/Library.pm
  lib/Type/Params.pm
+ lib/Type/Registry.pm
  lib/Type/Tiny.pm
  lib/Type/Tiny/Class.pm
  lib/Type/Tiny/Duck.pm
@@ -73,6 +74,7 @@ Files: examples/benchmark-coercions.pl
  t/params-optional.t
  t/params-positional.t
  t/params-slurpy.t
+ t/registry.t
  t/stdlib-inlined.t
  t/stdlib-optlist.t
  t/stdlib-overload.t

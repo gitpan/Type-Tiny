@@ -35,6 +35,7 @@ lib/Type/Coercion.pm
 lib/Type/Coercion/Union.pm
 lib/Type/Library.pm
 lib/Type/Params.pm
+lib/Type/Registry.pm
 lib/Type/Tiny.pm
 lib/Type/Tiny/Class.pm
 lib/Type/Tiny/Duck.pm
@@ -107,6 +108,7 @@ t/params-noninline.t
 t/params-optional.t
 t/params-positional.t
 t/params-slurpy.t
+t/registry.t
 t/stdlib-inlined.t
 t/stdlib-optlist.t
 t/stdlib-overload.t
