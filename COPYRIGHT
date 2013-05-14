@@ -12,6 +12,9 @@ Files: examples/benchmark-coercions.pl
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
  lib/Type/Coercion/Union.pm
+ lib/Type/Exception.pm
+ lib/Type/Exception/Assertion.pm
+ lib/Type/Exception/WrongNumberOfParameters.pm
  lib/Type/Library.pm
  lib/Type/Params.pm
  lib/Type/Registry.pm
@@ -45,6 +48,7 @@ Files: examples/benchmark-coercions.pl
  t/coercion-union.t
  t/coercion.t
  t/eval.t
+ t/exceptions.t
  t/exporter-installer.t
  t/exporter-roleconflict.t
  t/exporter.t
@@ -78,7 +82,6 @@ Files: examples/benchmark-coercions.pl
  t/stdlib-inlined.t
  t/stdlib-optlist.t
  t/stdlib-overload.t
- t/stdlib-str.t
  t/stdlib-strmatch.t
  t/stdlib-structures.t
  t/stdlib-tied.t

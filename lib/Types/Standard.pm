@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.005_02';
+	$Types::Standard::VERSION   = '0.005_03';
 }
 
 use base "Type::Library";
@@ -187,6 +187,24 @@ declare "ArrayRef",
 			.  "\$ok "
 			."}"
 		};
+	},
+	deep_explanation => sub {
+		my ($type, $value, $varname) = @_;
+		my $param = $type->parameters->[0];
+		
+		for my $i (0 .. $#$value)
+		{
+			my $item = $value->[$i];
+			next if $param->check($item);
+			require Type::Exception::Assertion;
+			return "Type::Exception::Assertion"->_explain(
+				$param,
+				$item,
+				sprintf('%s->[%d]', $varname, $i),
+			);
+		}
+		
+		return;
 	};
 
 declare "HashRef",
@@ -221,6 +239,25 @@ declare "HashRef",
 			.  "\$ok "
 			."}"
 		};
+	},
+	deep_explanation => sub {
+		require B;
+		my ($type, $value, $varname) = @_;
+		my $param = $type->parameters->[0];
+		
+		for my $k (sort keys %$value)
+		{
+			my $item = $value->{$k};
+			next if $param->check($item);
+			require Type::Exception::Assertion;
+			return "Type::Exception::Assertion"->_explain(
+				$param,
+				$item,
+				sprintf('%s->{%d}', $varname, B::perlstring($k)),
+			);
+		}
+		
+		return;
 	};
 
 declare "ScalarRef",
@@ -249,6 +286,23 @@ declare "ScalarRef",
 			my $param_check = $param->inline_check("\${$v}");
 			"(ref($v) eq 'SCALAR' or ref($v) eq 'REF') and $param_check";
 		};
+	},
+	deep_explanation => sub {
+		my ($type, $value, $varname) = @_;
+		my $param = $type->parameters->[0];
+		
+		for my $item ($$value)
+		{
+			next if $param->check($item);
+			require Type::Exception::Assertion;
+			return "Type::Exception::Assertion"->_explain(
+				$param,
+				$item,
+				sprintf('${%s}', $varname),
+			);
+		}
+		
+		return;
 	};
 
 declare "Object",
@@ -561,17 +615,6 @@ declare "StrMatch",
 		}
 	};
 
-declare "Bytes",
-	as "Str",
-	where { !utf8::is_utf8($_) },
-	inline_as { "!utf8::is_utf8($_)" };
-
-our $SevenBitSafe = qr{^[\x00-\x7F]*$}sm;
-declare "Chars",
-	as "Str",
-	where { utf8::is_utf8($_) or $_ =~ $Types::Standard::SevenBitSafe },
-	inline_as { "utf8::is_utf8($_) or $_ =~ \$Types::Standard::SevenBitSafe" };
-
 declare "OptList",
 	as ArrayRef([ArrayRef()]),
 	where {
@@ -662,30 +705,6 @@ declare_coercion "MkOpt",
 	from    "ArrayRef", q{ Exporter::TypeTiny::mkopt($_) },
 	from    "HashRef",  q{ Exporter::TypeTiny::mkopt($_) },
 	from    "Undef",    q{ [] };
-
-declare_coercion "Decode", to_type "Chars" => {
-	coercion_generator => sub {
-		my ($self, $target, $encoding) = @_;
-		require Encode;
-		Encode::find_encoding($encoding)
-			or _croak("Parameter \"$encoding\" for Decode[`a] is not an encoding supported by this version of Perl");
-		require B;
-		$encoding = B::perlstring($encoding);
-		return (Bytes(), qq{ Encode::decode($encoding, \$_) });
-	},
-};
-
-declare_coercion "Encode", to_type "Bytes" => {
-	coercion_generator => sub {
-		my ($self, $target, $encoding) = @_;
-		require Encode;
-		Encode::find_encoding($encoding)
-			or _croak("Parameter \"$encoding\" for Encode[`a] is not an encoding supported by this version of Perl");
-		require B;
-		$encoding = B::perlstring($encoding);
-		return (Chars(), qq{ Encode::encode($encoding, \$_) });
-	},
-};
 
 declare_coercion "Join", to_type "Str" => {
 	coercion_generator => sub {
@@ -878,15 +897,6 @@ You can optionally provide a type constraint for the array of subexpressions:
          ],
       ];
 
-=item C<< Bytes >>
-
-Strings where C<< utf8::is_utf8() >> is false.
-
-=item C<< Chars >>
-
-Strings where either C<< utf8::is_utf8() >> is true, or each byte is
-below C<0x7F>.
-
 =item C<< OptList >>
 
 An arrayref of arrayrefs in the style of L<Data::OptList> output.
@@ -914,26 +924,6 @@ usage in a Moose attribute:
       coerce => 1,
    );
 
-=item C<< Encode[`a] >>
-
-Coercion to encode a character string to a byte string using
-C<< Encode::encode() >>. This is a parameterized type coercion, which
-expects a character set:
-
-   use Types::Standard qw( Bytes Encode );
-   
-   has filename => (
-      is     => "ro",
-      isa    => Bytes + Encode["utf-8"],
-      coerce => 1,
-   );
-
-=item C<< Decode[`a] >>
-
-Coercion to decode a byte string to a character string using
-C<< Encode::decode() >>. This is a parameterized type coercion, which
-expects a character set.
-
 =item C<< Split[`a] >>
 
 Split a string on a regexp.
@@ -950,9 +940,9 @@ Split a string on a regexp.
 
 Join an array of strings with a delimiter.
 
-   use Types::Standard qw( Bytes Join );
+   use Types::Standard qw( Str Join );
    
-   my $FileLines = Bytes + Join["\n"];
+   my $FileLines = Str + Join["\n"];
    
    has file_contents => (
       is     => "ro",
@@ -980,6 +970,9 @@ L<MooseX::Types::Structured>.
 L<Types::XSD> provides some type constraints based on XML Schema's data
 types; this includes constraints for ISO8601-formatted datetimes, integer
 ranges (e.g. C<< PositiveInteger[maxInclusive=>10] >> and so on.
+
+L<Types::Encodings> provides C<Bytes> and C<Chars> type constraints that
+were formerly found in Types::Standard.
 
 =head1 AUTHOR
 
