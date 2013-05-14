@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.005_01';
+	$Type::Tiny::VERSION   = '0.005_02';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -345,7 +345,7 @@ L<Type::Library> is a tiny class for creating MooseX::Types-like type
 libraries which are compatible with Moo, Moose and Mouse.
 
 If you're reading this because you want to create a type library, then
-you're probably better off reading L<Type::Tiny::Intro>.
+you're probably better off reading L<Type::Tiny::Manual::Libraries>.
 
 =head2 Methods
 
