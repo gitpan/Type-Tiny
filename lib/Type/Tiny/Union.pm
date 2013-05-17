@@ -6,18 +6,13 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.005_03';
+	$Type::Tiny::Union::VERSION   = '0.005_04';
 }
 
 use Scalar::Util qw< blessed >;
 use Types::TypeTiny ();
 
-sub _croak ($;@)
-{
-	require Carp;
-	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::croak;
-}
+sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use overload q[@{}] => 'type_constraints';
 
@@ -26,7 +21,8 @@ use base "Type::Tiny";
 sub new {
 	my $proto = shift;
 	my %opts = @_;
-	_croak "need to supply list of type constraints" unless exists $opts{type_constraints};
+	_croak "Union type constraints cannot have a parent constraint" if exists $opts{parent};
+	_croak "Need to supply list of type constraints" unless exists $opts{type_constraints};
 	$opts{type_constraints} = [
 		map { $_->isa(__PACKAGE__) ? @$_ : $_ }
 		map Types::TypeTiny::to_TypeTiny($_),

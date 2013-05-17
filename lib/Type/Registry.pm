@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.005_03';
+	$Type::Registry::VERSION   = '0.005_04';
 }
 
 use Exporter::TypeTiny qw( mkopt _croak );
@@ -36,7 +36,7 @@ sub _exporter_expand_sub
 sub new
 {
 	my $class = shift;
-	ref($class) and _croak("not an object method");
+	ref($class) and _croak("Not an object method");
 	bless {}, $class;
 }
 

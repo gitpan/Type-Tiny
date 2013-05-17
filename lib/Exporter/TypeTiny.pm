@@ -5,14 +5,10 @@ use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.005_03';
+our $VERSION   = '0.005_04';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
-sub _croak ($;@) {
-	require Carp;
-	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::croak;
-}
+sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 sub import
 {

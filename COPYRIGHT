@@ -14,6 +14,7 @@ Files: examples/benchmark-coercions.pl
  lib/Type/Coercion/Union.pm
  lib/Type/Exception.pm
  lib/Type/Exception/Assertion.pm
+ lib/Type/Exception/Compilation.pm
  lib/Type/Exception/WrongNumberOfParameters.pm
  lib/Type/Library.pm
  lib/Type/Params.pm
@@ -47,6 +48,7 @@ Files: examples/benchmark-coercions.pl
  t/coercion-modifiers.t
  t/coercion-union.t
  t/coercion.t
+ t/coercions-parameterized.t
  t/eval.t
  t/exceptions.t
  t/exporter-installer.t

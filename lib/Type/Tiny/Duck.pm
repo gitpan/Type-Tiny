@@ -6,24 +6,20 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Duck::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Duck::VERSION   = '0.005_03';
+	$Type::Tiny::Duck::VERSION   = '0.005_04';
 }
 
 use Scalar::Util qw< blessed >;
 
-sub _croak ($;@)
-{
-	require Carp;
-	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::croak;
-}
+sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use base "Type::Tiny";
 
 sub new {
 	my $proto = shift;
 	my %opts = @_;
-	_croak "need to supply list of methods" unless exists $opts{methods};
+	_croak "Duck type constraints cannot have a parent constraint" if exists $opts{parent};
+	_croak "Need to supply list of methods" unless exists $opts{methods};
 	$opts{methods} = [$opts{methods}] unless ref $opts{methods};
 	return $proto->SUPER::new(%opts);
 }

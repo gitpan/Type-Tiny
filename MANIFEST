@@ -35,6 +35,7 @@ lib/Type/Coercion.pm
 lib/Type/Coercion/Union.pm
 lib/Type/Exception.pm
 lib/Type/Exception/Assertion.pm
+lib/Type/Exception/Compilation.pm
 lib/Type/Exception/WrongNumberOfParameters.pm
 lib/Type/Library.pm
 lib/Type/Params.pm
@@ -80,6 +81,7 @@ t/coercion-inlining.t
 t/coercion-modifiers.t
 t/coercion-union.t
 t/coercion.t
+t/coercions-parameterized.t
 t/eval.t
 t/exceptions.t
 t/exporter-installer.t

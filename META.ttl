@@ -90,6 +90,7 @@ dist:project
 	doap:release      dist:v_0-005_01;
 	doap:release      dist:v_0-005_02;
 	doap:release      dist:v_0-005_03;
+	doap:release      dist:v_0-005_04;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1047,6 +1048,50 @@ dist:v_0-005_03
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_03.tar.gz>;
 	doap:revision     "0.005_03"^^xsd:string.
+
+dist:v_0-005_04
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.005_04"^^xsd:string;
+	dc:issued         "2013-05-17"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "All error conditions now throw exception objects instead of string error messages.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Deep explanations for Types::Standard::{Map,Maybe,Ref,Dict,Tuple} type constraint assertion failures.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Test::TypeTiny performs more thorough testing if EXTENDED_TESTING environment variable is set.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fixed bug in non-inlined code for Types::Standard::MkOpt.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Improved deep explanations for Types::Standard::{ArrayRef,HashRef,ScalarRef}.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Throw exception if people attempt to set parent types for Type::Tiny::{Class,Role,Duck,Enum,Union,Intersection}.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Exception::Compilation.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Allow the slurpy tail of a Types::Standard::Tuple to be a treated as a hashref rather than an arrayref.";
+		];
+		dcs:versus dist:v_0-005_03;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_04.tar.gz>;
+	doap:revision     "0.005_04"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

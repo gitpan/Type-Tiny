@@ -6,14 +6,10 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.005_03';
+	$Type::Utils::VERSION   = '0.005_04';
 }
 
-sub _croak ($;@) {
-	require Carp;
-	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::croak;
-}
+sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use Scalar::Util qw< blessed >;
 use Type::Library;

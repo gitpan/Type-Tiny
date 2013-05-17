@@ -6,15 +6,10 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.005_03';
+	$Type::Tiny::Enum::VERSION   = '0.005_04';
 }
 
-sub _croak ($;@)
-{
-	require Carp;
-	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::croak;
-}
+sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use overload q[@{}] => 'values';
 
@@ -24,7 +19,8 @@ sub new
 {
 	my $proto = shift;
 	my %opts = @_;
-	_croak "need to supply list of values" unless exists $opts{values};
+	_croak "Enum type constraints cannot have a parent constraint" if exists $opts{parent};
+	_croak "Need to supply list of values" unless exists $opts{values};
 	my %tmp =
 		map { $_ => 1 }
 		@{ ref $opts{values} eq "ARRAY" ? $opts{values} : [$opts{values}] };

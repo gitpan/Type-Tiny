@@ -6,19 +6,14 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.005_03';
+	$Type::Tiny::VERSION   = '0.005_04';
 }
 
 use Eval::TypeTiny ();
 use Scalar::Util qw( blessed weaken refaddr isweak );
 use Types::TypeTiny ();
 
-sub _croak ($;@)
-{
-	require Carp;
-	@_ = sprintf($_[0], @_[1..$#_]) if @_ > 1;
-	goto \&Carp::croak;
-}
+sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 sub _swap { $_[2] ? @_[1,0] : @_[0,1] }
 
@@ -82,7 +77,7 @@ sub new
 	{
 		$params{parent} = Types::TypeTiny::to_TypeTiny($params{parent});
 		
-		_croak "parent must be an instance of %s", __PACKAGE__
+		_croak "Parent must be an instance of %s", __PACKAGE__
 			unless blessed($params{parent}) && $params{parent}->isa(__PACKAGE__);
 	}
 	
@@ -180,7 +175,7 @@ sub _default_message         { $_[0]{_default_message} ||= $_[0]->_build_default
 sub _assert_coercion
 {
 	my $self = shift;
-	_croak "no coercion for this type constraint"
+	_croak "No coercion for this type constraint"
 		unless $self->has_coercion && @{$self->coercion->type_coercion_map};
 	return $self->coercion;
 }
@@ -364,6 +359,25 @@ sub check
 	$self->compiled_check->(@_);
 }
 
+sub _strict_check
+{
+	my $self = shift;
+	local $_ = $_[0];
+
+	my @constraints =
+		reverse
+		map  { $_->constraint }
+		grep { not $_->_is_null_constraint }
+		($self, $self->parents);
+	
+	for my $c (@constraints)
+	{
+		return unless $c->(@_);
+	}
+	
+	return !!1;
+}
+
 sub get_message
 {
 	my $self = shift;
@@ -406,7 +420,7 @@ sub can_be_inlined
 sub inline_check
 {
 	my $self = shift;
-	_croak "cannot inline type constraint check for %s", $self
+	_croak 'Cannot inline type constraint check for "%s"', $self
 		unless $self->can_be_inlined;
 	return $self->parent->inline_check(@_)
 		if $self->has_parent && $self->_is_null_constraint;
@@ -487,7 +501,7 @@ sub parameterize
 	my $self = shift;
 	return $self unless @_;
 	$self->is_parameterizable
-		or _croak "type '%s' does not accept parameters", "$self";
+		or _croak "Type '%s' does not accept parameters", "$self";
 	
 	@_ = map Types::TypeTiny::to_TypeTiny($_), @_;
 	
@@ -714,7 +728,7 @@ sub _MONKEY_MAGIC
 		);
 		$meta->make_immutable(inline_constructor => 0);
 		1;
-	} or _croak("could not perform magic Moose trick: $@");
+	} or _croak("Could not perform magic Moose trick: $@");
 }
 
 sub isa

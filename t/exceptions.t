@@ -26,7 +26,7 @@ use lib qw( ./lib ./t/lib ../inc ./inc );
 use Test::More;
 use Test::Fatal;
 
-use Types::Standard qw( ArrayRef Int Ref Any );
+use Types::Standard slurpy => -types;
 
 my $v = [];
 my $e = exception { Int->create_child_type->assert_valid($v) };
@@ -69,6 +69,7 @@ is_deeply(
 	(exception { (ArrayRef[Int])->([1, 2, [3]]) })->explain,
 	[
 		'[1,2,[3]] did not pass type constraint "ArrayRef[Int]"',
+		'"ArrayRef[Int]" constrains each value in the array with "Int"',
 		'"Int" is a subtype of "Num"',
 		'"Num" is a subtype of "Str"',
 		'"Str" is a subtype of "Value"',
@@ -92,9 +93,74 @@ is_deeply(
 	(exception { (Ref["ARRAY"])->({}) })->explain,
 	[
 		'{} did not pass type constraint "Ref[ARRAY]"',
-		'"Ref[ARRAY]" is defined as: (ref($_) and Scalar::Util::reftype($_) eq q(ARRAY))',
+		'"Ref[ARRAY]" constrains reftype($_) to be equal to "ARRAY"',
+		'reftype($_) is "HASH"',
 	],
 	'Ref["ARRAY"] deep explanation, given {}',
+);
+
+is_deeply(
+	(exception { (HashRef[Maybe[Int]])->({a => undef, b => 42, c => []}) })->explain,
+	[
+		'{"a" => undef,"b" => 42,"c" => []} did not pass type constraint "HashRef[Maybe[Int]]"',
+		'"HashRef[Maybe[Int]]" constrains each value in the hash with "Maybe[Int]"',
+		'[] did not pass type constraint "Maybe[Int]" (in $_->{"c"})',
+		'[] is defined',
+		'"Maybe[Int]" constrains the value with "Int" if it is defined',
+		'"Int" is a subtype of "Num"',
+		'"Num" is a subtype of "Str"',
+		'"Str" is a subtype of "Value"',
+		'[] did not pass type constraint "Value" (in $_->{"c"})',
+		'"Value" is defined as: (defined($_) and not ref($_))',
+	],
+	'HashRef[Maybe[Int]] deep explanation, given {a => undef, b => 42, c => []}',
+);
+
+my $dict = Dict[a => Int, b => Optional[ArrayRef[Str]]];
+
+is_deeply(
+	(exception { $dict->({c => 1}) })->explain,
+	[
+		'{"c" => 1} did not pass type constraint "Dict[a=>Int,b=>Optional[ArrayRef[Str]]]"',
+		'"Dict[a=>Int,b=>Optional[ArrayRef[Str]]]" does not allow key "c" to appear in hash',
+	],
+	'$dict deep explanation, given {c => 1}',
+);
+
+is_deeply(
+	(exception { $dict->({b => 1}) })->explain,
+	[
+		'{"b" => 1} did not pass type constraint "Dict[a=>Int,b=>Optional[ArrayRef[Str]]]"',
+		'"Dict[a=>Int,b=>Optional[ArrayRef[Str]]]" requires key "a" to appear in hash',
+	],
+	'$dict deep explanation, given {b => 1}',
+);
+
+is_deeply(
+	(exception { $dict->({a => 1, b => 2}) })->explain,
+	[
+		'{"a" => 1,"b" => 2} did not pass type constraint "Dict[a=>Int,b=>Optional[ArrayRef[Str]]]"',
+		'"Dict[a=>Int,b=>Optional[ArrayRef[Str]]]" constrains value at key "b" of hash with "Optional[ArrayRef[Str]]"',
+		'Value "2" did not pass type constraint "Optional[ArrayRef[Str]]" (in $_->{"b"})',
+		'$_->{"b"} exists',
+		'"Optional[ArrayRef[Str]]" constrains $_->{"b"} with "ArrayRef[Str]" if it exists',
+		'"ArrayRef[Str]" is a subtype of "ArrayRef"',
+		'"ArrayRef" is a subtype of "Ref"',
+		'Value "2" did not pass type constraint "Ref" (in $_->{"b"})',
+		'"Ref" is defined as: (!!ref($_))',
+	],
+	'$dict deep explanation, given {a => 1, b => 2}',
+);
+
+is_deeply(
+	(exception { (Map[Int,Num])->({1=>1.1,2.2=>2.3,3.3=>3.4}) })->explain,
+	[
+		'{1 => "1.1","2.2" => "2.3","3.3" => "3.4"} did not pass type constraint "Map[Int,Num]"',
+		'"Map[Int,Num]" constrains each key in the hash with "Int"',
+		'Value "2.2" did not pass type constraint "Int" (in key $_->{"2.2"})',
+		'"Int" is defined as: (defined $_ and $_ =~ /\A-?[0-9]+\z/)',
+	],
+	'Map[Int,Num] deep explanation, given {1=>1.1,2.2=>2.3,3.3=>3.4}',
 );
 
 my $AlwaysFail = Any->create_child_type(constraint => sub { 0 });
@@ -108,13 +174,41 @@ is_deeply(
 	'$AlwaysFail explanation, given 1',
 );
 
+my $SlurpyThing = Tuple[ Num, slurpy Map[Int, ArrayRef] ];
+
+is_deeply(
+	(exception { $SlurpyThing->(1) })->explain,
+	[
+		'"Tuple[Num,slurpy Map[Int,ArrayRef]]" is a subtype of "Tuple"',
+		'"Tuple" is a subtype of "ArrayRef"',
+		'"ArrayRef" is a subtype of "Ref"',
+		'Value "1" did not pass type constraint "Ref"',
+		'"Ref" is defined as: (!!ref($_))',
+	],
+	'$SlurpyThing explanation, given 1',
+);
+
+is_deeply(
+	(exception { $SlurpyThing->([1.1, 2 => "Hello"]) })->explain,
+	[
+		'["1.1",2,"Hello"] did not pass type constraint "Tuple[Num,slurpy Map[Int,ArrayRef]]"',
+		'Array elements from index 1 are slurped into a hashref which is constrained with "Map[Int,ArrayRef]"',
+		'{2 => "Hello"} did not pass type constraint "Map[Int,ArrayRef]" (in $SLURPY)',
+		'"Map[Int,ArrayRef]" constrains each value in the hash with "ArrayRef"',
+		'"ArrayRef" is a subtype of "Ref"',
+		'Value "Hello" did not pass type constraint "Ref" (in $SLURPY->{"2"})',
+		'"Ref" is defined as: (!!ref($_))',
+	],
+	'$SlurpyThing explanation, given [1.1, 2 => "Hello"]',
+);
+
 my $e_where = exception {
 #line 1 "thisfile.plx"
 package Monkey::Nuts;
 "Type::Exception"->throw(message => "Test");
 };
 
-#line 118 "exceptions.t"
+#line 148 "exceptions.t"
 is_deeply(
 	$e_where->context,
 	{
