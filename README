@@ -197,6 +197,14 @@ DESCRIPTION
         Yes, that's three very similar methods. Blame
         Moose::Meta::TypeConstraint whose API I'm attempting to emulate. :-)
 
+    "assert_return($value)"
+        Like "assert_valid($value)" but returns the value if it passes the
+        type constraint.
+
+        This seems a more useful behaviour than "assert_valid($value)". I
+        would have just changed "assert_valid($value)" to do this, except
+        that there are edge cases where it could break Moose compatibility.
+
     "get_message($value)"
         Returns the error message for the value; even if the value passes
         the type constraint.
@@ -278,7 +286,7 @@ DESCRIPTION
 
     *   Boolification is overloaded to always return true.
 
-    *   Coderefification is overloaded to call "assert_value".
+    *   Coderefification is overloaded to call "assert_return".
 
     *   On Perl 5.10.1 and above, smart match is overloaded to call "check".
 

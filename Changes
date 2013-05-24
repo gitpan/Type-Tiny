@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.005_05  2013-05-24
+
+ - (Addition) Type::Tiny now has an assert_return method, which is used in
+   most places in preference to assert_valid.
+ - (Removal) Removed Type::Registry from the release; it will return at a
+   later date.
+ - (Update) Suggest newer version of Validation::Class.
+ - Fix warnings under Perl 5.18.
+
 0.005_04  2013-05-17
 
  - (Addition) Deep explanations for

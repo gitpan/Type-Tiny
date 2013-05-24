@@ -1,0 +1,9 @@
+language: perl
+script: HARNESS_IS_VERBOSE=1 prove -v -Ilib t
+install:
+  - cpanm Test::Requires Test::Fatal Moo
+perl:
+  - "5.16"
+  - "5.14"
+  - "5.12"
+  - "5.10"
