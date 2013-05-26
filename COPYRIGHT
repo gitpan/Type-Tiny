@@ -35,7 +35,6 @@ Files: examples/benchmark-coercions.pl
  lib/Type/Tiny/Union.pm
  lib/Type/Utils.pm
  lib/Types/Standard.pm
- lib/Types/Standard/DeepCoercion.pm
  lib/Types/TypeTiny.pm
  t/00-compile.t
  t/01-api.t
@@ -129,10 +128,6 @@ Files: inc/Module/Install/TrustMetaYml.pm
 Copyright: This software is copyright (c) 2011-2012 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Test/Fatal.pm
-Copyright: Copyright 2013 Ricardo Signes.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: inc/Module/Install/Makefile.pm
 Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
 License: GPL-1.0+ or Artistic-1.0
@@ -141,31 +136,6 @@ Files: inc/Module/Install/Package.pm
 Copyright: Copyright (c) 2011. Ingy doet Net.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/YAML/Tiny.pm
-Copyright: Copyright 2006 - 2012 Adam Kennedy.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: MANIFEST.SKIP
-Copyright: Copyright 2013 Ingy döt Net.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: COPYRIGHT
-Copyright: None
-License: public-domain
-Comment: This file! Automatically generated.
-
-Files: inc/Module/Install/Base.pm
-Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Test/Requires.pm
-Copyright: Copyright 2013 MATSUNO Tokuhiro.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: .travis.yml
-Copyright: Unknown
-License: Unknown
-
 Files: inc/Try/Tiny.pm
 Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
@@ -173,6 +143,35 @@ License: GPL-1.0+ or Artistic-1.0
 Files: t/oo-classinsideout.t
 Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
+
+Files: MANIFEST.SKIP
+Copyright: Copyright 2013 Ingy döt Net.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Module/Install/Base.pm
+Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: .travis.yml
+Copyright: Unknown
+License: Unknown
+
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/YAML/Tiny.pm
+Copyright: Copyright 2006 - 2012 Adam Kennedy.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: COPYRIGHT
+Copyright: None
+License: public-domain
+Comment: This file! Automatically generated.
 
 License: Artistic-1.0
  This software is Copyright (c) 2013 by the copyright holder(s).

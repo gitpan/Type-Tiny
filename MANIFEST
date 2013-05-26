@@ -57,7 +57,6 @@ lib/Type/Tiny/Role.pm
 lib/Type/Tiny/Union.pm
 lib/Type/Utils.pm
 lib/Types/Standard.pm
-lib/Types/Standard/DeepCoercion.pm
 lib/Types/TypeTiny.pm
 LICENSE
 Makefile.PL
