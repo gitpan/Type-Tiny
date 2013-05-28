@@ -5,7 +5,7 @@ use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.005_08';
+our $VERSION   = '0.006';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -176,7 +176,7 @@ sub mkopt
 sub mkopt_hash
 {
 	my $in  = shift or return;
-	my %out = map @$_, mkopt($in);
+	my %out = map +($_->[0] => $_->[1]), @{ mkopt($in) };
 	\%out;
 }
 
