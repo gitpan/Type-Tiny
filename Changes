@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.005_07  2013-05-26
+
+ - (Addition) Add pure-Perl Mouse to examples/benchmark-constraints.pl.
+ - (Bugfix) Assertions using the assert_return pattern were triggering
+   FATAL warnings when inlined with Sub::Quote. Inlined assertions are now
+   prefixed with 'no warnings "void";'.
+
 0.005_06  2013-05-26
 
  - (Bugfix) Fix StrMatch to properly support regexps containing slashes.

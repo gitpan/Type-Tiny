@@ -16,20 +16,20 @@ Hash: SHA1
 
 SHA1 c1f1bc303033147118344945bdd39ca0d72ce513 .travis.yml
 SHA1 294505f858f11dd062e9916e3f50d88210a9ef54 CONTRIBUTING
-SHA1 774b85cf615a7d4c690503f1fd45931f5aecccdc COPYRIGHT
-SHA1 74063c086f650656e2d80b30fb014b094fb21988 CREDITS
-SHA1 63507539e84d0a0cb94d790d1537ea40eeae0383 Changes
+SHA1 52267e09b68d5c182ba5ac7047d245ff37b35621 COPYRIGHT
+SHA1 89ebb4bda55a3fde20ec6dadac1fe6fc779a60ad CREDITS
+SHA1 ceae8b9ad193d78740532e399acf628c01d00bc8 Changes
 SHA1 937d452c5c4069f4cda9ffaf45a33f1eb5f060e8 LICENSE
 SHA1 9fd2168da2114454b0dbdf4a17082692a613632e MANIFEST
-SHA1 efac12ffec3b85507098d179021e1dc079bd7dba META.ttl
-SHA1 cbef98bffd063b754717436153a0dd82078fadca META.yml
+SHA1 845f879d2db3593b55bbda8e6c608da18948029c META.ttl
+SHA1 f606be6628bc57f6685b5ea8c669a3f6e635ad85 META.yml
 SHA1 a78f1d9e29bd6a7b0d495196f14e9fe95300cf9a Makefile.PL
 SHA1 dd8c77fa8656e7fb7bdc0078ad3ff69c228d5453 NEWS
 SHA1 f29cdd8c4b445dd8436836faf23d46935b2be513 README
 SHA1 09d834823b28cafc3b8bb57b1f500ca48eb7730c TODO
 SHA1 611b4630e956a6a3894ada1ee26aef381e731d30 TODO.mm
 SHA1 899a0efab4b5096bb91eb6c95cd8b3cdd9c40f6c examples/benchmark-coercions.pl
-SHA1 005ee39c0a450050df1c865415b62ca2c4b7d41d examples/benchmark-constraints.pl
+SHA1 797286fcd93ea65440ba512e1b4076017e655020 examples/benchmark-constraints.pl
 SHA1 c6127806b4b8c68d728e6c51e345e46c7a2b56f7 examples/benchmark-mkopt.pl
 SHA1 7213f90d626849606a8cbc37fc17549728b01681 examples/benchmark-param-validation.pl
 SHA1 1ec446214f4926f76b14c1d7f098a6d977829229 examples/datetime-coercions.pl
@@ -54,22 +54,22 @@ SHA1 85872fcf275a7868f858ca6ccc0e15cdaff8f8ac inc/Test/Fatal.pm
 SHA1 95d4da14025622f3a45f5e9b75b7b6860148f415 inc/Test/Requires.pm
 SHA1 75dd349355aff420c46d9e37802e39712b6309c2 inc/Try/Tiny.pm
 SHA1 feb933cefe2e3762e8322bd6071a2499f3440da1 inc/YAML/Tiny.pm
-SHA1 c2811983382a234e6ea713eb9835b4b35c90bdf8 lib/Eval/TypeTiny.pm
-SHA1 2bed58eaa05fc615f805d6da05ac05e8fd7f7d63 lib/Exporter/TypeTiny.pm
-SHA1 3654dc040f121bf10843edf6c1fa8ecd4280c6be lib/Test/TypeTiny.pm
-SHA1 4dcb81cbc7ac361bf6ec1304304b77673ad3ad9f lib/Type/Coercion.pm
-SHA1 42a0b6353e7538ddd3160e9127e23849c2da7dd4 lib/Type/Coercion/Union.pm
-SHA1 6b7000a2863a4ac807e457b6e98e636af0cde343 lib/Type/Exception.pm
-SHA1 291c8115b335dd9b24397fc3923e90d511e8ad8e lib/Type/Exception/Assertion.pm
-SHA1 b742668587025734adc990026888c180247a423f lib/Type/Exception/Compilation.pm
-SHA1 1f6f1da505501f7de08d41e5867756a2fbd81272 lib/Type/Exception/WrongNumberOfParameters.pm
-SHA1 b386cc0afed794872d459fd68022572b7c4c6a10 lib/Type/Library.pm
-SHA1 b83c661d5eb82eb4abd80212373e29098fa7224c lib/Type/Params.pm
-SHA1 231b1873d329c082ef59ebd95daa5367fbcceb4e lib/Type/Tiny.pm
-SHA1 4273d21dd3bbfe0c0fd9a2c77c0bf5a8577bb55c lib/Type/Tiny/Class.pm
-SHA1 cc30487820d1631ed955ff7e29a40592ac62d74f lib/Type/Tiny/Duck.pm
-SHA1 b689b75bff0a6b54bdaf63f1a863d0777f7b055b lib/Type/Tiny/Enum.pm
-SHA1 9dedd9f8fefbd30dd2f99865247390e7f796cb33 lib/Type/Tiny/Intersection.pm
+SHA1 71cb6ad6548f4a8b4366d95b632b3617760d5b85 lib/Eval/TypeTiny.pm
+SHA1 1ee2345a5a158474f467bee7f3ffbb07919137e9 lib/Exporter/TypeTiny.pm
+SHA1 0efe3d8149094e0c6881958bd9a68f81f17ebcf2 lib/Test/TypeTiny.pm
+SHA1 ab1079121a7a0f08d1ed826b72ed4e2edfeac56b lib/Type/Coercion.pm
+SHA1 7060fac864ef278892aa5c4af5db687c427aa717 lib/Type/Coercion/Union.pm
+SHA1 471df9c205b5954644a7b4ba08136d269da38fa0 lib/Type/Exception.pm
+SHA1 0e20dc8452b640fc9b0aed03dd42d852c5f598cc lib/Type/Exception/Assertion.pm
+SHA1 31f2148fce253fe7831daff490de8dd50c88a692 lib/Type/Exception/Compilation.pm
+SHA1 6af062fa12e13a40febed9840353b6c6d8e2c400 lib/Type/Exception/WrongNumberOfParameters.pm
+SHA1 2daccf3ce219964a5517ab6a41f4c81ebc962180 lib/Type/Library.pm
+SHA1 0c17d9e327235a7b8ab12b3e879b0e1dc2d017e3 lib/Type/Params.pm
+SHA1 4d6f08e45a65c30478191d0a4d0545ec09f38af5 lib/Type/Tiny.pm
+SHA1 4514e490c3939ae67fbdea7b2f583d3bad9374df lib/Type/Tiny/Class.pm
+SHA1 2345fd9beaef9ce4cf0b12a609aba8976ef5c734 lib/Type/Tiny/Duck.pm
+SHA1 5dc295465281137eb157306fb6c357c65e79567e lib/Type/Tiny/Enum.pm
+SHA1 e0308181adb9b26959cfbadbabf31205b55cc8cf lib/Type/Tiny/Intersection.pm
 SHA1 8cbfe799c390a876dbe5f4e6fde7128fb2c67363 lib/Type/Tiny/Manual.pod
 SHA1 b5c8ce3095a92013e27cea222bc3c9e35815ddb3 lib/Type/Tiny/Manual/Coercions.pod
 SHA1 52671658cd69f68fa380e873f879334f90ad68f6 lib/Type/Tiny/Manual/Libraries.pod
@@ -78,12 +78,12 @@ SHA1 ad6141f935e68d1acaf00ef0d65c62d31c8648a1 lib/Type/Tiny/Manual/UsingWithMoo.
 SHA1 196f1a0139e81d34d3d0411dbbe0239c87006927 lib/Type/Tiny/Manual/UsingWithMoose.pod
 SHA1 11989313f5c5e341e9a8adf84c56e19e0c3ecb8e lib/Type/Tiny/Manual/UsingWithMouse.pod
 SHA1 6f275259876e125860b5c547b42f1aa43422096a lib/Type/Tiny/Manual/UsingWithOther.pod
-SHA1 8b8e4ac7499b19b9d080d0e2a1c53cdc71bb1d26 lib/Type/Tiny/Role.pm
-SHA1 61ac1ee35c3e30cdd96a559a0de2251be241c336 lib/Type/Tiny/Union.pm
-SHA1 2e903f4554631f4dad005d8c0b87d35afab28bef lib/Type/Utils.pm
-SHA1 0506923b2e71389a258df04ec53f33d6cdd4273a lib/Types/Standard.pm
-SHA1 b39151e11a1c9bcc1a60bf6c886d19ea36f1d126 lib/Types/TypeTiny.pm
-SHA1 bd4d1cfa45e1b17dda7fa105aceab58a777cb2ee meta/changes.pret
+SHA1 d3f58be76bbf64f16ecfc4681d3cfa57ab94e3db lib/Type/Tiny/Role.pm
+SHA1 7029804859b851992b7771643ecd41a9144297e8 lib/Type/Tiny/Union.pm
+SHA1 bc77aea87ff5545fa9009fec93ae41eaf119982f lib/Type/Utils.pm
+SHA1 36d865c326fd3506e1fde25df46e5f32fddbd707 lib/Types/Standard.pm
+SHA1 83d02f68ea6d7f174cc43bdec485e4e93ad7f625 lib/Types/TypeTiny.pm
+SHA1 82be748e198478f69c37d9602cf00fcdb6b6f85b meta/changes.pret
 SHA1 44c50e98f08e14dbcf92f35026920a99d2f4acd2 meta/doap.pret
 SHA1 9c6b28ee3ba91cf0dd44ee9cacdde6e12afe94e4 meta/makefile.pret
 SHA1 c0cca09b829308a85f7c87583d8ad4a082d5451b meta/people.pret
@@ -150,7 +150,7 @@ SHA1 c24de2f66695a2038341be5cea9bb8841d6ab1b4 t/validationclass.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlGig64ACgkQzr+BKGoqfTkXQwCdEGwIgQXbAgv9Pj2gEJsLXGr9
-8rEAnA+DaBori8LhQa02nr3VtYRVhbVq
-=OHx6
+iEYEARECAAYFAlGkYT8ACgkQzr+BKGoqfTnCOQCgms+Zb7o6oLt0818+XnLekupX
+fmIAoKTyPaxtcxgjvKco4uCgYzXshQer
+=wqv9
 -----END PGP SIGNATURE-----

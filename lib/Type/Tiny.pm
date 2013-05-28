@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.005_06';
+	$Type::Tiny::VERSION   = '0.005_07';
 }
 
 use Eval::TypeTiny ();
@@ -446,11 +446,11 @@ sub inline_assert
 	my $self = shift;
 	my $varname = $_[0];
 	my $code = sprintf(
-		q[%s ? %s : Type::Tiny::_failed_check(%d, %s, %s);],
+		q[do { no warnings "void"; %s ? %s : Type::Tiny::_failed_check(%d, %s, %s) };],
 		$self->inline_check(@_),
+		$varname,
 		$self->{uniq},
 		B::perlstring("$self"),
-		$varname,
 		$varname,
 	);
 	return $code;
