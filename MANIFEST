@@ -70,8 +70,9 @@ meta/people.pret
 meta/rights.pret
 NEWS
 README
-t/00-compile.t
-t/01-api.t
+t/00-begin.t
+t/01-compile.t
+t/02-api.t
 t/arithmetic.t
 t/coercion-automatic.t
 t/coercion-classy.t
