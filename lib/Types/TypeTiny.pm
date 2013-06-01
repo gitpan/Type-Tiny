@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.006';
+our $VERSION   = '0.007_01';
 
 use Scalar::Util qw< blessed >;
 
@@ -21,6 +21,20 @@ sub import
 	my $next = \&Exporter::TypeTiny::import;
 	*import = $next;
 	goto $next;
+}
+
+sub meta
+{
+	return $_[0];
+}
+
+sub get_type
+{
+	my $self = shift;
+	my $func = $self->can(@_) or return;
+	my $type = $func->();
+	return $type if blessed($type) && $type->isa("Type::Tiny");
+	return;
 }
 
 sub StringLike ()
@@ -272,6 +286,19 @@ constraint. If C<< $_ >> fails the type constraint, they may either return
 false, or die with a helpful error message.
 
 =end not_supported_yet
+
+=back
+
+=head2 Methods
+
+These are implemented so that C<< Types::TypeTiny->meta->get_type($foo) >>
+works, for rough compatibility with a real L<Type::Library> type library.
+
+=over
+
+=item C<< meta >>
+
+=item C<< get_type($name) >>
 
 =back
 
