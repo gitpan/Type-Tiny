@@ -6,6 +6,32 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_02  2013-06-04
+
+ - (Addition) New constraints added to Types::Standard: InstanceOf,
+   ConsumerOf, HasMethods and Enum.
+   ++$HAARG
+ - (Documentation) Improvements to Type::Tiny::Manual.
+ - (Documentation) Improvements to Type::Tiny::Manual::Params, including
+   rewritten manual processing section, and processing type constraints in
+   function signatures via Function::Parameters/Attribute::Constract.
+ - (Packaging) Test cases for usage with Function::Parameters.
+ - Allow constraint_generators (for parameterizable type constraints) to
+   return full Type::Tiny objects instead of plain coderefs.
+ - Drop use of Carp in Type::Parser.
+ - Type::Tiny::Class types now have an automatically calculated parent type
+   constraint based on @ISA.
+ - Type::Tiny::Duck types now have a parent type constraint of
+   Types::Standard::Object.
+ - Type::Tiny::Enum types now have a parent type constraint of
+   Types::Standard::Str.
+ - Type::Tiny::Intersection types now have an arbitrary parent type
+   constraint.
+ - Type::Tiny::Role types now have a parent type constraint of
+   Types::Standard::Object.
+ - Type::Tiny::Union types now have an automatically calculated parent type
+   constraint based on the most specific common parent type constraint.
+
 0.007_01  2013-06-01  # Happy birthday to me...
 
  - (Addition) Type::Parser.

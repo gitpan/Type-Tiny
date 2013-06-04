@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.007_01';
+	$Type::Tiny::Union::VERSION   = '0.007_02';
 }
 
 use Scalar::Util qw< blessed >;
@@ -84,6 +84,29 @@ sub _instantiate_moose_type
 	
 	require Moose::Meta::TypeConstraint::Union;
 	return "Moose::Meta::TypeConstraint::Union"->new(%opts, type_constraints => \@tc);
+}
+
+sub has_parent
+{
+	defined(shift->parent);
+}
+
+sub parent
+{
+	$_[0]{parent} ||= $_[0]->_build_parent;
+}
+
+sub _build_parent
+{
+	my $self = shift;
+	my ($first, @rest) = @$self;
+	
+	for my $parent ($first, $first->parents)
+	{
+		return $parent unless grep !$_->is_a_type_of($parent), @rest;
+	}
+	
+	return;
 }
 
 1;
