@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.007_02';
+	$Types::Standard::VERSION   = '0.007_03';
 }
 
 use base "Type::Library";
@@ -1032,7 +1032,7 @@ $lib->get_type("ArrayRef")->{coercion_generator} = sub
 	my $coercable_item = $param->coercion->_source_type_union;
 	my $C = "Type::Coercion"->new(type_constraint => $child);
 	
-	if ($param->coercion->can_be_inlined)
+	if ($param->coercion->can_be_inlined and $coercable_item->can_be_inlined)
 	{
 		$C->add_type_coercions($parent => Stringable {
 			my @code;
@@ -1073,7 +1073,7 @@ $lib->get_type("HashRef")->{coercion_generator} = sub
 	my $coercable_item = $param->coercion->_source_type_union;
 	my $C = "Type::Coercion"->new(type_constraint => $child);
 	
-	if ($param->coercion->can_be_inlined)
+	if ($param->coercion->can_be_inlined and $coercable_item->can_be_inlined)
 	{
 		$C->add_type_coercions($parent => Stringable {
 			my @code;
@@ -1114,7 +1114,7 @@ $lib->get_type("ScalarRef")->{coercion_generator} = sub
 	my $coercable_item = $param->coercion->_source_type_union;
 	my $C = "Type::Coercion"->new(type_constraint => $child);
 	
-	if ($param->coercion->can_be_inlined)
+	if ($param->coercion->can_be_inlined and $coercable_item->can_be_inlined)
 	{
 		$C->add_type_coercions($parent => Stringable {
 			my @code;
@@ -1157,7 +1157,9 @@ $lib->get_type("Map")->{coercion_generator} = sub
 	my $C = "Type::Coercion"->new(type_constraint => $child);
 	
 	if ((!$kparam->has_coercion or $kparam->coercion->can_be_inlined)
-	and (!$vparam->has_coercion or $vparam->coercion->can_be_inlined))
+	and (!$vparam->has_coercion or $vparam->coercion->can_be_inlined)
+	and $kcoercable_item->can_be_inlined
+	and $vcoercable_item->can_be_inlined)
 	{
 		$C->add_type_coercions($parent => Stringable {
 			my @code;
@@ -1215,6 +1217,8 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 	for my $tc (values %dict)
 	{
 		$all_inlinable = 0 if $tc->has_coercion && !$tc->can_be_inlined;
+		$all_inlinable = 0 if $tc->has_coercion && !$tc->coercion->can_be_inlined;
+		last if!$all_inlinable;
 	}
 
 	if ($all_inlinable)
@@ -1327,10 +1331,12 @@ $lib->get_type("Tuple")->{coercion_generator} = sub
 		$slurpy = pop(@tuple)->{slurpy};
 	}
 
-	my $all_inlinable = $slurpy ? ($slurpy->has_coercion && $slurpy->can_be_inlined) : 1;
-	for my $tc (@tuple)
+	my $all_inlinable = 1;
+	for my $tc (@tuple, ($slurpy ? $slurpy : ()))
 	{
 		$all_inlinable = 0 if $tc->has_coercion && !$tc->can_be_inlined;
+		$all_inlinable = 0 if $tc->has_coercion && !$tc->coercion->can_be_inlined;
+		last if!$all_inlinable;
 	}
 
 	if ($all_inlinable)

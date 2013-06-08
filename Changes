@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_03  2013-06-08
+
+ - (Bugfix) Inlining of certain deep Dict, Tuple and Map coercions was
+   broken, but Type::Params attempted to inline them anyway, leading to
+   death.
+   ++$DJERIUS
+ - (Documentation) Better document Type::Tiny's 'parents' method which
+   differs from the Moose method of the same name.
+
 0.007_02  2013-06-04
 
  - (Addition) New constraints added to Types::Standard: InstanceOf,

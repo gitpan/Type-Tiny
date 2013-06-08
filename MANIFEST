@@ -118,6 +118,7 @@ t/params-optional.t
 t/params-positional.t
 t/params-slurpy.t
 t/registry.t
+t/rt85911.t
 t/stdlib-inlined.t
 t/stdlib-optlist.t
 t/stdlib-overload.t
