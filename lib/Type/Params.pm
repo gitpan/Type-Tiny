@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.007_03';
+	$Type::Params::VERSION   = '0.007_04';
 }
 
 use B qw(perlstring);
@@ -204,6 +204,8 @@ sub compile
 	push @code, '@R;';
 	
 	my $source  = "sub { no warnings; ".join("\n", @code)." };";
+	
+	return $source if $options{want_source};
 	
 	return eval_closure(
 		source      => $source,

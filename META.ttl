@@ -8,345 +8,345 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-_:r1370709907r0 a dcs:Documentation ;
+_:r1370793196r0 a dcs:Documentation ;
 	rdfs:label "Beginnings of Type::Tiny::Manual." .
-_:r1370709907r1 a dcs:Bugfix ;
+_:r1370793196r1 a dcs:Bugfix ;
 	rdfs:label "Anchor enum regexps to beginning and end of string." .
-_:r1370709907r10 a dcs:Change ;
+_:r1370793196r10 a dcs:Change ;
 	rdfs:label "Use more unique stringification for %Moo::HandleMoose::TYPE_MAP keys." .
-_:r1370709907r11 a dcs:Change ;
+_:r1370793196r11 a dcs:Change ;
 	rdfs:label "Make sure Type::Standard's Moose-like built-ins get inflated to real Moose built-in types." .
-_:r1370709907r12 a dcs:Change ;
+_:r1370793196r12 a dcs:Change ;
 	rdfs:label "Create and use compiled coercions; somewhat faster." .
-_:r1370709907r13 a dcs:Addition ;
+_:r1370793196r13 a dcs:Addition ;
 	rdfs:label "Type::Tiny plus_coercions/minus_coercions/no_coercions methods for creating subtypes with different sets of coercions." .
-_:r1370709907r14 a dcs:Addition ;
+_:r1370793196r14 a dcs:Addition ;
 	rdfs:label "Type::Tiny equals/is_subtype_of/is_supertype_of/is_a_type_of methods for type constraint comparisons." .
-_:r1370709907r15 a dcs:Addition ;
+_:r1370793196r15 a dcs:Addition ;
 	rdfs:label "Finally implement Type::Coercion's has_coercion_for_type method." .
-_:r1370709907r16 a dcs:Change ;
+_:r1370793196r16 a dcs:Change ;
 	rdfs:label "Allow coercion code to be expressed as a string; quite a bit faster." .
-_:r1370709907r17 a dcs:Addition ;
+_:r1370793196r17 a dcs:Addition ;
 	rdfs:label "Factor out some functions from test suite into a new module: Test::TypeTiny." .
-_:r1370709907r18 a dcs:Packaging ;
+_:r1370793196r18 a dcs:Packaging ;
 	rdfs:label "Rearrange test suite slightly." .
-_:r1370709907r19 a dcs:Change ;
+_:r1370793196r19 a dcs:Change ;
 	rdfs:label "Rename Type::Standard module to Types::Standard." .
-_:r1370709907r2 a dcs:Addition ;
+_:r1370793196r2 a dcs:Addition ;
 	rdfs:label "StrMatch added to Type::Standard." .
-_:r1370709907r20 a dcs:Change ;
+_:r1370793196r20 a dcs:Change ;
 	rdfs:label "Types::TypeTiny bootstrapping library now takes care of vaious internal type checking requirements." .
-_:r1370709907r21 a dcs:Change ;
+_:r1370793196r21 a dcs:Change ;
 	rdfs:label "Sanity checks for type constraint names." .
-_:r1370709907r22 a dcs:Bugfix ;
+_:r1370793196r22 a dcs:Bugfix ;
 	rdfs:label "Fix is_parameterized." .
-_:r1370709907r23 a dcs:Change ;
+_:r1370793196r23 a dcs:Change ;
 	rdfs:label "Allow null type constraints with no parent type (e.g. 'Any' in Types::Standard) to be inlined." .
-_:r1370709907r24 a dcs:Change ;
+_:r1370793196r24 a dcs:Change ;
 	rdfs:label "Don't die with full stack trace." .
-_:r1370709907r25 a dcs:Bugfix ;
+_:r1370793196r25 a dcs:Bugfix ;
 	rdfs:label "Get Mouse coercions working." .
-_:r1370709907r26 a dcs:Addition ;
+_:r1370793196r26 a dcs:Addition ;
 	rdfs:label "Monkey patch Moose::Meta::TypeConstraint to be able to retrieve Type::Tiny constraints from inflated Moose constraints." .
-_:r1370709907r27 a dcs:Packaging ;
+_:r1370793196r27 a dcs:Packaging ;
 	rdfs:label "More test cases." .
-_:r1370709907r28 a dcs:Documentation ;
+_:r1370793196r28 a dcs:Documentation ;
 	rdfs:label "Improved documentation of parameterization attributes." .
-_:r1370709907r29 a dcs:Change ;
+_:r1370793196r29 a dcs:Change ;
 	rdfs:label "Footprint reduction: Type::Tiny, Type::Library and Type::Coerce no longer automatically load Types::Standard and Type::Utils." .
-_:r1370709907r3 a dcs:Addition ;
+_:r1370793196r3 a dcs:Addition ;
 	rdfs:label "use Type::Library -base" .
-_:r1370709907r30 a dcs:Change ;
-	rdfs:label "Footprint reduction: Type::Tiny and Type::Coercion no longer use if.pm." .
-_:r1370709907r31 a dcs:Change ;
-	rdfs:label "Footprint reduction: Type::Tiny no longer triggers Perl to load its Unicode tables (unless you create a type constraint with a non-ASCII type name)." .
-_:r1370709907r32 a dcs:Addition ;
-	rdfs:label "Type::Tiny now has an 'inline_assert' function." .
-_:r1370709907r33 a dcs:Documentation ;
-	rdfs:label "Using Type::Tiny with Moo added to manual." .
-_:r1370709907r34 a dcs:Documentation ;
-	rdfs:label "Section in manual comparing Type::Tiny with various other type library frameworks." .
-_:r1370709907r35 a dcs:Packaging ;
-	rdfs:label "More test cases." .
-_:r1370709907r36 a dcs:Documentation ;
-	rdfs:label "Document constructor for Type::Tiny::Class." .
-_:r1370709907r37 a dcs:Bugfix ;
-	rdfs:label "Fix inlining for Type::Tiny::Intersection." .
-_:r1370709907r38 a dcs:Bugfix ;
-	rdfs:label "Types within libraries, if accessed directly rather than exported, did not accept parameters." .
-_:r1370709907r39 a dcs:Addition ;
-	rdfs:label "Type::Coercion::Union - automatically handles coercion to union types." .
-_:r1370709907r4 a dcs:Addition ;
+_:r1370793196r4 a dcs:Addition ;
 	rdfs:label "use Type::Library -declare" .
-_:r1370709907r40 a dcs:Bugfix ;
-	rdfs:label "Fix inlining of certain conditionals into coercion code." .
-_:r1370709907r41 a dcs:Change ;
-	rdfs:label "Rewrite most of the functions exported by Type::Library-based type libraries to cope better with being used mid-list." .
-_:r1370709907r42 a dcs:Change ;
-	rdfs:label "Most parts of the API that accept Type::Tiny objects (e.g. Type::Utils::from()) now also accept Moose::Meta::TypeConstraint objects." .
-_:r1370709907r43 a dcs:Addition ;
-	rdfs:label "Types::TypeTiny::to_TypeTiny can be used to coerce a Moose type constraint object to Type::Tiny." .
-_:r1370709907r5 a dcs:Documentation ;
+_:r1370793196r5 a dcs:Documentation ;
 	rdfs:label "Document Type::Coercion's overloading." .
-_:r1370709907r6 a dcs:Change ;
+_:r1370793196r6 a dcs:Change ;
 	rdfs:label "Create and use compiled type constraint checks; much faster!" .
-_:r1370709907r7 a dcs:Addition ;
+_:r1370793196r7 a dcs:Addition ;
 	rdfs:label "Inlined type constraints for all of Type::Standard." .
-_:r1370709907r8 a dcs:Addition ;
+_:r1370793196r8 a dcs:Addition ;
 	rdfs:label "Test cases for ScalarRef[`a]." .
-_:r1370709907r9 a dcs:Bugfix ;
+_:r1370793196r9 a dcs:Bugfix ;
 	rdfs:label "Fix the crashing t/moo-inflation.t test case." .
-_:r1370709908r44 a dcs:Addition ;
+_:r1370793197r30 a dcs:Change ;
+	rdfs:label "Footprint reduction: Type::Tiny and Type::Coercion no longer use if.pm." .
+_:r1370793197r31 a dcs:Change ;
+	rdfs:label "Footprint reduction: Type::Tiny no longer triggers Perl to load its Unicode tables (unless you create a type constraint with a non-ASCII type name)." .
+_:r1370793197r32 a dcs:Addition ;
+	rdfs:label "Type::Tiny now has an 'inline_assert' function." .
+_:r1370793197r33 a dcs:Documentation ;
+	rdfs:label "Using Type::Tiny with Moo added to manual." .
+_:r1370793197r34 a dcs:Documentation ;
+	rdfs:label "Section in manual comparing Type::Tiny with various other type library frameworks." .
+_:r1370793197r35 a dcs:Packaging ;
+	rdfs:label "More test cases." .
+_:r1370793197r36 a dcs:Documentation ;
+	rdfs:label "Document constructor for Type::Tiny::Class." .
+_:r1370793197r37 a dcs:Bugfix ;
+	rdfs:label "Fix inlining for Type::Tiny::Intersection." .
+_:r1370793197r38 a dcs:Bugfix ;
+	rdfs:label "Types within libraries, if accessed directly rather than exported, did not accept parameters." .
+_:r1370793197r39 a dcs:Addition ;
+	rdfs:label "Type::Coercion::Union - automatically handles coercion to union types." .
+_:r1370793197r40 a dcs:Bugfix ;
+	rdfs:label "Fix inlining of certain conditionals into coercion code." .
+_:r1370793197r41 a dcs:Change ;
+	rdfs:label "Rewrite most of the functions exported by Type::Library-based type libraries to cope better with being used mid-list." .
+_:r1370793197r42 a dcs:Change ;
+	rdfs:label "Most parts of the API that accept Type::Tiny objects (e.g. Type::Utils::from()) now also accept Moose::Meta::TypeConstraint objects." .
+_:r1370793197r43 a dcs:Addition ;
+	rdfs:label "Types::TypeTiny::to_TypeTiny can be used to coerce a Moose type constraint object to Type::Tiny." .
+_:r1370793197r44 a dcs:Addition ;
 	rdfs:label "Bundle benchmarking scripts." .
-_:r1370709908r45 a dcs:Packaging ;
+_:r1370793197r45 a dcs:Packaging ;
 	rdfs:label "Tidy up the 'examples' directory." .
-_:r1370709908r46 a dcs:Packaging ;
+_:r1370793197r46 a dcs:Packaging ;
 	rdfs:label "When generating Moose/Mouse constraints from Type::Tiny objects, prefer to generate anonymous ones." .
-_:r1370709908r47 a dcs:Documentation ;
+_:r1370793197r47 a dcs:Documentation ;
 	rdfs:label "Fill in the Usage with Moose section of the fine manual." .
-_:r1370709908r48 a dcs:Change ;
+_:r1370793197r48 a dcs:Change ;
 	rdfs:label "Improvements to has_coercion_for_{type,value} from Type::Coercion." .
-_:r1370709908r49 a dcs:Bugfix ;
+_:r1370793197r49 a dcs:Bugfix ;
 	rdfs:label "Fix incorrect Test::Requires line in 'mouse-coercion.t'." .
-_:r1370709908r50 a dcs:Bugfix ;
+_:r1370793197r50 a dcs:Bugfix ;
 	rdfs:label "Fix prototype for Type::Utils::as." .
-_:r1370709908r51 a dcs:Change ;
+_:r1370793197r51 a dcs:Change ;
 	rdfs:label "No longer need to pass '-moose' parameter when importing a library into a Moose class; only Mouse needs that treatment now." .
-_:r1370709908r52 a dcs:Documentation ;
+_:r1370793197r52 a dcs:Documentation ;
 	rdfs:label "Fix minor typo." .
-_:r1370709908r53 a dcs:Documentation ;
+_:r1370793197r53 a dcs:Documentation ;
 	rdfs:label "Minor improvements." .
-_:r1370709908r54 a dcs:Bugfix ;
+_:r1370793197r54 a dcs:Bugfix ;
 	rdfs:label "Some inline code assumed that it would be compiled in a package that had 'blessed' imported." .
-_:r1370709908r55 a dcs:Bugfix ;
+_:r1370793197r55 a dcs:Bugfix ;
 	rdfs:label "Some inline code wasn't wrapped in parentheses." .
-_:r1370709908r56 a dcs:Addition ;
+_:r1370793197r56 a dcs:Addition ;
 	rdfs:label "More test cases for Optional[`a] within Dict[`a]." .
-_:r1370709908r57 a dcs:Change ;
+_:r1370793197r57 a dcs:Change ;
 	rdfs:label "Weaken the reference from a Moose::Meta::TypeConstraint object to its Type::Tiny origin." .
-_:r1370709908r58 a dcs:Change ;
+_:r1370793197r58 a dcs:Change ;
 	rdfs:label "Parameterized type constraints in Types::Standard now do some sanity checking on their arguments." .
-_:r1370709908r59 a dcs:Change ;
+_:r1370793197r59 a dcs:Change ;
 	rdfs:label "Improve test names generated by Test::TypeTiny; allow test scripts to provide test names." .
-_:r1370709908r60 a dcs:Documentation ;
+_:r1370793197r60 a dcs:Documentation ;
 	rdfs:label "Link from Test::TypeTiny to Test::Deep::Type." .
-_:r1370709908r61 a dcs:Change ;
+_:r1370793197r61 a dcs:Change ;
 	rdfs:label "Avoid unnecessarily regenerating parameterized type constraints." .
-_:r1370709908r62 a dcs:Change ;
+_:r1370793197r62 a dcs:Change ;
 	rdfs:label "Make Type::Tiny's has_coercion method more DWIM." .
-_:r1370709908r63 a dcs:Addition ;
+_:r1370793197r63 a dcs:Addition ;
 	rdfs:label "Chars and Bytes types added to Types::Standard." .
-_:r1370709908r64 a dcs:Bugfix ;
+_:r1370793197r64 a dcs:Bugfix ;
 	rdfs:label "Prevent warnings (about 'my $val' masking a previously declared variable) when several Str checks are being inlined in close proximity, such as Tuple[Str,Str]" .
-_:r1370709908r65 a dcs:Documentation ;
+_:r1370793197r65 a dcs:Documentation ;
 	rdfs:label "Link from Test::TypeTiny to Test::Deep::Type." .
-_:r1370709908r66 a dcs:Change ;
+_:r1370793197r66 a dcs:Change ;
 	rdfs:label "Allow a Type::Tiny object to \"freeze\" its coercions. This prevents a Type::Tiny object from becoming out of sync with its equivalent Mouse or Moose constraint objects." .
-_:r1370709908r67 a dcs:Addition ;
+_:r1370793197r67 a dcs:Addition ;
 	rdfs:label "Type::Library packages can now include \"standalone\" Type::Coercion objects, not attached to a type constraint. These can be exported on request." .
-_:r1370709908r68 a dcs:Addition ;
+_:r1370793197r68 a dcs:Addition ;
 	rdfs:label "Overload \"+\" operator for Type::Coercion and Type::Tiny allows coercions to be added to each other, and added to type constraints." .
-_:r1370709908r69 a dcs:Addition ;
+_:r1370793197r69 a dcs:Addition ;
 	rdfs:label "Build coercions automatically for certain type parameterized constraints. Say there's a Num->Int coercion defined; then we should be able to coerce ArrayRef[Num]->ArrayRef[Int]." .
-_:r1370709908r70 a dcs:Addition ;
+_:r1370793197r70 a dcs:Addition ;
 	rdfs:label "Allow subtypes to inherit coercions from their parent type constraint. (They do not by default.)" .
-_:r1370709909r71 a dcs:Documentation ;
+_:r1370793198r71 a dcs:Documentation ;
 	rdfs:label "Document how to process sub parameters with Type::Tiny, and point people towards Type::Params." .
-_:r1370709909r72 a dcs:Change ;
+_:r1370793198r72 a dcs:Change ;
 	rdfs:label "Avoid unnecessarily regenerating parameterized type constraints." .
-_:r1370709909r73 a dcs:Change ;
+_:r1370793198r73 a dcs:Change ;
 	rdfs:label "When inflating Moo type constraints to Moose, don't unnecessarily call 'moose_type' method." .
-_:r1370709909r74 a dcs:Change ;
+_:r1370793198r74 a dcs:Change ;
 	rdfs:label "Make Type::Tiny's has_coercion method more DWIM." .
-_:r1370709909r75 a dcs:Addition ;
+_:r1370793198r75 a dcs:Addition ;
 	rdfs:label "Add OptList data type to Types::Standard, plus MkOpt coercion." .
-_:r1370709909r76 a dcs:Change ;
+_:r1370793198r76 a dcs:Change ;
 	rdfs:label "Factor out the sub exporting code scattered around (in Type::Utils, Types::TypeTiny and Type::Library) into a single module, Exporter::TypeTiny." .
-_:r1370709909r77 a dcs:Addition ;
+_:r1370793198r77 a dcs:Addition ;
 	rdfs:label "Chars and Bytes types added to Types::Standard." .
-_:r1370709909r78 a dcs:Addition ;
+_:r1370793198r78 a dcs:Addition ;
 	rdfs:label "Allow coercions to accept parameters." .
-_:r1370709909r79 a dcs:Addition ;
+_:r1370793198r79 a dcs:Addition ;
 	rdfs:label "Encode, Decode, Join and Split coercions added to Types::Standard." .
-_:r1370709909r80 a dcs:Bugfix ;
+_:r1370793198r80 a dcs:Bugfix ;
 	rdfs:label "Prevent warnings (about 'my $val' masking a previously declared variable) when several Str checks are being inlined in close proximity, such as Tuple[Str,Str]" .
-_:r1370709909r81 a dcs:Addition ;
+_:r1370793198r81 a dcs:Addition ;
 	rdfs:label "Type::Tiny::Class now has a plus_constructors method." .
-_:r1370709909r82 a dcs:Documentation ;
+_:r1370793198r82 a dcs:Documentation ;
 	rdfs:label "Type::Tiny::Manual::Coercions." .
-_:r1370709909r83 a dcs:Documentation ;
+_:r1370793198r83 a dcs:Documentation ;
 	rdfs:label "Document Exporter::TypeTiny." .
-_:r1370709909r84 a dcs:Change ;
+_:r1370793198r84 a dcs:Change ;
 	rdfs:label "No longer need to add '-mouse' when importing types into Mouse libraries. (Same change as what we did for Moose in 0.000_11.)" .
-_:r1370709909r85 a dcs:Documentation ;
+_:r1370793198r85 a dcs:Documentation ;
 	rdfs:label "Add lots of stuff to Type::Tiny::Manual::UsingWithMouse." .
-_:r1370709909r86 a dcs:Documentation ;
+_:r1370793198r86 a dcs:Documentation ;
 	rdfs:label "Document deep coercions (feature added in 0.003_01)." .
-_:r1370709909r87 a dcs:Change ;
+_:r1370793198r87 a dcs:Change ;
 	rdfs:label "Add a bunch of stub methods to Type::Tiny and Type::Coercion in order to make it less necessary to inflate to Moose/Mouse meta objects." .
-_:r1370709909r88 a dcs:Change ;
+_:r1370793198r88 a dcs:Change ;
 	rdfs:label "Various minor changes to Exporter::TypeTiny to make it more Sub::Exporter compatible." .
-_:r1370709909r89 a dcs:Addition ;
+_:r1370793198r89 a dcs:Addition ;
 	rdfs:label "Types::TypeTiny::to_TypeTiny can now coerce from a Mouse::Meta::TypeConstraint." .
-_:r1370709909r90 a dcs:Documentation ;
+_:r1370793198r90 a dcs:Documentation ;
 	rdfs:label "Document usage with Class::InsideOut." .
-_:r1370709909r91 a dcs:Documentation ;
+_:r1370793198r91 a dcs:Documentation ;
 	rdfs:label "Minor improvements to manual." .
-_:r1370709909r92 a dcs:Change ;
+_:r1370793198r92 a dcs:Change ;
 	rdfs:label "ASCII-only strings are now accepted by the Chars constraint in Types::Standard." .
-_:r1370709909r93 a dcs:Documentation ;
-	rdfs:label "More Exporter::TypeTiny docs, including usage with Sub::Exporter::Lexical." .
-_:r1370709910r100 a dcs:Documentation ;
+_:r1370793199r100 a dcs:Documentation ;
 	rdfs:label "Improve Exporter::TypeTiny documentation." .
-_:r1370709910r101 a dcs:Documentation ;
+_:r1370793199r101 a dcs:Documentation ;
 	rdfs:label "Improve advice on inlining type constraints and coercions." .
-_:r1370709910r102 a dcs:Packaging ;
+_:r1370793199r102 a dcs:Packaging ;
 	rdfs:label "Bump version of Test::More dependency fom 0.88 to 0.96." .
-_:r1370709910r103 a dcs:Change ;
+_:r1370793199r103 a dcs:Change ;
 	rdfs:label "General code tidy-up." .
-_:r1370709910r104 a dcs:Addition ;
+_:r1370793199r104 a dcs:Addition ;
 	rdfs:label "Type::Tiny::SUPPORT_SMARTMATCH constant." .
-_:r1370709910r105 a dcs:Addition ;
+_:r1370793199r105 a dcs:Addition ;
 	rdfs:label "Much of the stringy eval stuff has been factored out to a new module: Eval::TypeTiny." .
-_:r1370709910r106 a dcs:Addition ;
+_:r1370793199r106 a dcs:Addition ;
 	rdfs:label "Bundle Type::Params, which had previously appeared on CPAN in a separate developer release." .
-_:r1370709910r107 a dcs:Addition ;
+_:r1370793199r107 a dcs:Addition ;
 	rdfs:label "Test cases for Eval::TypeTiny." .
-_:r1370709910r108 a dcs:Change ;
+_:r1370793199r108 a dcs:Change ;
 	rdfs:label "Allow people to use Carp::{confess,cluck,carp} with Type::Params validators; default is still croak." .
-_:r1370709910r109 a dcs:Change ;
+_:r1370793199r109 a dcs:Change ;
 	rdfs:label "Improved Type::Params documentation." .
-_:r1370709910r110 a dcs:Bugfix ;
+_:r1370793199r110 a dcs:Bugfix ;
 	rdfs:label "Sane behaviour for Types::Standard's 'slurpy' function when it appears mid-list." .
-_:r1370709910r111 a dcs:Bugfix ;
+_:r1370793199r111 a dcs:Bugfix ;
 	rdfs:label "Don't crash in old versions of Moose that have no Class::MOP::_definition_context() function." .
-_:r1370709910r112 a dcs:Change ;
+_:r1370793199r112 a dcs:Change ;
 	rdfs:label "Better documentation and tests of Moose/Mouse-compatible API." .
-_:r1370709910r113 a dcs:Change ;
+_:r1370793199r113 a dcs:Change ;
 	rdfs:label "BAIL_OUT in test suite if 00-compile.t or 01-api.t fail." .
-_:r1370709910r94 a dcs:Addition ;
-	rdfs:label "Test case using Exporter::TypeTiny with Sub::Exporter::Lexical." .
-_:r1370709910r95 a dcs:Change ;
-	rdfs:label "Type::Tiny, Type::Coercion and their subclasses no longer call Types::TypeTiny->import method." .
-_:r1370709910r96 a dcs:Change ;
-	rdfs:label "Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads Exporter::TypeTiny when Types::TypeTiny->import is first called." .
-_:r1370709910r97 a dcs:Documentation ;
-	rdfs:label "Document usage with Params::Check and Object::Accessor." .
-_:r1370709910r98 a dcs:Addition ;
-	rdfs:label "'Tied' type constraint added to Types::Standard." .
-_:r1370709910r99 a dcs:Change ;
-	rdfs:label "If Mouse is already in memory, Type::Tiny will use its super-fast XS subs to validate values when possible." .
-_:r1370709911r114 a dcs:Addition ;
+_:r1370793199r114 a dcs:Addition ;
 	rdfs:label "Improvements to to_TypeTiny function, including accepting Validation::Class::Simple objects." .
-_:r1370709911r115 a dcs:Change ;
+_:r1370793199r93 a dcs:Documentation ;
+	rdfs:label "More Exporter::TypeTiny docs, including usage with Sub::Exporter::Lexical." .
+_:r1370793199r94 a dcs:Addition ;
+	rdfs:label "Test case using Exporter::TypeTiny with Sub::Exporter::Lexical." .
+_:r1370793199r95 a dcs:Change ;
+	rdfs:label "Type::Tiny, Type::Coercion and their subclasses no longer call Types::TypeTiny->import method." .
+_:r1370793199r96 a dcs:Change ;
+	rdfs:label "Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads Exporter::TypeTiny when Types::TypeTiny->import is first called." .
+_:r1370793199r97 a dcs:Documentation ;
+	rdfs:label "Document usage with Params::Check and Object::Accessor." .
+_:r1370793199r98 a dcs:Addition ;
+	rdfs:label "'Tied' type constraint added to Types::Standard." .
+_:r1370793199r99 a dcs:Change ;
+	rdfs:label "If Mouse is already in memory, Type::Tiny will use its super-fast XS subs to validate values when possible." .
+_:r1370793200r115 a dcs:Change ;
 	rdfs:label "Rename Types::Standard::AutomaticCoercion -> Types::Standard::DeepCoercion." .
-_:r1370709911r116 a dcs:Change ;
+_:r1370793200r116 a dcs:Change ;
 	rdfs:label "Type::Params produces nicer error messages." .
-_:r1370709911r117 a dcs:Documentation ;
+_:r1370793200r117 a dcs:Documentation ;
 	rdfs:label "Document that Map[`k,`v] has a deep coercion." .
-_:r1370709911r118 a dcs:Documentation ;
+_:r1370793200r118 a dcs:Documentation ;
 	rdfs:label "Improve Type::Coercion documentation." .
-_:r1370709911r119 a dcs:Change ;
+_:r1370793200r119 a dcs:Change ;
 	rdfs:label "Minor updates to coderef overloading following Moo 1.002000 release." .
-_:r1370709911r120 a dcs:Change ;
+_:r1370793200r120 a dcs:Change ;
 	rdfs:label "Minor updates to to_TypeTiny following Validation::Class 7.900048 release." .
-_:r1370709911r121 a dcs:Bugfix ;
+_:r1370793200r121 a dcs:Bugfix ;
 	rdfs:label "Eval::Closure now strips line breaks and other unsavoury characters from descriptions." .
-_:r1370709911r122 a dcs:Bugfix ;
+_:r1370793200r122 a dcs:Bugfix ;
 	rdfs:label "Type::Library should require Perl 5.8.1, not 5.8.3." .
-_:r1370709911r123 a dcs:Addition ;
+_:r1370793200r123 a dcs:Addition ;
 	rdfs:label "ArrayLike type added to Types::TypeTiny." .
-_:r1370709911r124 a dcs:Addition ;
+_:r1370793200r124 a dcs:Addition ;
 	rdfs:label "Type::Registry." .
-_:r1370709911r125 a dcs:Change ;
+_:r1370793200r125 a dcs:Change ;
 	rdfs:label "Many error conditions now throw exception objects instead of string error messages." .
-_:r1370709911r126 a dcs:Removal ;
+_:r1370793200r126 a dcs:Removal ;
 	rdfs:label "Bytes and Chars type constraints removed from Types::Standard." .
-_:r1370709911r127 a dcs:Removal ;
+_:r1370793200r127 a dcs:Removal ;
 	rdfs:label "Decode and Encode coercions removed from Types::Standard." .
-_:r1370709911r128 a dcs:Change ;
+_:r1370793200r128 a dcs:Change ;
 	rdfs:label "All error conditions now throw exception objects instead of string error messages." .
-_:r1370709911r129 a dcs:Addition ;
+_:r1370793200r129 a dcs:Addition ;
 	rdfs:label "Deep explanations for Types::Standard::{Map,Maybe,Ref,Dict,Tuple} type constraint assertion failures." .
-_:r1370709911r130 a dcs:Change ;
+_:r1370793200r130 a dcs:Change ;
 	rdfs:label "Test::TypeTiny performs more thorough testing if EXTENDED_TESTING environment variable is set." .
-_:r1370709911r131 a dcs:Bugfix ;
+_:r1370793200r131 a dcs:Bugfix ;
 	rdfs:label "Fixed bug in non-inlined code for Types::Standard::MkOpt." .
-_:r1370709911r132 a dcs:Change ;
+_:r1370793200r132 a dcs:Change ;
 	rdfs:label "Improved deep explanations for Types::Standard::{ArrayRef,HashRef,ScalarRef}." .
-_:r1370709911r133 a dcs:Change ;
+_:r1370793200r133 a dcs:Change ;
 	rdfs:label "Throw exception if people attempt to set parent types for Type::Tiny::{Class,Role,Duck,Enum,Union,Intersection}." .
-_:r1370709911r134 a dcs:Addition ;
+_:r1370793200r134 a dcs:Addition ;
 	rdfs:label "Type::Exception::Compilation." .
-_:r1370709911r135 a dcs:Change ;
+_:r1370793200r135 a dcs:Change ;
 	rdfs:label "Allow the slurpy tail of a Types::Standard::Tuple to be a treated as a hashref rather than an arrayref." .
-_:r1370709911r136 a dcs:Change ;
+_:r1370793200r136 a dcs:Change ;
 	rdfs:label "Fix warnings under Perl 5.18." .
-_:r1370709911r137 a dcs:Update ;
+_:r1370793200r137 a dcs:Update ;
 	rdfs:label "Suggest newer version of Validation::Class." .
-_:r1370709911r138 a dcs:Addition ;
+_:r1370793200r138 a dcs:Addition ;
 	rdfs:label "Type::Tiny now has an assert_return method, which is used in most places in preference to assert_valid." .
-_:r1370709911r139 a dcs:Removal ;
+_:r1370793200r139 a dcs:Removal ;
 	rdfs:label "Removed Type::Registry from the release; it will return at a later date." .
-_:r1370709911r140 a dcs:Change ;
+_:r1370793201r140 a dcs:Change ;
 	rdfs:label "Fold Types::Standard::DeepCoercion into Types::Standard." .
-_:r1370709911r141 a dcs:Bugfix ;
+_:r1370793201r141 a dcs:Bugfix ;
 	rdfs:label "Fix StrMatch to properly support regexps containing slashes." .
-_:r1370709911r142 a dcs:Addition ;
+_:r1370793201r142 a dcs:Addition ;
 	rdfs:label "Add pure-Perl Mouse to examples/benchmark-constraints.pl." .
-_:r1370709911r143 a dcs:Bugfix ;
+_:r1370793201r143 a dcs:Bugfix ;
 	rdfs:label "Assertions using the assert_return pattern were triggering FATAL warnings when inlined with Sub::Quote. Inlined assertions are now prefixed with 'no warnings \"void\";'." .
-_:r1370709912r144 a dcs:Update ;
+_:r1370793201r144 a dcs:Update ;
 	rdfs:label "Use JSON::PP instead of JSON in test cases, because JSON::PP is a core module since Perl 5.14." .
-_:r1370709912r145 a dcs:Packaging ;
+_:r1370793201r145 a dcs:Packaging ;
 	rdfs:label "Rearrange test cases; add 00-begin.t." .
-_:r1370709912r146 a dcs:Packaging ;
+_:r1370793201r146 a dcs:Packaging ;
 	rdfs:label "Exporter::TypeTiny::mkopt_hash now works." .
-_:r1370709912r147 a dcs:Bugfix ;
+_:r1370793201r147 a dcs:Bugfix ;
 	rdfs:label "Fix $VERSION defined in Type::Library." .
-_:r1370709912r148 a dcs:Change ;
+_:r1370793201r148 a dcs:Change ;
 	rdfs:label "Re-introduce Type::Registry, with improved parsing thanks to Type::Parser." .
-_:r1370709912r149 a dcs:Addition ;
+_:r1370793201r149 a dcs:Addition ;
 	rdfs:label "Type::Parser." .
-_:r1370709912r150 a dcs:Addition ;
+_:r1370793201r150 a dcs:Addition ;
 	rdfs:label "Types::Standard now has LaxNum/StrictNum type constraints, and Num selects between them." .
-_:r1370709912r151 a dcs:Change ;
+_:r1370793201r151 a dcs:Change ;
 	rdfs:label "Implemented Types::TypeTiny->meta->get_type." .
-_:r1370709912r152 a dcs:Packaging ;
+_:r1370793201r152 a dcs:Packaging ;
 	rdfs:label "Generate README from Type::Tiny::Manual instead of Type::Tiny." .
-_:r1370709912r153 a dcs:Change ;
+_:r1370793202r153 a dcs:Change ;
 	rdfs:label "Drop use of Carp in Type::Parser." .
-_:r1370709912r154 a dcs:Documentation ;
+_:r1370793202r154 a dcs:Documentation ;
 	rdfs:label "Improvements to Type::Tiny::Manual." .
-_:r1370709912r155 a dcs:Documentation ;
+_:r1370793202r155 a dcs:Documentation ;
 	rdfs:label "Improvements to Type::Tiny::Manual::Params, including rewritten manual processing section, and processing type constraints in function signatures via Function::Parameters/Attribute::Constract." .
-_:r1370709912r156 a dcs:Packaging ;
+_:r1370793202r156 a dcs:Packaging ;
 	rdfs:label "Test cases for usage with Function::Parameters." .
-_:r1370709912r157 a dcs:Change ;
+_:r1370793202r157 a dcs:Change ;
 	rdfs:label "Allow constraint_generators (for parameterizable type constraints) to return full Type::Tiny objects instead of plain coderefs." .
-_:r1370709912r158 a dcs:Change ;
+_:r1370793202r158 a dcs:Change ;
 	rdfs:label "Type::Tiny::Duck types now have a parent type constraint of Types::Standard::Object." .
-_:r1370709912r159 a dcs:Change ;
+_:r1370793202r159 a dcs:Change ;
 	rdfs:label "Type::Tiny::Role types now have a parent type constraint of Types::Standard::Object." .
-_:r1370709912r160 a dcs:Change ;
+_:r1370793202r160 a dcs:Change ;
 	rdfs:label "Type::Tiny::Enum types now have a parent type constraint of Types::Standard::Str." .
-_:r1370709912r161 a dcs:Change ;
+_:r1370793202r161 a dcs:Change ;
 	rdfs:label "Type::Tiny::Class types now have an automatically calculated parent type constraint based on @ISA." .
-_:r1370709912r162 a dcs:Change ;
+_:r1370793202r162 a dcs:Change ;
 	rdfs:label "Type::Tiny::Union types now have an automatically calculated parent type constraint based on the most specific common parent type constraint." .
-_:r1370709912r163 a dcs:Change ;
+_:r1370793202r163 a dcs:Change ;
 	rdfs:label "Type::Tiny::Intersection types now have an arbitrary parent type constraint." .
-_:r1370709912r164 a dcs:Documentation ;
+_:r1370793202r164 a dcs:Documentation ;
 	rdfs:label "Better document Type::Tiny's 'parents' method which differs from the Moose method of the same name." .
-_:r1370709913r165 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/Type/Tiny.pm" ;
+_:r1370793203r165 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/Type/Tiny.pm" ;
 	<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#programmingLanguage> "Perl" ;
 	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject>, <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SourceCode> ;
 	rdfs:label "Type::Tiny" .
-_:r1370709913r166 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/Type/Tiny.pm" ;
+_:r1370793203r166 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/Type/Tiny.pm" ;
 	<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#programmingLanguage> "Perl" ;
 	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject>, <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SourceCode> ;
 	rdfs:label "Type::Tiny" .
-_:r1370709913r167 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/Type/Tiny/Manual.pod" ;
+_:r1370793203r167 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/Type/Tiny/Manual.pod" ;
 	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Document>, <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject> .
 [] <http://purl.org/dc/terms/license> <http://dev.perl.org/licenses/> ;
 	<http://purl.org/dc/terms/rightsHolder> cpan:tobyink ;
@@ -438,17 +438,17 @@ _:r1370709913r167 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#file
 	<http://purl.org/dc/terms/rightsHolder> cpan:ingy ;
 	<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "MANIFEST.SKIP" ;
 	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject> .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar0 dcs:item _:r1370709907r0, _:r1370709907r1, _:r1370709907r2, _:r1370709907r3, _:r1370709907r4 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar0 dcs:item _:r1370793196r0, _:r1370793196r1, _:r1370793196r2, _:r1370793196r3, _:r1370793196r4 ;
 	dcs:versus dist:v_0-000_01 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar1 dcs:item _:r1370709907r10, _:r1370709907r11, _:r1370709907r5, _:r1370709907r6, _:r1370709907r7, _:r1370709907r8, _:r1370709907r9 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar1 dcs:item _:r1370793196r10, _:r1370793196r11, _:r1370793196r5, _:r1370793196r6, _:r1370793196r7, _:r1370793196r8, _:r1370793196r9 ;
 	dcs:versus dist:v_0-000_02 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar10 dcs:item _:r1370709908r50, _:r1370709908r51 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar10 dcs:item _:r1370793197r50, _:r1370793197r51 ;
 	dcs:versus dist:v_0-000_10 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar11 dcs:item _:r1370709908r52 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar11 dcs:item _:r1370793197r52 ;
 	dcs:versus dist:v_0-000_11 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar12 dcs:item _:r1370709908r53, _:r1370709908r54, _:r1370709908r55, _:r1370709908r56, _:r1370709908r57, _:r1370709908r58, _:r1370709908r59 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar12 dcs:item _:r1370793197r53, _:r1370793197r54, _:r1370793197r55, _:r1370793197r56, _:r1370793197r57, _:r1370793197r58, _:r1370793197r59 ;
 	dcs:versus dist:v_0-000_12 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar13 dcs:item _:r1370709908r60, _:r1370709908r61, _:r1370709908r62, _:r1370709908r63, _:r1370709908r64, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar13 dcs:item _:r1370793197r60, _:r1370793197r61, _:r1370793197r62, _:r1370793197r63, _:r1370793197r64, [
 		dcs:fixes [
 			dbug:reporter cpan:bowtie
 		] ;
@@ -457,21 +457,21 @@ _:rbC63D425AD05A11E2B3A6B83FCB91025Ar13 dcs:item _:r1370709908r60, _:r1370709908
 		rdfs:label "Fix method conflicts when exporting type constraints to roles."
 	] ;
 	dcs:versus dist:v_0-001 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar16 dcs:item _:r1370709908r65, _:r1370709908r66, _:r1370709908r67, _:r1370709908r68, _:r1370709908r69, _:r1370709908r70 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar16 dcs:item _:r1370793197r65, _:r1370793197r66, _:r1370793197r67, _:r1370793197r68, _:r1370793197r69, _:r1370793197r70 ;
 	dcs:versus dist:v_0-001 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar17 dcs:item _:r1370709909r71, _:r1370709909r72 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar17 dcs:item _:r1370793198r71, _:r1370793198r72 ;
 	dcs:versus dist:v_0-003_01 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar18 dcs:item _:r1370709909r73, _:r1370709909r74, _:r1370709909r75 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar18 dcs:item _:r1370793198r73, _:r1370793198r74, _:r1370793198r75 ;
 	dcs:versus dist:v_0-003_02 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar19 dcs:item _:r1370709909r76 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar19 dcs:item _:r1370793198r76 ;
 	dcs:versus dist:v_0-003_03 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar2 dcs:item _:r1370709907r12, _:r1370709907r13, _:r1370709907r14, _:r1370709907r15, _:r1370709907r16 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar2 dcs:item _:r1370793196r12, _:r1370793196r13, _:r1370793196r14, _:r1370793196r15, _:r1370793196r16 ;
 	dcs:versus dist:v_0-000_03 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar20 dcs:item _:r1370709909r77, _:r1370709909r78, _:r1370709909r79, _:r1370709909r80, _:r1370709909r81, _:r1370709909r82, _:r1370709909r83 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar20 dcs:item _:r1370793198r77, _:r1370793198r78, _:r1370793198r79, _:r1370793198r80, _:r1370793198r81, _:r1370793198r82, _:r1370793198r83 ;
 	dcs:versus dist:v_0-003_04 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar21 dcs:item _:r1370709909r84, _:r1370709909r85, _:r1370709909r86, _:r1370709909r87, _:r1370709909r88, _:r1370709909r89 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar21 dcs:item _:r1370793198r84, _:r1370793198r85, _:r1370793198r86, _:r1370793198r87, _:r1370793198r88, _:r1370793198r89 ;
 	dcs:versus dist:v_0-003_05 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar22 dcs:item _:r1370709909r90, _:r1370709909r91, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar22 dcs:item _:r1370793198r90, _:r1370793198r91, [
 		dcs:fixes [
 			dbug:reporter cpan:bowtie
 		] ;
@@ -480,13 +480,13 @@ _:rbC63D425AD05A11E2B3A6B83FCB91025Ar22 dcs:item _:r1370709909r90, _:r1370709909
 		rdfs:label "Fix method conflicts when exporting type constraints to roles."
 	] ;
 	dcs:versus dist:v_0-003_06 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar25 dcs:item _:r1370709909r92, _:r1370709909r93, _:r1370709910r94, _:r1370709910r95, _:r1370709910r96 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar25 dcs:item _:r1370793198r92, _:r1370793199r93, _:r1370793199r94, _:r1370793199r95, _:r1370793199r96 ;
 	dcs:versus dist:v_0-003_07 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar26 dcs:item _:r1370709910r97, _:r1370709910r98, _:r1370709910r99 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar26 dcs:item _:r1370793199r97, _:r1370793199r98, _:r1370793199r99 ;
 	dcs:versus dist:v_0-003_08 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar27 dcs:item _:r1370709910r100, _:r1370709910r101, _:r1370709910r102, _:r1370709910r103, _:r1370709910r104, _:r1370709910r105, _:r1370709910r106 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar27 dcs:item _:r1370793199r100, _:r1370793199r101, _:r1370793199r102, _:r1370793199r103, _:r1370793199r104, _:r1370793199r105, _:r1370793199r106 ;
 	dcs:versus dist:v_0-003_09 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar28 dcs:item _:r1370709910r107, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar28 dcs:item _:r1370793199r107, [
 		dcs:thanks cpan:mmcleric ;
 		rdfs:label "Automatic coercion for parameterized Dict will no longer drop key/value pairs to force a coercion." ;
 		rdfs:seeAlso <http://play-perl.org/quest/51682ae05efa74c95c00001e>
@@ -496,29 +496,29 @@ _:rbC63D425AD05A11E2B3A6B83FCB91025Ar28 dcs:item _:r1370709910r107, [
 		rdfs:seeAlso <http://play-perl.org/quest/51682ae05efa74c95c00001e>
 	] ;
 	dcs:versus dist:v_0-003_10 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar3 dcs:item _:r1370709907r17, _:r1370709907r18, _:r1370709907r19, _:r1370709907r20, _:r1370709907r21, _:r1370709907r22, _:r1370709907r23, _:r1370709907r24, _:r1370709907r25 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar3 dcs:item _:r1370793196r17, _:r1370793196r18, _:r1370793196r19, _:r1370793196r20, _:r1370793196r21, _:r1370793196r22, _:r1370793196r23, _:r1370793196r24, _:r1370793196r25 ;
 	dcs:versus dist:v_0-000_04 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar31 dcs:item _:r1370709910r108, _:r1370709910r109, _:r1370709910r110, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar31 dcs:item _:r1370793199r108, _:r1370793199r109, _:r1370793199r110, [
 		dcs:thanks cpan:mmcleric ;
 		rdfs:label "Type::Params validators now explicitly check the number of arguments passed to them." ;
 		rdfs:seeAlso <http://play-perl.org/quest/517efcef53a418983f000012>
 	] ;
 	dcs:versus dist:v_0-003_11 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar33 dcs:item _:r1370709910r111, _:r1370709910r112, _:r1370709910r113, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar33 dcs:item _:r1370793199r111, _:r1370793199r112, _:r1370793199r113, [
 		dcs:blame cpan:djerius ;
 		rdfs:label "Fix typo in Type::Params documentation." ;
 		rdfs:seeAlso <https://bitbucket.org/tobyink/p5-type-tiny/pull-request/1/fix-typo-in-docs/diff>
 	] ;
 	dcs:versus dist:v_0-003_12 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar35 dcs:item _:r1370709911r114 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar35 dcs:item _:r1370793199r114 ;
 	dcs:versus dist:v_0-003_13 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar36 dcs:item _:r1370709911r115, _:r1370709911r116, _:r1370709911r117, _:r1370709911r118, _:r1370709911r119 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar36 dcs:item _:r1370793200r115, _:r1370793200r116, _:r1370793200r117, _:r1370793200r118, _:r1370793200r119 ;
 	dcs:versus dist:v_0-003_15 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar37 dcs:item _:r1370709911r120, _:r1370709911r121 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar37 dcs:item _:r1370793200r120, _:r1370793200r121 ;
 	dcs:versus dist:v_0-003_16 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar38 dcs:item _:r1370709911r122, _:r1370709911r123, _:r1370709911r124 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar38 dcs:item _:r1370793200r122, _:r1370793200r123, _:r1370793200r124 ;
 	dcs:versus dist:v_0-004 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar39 dcs:item [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar39 dcs:item [
 		dcs:blame cpan:mmcleric ;
 		a dcs:Documentation ;
 		rdfs:label "Fix a typo in declare_coercion in Type::Tiny::Manual::Coercions."
@@ -528,71 +528,83 @@ _:rbC63D425AD05A11E2B3A6B83FCB91025Ar39 dcs:item [
 		rdfs:label "Link to Type::Tiny::Manual::Libraries instead of non-existing Type::Tiny::Intro."
 	] ;
 	dcs:versus dist:v_0-005_01 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar4 dcs:item _:r1370709907r26, _:r1370709907r27, _:r1370709907r28, _:r1370709907r29, _:r1370709907r30, _:r1370709907r31, _:r1370709907r32, _:r1370709907r33, _:r1370709907r34, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar4 dcs:item _:r1370793196r26, _:r1370793196r27, _:r1370793196r28, _:r1370793196r29, _:r1370793197r30, _:r1370793197r31, _:r1370793197r32, _:r1370793197r33, _:r1370793197r34, [
 		dcs:thanks cpan:mstrout ;
 		a dcs:Addition ;
 		rdfs:label "In Moo, type assertions and coercions are now inlined."
 	] ;
 	dcs:versus dist:v_0-000_05 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar42 dcs:item _:r1370709911r125, _:r1370709911r126, _:r1370709911r127 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar42 dcs:item _:r1370793200r125, _:r1370793200r126, _:r1370793200r127 ;
 	dcs:versus dist:v_0-005_02 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar43 dcs:item _:r1370709911r128, _:r1370709911r129, _:r1370709911r130, _:r1370709911r131, _:r1370709911r132, _:r1370709911r133, _:r1370709911r134, _:r1370709911r135 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar43 dcs:item _:r1370793200r128, _:r1370793200r129, _:r1370793200r130, _:r1370793200r131, _:r1370793200r132, _:r1370793200r133, _:r1370793200r134, _:r1370793200r135 ;
 	dcs:versus dist:v_0-005_03 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar44 dcs:item _:r1370709911r136, _:r1370709911r137, _:r1370709911r138, _:r1370709911r139 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar44 dcs:item _:r1370793200r136, _:r1370793200r137, _:r1370793200r138, _:r1370793200r139 ;
 	dcs:versus dist:v_0-005_04 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar45 dcs:item _:r1370709911r140, _:r1370709911r141 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar45 dcs:item _:r1370793201r140, _:r1370793201r141 ;
 	dcs:versus dist:v_0-005_05 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar46 dcs:item _:r1370709911r142, _:r1370709911r143 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar46 dcs:item _:r1370793201r142, _:r1370793201r143 ;
 	dcs:versus dist:v_0-005_06 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar47 dcs:item _:r1370709912r144, _:r1370709912r145 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar47 dcs:item _:r1370793201r144, _:r1370793201r145 ;
 	dcs:versus dist:v_0-005_07 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar48 dcs:item _:r1370709912r146 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar48 dcs:item _:r1370793201r146 ;
 	dcs:versus dist:v_0-005_08 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar49 dcs:item _:r1370709912r147, _:r1370709912r148, _:r1370709912r149, _:r1370709912r150, _:r1370709912r151, _:r1370709912r152 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar49 dcs:item _:r1370793201r147, _:r1370793201r148, _:r1370793201r149, _:r1370793201r150, _:r1370793201r151, _:r1370793201r152 ;
 	dcs:versus dist:v_0-006 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar50 dcs:item _:r1370709912r153, _:r1370709912r154, _:r1370709912r155, _:r1370709912r156, _:r1370709912r157, _:r1370709912r158, _:r1370709912r159, _:r1370709912r160, _:r1370709912r161, _:r1370709912r162, _:r1370709912r163, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar50 dcs:item _:r1370793202r153, _:r1370793202r154, _:r1370793202r155, _:r1370793202r156, _:r1370793202r157, _:r1370793202r158, _:r1370793202r159, _:r1370793202r160, _:r1370793202r161, _:r1370793202r162, _:r1370793202r163, [
 		dcs:thanks cpan:haarg ;
 		a dcs:Addition ;
 		rdfs:label "New constraints added to Types::Standard: InstanceOf, ConsumerOf, HasMethods and Enum."
 	] ;
 	dcs:versus dist:v_0-007_01 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar52 dcs:item _:r1370709912r164, [
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar52 dcs:item _:r1370793202r164, [
 		dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/85911> ;
 		dcs:thanks cpan:djerius ;
 		a dcs:Bugfix ;
 		rdfs:label "Inlining of certain deep Dict, Tuple and Map coercions was broken, but Type::Params attempted to inline them anyway, leading to death."
 	] ;
 	dcs:versus dist:v_0-007_02 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar54 doap:browse <https://github.com/tobyink/p5-type-tiny> ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar54 dcs:item [
+		dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86001> ;
+		dcs:thanks cpan:djerius ;
+		a dcs:Bugfix ;
+		rdfs:label "The combination of Dict, Optional and coercions seems to have been broken in certain circumstances."
+	], [
+		dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/85895> ;
+		dcs:thanks cpan:mmcleric ;
+		a dcs:Bugfix ;
+		rdfs:label "Overloading of `$type eq $type` now works in Perl 5.8."
+	] ;
+	dcs:versus dist:v_0-007_03 .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar57 doap:browse <https://github.com/tobyink/p5-type-tiny> ;
 	a doap:GitRepository .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar55 rdfs:label "Moo" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar56 rdfs:label "Moose" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar57 rdfs:label "Mouse" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar58 rdfs:label "Type Constraint" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar59 rdfs:label "Type Coercion" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar6 dcs:item _:r1370709907r35, _:r1370709907r36, _:r1370709907r37, _:r1370709907r38, _:r1370709907r39, _:r1370709907r40 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar58 rdfs:label "Moo" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar59 rdfs:label "Moose" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar6 dcs:item _:r1370793197r35, _:r1370793197r36, _:r1370793197r37, _:r1370793197r38, _:r1370793197r39, _:r1370793197r40 ;
 	dcs:versus dist:v_0-000_06 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar60 rdfs:label "Type Library" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar61 rdfs:label "Schema" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar62 rdfs:label "Parameter Validation" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar63 rdfs:label "Parameter Checking" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar64 rdfs:label "Argument Validation" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar65 rdfs:label "Argument Checking" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar66 rdfs:label "Validation" .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar7 dcs:item _:r1370709907r41, _:r1370709907r42, _:r1370709907r43 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar60 rdfs:label "Mouse" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar61 rdfs:label "Type Constraint" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar62 rdfs:label "Type Coercion" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar63 rdfs:label "Type Library" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar64 rdfs:label "Schema" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar65 rdfs:label "Parameter Validation" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar66 rdfs:label "Parameter Checking" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar67 rdfs:label "Argument Validation" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar68 rdfs:label "Argument Checking" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar69 rdfs:label "Validation" .
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar7 dcs:item _:r1370793197r41, _:r1370793197r42, _:r1370793197r43 ;
 	dcs:versus dist:v_0-000_07 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar8 dcs:item _:r1370709908r44, _:r1370709908r45, _:r1370709908r46, _:r1370709908r47 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar8 dcs:item _:r1370793197r44, _:r1370793197r45, _:r1370793197r46, _:r1370793197r47 ;
 	dcs:versus dist:v_0-000_08 .
-_:rbC63D425AD05A11E2B3A6B83FCB91025Ar9 dcs:item _:r1370709908r48, _:r1370709908r49 ;
+_:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar9 dcs:item _:r1370793197r48, _:r1370793197r49 ;
 	dcs:versus dist:v_0-000_09 .
 <http://dev.perl.org/licenses/> <http://purl.org/dc/terms/title> "the same terms as the perl 5 programming language system itself" .
-dist:project cpant:perl_version_from _:r1370709913r165 ;
-	cpant:readme_from _:r1370709913r167 ;
+dist:project cpant:perl_version_from _:r1370793203r165 ;
+	cpant:readme_from _:r1370793203r167 ;
 	cpant:test_requires "Test::More 0.96"^^cpant:dsWithVersion ;
-	cpant:version_from _:r1370709913r166 ;
+	cpant:version_from _:r1370793203r166 ;
 	<http://purl.org/dc/terms/contributor> cpan:tobyink ;
 	doap:bug-database <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny> ;
-	doap:category _:rbC63D425AD05A11E2B3A6B83FCB91025Ar55, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar56, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar57, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar58, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar59, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar60, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar61, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar62, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar63, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar64, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar65, _:rbC63D425AD05A11E2B3A6B83FCB91025Ar66 ;
+	doap:category _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar58, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar59, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar60, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar61, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar62, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar63, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar64, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar65, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar66, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar67, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar68, _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar69 ;
 	doap:created "2013-03-23"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:developer cpan:tobyink ;
 	doap:download-page <https://metacpan.org/release/Type-Tiny> ;
@@ -601,8 +613,8 @@ dist:project cpant:perl_version_from _:r1370709913r165 ;
 	doap:maintainer cpan:tobyink ;
 	doap:name "Type-Tiny" ;
 	doap:programming-language "Perl" ;
-	doap:release dist:v_0-000_01, dist:v_0-000_02, dist:v_0-000_03, dist:v_0-000_04, dist:v_0-000_05, dist:v_0-000_06, dist:v_0-000_07, dist:v_0-000_08, dist:v_0-000_09, dist:v_0-000_10, dist:v_0-000_11, dist:v_0-000_12, dist:v_0-001, dist:v_0-002, dist:v_0-003_01, dist:v_0-003_02, dist:v_0-003_03, dist:v_0-003_04, dist:v_0-003_05, dist:v_0-003_06, dist:v_0-003_07, dist:v_0-003_08, dist:v_0-003_09, dist:v_0-003_10, dist:v_0-003_11, dist:v_0-003_12, dist:v_0-003_13, dist:v_0-003_14, dist:v_0-003_15, dist:v_0-003_16, dist:v_0-004, dist:v_0-005_01, dist:v_0-005_02, dist:v_0-005_03, dist:v_0-005_04, dist:v_0-005_05, dist:v_0-005_06, dist:v_0-005_07, dist:v_0-005_08, dist:v_0-006, dist:v_0-007_01, dist:v_0-007_02, dist:v_0-007_03 ;
-	doap:repository _:rbC63D425AD05A11E2B3A6B83FCB91025Ar54 ;
+	doap:release dist:v_0-000_01, dist:v_0-000_02, dist:v_0-000_03, dist:v_0-000_04, dist:v_0-000_05, dist:v_0-000_06, dist:v_0-000_07, dist:v_0-000_08, dist:v_0-000_09, dist:v_0-000_10, dist:v_0-000_11, dist:v_0-000_12, dist:v_0-001, dist:v_0-002, dist:v_0-003_01, dist:v_0-003_02, dist:v_0-003_03, dist:v_0-003_04, dist:v_0-003_05, dist:v_0-003_06, dist:v_0-003_07, dist:v_0-003_08, dist:v_0-003_09, dist:v_0-003_10, dist:v_0-003_11, dist:v_0-003_12, dist:v_0-003_13, dist:v_0-003_14, dist:v_0-003_15, dist:v_0-003_16, dist:v_0-004, dist:v_0-005_01, dist:v_0-005_02, dist:v_0-005_03, dist:v_0-005_04, dist:v_0-005_05, dist:v_0-005_06, dist:v_0-005_07, dist:v_0-005_08, dist:v_0-006, dist:v_0-007_01, dist:v_0-007_02, dist:v_0-007_03, dist:v_0-007_04 ;
+	doap:repository _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar57 ;
 	doap:shortdesc "tiny, yet Moo(se)-compatible type constraint" ;
 	a doap:Project .
 dist:v_0-000_01 dcs:released-by cpan:tobyink ;
@@ -612,84 +624,84 @@ dist:v_0-000_01 dcs:released-by cpan:tobyink ;
 	doap:revision "0.000_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version ;
 	rdfs:label "Developer preview" .
-dist:v_0-000_02 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar0 ;
+dist:v_0-000_02 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar0 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-02"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_02.tar.gz> ;
 	doap:revision "0.000_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_03 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar1 ;
+dist:v_0-000_03 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar1 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-03"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_03.tar.gz> ;
 	doap:revision "0.000_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_04 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar2 ;
+dist:v_0-000_04 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar2 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-03"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_04.tar.gz> ;
 	doap:revision "0.000_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_05 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar3 ;
+dist:v_0-000_05 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar3 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_05"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-04"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_05.tar.gz> ;
 	doap:revision "0.000_05"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_06 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar4 ;
+dist:v_0-000_06 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar4 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_06"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-05"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_06.tar.gz> ;
 	doap:revision "0.000_06"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_07 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar6 ;
+dist:v_0-000_07 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar6 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_07"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-06"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_07.tar.gz> ;
 	doap:revision "0.000_07"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_08 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar7 ;
+dist:v_0-000_08 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar7 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_08"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-07"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_08.tar.gz> ;
 	doap:revision "0.000_08"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_09 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar8 ;
+dist:v_0-000_09 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar8 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_09"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-08"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_09.tar.gz> ;
 	doap:revision "0.000_09"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_10 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar9 ;
+dist:v_0-000_10 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar9 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_10"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-09"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_10.tar.gz> ;
 	doap:revision "0.000_10"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_11 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar10 ;
+dist:v_0-000_11 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar10 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_11"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-11"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_11.tar.gz> ;
 	doap:revision "0.000_11"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-000_12 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar11 ;
+dist:v_0-000_12 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar11 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.000_12"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-12"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.000_12.tar.gz> ;
 	doap:revision "0.000_12"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-001 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar12 ;
+dist:v_0-001 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar12 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.001"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-15"^^<http://www.w3.org/2001/XMLSchema#date> ;
@@ -697,98 +709,98 @@ dist:v_0-001 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar12 ;
 	doap:revision "0.001"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a doap:Version ;
 	rdfs:label "First public release" .
-dist:v_0-002 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar13 ;
+dist:v_0-002 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar13 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.002"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.002.tar.gz> ;
 	doap:revision "0.002"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a doap:Version .
-dist:v_0-003_01 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar16 ;
+dist:v_0-003_01 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar16 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-16"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_01.tar.gz> ;
 	doap:revision "0.003_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_02 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar17 ;
+dist:v_0-003_02 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar17 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-16"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_02.tar.gz> ;
 	doap:revision "0.003_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_03 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar18 ;
+dist:v_0-003_03 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar18 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-17"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_03.tar.gz> ;
 	doap:revision "0.003_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_04 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar19 ;
+dist:v_0-003_04 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar19 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-18"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_04.tar.gz> ;
 	doap:revision "0.003_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_05 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar20 ;
+dist:v_0-003_05 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar20 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_05"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-19"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_05.tar.gz> ;
 	doap:revision "0.003_05"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_06 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar21 ;
+dist:v_0-003_06 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar21 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_06"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-25"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_06.tar.gz> ;
 	doap:revision "0.003_06"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_07 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar22 ;
+dist:v_0-003_07 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar22 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_07"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_07.tar.gz> ;
 	doap:revision "0.003_07"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_08 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar25 ;
+dist:v_0-003_08 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar25 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_08"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_08.tar.gz> ;
 	doap:revision "0.003_08"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_09 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar26 ;
+dist:v_0-003_09 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar26 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_09"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-28"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_09.tar.gz> ;
 	doap:revision "0.003_09"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_10 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar27 ;
+dist:v_0-003_10 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar27 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_10"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-29"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_10.tar.gz> ;
 	doap:revision "0.003_10"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_11 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar28 ;
+dist:v_0-003_11 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar28 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_11"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-04-30"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_11.tar.gz> ;
 	doap:revision "0.003_11"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_12 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar31 ;
+dist:v_0-003_12 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar31 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_12"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_12.tar.gz> ;
 	doap:revision "0.003_12"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_13 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar33 ;
+dist:v_0-003_13 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar33 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_13"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-03"^^<http://www.w3.org/2001/XMLSchema#date> ;
@@ -802,91 +814,91 @@ dist:v_0-003_14 dcs:released-by cpan:tobyink ;
 	doap:revision "0.003_14"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version ;
 	rdfs:comment "No functional changes." .
-dist:v_0-003_15 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar35 ;
+dist:v_0-003_15 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar35 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_15"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-03"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_15.tar.gz> ;
 	doap:revision "0.003_15"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-003_16 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar36 ;
+dist:v_0-003_16 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar36 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.003_16"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-05"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.003_16.tar.gz> ;
 	doap:revision "0.003_16"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-004 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar37 ;
+dist:v_0-004 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar37 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.004"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-06"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.004.tar.gz> ;
 	doap:revision "0.004"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a doap:Version .
-dist:v_0-005_01 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar38 ;
+dist:v_0-005_01 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar38 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-07"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_01.tar.gz> ;
 	doap:revision "0.005_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_02 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar39 ;
+dist:v_0-005_02 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar39 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-14"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_02.tar.gz> ;
 	doap:revision "0.005_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_03 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar42 ;
+dist:v_0-005_03 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar42 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-14"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_03.tar.gz> ;
 	doap:revision "0.005_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_04 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar43 ;
+dist:v_0-005_04 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar43 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-17"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_04.tar.gz> ;
 	doap:revision "0.005_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_05 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar44 ;
+dist:v_0-005_05 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar44 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_05"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-24"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_05.tar.gz> ;
 	doap:revision "0.005_05"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_06 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar45 ;
+dist:v_0-005_06 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar45 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_06"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_06.tar.gz> ;
 	doap:revision "0.005_06"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_07 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar46 ;
+dist:v_0-005_07 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar46 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_07"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-28"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_07.tar.gz> ;
 	doap:revision "0.005_07"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-005_08 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar47 ;
+dist:v_0-005_08 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar47 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.005_08"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-28"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.005_08.tar.gz> ;
 	doap:revision "0.005_08"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-006 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar48 ;
+dist:v_0-006 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar48 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.006"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-05-28"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.006.tar.gz> ;
 	doap:revision "0.006"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a doap:Version .
-dist:v_0-007_01 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar49 ;
+dist:v_0-007_01 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar49 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.007_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-06-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
@@ -894,19 +906,26 @@ dist:v_0-007_01 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar49 ;
 	doap:revision "0.007_01"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version ;
 	rdfs:label "Happy birthday to me..." .
-dist:v_0-007_02 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar50 ;
+dist:v_0-007_02 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar50 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.007_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-06-04"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.007_02.tar.gz> ;
 	doap:revision "0.007_02"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
-dist:v_0-007_03 dcs:changeset _:rbC63D425AD05A11E2B3A6B83FCB91025Ar52 ;
+dist:v_0-007_03 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar52 ;
 	dcs:released-by cpan:tobyink ;
 	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.007_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	<http://purl.org/dc/terms/issued> "2013-06-08"^^<http://www.w3.org/2001/XMLSchema#date> ;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.007_03.tar.gz> ;
 	doap:revision "0.007_03"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	a cpant:DeveloperRelease, doap:Version .
+dist:v_0-007_04 dcs:changeset _:rbB2BB7202D11C11E2BFFF3D5BCB91025Ar54 ;
+	dcs:released-by cpan:tobyink ;
+	<http://purl.org/dc/terms/identifier> "Type-Tiny-0.007_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	<http://purl.org/dc/terms/issued> "2013-06-09"^^<http://www.w3.org/2001/XMLSchema#date> ;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.007_04.tar.gz> ;
+	doap:revision "0.007_04"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	a cpant:DeveloperRelease, doap:Version .
 cpan:bowtie a foaf:Person ;
 	foaf:name "Kevin Dawson" ;
@@ -949,6 +968,12 @@ cpan:tokuhirom a foaf:Person ;
 	foaf:name "MATSUNO Tokuhiro" ;
 	foaf:nick "TOKUHIROM" ;
 	foaf:page <https://metacpan.org/author/TOKUHIROM> .
+<http://purl.org/NET/cpan-uri/rt/ticket/85895> dbug:id "85895"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=85895> ;
+	a dbug:Issue .
 <http://purl.org/NET/cpan-uri/rt/ticket/85911> dbug:id "85911"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=85911> ;
+	a dbug:Issue .
+<http://purl.org/NET/cpan-uri/rt/ticket/86001> dbug:id "86001"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=86001> ;
 	a dbug:Issue .

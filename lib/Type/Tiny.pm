@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.007_03';
+	$Type::Tiny::VERSION   = '0.007_04';
 }
 
 use Eval::TypeTiny ();
@@ -36,6 +36,7 @@ use overload
 	q(>)       => sub { my $m = $_[0]->can('is_subtype_of'); $m->(reverse _swap @_) },
 	q(<=)      => sub { my $m = $_[0]->can('is_a_type_of');  $m->(_swap @_) },
 	q(>=)      => sub { my $m = $_[0]->can('is_a_type_of');  $m->(reverse _swap @_) },
+	q(eq)      => sub { $_[2] ? ("$_[1]" eq "$_[0]") : ("$_[0]" eq "$_[1]") },
 	fallback   => 1,
 ;
 BEGIN {
