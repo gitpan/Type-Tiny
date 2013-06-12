@@ -38,6 +38,9 @@ SEE ALSO
     *   Processing arguments to subs - coerce and validate arguments to
         functions and methods.
 
+    *   Other modules using Type::Tiny in interesting ways: Type::Tie,
+        Scalar::Does...
+
 TYPE::TINY VERSUS X
   Specio
     Type::Tiny is similar in aim to Specio. The major differences are that
@@ -51,6 +54,16 @@ TYPE::TINY VERSUS X
 
   MooX::Types::MooseLike
     Type::Tiny is faster and supports coercions.
+
+  Scalar::Does
+    Scalar::Does is somewhat of a precursor to Type::Tiny, but has now been
+    rewritten to use Type::Tiny internally.
+
+    It gives you a "does($value, $type)" function that is roughly equivalent
+    to "$type->check($value)" except that $type may be one of a list of
+    pre-defined strings (instead of a Type::Tiny type constraint); or may be
+    a package name in which case it will be assumed to be a role and checked
+    with "$value->DOES($type)".
 
 BUGS
     Please report any bugs to

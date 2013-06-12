@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_05  2013-06-12
+
+ - (Addition) Add match_on_type and compile_match_on_type to Type::Utils.
+ - (Addition) Test cases for InstanceOf, ConsumerOf, HasMethods and Enum
+   types defined by Types::Standard.
+ - (Documentation) Mention Scalar::Does and Type::Tie in manual.
+ - (Documentation) Vastly improved documentation for Type::Utils.
+ - (Documentation) Vastly improved documentation for Types::Standard.
+ - Support '0' and '1' as shortcuts for Optional[Any] and Any in
+   Type::Params. (Not documented yet.)
+
 0.007_04  2013-06-09
 
  - (Bugfix) Overloading of `$type eq $type` now works in Perl 5.8.

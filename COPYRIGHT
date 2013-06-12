@@ -62,6 +62,7 @@ Files: examples/benchmark-coercions.pl
  t/library-is.t
  t/library-to.t
  t/library-types.t
+ t/match-on-type.t
  t/moo-coercion.t
  t/moo-inflation.t
  t/moo.t
@@ -84,6 +85,7 @@ Files: examples/benchmark-coercions.pl
  t/params-slurpy.t
  t/registry.t
  t/stdlib-inlined.t
+ t/stdlib-mxtmlb-alike.t
  t/stdlib-optlist.t
  t/stdlib-overload.t
  t/stdlib-strmatch.t
@@ -138,45 +140,45 @@ Files: t/rt85911.t
 Copyright: This software is copyright (c) 2013 by Diab Jerius.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/YAML/Tiny.pm
-Copyright: Copyright 2006 - 2012 Adam Kennedy.
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Module/Install/Makefile.pm
-Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: .travis.yml
-Copyright: Unknown
-License: Unknown
 
 Files: COPYRIGHT
 Copyright: None
 License: public-domain
 Comment: This file! Automatically generated.
 
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
+Files: .travis.yml
+Copyright: Unknown
+License: Unknown
+
+Files: inc/Module/Install/Package.pm
+Copyright: Copyright (c) 2011. Ingy doet Net.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Module/Install/Makefile.pm
+Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Test/Requires.pm
 Copyright: Copyright 2013 MATSUNO Tokuhiro.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Module/Install/Package.pm
-Copyright: Copyright (c) 2011. Ingy doet Net.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: t/oo-classinsideout.t
 Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Module/Install/Base.pm
-Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
+Files: inc/YAML/Tiny.pm
+Copyright: Copyright 2006 - 2012 Adam Kennedy.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Test/Fatal.pm
-Copyright: Copyright 2013 Ricardo Signes.
+Files: inc/Module/Install/Base.pm
+Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: MANIFEST.SKIP

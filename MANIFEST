@@ -96,6 +96,7 @@ t/library-assert.t
 t/library-is.t
 t/library-to.t
 t/library-types.t
+t/match-on-type.t
 t/moo-coercion.t
 t/moo-inflation.t
 t/moo.t
@@ -121,6 +122,7 @@ t/registry.t
 t/rt85911.t
 t/rt86004.t
 t/stdlib-inlined.t
+t/stdlib-mxtmlb-alike.t
 t/stdlib-optlist.t
 t/stdlib-overload.t
 t/stdlib-strmatch.t

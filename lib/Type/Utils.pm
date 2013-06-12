@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.007_04';
+	$Type::Utils::VERSION   = '0.007_05';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -14,7 +14,7 @@ sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 use Scalar::Util qw< blessed >;
 use Type::Library;
 use Type::Tiny;
-use Types::TypeTiny qw< TypeTiny to_TypeTiny HashLike >;
+use Types::TypeTiny qw< TypeTiny to_TypeTiny HashLike StringLike CodeLike >;
 
 our @EXPORT = qw<
 	extends declare as where message inline_as
@@ -22,7 +22,13 @@ our @EXPORT = qw<
 	coerce from via
 	declare_coercion to_type
 >;
-our @EXPORT_OK = (@EXPORT, qw< type subtype >);
+our @EXPORT_OK = (
+	@EXPORT,
+	qw<
+		type subtype
+		match_on_type compile_match_on_type
+	>,
+);
 
 use base qw< Exporter::TypeTiny >;
 
@@ -274,6 +280,114 @@ sub via (&;@)
 	return @_;
 }
 
+sub match_on_type
+{
+	my $value = shift;
+	
+	while (@_)
+	{
+		my ($type, $code);
+		if (@_ == 1)
+		{
+			require Types::Standard;
+			($type, $code) = (Types::Standard::Any(), shift);
+		}
+		else
+		{
+			($type, $code) = splice(@_, 0, 2);
+			TypeTiny->($type);
+		}
+		
+		$type->check($value) or next;
+		
+		if (StringLike->check($code))
+		{
+			local $_ = $value;
+			if (wantarray) {
+				my @r = eval "$code";
+				die $@ if $@;
+				return @r;
+			}
+			if (defined wantarray) {
+				my $r = eval "$code";
+				die $@ if $@;
+				return $r;
+			}
+			eval "$code";
+			die $@ if $@;
+			return;
+		}
+		else
+		{
+			CodeLike->($code);
+			local $_ = $value;
+			return $code->($value);
+		}
+	}
+	
+	_croak("No cases matched for %s", Type::Tiny::_dd($value));
+}
+
+sub compile_match_on_type
+{
+	my @code = 'sub {';
+	my @checks;
+	my @actions;
+	
+	my $els = '';
+	
+	while (@_)
+	{
+		my ($type, $code);
+		if (@_ == 1)
+		{
+			require Types::Standard;
+			($type, $code) = (Types::Standard::Any(), shift);
+		}
+		else
+		{
+			($type, $code) = splice(@_, 0, 2);
+			TypeTiny->($type);
+		}
+		
+		if ($type->can_be_inlined)
+		{
+			push @code, sprintf('%sif (%s)', $els, $type->inline_check('$_[0]'));
+		}
+		else
+		{
+			push @checks, $type;
+			push @code, sprintf('%sif ($checks[%d]->check($_[0]))', $els, $#checks);
+		}
+		
+		$els = 'els';
+		
+		if (StringLike->check($code))
+		{
+			push @code, sprintf('  { local $_ = $_[0]; %s }', $code);
+		}
+		else
+		{
+			CodeLike->($code);
+			push @actions, $code;
+			push @code, sprintf('  { local $_ = $_[0]; $actions[%d]->(@_) }', $#actions);
+		}
+	}
+	
+	push @code, 'else', '  { Type::Util::_croak("No cases matched for %s", Type::Tiny::_dd($_[0])) }';
+	
+	push @code, '}';  # /sub
+	
+	require Eval::TypeTiny;
+	return Eval::TypeTiny::eval_closure(
+		source      => \@code,
+		environment => {
+			'@actions' => \@actions,
+			'@checks'  => \@checks,
+		},
+	);
+}
+
 1;
 
 __END__
@@ -319,43 +433,163 @@ L<Moose::Util::TypeConstraints>.
 
 =item C<< subtype %options >>
 
+Declare a named or anonymous type constraint which is descended from an
+existing type constraint. Use C<as> and C<where> to specify the parent
+type and refine its definition.
+
+Actually, you should use C<declare> instead (see below).
+
+If the caller package inherits from L<Type::Library> then any non-anonymous
+types declared in the package will be automatically installed into the
+library.
+
 =item C<< type $name, %options >>
 
 =item C<< type %options >>
 
+Declare a named or anonymous type constraint which is not descended from
+an existing type constraint. Use C<where> to provide a coderef that
+constrains values.
+
+Actually, you should use C<declare> instead (see below).
+
+If the caller package inherits from L<Type::Library> then any non-anonymous
+types declared in the package will be automatically installed into the
+library.
+
 =item C<< as $parent >>
+
+Used with C<declare> (and C<subtype> which is just an alias) to specify
+a parent type constraint:
+
+   declare EvenInt, as Int, where { $_ % 2 == 0 };
 
 =item C<< where { BLOCK } >>
 
+Used with C<declare> (and C<subtype> which is just an alias) to provide
+the constraint coderef:
+
+   declare EvenInt, as Int, where { $_ % 2 == 0 };
+
+The coderef operates on C<< $_ >>, which is the value being tested.
+
 =item C<< message { BLOCK } >>
 
+Generate a custom error message when a value fails validation.
+
+   declare EvenInt,
+      as Int,
+      where { $_ % 2 == 0 },
+      message {
+         if (Int->check($_))
+            { "$_ is an integer, but not even" }
+         else
+            { "$_ is not an integer" }
+      };
+
 =item C<< inline_as { BLOCK } >>
+
+Generate a string of Perl code that can be used to inline the type check into
+other functions. If your type check is being used within a L<Moose> or L<Moo>
+constructor or accessor methods, or used by L<Type::Params>, this can lead to
+significant performance improvements.
+
+   declare EvenInt,
+      as Int,
+      where { $_ % 2 == 0 },
+      inline_as {
+         my ($constraint, $varname) = @_;
+         my $perlcode = 
+            $constraint->parent->inline_check($varname)
+            . "&& ($varname % 2 == 0)";
+         return $perlcode;
+      };
+   
+   warn EvenInt->inline_check('$xxx');  # demonstration
 
 =item C<< class_type $name, { class => $package, %options } >>
 
 =item C<< class_type { class => $package, %options } >>
 
+Shortcut for declaring a L<Type::Tiny::Class> type constraint.
+
 =item C<< role_type $name, { role => $package, %options } >>
 
 =item C<< role_type { role => $package, %options } >>
+
+Shortcut for declaring a L<Type::Tiny::Role> type constraint.
 
 =item C<< duck_type $name, \@methods >>
 
 =item C<< duck_type \@methods >>
 
+Shortcut for declaring a L<Type::Tiny::Duck> type constraint.
+
 =item C<< union $name, \@constraints >>
 
 =item C<< union \@constraints >>
+
+Shortcut for declaring a L<Type::Tiny::Union> type constraint.
 
 =item C<< enum $name, \@values >>
 
 =item C<< enum \@values >>
 
+Shortcut for declaring a L<Type::Tiny::Enum> type constraint.
+
 =item C<< coerce $target, @coercions >>
+
+Add coercions to the target type constraint. The list of coercions is a
+list of type constraint, conversion code pairs. Conversion code can be
+either a string of Perl code or a coderef; in either case the value to
+be converted is C<< $_ >>.
 
 =item C<< from $source >>
 
+Sugar to specify a type constraint in a list of coercions:
+
+   coerce EvenInt, from Int, via { $_ * 2 };  # As a coderef...
+   coerce EvenInt, from Int, q { $_ * 2 };    # or as a string!
+
 =item C<< via { BLOCK } >>
+
+Sugar to specify a coderef in a list of coercions.
+
+=item C<< match_on_type $value => ($type => \&action, ..., \&default?) >>
+
+Something like a C<switch>/C<case> or C<given>/C<when> construct. Dispatches
+along different code paths depending on the type of the incoming value.
+Example blatantly stolen from the Moose documentation:
+
+   sub to_json
+   {
+      my $value = shift;
+      
+      return match_on_type $value => (
+         HashRef() => sub {
+            my $hash = shift;
+            '{ '
+               . (
+               join ", " =>
+               map { '"' . $_ . '" : ' . to_json( $hash->{$_} ) }
+               sort keys %$hash
+            ) . ' }';
+         },
+         ArrayRef() => sub {
+            my $array = shift;
+            '[ '.( join ", " => map { to_json($_) } @$array ).' ]';
+         },
+         Num()   => q {$_},
+         Str()   => q { '"' . $_ . '"' },
+         Undef() => q {'null'},
+         => sub { die "$_ is not acceptable json type" },
+      );
+   }
+
+Note that unlike Moose, code can be specified as a string instead of a
+coderef. (e.g. for C<Num>, C<Str> and C<Undef> above.)
+
+For improved performance, try C<compile_match_on_type>.
 
 =back
 
@@ -417,12 +651,44 @@ it will coerce to - this allows it to skip coercion when no coercion is
 needed (e.g. avoiding coercing C<< [] >> to C<< [ [] ] >>) and allows
 C<assert_coerce> to work properly.
 
+=item C<< my $coderef = compile_match_on_type($type => \&action, ..., \&default?) >>
+
+Compile a C<match_on_type> block into a coderef. The following JSON
+converter is about two orders of magnitude faster than the previous
+example:
+
+   sub to_json;
+   *to_json = compile_match_on_type(
+      HashRef() => sub {
+         my $hash = shift;
+         '{ '
+            . (
+            join ", " =>
+            map { '"' . $_ . '" : ' . to_json( $hash->{$_} ) }
+            sort keys %$hash
+         ) . ' }';
+      },
+      ArrayRef() => sub {
+         my $array = shift;
+         '[ '.( join ", " => map { to_json($_) } @$array ).' ]';
+      },
+      Num()   => q {$_},
+      Str()   => q { '"' . $_ . '"' },
+      Undef() => q {'null'},
+      => sub { die "$_ is not acceptable json type" },
+   );
+
+Remember to store the coderef somewhere fairly permanent so that you
+don't compile it over and over. C<state> variables (in Perl >= 5.10)
+are good for this. (Same sort of idea as L<Type::Params>.)
+
 =back
 
 =head1 EXPORT
 
 By default, all of the functions documented above are exported, except
-C<subtype> and C<type> (prefer C<declare> instead).
+C<subtype> and C<type> (prefer C<declare> instead), and C<match_on_type>
+and C<compile_match_on_type>.
 
 This module uses L<Exporter::TypeTiny>; see the documentation of that module
 for tips and tricks importing from Type::Utils.

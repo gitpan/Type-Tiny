@@ -57,6 +57,10 @@ Type::Tiny and friends don't need to be used within an OO framework. See L<FreeM
 
 L<Processing arguments to subs|Type::Tiny::Manual::Params> - coerce and validate arguments to functions and methods.
 
+=item *
+
+Other modules using Type::Tiny in interesting ways: L<Type::Tie>, L<Scalar::Does>...
+
 =back
 
 =head1 TYPE::TINY VERSUS X
@@ -76,6 +80,17 @@ use Type::Tiny pretty easily.
 =head2 MooX::Types::MooseLike
 
 Type::Tiny is faster and supports coercions.
+
+=head2 Scalar::Does
+
+L<Scalar::Does> is somewhat of a precursor to Type::Tiny, but has now been
+rewritten to use Type::Tiny internally.
+
+It gives you a C<< does($value, $type) >> function that is roughly equivalent
+to C<< $type->check($value) >> except that C<< $type >> may be one of a list
+of pre-defined strings (instead of a Type::Tiny type constraint); or may be
+a package name in which case it will be assumed to be a role and checked with
+C<< $value->DOES($type) >>.
 
 =head1 BUGS
 
