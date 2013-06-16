@@ -85,6 +85,7 @@ t/coercion-union.t
 t/coercion.t
 t/coercions-parameterized.t
 t/eval.t
+t/exceptions-stack.t
 t/exceptions.t
 t/exporter-installer.t
 t/exporter-roleconflict.t
@@ -98,6 +99,7 @@ t/library-to.t
 t/library-types.t
 t/match-on-type.t
 t/moo-coercion.t
+t/moo-exceptions.t
 t/moo-inflation.t
 t/moo.t
 t/moose-autott.t

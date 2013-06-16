@@ -6,6 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_06  2013-06-16
+
+ - (Addition) Type::Exception is now capable of supplying stack traces
+   (requires Devel::StackTrace).
+ - (Documentation) Document the evaluation environment used by
+   Eval::TypeTiny.
+ - (Documentation) Rearranged documentation for Type::Utils, avoiding
+   previous split into Moose-like and non-Moose-like functions.
+ - Better prototypes (was `;@`, now `;$`) for parameterizable type
+   'constants' exported by type libraries.
+   ++$MSTROUT
+ - Exceptions thrown for Moo isa/coerce now indicate which attribute was
+   involved.
+ - Type::Utils no longer exports 'extends' by default!!
+
 0.007_05  2013-06-12
 
  - (Addition) Add match_on_type and compile_match_on_type to Type::Utils.
