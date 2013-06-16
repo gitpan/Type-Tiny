@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_07  2013-06-16
+
+ - (Bugfix) Partly roll back prototype changes. Now we use `;$` for Perl
+   since 5.14, but `;@`, for older Perls that don't support `;$` so well.
+
 0.007_06  2013-06-16
 
  - (Addition) Type::Exception is now capable of supplying stack traces
