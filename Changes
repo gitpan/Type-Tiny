@@ -6,6 +6,12 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_08  2013-06-17
+
+ - (Bugfix) Fix problem with interaction between constraints, coercions,
+   and Moose classes that inherit from Moo classes.
+   ++$PJFL
+
 0.007_07  2013-06-16
 
  - (Bugfix) Partly roll back prototype changes. Now we use `;$` for Perl

@@ -123,6 +123,7 @@ t/params-slurpy.t
 t/registry.t
 t/rt85911.t
 t/rt86004.t
+t/rt86172.t
 t/stdlib-inlined.t
 t/stdlib-mxtmlb-alike.t
 t/stdlib-optlist.t
