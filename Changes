@@ -6,10 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_09  2013-06-18
+
+ - (Bugfix) Fix problems inlining Dict deep coercions where the target
+   constraint could not be inlined.
+   Fixes RT#86233
+   ++$MMCLERIC
+ - (Bugfix) Fix unintuitive Dict deep coercions.
+   Fixes RT#86239
+   ++$MMCLERIC
+
 0.007_08  2013-06-17
 
  - (Bugfix) Fix problem with interaction between constraints, coercions,
    and Moose classes that inherit from Moo classes.
+   Fixes RT#86172
    ++$PJFL
 
 0.007_07  2013-06-16
@@ -46,9 +57,11 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 0.007_04  2013-06-09
 
  - (Bugfix) Overloading of `$type eq $type` now works in Perl 5.8.
+   Fixes RT#85895
    ++$MMCLERIC
  - (Bugfix) The combination of Dict, Optional and coercions seems to have
    been broken in certain circumstances.
+   Fixes RT#86001
    ++$DJERIUS
 
 0.007_03  2013-06-08
@@ -56,6 +69,7 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
  - (Bugfix) Inlining of certain deep Dict, Tuple and Map coercions was
    broken, but Type::Params attempted to inline them anyway, leading to
    death.
+   Fixes RT#85911
    ++$DJERIUS
  - (Documentation) Better document Type::Tiny's 'parents' method which
    differs from the Moose method of the same name.

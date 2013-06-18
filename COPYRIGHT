@@ -132,54 +132,51 @@ Files: inc/Module/Install.pm
 Copyright: Copyright 2002 - 2012 Brian Ingerson, Audrey Tang and Adam Kennedy.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Module/Install/TrustMetaYml.pm
- inc/Module/Package/Dist/RDF.pm
-Copyright: This software is copyright (c) 2011-2012 by Toby Inkster.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: t/rt85911.t
  t/rt86004.t
 Copyright: This software is copyright (c) 2013 by Diab Jerius.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Module/Install/Package.pm
-Copyright: Copyright (c) 2011. Ingy doet Net.
+Files: t/rt86233.t
+ t/rt86239.t
+Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: t/oo-classinsideout.t
-Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
+Files: inc/Module/Install/TrustMetaYml.pm
+ inc/Module/Package/Dist/RDF.pm
+Copyright: This software is copyright (c) 2011-2012 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: t/rt86172.t
 Copyright: This software is copyright (c) 2013 by Peter Flanigan.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Test/Requires.pm
-Copyright: Copyright 2013 MATSUNO Tokuhiro.
+Files: .travis.yml
+Copyright: Unknown
+License: Unknown
+
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/YAML/Tiny.pm
+Copyright: Copyright 2006 - 2012 Adam Kennedy.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/oo-classinsideout.t
+Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Module/Install/Makefile.pm
 Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: .travis.yml
-Copyright: Unknown
-License: Unknown
-
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Module/Install/Base.pm
-Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: MANIFEST.SKIP
-Copyright: Copyright 2013 Ingy döt Net.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/YAML/Tiny.pm
-Copyright: Copyright 2006 - 2012 Adam Kennedy.
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: COPYRIGHT
@@ -187,8 +184,16 @@ Copyright: None
 License: public-domain
 Comment: This file! Automatically generated.
 
-Files: inc/Test/Fatal.pm
-Copyright: Copyright 2013 Ricardo Signes.
+Files: inc/Module/Install/Base.pm
+Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Module/Install/Package.pm
+Copyright: Copyright (c) 2011. Ingy doet Net.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: MANIFEST.SKIP
+Copyright: Copyright 2013 Ingy döt Net.
 License: GPL-1.0+ or Artistic-1.0
 
 License: Artistic-1.0

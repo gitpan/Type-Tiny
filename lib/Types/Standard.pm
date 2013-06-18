@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.007_08';
+	$Types::Standard::VERSION   = '0.007_09';
 }
 
 use base "Type::Library";
@@ -1216,11 +1216,11 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 	my $all_inlinable = 1;
 	for my $tc (values %dict)
 	{
-		$all_inlinable = 0 if $tc->has_coercion && !$tc->can_be_inlined;
+		$all_inlinable = 0 if !$tc->can_be_inlined;
 		$all_inlinable = 0 if $tc->has_coercion && !$tc->coercion->can_be_inlined;
 		last if!$all_inlinable;
 	}
-
+	
 	if ($all_inlinable)
 	{
 		$C->add_type_coercions($parent => Stringable {
@@ -1246,9 +1246,10 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 				{
 					push @code, sprintf('%%tmp = (); $tmp{x} = %s;', $ct->coercion->inline_coercion("\$orig->{$K}"));
 					push @code, sprintf(
-						$ct_optional
-							? 'if (%s) { $new{%s}=$tmp{x} }'
-							: 'if (%s) { $new{%s}=$tmp{x} } else { $return_orig = 1; last %s }',
+#						$ct_optional
+#							? 'if (%s) { $new{%s}=$tmp{x} }'
+#							:
+						'if (%s) { $new{%s}=$tmp{x} } else { $return_orig = 1; last %s }',
 						$ct->inline_check('$tmp{x}'),
 						$K,
 						$label,
@@ -1257,9 +1258,10 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 				else
 				{
 					push @code, sprintf(
-						$ct_optional
-							? 'if (%s) { $new{%s}=$orig->{%s} }'
-							: 'if (%s) { $new{%s}=$orig->{%s} } else { $return_orig = 1; last %s }',
+#						$ct_optional
+#							? 'if (%s) { $new{%s}=$orig->{%s} }'
+#							:
+						'if (%s) { $new{%s}=$orig->{%s} } else { $return_orig = 1; last %s }',
 						$ct->inline_check("\$orig->{$K}"),
 						$K,
 						$K,
@@ -1327,21 +1329,21 @@ $lib->get_type("Tuple")->{coercion_generator} = sub
 {
 	my ($parent, $child, @tuple) = @_;
 	my $C = "Type::Coercion"->new(type_constraint => $child);
-
+	
 	my $slurpy;
 	if (exists $tuple[-1] and ref $tuple[-1] eq "HASH")
 	{
 		$slurpy = pop(@tuple)->{slurpy};
 	}
-
+	
 	my $all_inlinable = 1;
 	for my $tc (@tuple, ($slurpy ? $slurpy : ()))
 	{
-		$all_inlinable = 0 if $tc->has_coercion && !$tc->can_be_inlined;
+		$all_inlinable = 0 if !$tc->can_be_inlined;
 		$all_inlinable = 0 if $tc->has_coercion && !$tc->coercion->can_be_inlined;
 		last if!$all_inlinable;
 	}
-
+	
 	if ($all_inlinable)
 	{
 		$C->add_type_coercions($parent => Stringable {
