@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.009_01';
+our $VERSION   = '0.009_02';
 
 use Scalar::Util qw< blessed >;
 
@@ -90,6 +90,9 @@ sub TypeTiny ()
 sub to_TypeTiny
 {
 	my $t = $_[0];
+	
+	return $t
+		if (ref($t) =~ /^Type::Tiny\b/);
 	
 	return $t
 		if (blessed($t) and $t->isa("Type::Tiny"));

@@ -106,6 +106,7 @@ dist:project
 	doap:release      dist:v_0-007_10;
 	doap:release      dist:v_0-008;
 	doap:release      dist:v_0-009_01;
+	doap:release      dist:v_0-009_02;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1562,6 +1563,32 @@ dist:v_0-009_01
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.009_01.tar.gz>;
 	doap:revision     "0.009_01"^^xsd:string.
 
+dist:v_0-009_02
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.009_02"^^xsd:string;
+	dc:issued         "2013-06-22"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Various minor optimizations for Eval::TypeTiny, Type::Tiny, etc.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Types::Standard no longer uses Type::Utils.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix for compiled_checks for type constraints inheriting from Type::Tiny::Class, etc.";
+			dcs:fixes <tdb:2013:https://github.com/tobyink/p5-type-tiny/issues/1>;
+			dcs:thanks cpan:rsimoes;
+		];
+		dcs:versus dist:v_0-009_01;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.009_02.tar.gz>;
+	doap:revision     "0.009_02"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -1615,6 +1642,12 @@ cpan:rjbs
 	foaf:name         "Ricardo Signes";
 	foaf:nick         "RJBS";
 	foaf:page         <https://metacpan.org/author/RJBS>.
+
+cpan:rsimoes
+	a                 foaf:Person;
+	foaf:name         "Richard Simões";
+	foaf:nick         "RSIMOES";
+	foaf:page         <https://metacpan.org/author/RSIMOES>.
 
 cpan:tobyink
 	a                 foaf:Person;

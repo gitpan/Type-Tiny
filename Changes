@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.009_02  2013-06-22
+
+ - (Bugfix) Fix for compiled_checks for type constraints inheriting from
+   Type::Tiny::Class, etc.
+   Fixes GH#1
+   ++$RSIMOES
+ - Types::Standard no longer uses Type::Utils.
+ - Various minor optimizations for Eval::TypeTiny, Type::Tiny, etc.
+
 0.009_01  2013-06-21
 
  - (Addition) Reply::Plugin::TypeTiny.

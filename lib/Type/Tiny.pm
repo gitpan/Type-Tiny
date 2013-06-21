@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.009_01';
+	$Type::Tiny::VERSION   = '0.009_02';
 }
 
 use Eval::TypeTiny ();
@@ -77,7 +77,9 @@ sub new
 	
 	if (exists $params{parent})
 	{
-		$params{parent} = Types::TypeTiny::to_TypeTiny($params{parent});
+		$params{parent} = ref($params{parent}) =~ /^Type::Tiny\b/
+			? $params{parent}
+			: Types::TypeTiny::to_TypeTiny($params{parent});
 		
 		_croak "Parent must be an instance of %s", __PACKAGE__
 			unless blessed($params{parent}) && $params{parent}->isa(__PACKAGE__);
@@ -85,6 +87,14 @@ sub new
 	
 	$params{name} = "__ANON__" unless exists $params{name};
 	$params{uniq} = $uniq++;
+	
+	if ($params{name} ne "__ANON__")
+	{
+		# First try a fast ASCII-only expression, but fall back to Unicode
+		$params{name} =~ /^[A-Z][A-Za-z0-9_]+$/sm
+			or eval q( $params{name} =~ /^\p{Lu}[\p{L}0-9_]+$/sm )
+			or _croak '"%s" is not a valid type name', $params{name};
+	}
 	
 	if (exists $params{coercion} and !ref $params{coercion} and $params{coercion})
 	{
@@ -95,14 +105,6 @@ sub new
 	}
 	
 	my $self = bless \%params, $class;
-	
-	unless ($self->is_anon)
-	{
-		# First try a fast ASCII-only expression, but fall back to Unicode
-		$self->name =~ /^[A-Z][A-Za-z0-9_]+$/sm
-			or eval q( $self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm )
-			or _croak '"%s" is not a valid type name', $self->name;
-	}
 	
 	unless ($params{tmp})
 	{
@@ -256,12 +258,9 @@ sub _build_compiled_check
 		description => sprintf("compiled check '%s'", $self),
 	) if $self->can_be_inlined;
 	
-	my @constraints =
-		reverse
-		map  { $_->constraint }
-		grep { not $_->_is_null_constraint }
-		($self, $self->parents);
-	
+	my @constraints;
+	push @constraints, $self->parent->compiled_check if $self->has_parent;
+	push @constraints, $self->constraint if !$self->_is_null_constraint;
 	return $null_constraint unless @constraints;
 	
 	return sub ($)
@@ -333,13 +332,9 @@ sub is_a_type_of
 sub qualified_name
 {
 	my $self = shift;
-	
-	if ($self->has_library and not $self->is_anon)
-	{
-		return sprintf("%s::%s", $self->library, $self->name);
-	}
-	
-	return $self->name;
+	(exists $self->{library} and $self->name ne "__ANON__")
+		? "$self->{library}::$self->{name}"
+		: $self->{name};
 }
 
 sub is_anon
@@ -358,7 +353,7 @@ sub parents
 sub check
 {
 	my $self = shift;
-	$self->compiled_check->(@_);
+	($self->{compiled_check} ||= $self->_build_compiled_check)->(@_);
 }
 
 sub _strict_check
@@ -393,7 +388,7 @@ sub validate
 {
 	my $self = shift;
 	
-	return undef if $self->compiled_check->(@_);
+	return undef if ($self->{compiled_check} ||= $self->_build_compiled_check)->(@_);
 	
 	local $_ = $_[0];
 	return $self->get_message(@_);
@@ -403,7 +398,7 @@ sub assert_valid
 {
 	my $self = shift;
 	
-	return !!1 if $self->compiled_check->(@_);
+	return !!1 if ($self->{compiled_check} ||= $self->_build_compiled_check)->(@_);
 	
 	local $_ = $_[0];
 	$self->_failed_check("$self", $_);
@@ -413,7 +408,7 @@ sub assert_return
 {
 	my $self = shift;
 	
-	return $_[0] if $self->compiled_check->(@_);
+	return $_[0] if ($self->{compiled_check} ||= $self->_build_compiled_check)->(@_);
 	
 	local $_ = $_[0];
 	$self->_failed_check("$self", $_);

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.009_01';
+	$Type::Library::VERSION   = '0.009_02';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -95,7 +95,7 @@ sub _mksub
 			q{ sub () { $type%s if $] } },
 			$post_method,
 		);
-	
+		
 	return _subname(
 		$type->qualified_name,
 		eval_closure(
@@ -212,8 +212,12 @@ sub meta
 sub add_type
 {
 	my $meta = shift->meta;
-	my $type = blessed($_[0]) ? to_TypeTiny($_[0]) : "Type::Tiny"->new(@_);
-	my $name = $type->name;
+	
+	my $type =
+		ref($_[0]) =~ /^Type::Tiny\b/  ? $_[0] :
+		blessed($_[0])                 ? to_TypeTiny($_[0]) :
+		"Type::Tiny"->new(@_);
+	my $name = $type->{name};
 	
 	$meta->{types} ||= {};
 	_croak 'Type %s already exists in this library', $name if $meta->has_type($name);
@@ -260,6 +264,7 @@ sub type_names
 
 sub add_coercion
 {
+	require Type::Coercion;
 	my $meta = shift->meta;
 	my $c    = blessed($_[0]) ? $_[0] : "Type::Coercion"->new(@_);
 	my $name = $c->name;
