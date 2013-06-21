@@ -103,6 +103,7 @@ dist:project
 	doap:release      dist:v_0-007_07;
 	doap:release      dist:v_0-007_08;
 	doap:release      dist:v_0-007_09;
+	doap:release      dist:v_0-007_10;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1479,6 +1480,51 @@ dist:v_0-007_09
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.007_09.tar.gz>;
 	doap:revision     "0.007_09"^^xsd:string.
 
+dist:v_0-007_10
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.007_10"^^xsd:string;
+	dc:issued         "2013-06-21"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Parser now supports parentheses in its DSL.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Parser now exports a _std_eval function useful for testing.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fixed many small parsing bugs in Type::Parser.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Improved error messages from Type::Parser.";
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Test cases for Type::Parser.";
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Better test cases for Type::Registry.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document status of Type::Registry.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "MooseX::Types objects used in Type::Tiny::Union, Type::Tiny::Intersection and parameterized Type::Tiny type constraints would break in some circumstances, as Types::TypeTiny::to_TypeTiny was failing to convert them to native Type::Tiny type constraints.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86303>;
+		];
+		dcs:versus dist:v_0-007_09;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.007_10.tar.gz>;
+	doap:revision     "0.007_10"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -1578,6 +1624,11 @@ cpan:tokuhirom
 	a                 dbug:Issue;
 	dbug:id           "86239"^^xsd:string;
 	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86239>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/86303>
+	a                 dbug:Issue;
+	dbug:id           "86303"^^xsd:string;
+	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86303>.
 
 []
 	a                 nfo:FileDataObject;

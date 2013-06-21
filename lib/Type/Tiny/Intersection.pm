@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.007_09';
+	$Type::Tiny::Intersection::VERSION   = '0.007_10';
 }
 
 use Scalar::Util qw< blessed >;
@@ -24,8 +24,8 @@ sub new {
 	_croak "Intersection type constraints cannot have a parent constraint" if exists $opts{parent};
 	_croak "Need to supply list of type constraints" unless exists $opts{type_constraints};
 	$opts{type_constraints} = [
-		map { $_->isa(__PACKAGE__) ? @$_ : $_ }
 		map Types::TypeTiny::to_TypeTiny($_),
+		map { $_->isa(__PACKAGE__) ? @$_ : $_ }
 		@{ ref $opts{type_constraints} eq "ARRAY" ? $opts{type_constraints} : [$opts{type_constraints}] }
 	];
 	return $proto->SUPER::new(%opts);

@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.007_09';
+our $VERSION   = '0.007_10';
 
 # Token types
 # 
@@ -21,10 +21,12 @@ sub SLURPY    () { "SLURPY" };
 sub UNION     () { "UNION" };
 sub INTERSECT () { "INTERSECT" };
 sub NOT       () { "NOT" };
+sub L_PAREN   () { "L_PAREN" };
+sub R_PAREN   () { "R_PAREN" };
 
 use Text::Balanced qw(extract_quotelike);
 
-our @EXPORT_OK = qw( tokens parse eval_type );
+our @EXPORT_OK = qw( tokens parse eval_type _std_eval );
 use base "Exporter::TypeTiny";
 
 Evaluate: {
@@ -34,6 +36,18 @@ Evaluate: {
 		my ($str, $reg) = @_;
 		my $parsed = parse($str);
 		return _eval_type($parsed, $reg);
+	}
+	
+	my $std;
+	sub _std_eval
+	{
+		require Type::Registry;
+		unless ($std)
+		{
+			$std = "Type::Registry"->new;
+			$std->add_types(-Standard);
+		}
+		eval_type($_[0], $std);
 	}
 	
 	sub _eval_type
@@ -75,6 +89,7 @@ Evaluate: {
 		
 		if ($node->{type} eq "parameterized")
 		{
+			return _eval_type($node->{base}, $reg) unless $node->{params};
 			return _eval_type($node->{base}, $reg)->parameterize(_eval_type($node->{params}, $reg));
 		}
 		
@@ -87,7 +102,7 @@ Evaluate: {
 		
 		if ($node->{type} eq "primary" and $node->{token}->type eq QUOTELIKE)
 		{
-			return eval($node->{token}->spelling);
+			return eval($node->{token}->spelling); #ARGH
 		}
 		
 		if ($node->{type} eq "primary" and $node->{token}->type eq STRING)
@@ -165,12 +180,13 @@ Parsing: {
 	
 	sub _parse_primary
 	{
-		_croak "Expected token, but got nothing"
-			unless @tokens;
+		@tokens or _croak "Expected primary type expression; got nothing";
 		
 		if ($tokens[0]->type eq NOT)
 		{
 			shift @tokens;
+			@tokens
+				or _croak("Unexpected end of string following type complement; expected type; got nothing");
 			return {
 				type  => "complement",
 				of    => _parse_primary(),
@@ -180,10 +196,24 @@ Parsing: {
 		if ($tokens[0]->type eq SLURPY)
 		{
 			shift @tokens;
+			@tokens
+				or _croak("Unexpected end of string following slurpy type modifier; expected type; got nothing");
 			return {
 				type  => "slurpy",
 				of    => _parse_primary(),
 			};
+		}
+		
+		if ($tokens[0]->type eq L_PAREN)
+		{
+			shift @tokens;
+			my $r = _parse_expression();
+			@tokens
+				or _croak("Unexpected end of string parsing parenthetical type expression; expected ')'; got nothing");
+			$tokens[0]->type eq R_PAREN
+				or _croak("Unexpected token parsing parenthetical type expression; expected ')'; got '%s'", $tokens[0]->spelling);
+			shift @tokens;
+			return $r;
 		}
 		
 		if (@tokens > 1 and $tokens[0]->type eq TYPE and $tokens[1]->type eq L_BRACKET)
@@ -191,7 +221,7 @@ Parsing: {
 			my $base = { type  => "primary", token => shift @tokens };
 			shift @tokens;
 			my $params = undef;
-			if ($tokens[0]->type eq R_BRACKET)
+			if (@tokens and $tokens[0]->type eq R_BRACKET)
 			{
 				shift @tokens;
 			}
@@ -199,7 +229,10 @@ Parsing: {
 			{
 				$params = _parse_expression();
 				$params = { type => "list", list => [$params] } unless $params->{type} eq "list";
-				$tokens[0]->type eq R_BRACKET or die;
+				@tokens
+					or _croak("Unexpected end of string following bracketted type expression; expected ']'; got nothing");
+				$tokens[0]->type eq R_BRACKET
+					or _croak("Unexpected token following bracketted type expression; expected ']'; got '%s'", $tokens[0]->spelling);
 				shift @tokens;
 			}
 			return {
@@ -209,12 +242,15 @@ Parsing: {
 			};
 		}
 		
-		if ($tokens[0]->is_primary)
+		if ($tokens[0][0] eq Type::Parser::TYPE
+		or  $tokens[0][0] eq Type::Parser::QUOTELIKE
+		or  $tokens[0][0] eq Type::Parser::STRING
+		or  $tokens[0][0] eq Type::Parser::CLASS)
 		{
 			return { type  => "primary", token => shift @tokens };
 		}
 		
-		die;
+		_croak("Unexpected token in primary type expression; got '%s'", $tokens[0]->spelling);
 	}
 	
 	sub _parse_expression_1
@@ -227,7 +263,7 @@ Parsing: {
 			
 			while (@tokens and exists $precedence{$tokens[0]->type} and $precedence{$tokens[0]->type} > $precedence{$op->type})
 			{
-				my $lookahead = shift @tokens;
+				my $lookahead = $tokens[0];
 				$rhs = _parse_expression_1($rhs, $precedence{$lookahead->type});
 			}
 			
@@ -265,7 +301,7 @@ Tokenization: {
 		my $count;
 		while (my $token = _token())
 		{
-			die "ETOOBIG" if $count++ > 1000;
+			_croak "ETOOBIG" if $count++ > 1000;
 			push @tokens, $token;
 		}
 		return @tokens;
@@ -274,6 +310,8 @@ Tokenization: {
 	my %punctuation = (
 		'['       => bless([ L_BRACKET, "[" ], "Type::Parser::Token"),
 		']'       => bless([ R_BRACKET, "]" ], "Type::Parser::Token"),
+		'('       => bless([ L_PAREN,   "[" ], "Type::Parser::Token"),
+		')'       => bless([ R_PAREN,   "]" ], "Type::Parser::Token"),
 		','       => bless([ COMMA,     "," ], "Type::Parser::Token"),
 		'=>'      => bless([ COMMA,     "=>" ], "Type::Parser::Token"),
 		'slurpy'  => bless([ SLURPY,    "slurpy" ], "Type::Parser::Token"),
@@ -284,14 +322,14 @@ Tokenization: {
 	
 	sub _token
 	{
-		$str =~ s/^\s*//sm;
+		$str =~ s/^[\s\n\r]*//sm;
 		
 		return if $str eq "";
 		
 		# Punctuation
 		# 
 		
-		if ($str =~ /^( slurpy | => | [\]\[|&~,] )/xsm)
+		if ($str =~ /^( => | [()\]\[|&~,] )/xsm)
 		{
 			my $spelling = $1;
 			$str = substr($str, length $spelling);
@@ -312,9 +350,13 @@ Tokenization: {
 			{
 				return bless([ CLASS, $spelling ], "Type::Parser::Token"),;
 			}
-			elsif ($str =~ /\s*=>$/sm) # peek ahead
+			elsif ($str =~ /^\s*=>/sm) # peek ahead
 			{
 				return bless([ STRING, $spelling ], "Type::Parser::Token"),;
+			}
+			elsif ($spelling eq "slurpy")
+			{
+				return $punctuation{$spelling};
 			}
 			
 			return bless([ TYPE, $spelling ], "Type::Parser::Token"),;
@@ -326,26 +368,8 @@ Tokenization: {
 	{
 		package # hide from CPAN
 		Type::Parser::Token;
-		
-		sub is_primary
-		{
-			my $self = shift;
-			return 1 if $self->[0] eq Type::Parser::TYPE;
-			return 1 if $self->[0] eq Type::Parser::QUOTELIKE;
-			return 1 if $self->[0] eq Type::Parser::STRING;
-			return 1 if $self->[0] eq Type::Parser::CLASS;
-			return;
-		}
-		
-		sub type
-		{
-			return $_[0][0];
-		}
-		
-		sub spelling
-		{
-			return $_[0][1];
-		}
+		sub type     { $_[0][0] }
+		sub spelling { $_[0][1] }
 	}
 }
 
@@ -429,6 +453,10 @@ The following constants correspond to values returned by C<< $token->type >>.
 =item C<< INTERSECT >>
 
 =item C<< NOT >>
+
+=item C<< L_PAREN >>
+
+=item C<< R_PAREN >>
 
 =back
 

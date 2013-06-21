@@ -6,6 +6,22 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.007_10  2013-06-21
+
+ - (Addition) Type::Parser now exports a _std_eval function useful for
+   testing.
+ - (Addition) Type::Parser now supports parentheses in its DSL.
+ - (Bugfix) Fixed many small parsing bugs in Type::Parser.
+ - (Bugfix) MooseX::Types objects used in Type::Tiny::Union,
+   Type::Tiny::Intersection and parameterized Type::Tiny type constraints
+   would break in some circumstances, as Types::TypeTiny::to_TypeTiny was
+   failing to convert them to native Type::Tiny type constraints.
+   Fixes RT#86303
+ - (Documentation) Document status of Type::Registry.
+ - (Packaging) Better test cases for Type::Registry.
+ - (Packaging) Test cases for Type::Parser.
+ - Improved error messages from Type::Parser.
+
 0.007_09  2013-06-18
 
  - (Bugfix) Fix problems inlining Dict deep coercions where the target

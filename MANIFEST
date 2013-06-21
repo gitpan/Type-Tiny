@@ -107,6 +107,7 @@ t/moose-coercion.t
 t/moose.t
 t/mouse-coercion.t
 t/mouse.t
+t/mxtypes.t
 t/oo-classinsideout.t
 t/oo-objectaccessor.t
 t/parameterization.t
@@ -120,6 +121,7 @@ t/params-noninline.t
 t/params-optional.t
 t/params-positional.t
 t/params-slurpy.t
+t/parser.t
 t/registry.t
 t/rt85911.t
 t/rt86004.t
