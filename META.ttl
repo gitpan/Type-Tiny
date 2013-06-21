@@ -107,6 +107,7 @@ dist:project
 	doap:release      dist:v_0-008;
 	doap:release      dist:v_0-009_01;
 	doap:release      dist:v_0-009_02;
+	doap:release      dist:v_0-009_03;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1588,6 +1589,22 @@ dist:v_0-009_02
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.009_02.tar.gz>;
 	doap:revision     "0.009_02"^^xsd:string.
+
+dist:v_0-009_03
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.009_03"^^xsd:string;
+	dc:issued         "2013-06-22"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix Types::Standard compilation errors under Perl 5.8.x.";
+		];
+		dcs:versus dist:v_0-009_02;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.009_03.tar.gz>;
+	doap:revision     "0.009_03"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;
