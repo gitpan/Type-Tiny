@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.009_05  2013-06-23
+
+ - (Bugfix) Type::Registry does the AUTOLOAD thing, so ought to provide a
+   DESTROY method.
+
 0.009_04  2013-06-23
 
  - (Bugfix) Type::Tiny::Class shouldn't completely trust @ISA when

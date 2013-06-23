@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.009_04';
+	$Type::Registry::VERSION   = '0.009_05';
 }
 
 use Exporter::TypeTiny qw( mkopt _croak );
@@ -126,6 +126,12 @@ sub AUTOLOAD
 	my $type = $self->simple_lookup($method);
 	return $type if $type;
 	_croak(q[Can't locate object method "%s" via package "%s"], $method, ref($self));
+}
+
+# Prevent AUTOLOAD being called for DESTROY!
+sub DESTROY
+{
+	return;
 }
 
 1;
