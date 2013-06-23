@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.009_03';
+	$Type::Tiny::VERSION   = '0.009_04';
 }
 
 use Eval::TypeTiny ();
@@ -755,17 +755,17 @@ sub isa
 {
 	my $self = shift;
 	
-	if ($INC{"Moose.pm"} and blessed($self) and $_[0] eq 'Moose::Meta::TypeConstraint')
+	if ($INC{"Moose.pm"} and ref($self) and $_[0] eq 'Moose::Meta::TypeConstraint')
 	{
 		return !!1;
 	}
 	
-	if ($INC{"Moose.pm"} and blessed($self) and $_[0] =~ /^Moose/ and my $r = $self->moose_type->isa(@_))
+	if ($INC{"Moose.pm"} and ref($self) and $_[0] =~ /^Moose/ and my $r = $self->moose_type->isa(@_))
 	{
 		return $r;
 	}
 
-	if ($INC{"Mouse.pm"} and blessed($self) and $_[0] eq 'Mouse::Meta::TypeConstraint')
+	if ($INC{"Mouse.pm"} and ref($self) and $_[0] eq 'Mouse::Meta::TypeConstraint')
 	{
 		return !!1;
 	}
@@ -780,7 +780,7 @@ sub can
 	my $can = $self->SUPER::can(@_);
 	return $can if $can;
 	
-	if ($INC{"Moose.pm"} and blessed($self) and my $method = $self->moose_type->can(@_))
+	if ($INC{"Moose.pm"} and ref($self) and my $method = $self->moose_type->can(@_))
 	{
 		return sub { $method->(shift->moose_type, @_) };
 	}
@@ -794,12 +794,20 @@ sub AUTOLOAD
 	my ($m) = (our $AUTOLOAD =~ /::(\w+)$/);
 	return if $m eq 'DESTROY';
 	
-	if ($INC{"Moose.pm"} and blessed($self) and my $method = $self->moose_type->can($m))
+	if ($INC{"Moose.pm"} and ref($self) and my $method = $self->moose_type->can($m))
 	{
 		return $method->($self->moose_type, @_);
 	}
 	
 	_croak q[Can't locate object method "%s" via package "%s"], $m, ref($self)||$self;
+}
+
+sub DOES
+{
+	my $self = shift;
+	return !!1 if  ref($self) && $_[0] =~ m{^ Type::API::Constraint (?: ::Coercible | ::Inlinable )? $}x;
+	return !!1 if !ref($self) && $_[0] eq 'Type::API::Constraint::Constructor';
+	return $self->SUPER::DOES(@_);
 }
 
 # fill out Moose-compatible API
@@ -1164,6 +1172,12 @@ a Moose::Meta::TypeConstraint.
 
 If Mouse is loaded, then C<isa> mocks Mouse::Meta::TypeConstraint.
 
+=item C<< DOES($role) >>
+
+Overridden to advertise support for various roles.
+
+See also L<Type::API::Constraint>, etc.
+
 =back
 
 The following methods exist for Moose/Mouse compatibility, but do not do
@@ -1253,7 +1267,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 =head1 SEE ALSO
 
-L<Type::Tiny::Manual>.
+L<Type::Tiny::Manual>, L<Type::API>.
 
 L<Type::Library>, L<Type::Utils>, L<Types::Standard>, L<Type::Coercion>.
 

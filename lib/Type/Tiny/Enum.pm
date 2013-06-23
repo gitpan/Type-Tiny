@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.009_03';
+	$Type::Tiny::Enum::VERSION   = '0.009_04';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -18,13 +18,17 @@ use base "Type::Tiny";
 sub new
 {
 	my $proto = shift;
+	
 	my %opts = @_;
-	_croak "Enum type constraints cannot have a parent constraint" if exists $opts{parent};
+	_croak "Enum type constraints cannot have a parent constraint passed to the constructor" if exists $opts{parent};
+	_croak "Enum type constraints cannot have a constraint coderef passed to the constructor" if exists $opts{constraint};
 	_croak "Need to supply list of values" unless exists $opts{values};
+	
 	my %tmp =
 		map { $_ => 1 }
 		@{ ref $opts{values} eq "ARRAY" ? $opts{values} : [$opts{values}] };
 	$opts{values} = [sort keys %tmp];
+	
 	return $proto->SUPER::new(%opts);
 }
 

@@ -92,6 +92,7 @@ t/exporter-installer.t
 t/exporter-roleconflict.t
 t/exporter.t
 t/functionparameters.t
+t/gh1.t
 t/lib/BiggerLib.pm
 t/lib/DemoLib.pm
 t/library-assert.t

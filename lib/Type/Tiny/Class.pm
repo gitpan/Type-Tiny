@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.009_03';
+	$Type::Tiny::Class::VERSION   = '0.009_04';
 }
 
 use Scalar::Util qw< blessed >;
@@ -21,6 +21,7 @@ sub new {
 	
 	my %opts = @_;
 	_croak "Class type constraints cannot have a parent constraint passed to the constructor" if exists $opts{parent};
+	_croak "Class type constraints cannot have a constraint coderef passed to the constructor" if exists $opts{constraint};
 	_croak "Need to supply class name" unless exists $opts{class};
 	
 	return $proto->SUPER::new(%opts);
@@ -115,7 +116,7 @@ sub _build_parent
 	my $self  = shift;
 	my $class = $self->class;
 	
-	my @isa = do { no strict "refs"; no warnings; @{"$class\::ISA"} };
+	my @isa = grep $class->isa($_), do { no strict "refs"; no warnings; @{"$class\::ISA"} };
 	
 	if (@isa == 0)
 	{
