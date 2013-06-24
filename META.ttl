@@ -111,6 +111,7 @@ dist:project
 	doap:release      dist:v_0-009_04;
 	doap:release      dist:v_0-009_05;
 	doap:release      dist:v_0-009_06;
+	doap:release      dist:v_0-009_07;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1664,6 +1665,42 @@ dist:v_0-009_06
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.009_06.tar.gz>;
 	doap:revision     "0.009_06"^^xsd:string.
+
+dist:v_0-009_07
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.009_07"^^xsd:string;
+	dc:issued         "2013-06-24"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Types::Standard::to_TypeTiny now sets 'display_name' instead of 'name' on generated type constraints.";
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "More test cases for interacting with MooseX::Types type constraints.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Params no longer uses Type::Utils.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Subclasses of Type::Tiny reject 'inlined' coderef, just like they already reject 'constraint' coderef.";
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Make rt86172.t an 'xt' test case because it's causing random CPAN testers failures unrelated to the feature it's supposed to be testing.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "If a Type::Tiny object is instantiated with a Sub::Quote quoted constraint coderef, and no inlined coderef, then Type::Tiny will use Sub::Quote to make an inlined coderef.";
+		];
+		dcs:versus dist:v_0-009_06;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.009_07.tar.gz>;
+	doap:revision     "0.009_07"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

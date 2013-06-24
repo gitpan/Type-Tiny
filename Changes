@@ -6,6 +6,22 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.009_07  2013-06-24
+
+ - (Packaging) Make rt86172.t an 'xt' test case because it's causing random
+   CPAN testers failures unrelated to the feature it's supposed to be
+   testing.
+ - (Packaging) More test cases for interacting with MooseX::Types type
+   constraints.
+ - If a Type::Tiny object is instantiated with a Sub::Quote quoted
+   constraint coderef, and no inlined coderef, then Type::Tiny will use
+   Sub::Quote to make an inlined coderef.
+ - Subclasses of Type::Tiny reject 'inlined' coderef, just like they
+   already reject 'constraint' coderef.
+ - Type::Params no longer uses Type::Utils.
+ - Types::Standard::to_TypeTiny now sets 'display_name' instead of 'name'
+   on generated type constraints.
+
 0.009_06  2013-06-23
 
  - (Bugfix) Careful calling the DOES method (it doesn't exist in Perl 5.8).

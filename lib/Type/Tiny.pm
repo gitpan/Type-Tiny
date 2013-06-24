@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.009_06';
+	$Type::Tiny::VERSION   = '0.009_07';
 }
 
 use Eval::TypeTiny ();
@@ -69,6 +69,7 @@ sub _overload_coderef
 
 our %ALL_TYPES;
 
+my $QFS;
 my $uniq = 1;
 sub new
 {
@@ -102,6 +103,24 @@ sub new
 			or _croak "coercion => 1 requires type to have a direct parent with a coercion";
 		
 		$params{coercion} = $params{parent}->coercion;
+	}
+	
+	if (!exists $params{inlined}
+	and exists $params{constraint}
+	and ( !exists $params{parent} or $params{parent}->can_be_inlined )
+	and $QFS ||= "Sub::Quote"->can("quoted_from_sub"))
+	{
+		my (undef, $perlstring, $captures) = @{ $QFS->($params{constraint}) || [] };
+		
+		$params{inlined} = sub {
+			my ($self, $var) = @_;
+			my $code = Sub::Quote::inlinify(
+				$var eq q($_) ? $perlstring : "local \$_ = $var; $perlstring",
+				$var,
+			);
+			$code = sprintf('%s and %s', $self->parent->inline_check($var), $code) if $self->has_parent;
+			return $code;
+		} if $perlstring && !$captures;
 	}
 	
 	my $self = bless \%params, $class;
@@ -944,6 +963,9 @@ against the type constraint. Optional (there's a vaguely sensible default.)
 
 A coderef which returns a string of Perl code suitable for inlining this
 type. Optional.
+
+If C<constraint> (above) is a coderef generated via L<Sub::Quote>, then
+Type::Tiny I<may> be able to automatically generate C<inlined> for you.
 
 =item C<< library >>
 

@@ -109,6 +109,7 @@ t/moose-coercion.t
 t/moose.t
 t/mouse-coercion.t
 t/mouse.t
+t/mxtypes-more.t
 t/mxtypes.t
 t/oo-classinsideout.t
 t/oo-objectaccessor.t
@@ -127,7 +128,6 @@ t/parser.t
 t/registry.t
 t/rt85911.t
 t/rt86004.t
-t/rt86172.t
 t/rt86233.t
 t/rt86239.t
 t/stdlib-inlined.t
@@ -138,6 +138,7 @@ t/stdlib-strmatch.t
 t/stdlib-structures.t
 t/stdlib-tied.t
 t/stdlib.t
+t/subquote.t
 t/syntax.t
 t/type-class.t
 t/type-duck.t
