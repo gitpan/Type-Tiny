@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.010';
+our $VERSION   = '0.011_01';
 
 use Scalar::Util qw< blessed >;
 
@@ -91,26 +91,20 @@ sub to_TypeTiny
 {
 	my $t = $_[0];
 	
-	return $t
-		if (ref($t) =~ /^Type::Tiny\b/);
+	return $t unless ref $t;
+	return $t if ref($t) =~ /^Type::Tiny\b/;
 	
-	return $t
-		if (blessed($t) and $t->isa("Type::Tiny"));
+	if (my $class = blessed $t)
+	{
+		return $t                           if $class->isa("Type::Tiny");
+		goto \&_TypeTinyFromMoose           if $class->isa("Moose::Meta::TypeConstraint");
+		goto \&_TypeTinyFromMoose           if $class->isa("MooseX::Types::TypeDecorator");
+		goto \&_TypeTinyFromValidationClass if $class->isa("Validation::Class::Simple");
+		goto \&_TypeTinyFromValidationClass if $class->isa("Validation::Class");
+		goto \&_TypeTinyFromGeneric         if $t->can("check") && $t->can("get_message"); # i.e. Type::API::Constraint
+	}
 	
-	goto \&_TypeTinyFromMoose
-		if (blessed($t) and ref($t)->isa("Moose::Meta::TypeConstraint"));
-	
-	goto \&_TypeTinyFromMoose
-		if (blessed($t) and ref($t)->isa("MooseX::Types::TypeDecorator"));
-	
-	goto \&_TypeTinyFromMouse
-		if (blessed($t) and ref($t)->isa("Mouse::Meta::TypeConstraint"));
-	
-	goto \&_TypeTinyFromValidationClass
-		if (blessed($t) and ref($t)->isa("Validation::Class::Simple") || ref($t)->isa("Validation::Class"));
-	
-#	goto \&_TypeTinyFromCodeRef
-#		if (ref($t) and ref($t) eq q(CODE));
+	goto \&_TypeTinyFromCodeRef if ref($t) eq q(CODE);
 	
 	$t;
 }
@@ -131,21 +125,6 @@ sub _TypeTinyFromMoose
 	$opts{inlined}      = sub { shift; $t->_inline_check(@_) } if $t->can_be_inlined;
 	$opts{message}      = sub { $t->get_message($_) }          if $t->has_message;
 	$opts{moose_type}   = $t;
-	
-	require Type::Tiny;
-	return "Type::Tiny"->new(%opts);
-}
-
-sub _TypeTinyFromMouse
-{
-	my $t = $_[0];
-	
-	my %opts;
-	$opts{display_name} = $t->name;
-	$opts{constraint}   = $t->constraint;
-	$opts{parent}       = to_TypeTiny($t->parent)              if $t->has_parent;
-	$opts{message}      = sub { $t->get_message($_) }          if $t->has_message;
-	$opts{mouse_type}   = $t;
 	
 	require Type::Tiny;
 	return "Type::Tiny"->new(%opts);
@@ -217,6 +196,27 @@ sub _TypeTinyFromValidationClass
 	return $new;
 }
 
+sub _TypeTinyFromGeneric
+{
+	my $t = $_[0];
+	
+	# XXX - handle inlining??
+	# XXX - handle display_name????
+	
+	my %opts = (
+		constraint => sub { $t->check(@_ ? @_ : $_) },
+		message    => sub { $t->get_message(@_ ? @_ : $_) },
+	);
+	
+	$opts{display_name} = $t->name if $t->can("name");
+	
+	$opts{coercion} = sub { $t->coerce(@_ ? @_ : $_) }
+		if $t->can("has_coercion") && $t->has_coercion && $t->can("coerce");
+	
+	require Type::Tiny;
+	return "Type::Tiny"->new(%opts);
+}
+
 sub _TypeTinyFromCodeRef
 {
 	my $t = $_[0];
@@ -275,7 +275,7 @@ much circularity. But it exports some type constraint "constants":
 
 =item C<< to_TypeTiny($constraint) >>
 
-Promotes (or "demotes" if you prefer) a Moose/Mouse::Meta::TypeConstraint object
+Promotes (or "demotes" if you prefer) a Moose::Meta::TypeConstraint object
 to a Type::Tiny object.
 
 Can also handle L<Validation::Class> objects. Type constraints built from 
@@ -284,14 +284,14 @@ do constraint checking (and go to great lengths to do so); using filters for
 coercion only. (The behaviour of C<coerce> if we don't do that is just too
 weird!)
 
-=begin not_supported_yet
+Can also handle any object providing C<check> and C<get_message> methods.
+(This includes L<Mouse::Meta::TypeConstraint> objects.) If the object also
+provides C<has_coercion> and C<coerce> methods, these will be used too.
 
 Can also handle coderefs (but not blessed coderefs or objects overloading
 C<< &{} >>). Coderefs are expected to return true iff C<< $_ >> passes the
 constraint. If C<< $_ >> fails the type constraint, they may either return
 false, or die with a helpful error message.
-
-=end not_supported_yet
 
 =back
 

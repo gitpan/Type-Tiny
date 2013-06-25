@@ -5,7 +5,7 @@ use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.010';
+our $VERSION   = '0.011_01';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -140,8 +140,9 @@ sub _exporter_install_sub
 	require B;
 	for (grep ref, $into->can($name))
 	{
-		my $cv = B::svref_2object($_);
-		$cv->STASH->NAME eq $into
+		my $stash = B::svref_2object($_)->STASH;
+		next unless $stash->can("NAME");
+		$stash->NAME eq $into
 			and _croak("Refusing to overwrite local sub '$name' with export from $class");
 	}
 	

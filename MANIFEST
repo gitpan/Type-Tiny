@@ -107,10 +107,11 @@ t/moo.t
 t/moose-autott.t
 t/moose-coercion.t
 t/moose.t
+t/moosextypes-more.t
+t/moosextypes.t
 t/mouse-coercion.t
 t/mouse.t
-t/mxtypes-more.t
-t/mxtypes.t
+t/mousextypes.t
 t/oo-classinsideout.t
 t/oo-objectaccessor.t
 t/parameterization.t

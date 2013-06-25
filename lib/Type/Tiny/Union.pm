@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.010';
+	$Type::Tiny::Union::VERSION   = '0.011_01';
 }
 
 use Scalar::Util qw< blessed >;
@@ -14,7 +14,7 @@ use Types::TypeTiny ();
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
-use overload q[@{}] => 'type_constraints';
+use overload q[@{}] => sub { $_[0]{type_constraints} ||= [] };
 
 use base "Type::Tiny";
 
@@ -28,8 +28,8 @@ sub new {
 	_croak "Need to supply list of type constraints" unless exists $opts{type_constraints};
 	
 	$opts{type_constraints} = [
-		map Types::TypeTiny::to_TypeTiny($_),
 		map { $_->isa(__PACKAGE__) ? @$_ : $_ }
+		map Types::TypeTiny::to_TypeTiny($_),
 		@{ ref $opts{type_constraints} eq "ARRAY" ? $opts{type_constraints} : [$opts{type_constraints}] }
 	];
 	
