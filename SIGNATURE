@@ -16,15 +16,15 @@ Hash: SHA1
 
 SHA1 ffba79617e0a3973b8e686262c11356c9660fc80 .travis.yml
 SHA1 294505f858f11dd062e9916e3f50d88210a9ef54 CONTRIBUTING
-SHA1 19bd26364b42a48bb9763e5ee23bcf480e6f96cc COPYRIGHT
-SHA1 27b558faac3f193b28e1e64fd23e63006dfc0dd5 CREDITS
-SHA1 918aa1b50bb41bfa9a97939c2c7370f8935cb0ab Changes
+SHA1 642804233be2c713316b360c8981cb1165ea5bc8 COPYRIGHT
+SHA1 5eb912e42c7f1c028f41b30e7c19a379904abc08 CREDITS
+SHA1 3f04fdfd9d044192a762bb22d66ce7b46a5fed94 Changes
 SHA1 937d452c5c4069f4cda9ffaf45a33f1eb5f060e8 LICENSE
 SHA1 de87ff13c8a05a95a1bf8ad2e891277a9af21fbc MANIFEST
-SHA1 ca2585f9978b41d6599afd0617fd9b03aa98296b META.ttl
-SHA1 bd0293b33dbdc5cf752386c61d80cd3496d95cdc META.yml
+SHA1 5109a08d6c1a30218bf51651968b22701cf1e31d META.ttl
+SHA1 355cfde866e7d70da8ba04a9be700024ad498c8e META.yml
 SHA1 e1bc19b712df138f9088b140d73a5372e0c3ba12 Makefile.PL
-SHA1 309484cdd2c7af34ec16835e2d65e18f572aa1a9 NEWS
+SHA1 ec57a4c109eb3c7caf20703182043efd9d72d2b1 NEWS
 SHA1 6951011ceadfa33e70f5c27673d14d1a6eb2a740 README
 SHA1 a8a6f30972b8ba86378da9b942fe83e501522119 TODO
 SHA1 5d6ca147cd4b62cb647d722161a4a4922afb46a9 TODO.mm
@@ -54,25 +54,25 @@ SHA1 85872fcf275a7868f858ca6ccc0e15cdaff8f8ac inc/Test/Fatal.pm
 SHA1 95d4da14025622f3a45f5e9b75b7b6860148f415 inc/Test/Requires.pm
 SHA1 75dd349355aff420c46d9e37802e39712b6309c2 inc/Try/Tiny.pm
 SHA1 feb933cefe2e3762e8322bd6071a2499f3440da1 inc/YAML/Tiny.pm
-SHA1 9b8aaf34f9a567e0b5baa23a0c6211fe71b4bb00 lib/Eval/TypeTiny.pm
-SHA1 dabca5e8fddbb7a8b2ec72303906cee703980b56 lib/Exporter/TypeTiny.pm
-SHA1 842ef6f90a98f4dcdad79546c2df27b494332882 lib/Reply/Plugin/TypeTiny.pm
-SHA1 9234f50a2f9f43ab419f8f1902f12c1e0bb21ef4 lib/Test/TypeTiny.pm
-SHA1 0728fa8ae8c0c8689563f1ec30e1aa8384607637 lib/Type/Coercion.pm
-SHA1 b0861ab538888d5bac0ec78244f9e01262958314 lib/Type/Coercion/Union.pm
-SHA1 036ad5e93772859d4b28681d4fc5e4770c91c84f lib/Type/Exception.pm
-SHA1 b5fca23720cf54d966ae1c870e743f218285172c lib/Type/Exception/Assertion.pm
-SHA1 ebb7ad041b2476dadea5dc79c311c8ffabaafa76 lib/Type/Exception/Compilation.pm
-SHA1 ed9457d23879eaec5cac3cbbe8caf52626e8c8dd lib/Type/Exception/WrongNumberOfParameters.pm
-SHA1 f4e383bf21beb4680bf5908968f93938646b8d08 lib/Type/Library.pm
-SHA1 a0e625837486bbe048cf1ffc0f428fe5b3778aaf lib/Type/Params.pm
-SHA1 bcda0fd5dc36ddb07515b0379c670876f936b6ff lib/Type/Parser.pm
-SHA1 5b2095c0a895280e4d8afad53886c24ad251f179 lib/Type/Registry.pm
-SHA1 e10493559b827fcca23a785f2b239b1ee7b42d09 lib/Type/Tiny.pm
-SHA1 1f0b1e635436b0b357285e5aed279ee4344cf95d lib/Type/Tiny/Class.pm
-SHA1 6be471ee293b19fe130a2e0b2c594cfd41bd4320 lib/Type/Tiny/Duck.pm
-SHA1 cb52611ade8bfd240b5bfc33a6e92201f1b44bd5 lib/Type/Tiny/Enum.pm
-SHA1 7d394bf679fdb5a841ba9c62afff63b206ba5c63 lib/Type/Tiny/Intersection.pm
+SHA1 eafa4f0a9ad107c2e7a8a6ab5642ba3771669590 lib/Eval/TypeTiny.pm
+SHA1 b712365ee036ae8e30a367efd0dcad4157f665d9 lib/Exporter/TypeTiny.pm
+SHA1 602ca8f843ac8431bdc2291a23665a81dc40579a lib/Reply/Plugin/TypeTiny.pm
+SHA1 d4f06ea5b4ed96a991e950efdbc89c4ec531feb6 lib/Test/TypeTiny.pm
+SHA1 5614ab1dbe6f6e26d91b51377da0c783ef34a5c4 lib/Type/Coercion.pm
+SHA1 ab6fa067181478077c27bf69dcb08ca3569a8359 lib/Type/Coercion/Union.pm
+SHA1 b15ec55e5955cd252bc703943122890e91e3360d lib/Type/Exception.pm
+SHA1 2f1060ff162a20294dcc806b38d2328fed9cd71b lib/Type/Exception/Assertion.pm
+SHA1 17169f0a07e309ddf76092ba12b524ae7ea5984a lib/Type/Exception/Compilation.pm
+SHA1 4cb75ab5cf50de74854a6b98cd545e59f4846284 lib/Type/Exception/WrongNumberOfParameters.pm
+SHA1 be0426fc29b4635224ec3a9c174dae3e3d07dbf7 lib/Type/Library.pm
+SHA1 2142f28e0ecbd817a0577b0e3b191f578cb1f3f4 lib/Type/Params.pm
+SHA1 7ac2abec064d9b49847c72b6fefb369b1a4beb4c lib/Type/Parser.pm
+SHA1 c3468cf73b0030ffcb7e813ff5f791851fff84ef lib/Type/Registry.pm
+SHA1 810876b03d2fe9bcfbcc7eaea4eb184cb4e9ea34 lib/Type/Tiny.pm
+SHA1 d71665bd43b9307df0d6e4628a137b52edb1058f lib/Type/Tiny/Class.pm
+SHA1 1d3c57ded4a89bd1922c1f1447f95395b30f6161 lib/Type/Tiny/Duck.pm
+SHA1 d38459b8cb4f4e863589ab2ac92c2b18278236e6 lib/Type/Tiny/Enum.pm
+SHA1 1df07ba1a262aa5c7b825d644ce52ae66a7a4894 lib/Type/Tiny/Intersection.pm
 SHA1 d554b8edd138e8f4a275706d17bd4f548b6e8e28 lib/Type/Tiny/Manual.pod
 SHA1 b5c8ce3095a92013e27cea222bc3c9e35815ddb3 lib/Type/Tiny/Manual/Coercions.pod
 SHA1 d62398db46262dcff04d55b74837b62f75f11b10 lib/Type/Tiny/Manual/Libraries.pod
@@ -81,12 +81,12 @@ SHA1 a5d063f03a668b29a64725efa3e2d0b1b29ffda1 lib/Type/Tiny/Manual/UsingWithMoo.
 SHA1 196f1a0139e81d34d3d0411dbbe0239c87006927 lib/Type/Tiny/Manual/UsingWithMoose.pod
 SHA1 11989313f5c5e341e9a8adf84c56e19e0c3ecb8e lib/Type/Tiny/Manual/UsingWithMouse.pod
 SHA1 6f275259876e125860b5c547b42f1aa43422096a lib/Type/Tiny/Manual/UsingWithOther.pod
-SHA1 5c41dbbac8fdc7be991859ff0c1f2942274be5de lib/Type/Tiny/Role.pm
-SHA1 28dd89054321c7f6c2de498785d6bcd744305f78 lib/Type/Tiny/Union.pm
-SHA1 77eeeccd05e87739f4af4befe285444f610b243a lib/Type/Utils.pm
-SHA1 02963f5ca2a535ffacadcb67c5104e5b219a1d0b lib/Types/Standard.pm
-SHA1 5bde7968f0a5fdd53a413fb73bbff5b56b684888 lib/Types/TypeTiny.pm
-SHA1 c2f89f3377fbe3b8b3e10752a50ae58b9982f09f meta/changes.pret
+SHA1 b8cd9f720000edee4b430ce060868b466e88a5b2 lib/Type/Tiny/Role.pm
+SHA1 cbab3a7192825394755f589348b665c208a93cda lib/Type/Tiny/Union.pm
+SHA1 345359adc12d62bf9f0dc39602ab8bb317b3b654 lib/Type/Utils.pm
+SHA1 d9c061ec69ad46d9f1306b87e3ba7eb49167567e lib/Types/Standard.pm
+SHA1 d3f82e99448c7a388a8f1e3926789bbf46b79cdf lib/Types/TypeTiny.pm
+SHA1 a456023b74c24b12bd678fc0cd4829142d593040 meta/changes.pret
 SHA1 44c50e98f08e14dbcf92f35026920a99d2f4acd2 meta/doap.pret
 SHA1 acb24945327c0a0ac3853759e100f9ded2f752b0 meta/makefile.pret
 SHA1 57fe70b19853493a8a13e3b226312e3ff7497000 meta/people.pret
@@ -170,7 +170,7 @@ SHA1 c24de2f66695a2038341be5cea9bb8841d6ab1b4 t/validationclass.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlHJ6VQACgkQzr+BKGoqfTlIggCdErQNSuZu4SPHiUDW9nx7Mw+n
-mJEAmgLk00Gtb8JGEHrAxvkpkkiFbuqT
-=PWrQ
+iEYEARECAAYFAlHJ/hsACgkQzr+BKGoqfTkrtwCaAjAfPyVxDOxGqe1FzlmIltGw
+pxIAoLiQEmcQiWWkqxT0ivBmea1pbyiU
+=it+a
 -----END PGP SIGNATURE-----
