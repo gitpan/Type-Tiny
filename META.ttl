@@ -114,6 +114,7 @@ dist:project
 	doap:release      dist:v_0-009_07;
 	doap:release      dist:v_0-010;
 	doap:release      dist:v_0-011_01;
+	doap:release      dist:v_0-011_02;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -169,20 +170,20 @@ dist:v_0-000_03
 	dc:issued         "2013-04-03"^^xsd:date;
 	dcs:changeset     [
 		dcs:item [
-			a dcs:Documentation;
-			rdfs:label "Document Type::Coercion's overloading.";
-		];
-		dcs:item [
-			a dcs:Change;
-			rdfs:label "Create and use compiled type constraint checks; much faster!";
-		];
-		dcs:item [
 			a dcs:Change;
 			rdfs:label "Use more unique stringification for %Moo::HandleMoose::TYPE_MAP keys.";
 		];
 		dcs:item [
 			a dcs:Change;
 			rdfs:label "Make sure Type::Standard's Moose-like built-ins get inflated to real Moose built-in types.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Document Type::Coercion's overloading.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Create and use compiled type constraint checks; much faster!";
 		];
 		dcs:item [
 			a dcs:Addition;
@@ -1746,6 +1747,22 @@ dist:v_0-011_01
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.011_01.tar.gz>;
 	doap:revision     "0.011_01"^^xsd:string.
+
+dist:v_0-011_02
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.011_02"^^xsd:string;
+	dc:issued         "2013-06-25"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Types::Standard 0.009_02 stopped including 'library' attribute in its types, and thus broke MooX::late. Type::Library modified to make 'library' attribute more automatic, and less reliant on Type::Utils to do the right thing.";
+		];
+		dcs:versus dist:v_0-011_02;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.011_02.tar.gz>;
+	doap:revision     "0.011_02"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

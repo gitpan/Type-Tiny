@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.011_02  2013-06-25
+
+ - (Bugfix) Types::Standard 0.009_02 stopped including 'library' attribute
+   in its types, and thus broke MooX::late. Type::Library modified to make
+   'library' attribute more automatic, and less reliant on Type::Utils to
+   do the right thing.
+
 0.011_01  2013-06-25
 
  - (Addition) Types::Standard::to_TypeTiny now accepts any object
