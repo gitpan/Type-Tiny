@@ -6,6 +6,12 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.011_03  2013-06-25
+
+ - (Bugfix) Type::Tiny now overloads `cmp`. Necessary because Mouse does a
+   sort on type constraints in a union, and overload's fallback doesn't
+   seem to cover `cmp` on Perl prior to 5.12.
+
 0.011_02  2013-06-25
 
  - (Bugfix) Types::Standard 0.009_02 stopped including 'library' attribute

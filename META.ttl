@@ -115,6 +115,7 @@ dist:project
 	doap:release      dist:v_0-010;
 	doap:release      dist:v_0-011_01;
 	doap:release      dist:v_0-011_02;
+	doap:release      dist:v_0-011_03;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1758,11 +1759,27 @@ dist:v_0-011_02
 			a dcs:Bugfix;
 			rdfs:label "Types::Standard 0.009_02 stopped including 'library' attribute in its types, and thus broke MooX::late. Type::Library modified to make 'library' attribute more automatic, and less reliant on Type::Utils to do the right thing.";
 		];
-		dcs:versus dist:v_0-011_02;
+		dcs:versus dist:v_0-011_01;
 	];
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.011_02.tar.gz>;
 	doap:revision     "0.011_02"^^xsd:string.
+
+dist:v_0-011_03
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.011_03"^^xsd:string;
+	dc:issued         "2013-06-25"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Type::Tiny now overloads `cmp`. Necessary because Mouse does a sort on type constraints in a union, and overload's fallback doesn't seem to cover `cmp` on Perl prior to 5.12.";
+		];
+		dcs:versus dist:v_0-011_02;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.011_03.tar.gz>;
+	doap:revision     "0.011_03"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;
