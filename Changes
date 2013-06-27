@@ -6,6 +6,20 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.013_01  2013-06-27
+
+ - (Addition) Type::Parser now provides a `extract_type` function which
+   parses a type constraint expression from the head of a string and
+   returns a Type::Tiny object, plus the tail of the string. (This is
+   designed to make it easier to use Type::Parser to parse things like
+   function signatures.)
+ - (Removal) Type::Parser functions no longer accept an arrayref of tokens,
+   as they expect to pull tokens from a stream as required.
+ - (Removal) Type::Parser no longer provides a `tokens` function as it no
+   longer pre-emptively tokenizes the whole string it is given.
+ - Type::Parser's tokenization is now done on a pull basis, allowing
+   one-pass building of the AST.
+
 0.012  2013-06-25
 
  - (Documentation) Updated NEWS file.
@@ -22,6 +36,7 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
    in its types, and thus broke MooX::late. Type::Library modified to make
    'library' attribute more automatic, and less reliant on Type::Utils to
    do the right thing.
+   ++$HAARG
 
 0.011_01  2013-06-25
 
@@ -34,6 +49,9 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
  - (Addition) Types::Standard::to_TypeTiny now accepts unblessed coderefs
    and converts them to type constraints. This allows things like `Int &
    sub { $_ < 10 }` to work.
+ - (Bugfix) B::SPECIAL-related fix.
+   Fixes RT#86383
+   ++$PJFL
  - (Bugfix) Unions of Type::Tiny and Mouse::Meta::TypeConstraints now work
    properly. This makes Type::Tiny and MouseX::Types play nice together
    (much like Type::Tiny already plays nice with MooseX::Types).
@@ -89,6 +107,9 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
    Type::Tiny::Class, etc.
    Fixes GH#1
    ++$RSIMOES
+ - (Regression) Types::Standard types no longer have 'library' attribute
+   set; this subtly breaks Moo type inflation, and breaks the MooX::late
+   test suite which relies on type inflation working correctly.
  - Types::Standard no longer uses Type::Utils.
  - Various minor optimizations for Eval::TypeTiny, Type::Tiny, etc.
 

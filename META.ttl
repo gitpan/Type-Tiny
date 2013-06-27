@@ -117,6 +117,7 @@ dist:project
 	doap:release      dist:v_0-011_02;
 	doap:release      dist:v_0-011_03;
 	doap:release      dist:v_0-012;
+	doap:release      dist:v_0-013_01;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1593,6 +1594,10 @@ dist:v_0-009_02
 			dcs:fixes <tdb:2013:https://github.com/tobyink/p5-type-tiny/issues/1>;
 			dcs:thanks cpan:rsimoes;
 		];
+		dcs:item [
+			a dcs:Regression;
+			rdfs:label "Types::Standard types no longer have 'library' attribute set; this subtly breaks Moo type inflation, and breaks the MooX::late test suite which relies on type inflation working correctly.";
+		];
 		dcs:versus dist:v_0-009_01;
 	];
 	dcs:released-by   cpan:tobyink;
@@ -1744,6 +1749,12 @@ dist:v_0-011_01
 			a dcs:Addition;
 			rdfs:label "Types::Standard::to_TypeTiny now accepts unblessed coderefs and converts them to type constraints. This allows things like `Int & sub { $_ < 10 }` to work.";
 		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "B::SPECIAL-related fix.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86383>;
+			dcs:thanks cpan:pjfl;
+		];
 		dcs:versus dist:v_0-010;
 	];
 	dcs:released-by   cpan:tobyink;
@@ -1759,6 +1770,7 @@ dist:v_0-011_02
 		dcs:item [
 			a dcs:Bugfix;
 			rdfs:label "Types::Standard 0.009_02 stopped including 'library' attribute in its types, and thus broke MooX::late. Type::Library modified to make 'library' attribute more automatic, and less reliant on Type::Utils to do the right thing.";
+			dcs:thanks cpan:haarg;
 		];
 		dcs:versus dist:v_0-011_01;
 	];
@@ -1796,6 +1808,34 @@ dist:v_0-012
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.012.tar.gz>;
 	doap:revision     "0.012"^^xsd:string.
+
+dist:v_0-013_01
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.013_01"^^xsd:string;
+	dc:issued         "2013-06-27"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Parser's tokenization is now done on a pull basis, allowing one-pass building of the AST.";
+		];
+		dcs:item [
+			a dcs:Removal;
+			rdfs:label "Type::Parser no longer provides a `tokens` function as it no longer pre-emptively tokenizes the whole string it is given.";
+		];
+		dcs:item [
+			a dcs:Removal;
+			rdfs:label "Type::Parser functions no longer accept an arrayref of tokens, as they expect to pull tokens from a stream as required.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Parser now provides a `extract_type` function which parses a type constraint expression from the head of a string and returns a Type::Tiny object, plus the tail of the string. (This is designed to make it easier to use Type::Parser to parse things like function signatures.)";
+		];
+		dcs:versus dist:v_0-012;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.013_01.tar.gz>;
+	doap:revision     "0.013_01"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;
@@ -1907,6 +1947,11 @@ cpan:tokuhirom
 	a                 dbug:Issue;
 	dbug:id           "86303"^^xsd:string;
 	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86303>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/86383>
+	a                 dbug:Issue;
+	dbug:id           "86383"^^xsd:string;
+	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86383>.
 
 []
 	a                 nfo:FileDataObject;
