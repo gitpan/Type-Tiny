@@ -35,6 +35,7 @@ dist:project
 	];
 	dc:contributor    cpan:tobyink;
 	doap:bug-database <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>;
+	doap:category     [ rdfs:label "Validation" ];
 	doap:category     [ rdfs:label "Moo" ];
 	doap:category     [ rdfs:label "Moose" ];
 	doap:category     [ rdfs:label "Mouse" ];
@@ -46,7 +47,6 @@ dist:project
 	doap:category     [ rdfs:label "Parameter Checking" ];
 	doap:category     [ rdfs:label "Argument Validation" ];
 	doap:category     [ rdfs:label "Argument Checking" ];
-	doap:category     [ rdfs:label "Validation" ];
 	doap:created      "2013-03-23"^^xsd:date;
 	doap:developer    cpan:tobyink;
 	doap:download-page <https://metacpan.org/release/Type-Tiny>;
@@ -119,6 +119,7 @@ dist:project
 	doap:release      dist:v_0-012;
 	doap:release      dist:v_0-013_01;
 	doap:release      dist:v_0-014;
+	doap:release      dist:v_0-015_01;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1852,6 +1853,26 @@ dist:v_0-014
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.014.tar.gz>;
 	doap:revision     "0.014"^^xsd:string.
+
+dist:v_0-015_01
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.015_01"^^xsd:string;
+	dc:issued         "2013-07-05"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Parser can now pull in types from MooseX::Types libraries properly.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Utils now provides a `dwim_type` function; this is powered by a hidden Type::Registry::DWIM package.";
+		];
+		dcs:versus dist:v_0-014;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.015_01.tar.gz>;
+	doap:revision     "0.015_01"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

@@ -107,6 +107,7 @@ t/moo.t
 t/moose-autott.t
 t/moose-coercion.t
 t/moose.t
+t/moosextypes-dwimmery.t
 t/moosextypes-more.t
 t/moosextypes.t
 t/mouse-coercion.t
