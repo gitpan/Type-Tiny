@@ -85,6 +85,8 @@ t/coercion-modifiers.t
 t/coercion-union.t
 t/coercion.t
 t/coercions-parameterized.t
+t/dwim-moose.t
+t/dwim-mouse.t
 t/eval.t
 t/exceptions-stack.t
 t/exceptions.t
@@ -107,7 +109,6 @@ t/moo.t
 t/moose-autott.t
 t/moose-coercion.t
 t/moose.t
-t/moosextypes-dwimmery.t
 t/moosextypes-more.t
 t/moosextypes.t
 t/mouse-coercion.t
