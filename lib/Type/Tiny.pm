@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.015_02';
+	$Type::Tiny::VERSION   = '0.015_03';
 }
 
 use Eval::TypeTiny ();
@@ -853,6 +853,11 @@ sub _identity                  { refaddr(shift) };
 sub _unite                     { require Type::Tiny::Union; "Type::Tiny::Union"->new(type_constraints => \@_) };
 sub type_parameter             { my @p = @{ shift->parameters || [] }; @p==1 ? $p[0] : @p }
 
+# Hooks for Type::Tie
+sub TIESCALAR  { require Type::Tie; unshift @_, 'Type::Tie::SCALAR'; goto \&Type::Tie::SCALAR::TIESCALAR };
+sub TIEARRAY   { require Type::Tie; unshift @_, 'Type::Tie::ARRAY';  goto \&Type::Tie::SCALAR::TIEARRAY };
+sub TIEHASH    { require Type::Tie; unshift @_, 'Type::Tie::HASH';   goto \&Type::Tie::SCALAR::TIEHASH };
+
 1;
 
 __END__
@@ -1204,6 +1209,17 @@ If Mouse is loaded, then C<isa> mocks Mouse::Meta::TypeConstraint.
 Overridden to advertise support for various roles.
 
 See also L<Type::API::Constraint>, etc.
+
+=item C<< TIESCALAR >>, C<< TIEARRAY >>, C<< TIEHASH >>
+
+These are provided as hooks that wrap L<Type::Tie>. (Type::Tie is distributed
+separately, and can be used with non-Type::Tiny type constraints too.) They
+allow the following to work:
+
+   use Types::Standard qw(Int);
+   tie my @list, Int;
+   push @list, 123, 456;   # ok
+   push @list, "Hello";    # dies
 
 =back
 

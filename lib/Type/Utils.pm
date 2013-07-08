@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.015_02';
+	$Type::Utils::VERSION   = '0.015_03';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -341,7 +341,7 @@ sub match_on_type
 
 sub compile_match_on_type
 {
-	my @code = 'sub {';
+	my @code = 'sub { local $_ = $_[0]; ';
 	my @checks;
 	my @actions;
 	
@@ -363,25 +363,25 @@ sub compile_match_on_type
 		
 		if ($type->can_be_inlined)
 		{
-			push @code, sprintf('%sif (%s)', $els, $type->inline_check('$_[0]'));
+			push @code, sprintf('%sif (%s)', $els, $type->inline_check('$_'));
 		}
 		else
 		{
 			push @checks, $type;
-			push @code, sprintf('%sif ($checks[%d]->check($_[0]))', $els, $#checks);
+			push @code, sprintf('%sif ($checks[%d]->check($_))', $els, $#checks);
 		}
 		
 		$els = 'els';
 		
 		if (StringLike->check($code))
 		{
-			push @code, sprintf('  { local $_ = $_[0]; %s }', $code);
+			push @code, sprintf('  { %s }', $code);
 		}
 		else
 		{
 			CodeLike->($code);
 			push @actions, $code;
-			push @code, sprintf('  { local $_ = $_[0]; $actions[%d]->(@_) }', $#actions);
+			push @code, sprintf('  { $actions[%d]->(@_) }', $#actions);
 		}
 	}
 	
@@ -397,6 +397,75 @@ sub compile_match_on_type
 			'@checks'  => \@checks,
 		},
 	);
+}
+
+{
+	package #hide
+	Type::Registry::DWIM;
+	
+	our @ISA = qw(Type::Registry);
+	
+	sub simple_lookup
+	{
+		my $self = shift;
+		my $r;
+		
+		# If the lookup is chained to a class, then the class' own
+		# type registry gets first refusal.
+		#
+		if (defined $self->{"~~chained"})
+		{
+			my $chained = "Type::Registry"->for_class($self->{"~~chained"});
+			$r = eval { $chained->simple_lookup(@_) } unless $self == $chained;
+			return $r if defined $r;
+		}
+		
+		# Fall back to types in Types::Standard.
+		require Types::Standard;
+		return 'Types::Standard'->get_type($_[0]) if 'Types::Standard'->has_type($_[0]);
+		
+		# Only continue any further if we've been called from Type::Parser.
+		return unless $_[1];
+		
+		# If Moose is loaded...
+		if ($INC{'Moose.pm'})
+		{
+			require Moose::Util::TypeConstraints;
+			require Types::TypeTiny;
+			$r = Moose::Util::TypeConstraints::find_type_constraint($_[0]);
+			return Types::TypeTiny::to_TypeTiny($r) if defined $r;
+		}
+		
+		# If Mouse is loaded...
+		if ($INC{'Mouse.pm'})
+		{
+			require Mouse::Util::TypeConstraints;
+			require Types::TypeTiny;
+			$r = Mouse::Util::TypeConstraints::find_type_constraint($_[0]);
+			return Types::TypeTiny::to_TypeTiny($r) if defined $r;
+		}
+		
+		return unless $_[0] =~ /^\s*(\w+(::\w+)*)\s*$/sm;
+		return unless defined $self->{"~~assume"};
+		
+		# Lastly, if it looks like a class/role name, assume it's
+		# supposed to be a class/role type.
+		#
+		
+		if ($self->{"~~assume"} eq "Type::Tiny::Class")
+		{
+			require Type::Tiny::Class;
+			return "Type::Tiny::Class"->new(class => $_[0]);
+		}
+		
+		if ($self->{"~~assume"} eq "Type::Tiny::Role")
+		{
+			require Type::Tiny::Role;
+			return "Type::Tiny::Role"->new(role => $_[0]);
+		}
+		
+		die;
+	}
 }
 
 our $dwimmer;
@@ -742,11 +811,14 @@ This function is not exported by default.
 Given a string like "ArrayRef[Int|CodeRef]", turns it into a type constraint
 object, hopefully doing what you mean.
 
-It uses the syntax of L<Type::Parser>. Firstly L<Types::Standard> is
-consulted for type constraint names; if that doesn't have a match, the
-L<Type::Registry> for the caller package is consulted; and if there's
-still no match, then if a type constraint looks like a class name, a new
-L<Type::Tiny::Class> object is created for it.
+It uses the syntax of L<Type::Parser>. Firstly the L<Type::Registry>
+for the caller package is consulted; if that doesn't have a match,
+L<Types::Standard> is consulted for type constraint names; and if
+there's still no match, then if a type constraint looks like a class
+name, a new L<Type::Tiny::Class> object is created for it.
+
+Somewhere along the way, it also checks Moose/Mouse's type constraint
+registries if they are loaded.
 
 You can specify an alternative for the caller using the C<for> option.
 If you'd rather create a L<Type::Tiny::Role> object, set the C<does>
@@ -764,6 +836,10 @@ option to true.
 While it's probably better overall to use the proper L<Type::Registry>
 interface for resolving type constraint strings, this function often does
 what you want.
+
+It should never die if it fails to find a type constraint (but may die
+if the type constraint string is syntactically malformed), preferring to
+return undef.
 
 This function is not exported by default.
 

@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.015_03  2013-07-08
+
+ - (Addition) Implement TIESCALAR, TIEARRAY and TIEHASH methods for
+   Type::Tiny; this improves Type::Tie integration.
+ - Slight speed improvements for `compile_match_on_type`.
+ - The `dwim_type` function now prioritizes lookups within the caller
+   class' type registry over Types::Standard's built-in types.
+
 0.015_02  2013-07-06
 
  - Better test cases for `dwim_type`.

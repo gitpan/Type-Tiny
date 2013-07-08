@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.015_02';
+	$Type::Registry::VERSION   = '0.015_03';
 }
 
 use Exporter::TypeTiny qw( mkopt _croak );
@@ -132,82 +132,6 @@ sub AUTOLOAD
 sub DESTROY
 {
 	return;
-}
-
-{
-	package #hide
-	Type::Registry::DWIM;
-	
-	our @ISA = qw(Type::Registry);
-	
-	sub new
-	{
-		my $class = shift;
-		my $self = $class->SUPER::new(@_);
-		$self->add_types(-Standard);
-		return $self;
-	}
-	
-	sub simple_lookup
-	{
-		my $self = shift;
-		
-		my $r = $self->SUPER::simple_lookup(@_);
-		return $r if defined $r;
-		
-		# Chaining! This is a fallback which looks up the
-		# type constraint in the class' Type::Registry if
-		# we couldn't find it ourselves.
-		#
-		if (defined $self->{"~~chained"})
-		{
-			my $chained = "Type::Registry"->for_class($self->{"~~chained"});
-			$r = eval { $chained->simple_lookup(@_) } unless $self == $chained;
-			return $r if defined $r;
-		}
-		
-		return unless $_[1];
-		return unless $_[0] =~ /^\s*(\w+(::\w+)*)\s*$/sm;
-		my $classlike = $1;
-		
-		# If Moose is loaded...
-		if ($INC{'Moose.pm'})
-		{
-			require Moose::Util::TypeConstraints;
-			require Types::TypeTiny;
-			$r = Moose::Util::TypeConstraints::find_type_constraint($classlike);
-			return Types::TypeTiny::to_TypeTiny($r);
-		}
-		
-		# If Mouse is loaded...
-		if ($INC{'Mouse.pm'})
-		{
-			require Mouse::Util::TypeConstraints;
-			require Types::TypeTiny;
-			$r = Mouse::Util::TypeConstraints::find_type_constraint($classlike);
-			return Types::TypeTiny::to_TypeTiny($r);
-		}
-		
-		return unless defined $self->{"~~assume"};
-		
-		# Lastly, if it looks like a class/role name, assume it's
-		# supposed to be a class/role type.
-		#
-		
-		if ($self->{"~~assume"} eq "Type::Tiny::Class")
-		{
-			require Type::Tiny::Class;
-			return "Type::Tiny::Class"->new(class => $classlike);
-		}
-		
-		if ($self->{"~~assume"} eq "Type::Tiny::Role")
-		{
-			require Type::Tiny::Role;
-			return "Type::Tiny::Role"->new(role => $classlike);
-		}
-		
-		die;
-	}
 }
 
 1;

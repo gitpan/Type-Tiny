@@ -35,6 +35,7 @@ dist:project
 	];
 	dc:contributor    cpan:tobyink;
 	doap:bug-database <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>;
+	doap:category     [ rdfs:label "Argument Validation" ];
 	doap:category     [ rdfs:label "Argument Checking" ];
 	doap:category     [ rdfs:label "Validation" ];
 	doap:category     [ rdfs:label "Moo" ];
@@ -46,7 +47,6 @@ dist:project
 	doap:category     [ rdfs:label "Schema" ];
 	doap:category     [ rdfs:label "Parameter Validation" ];
 	doap:category     [ rdfs:label "Parameter Checking" ];
-	doap:category     [ rdfs:label "Argument Validation" ];
 	doap:created      "2013-03-23"^^xsd:date;
 	doap:developer    cpan:tobyink;
 	doap:download-page <https://metacpan.org/release/Type-Tiny>;
@@ -121,6 +121,7 @@ dist:project
 	doap:release      dist:v_0-014;
 	doap:release      dist:v_0-015_01;
 	doap:release      dist:v_0-015_02;
+	doap:release      dist:v_0-015_03;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1894,6 +1895,30 @@ dist:v_0-015_02
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.015_02.tar.gz>;
 	doap:revision     "0.015_02"^^xsd:string.
+
+dist:v_0-015_03
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.015_03"^^xsd:string;
+	dc:issued         "2013-07-08"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "The `dwim_type` function now prioritizes lookups within the caller class' type registry over Types::Standard's built-in types.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Slight speed improvements for `compile_match_on_type`.";
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Implement TIESCALAR, TIEARRAY and TIEHASH methods for Type::Tiny; this improves Type::Tie integration.";
+		];
+		dcs:versus dist:v_0-015_02;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.015_03.tar.gz>;
+	doap:revision     "0.015_03"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;
