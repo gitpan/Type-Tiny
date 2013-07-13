@@ -6,6 +6,24 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.015_04  2013-07-13
+
+ - (Bugfix Documentation) Allow an inline_as block to return a list of
+   strings (which are implictly joined with &&); allow the first item on
+   the list to be undef, which is treated as the inlined parent type
+   constraint.
+   Fixes RT#86891
+   ++$TIMB
+ - (Bugfix Documentation) Clarify when inlining via Sub::Quote may be less
+   efficient than hand-written inlining.
+   Fixes RT#86893
+   ++$TIMB
+ - (Bugfix Documentation) Mention in Type::Tiny::Manual::Libraries that the
+   `extends` function is no longer exported by default; update example
+   code.
+   Fixes RT#86813
+   ++"Pierre Masci"
+
 0.015_03  2013-07-08
 
  - (Addition) Implement TIESCALAR, TIEARRAY and TIEHASH methods for

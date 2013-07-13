@@ -1,5 +1,7 @@
 =pod
 
+=for stopwords smush smushed
+
 =encoding utf-8
 
 =head1 NAME
@@ -17,7 +19,7 @@ The following is an example type library:
    use Type::Library
       -base,
       -declare => qw( Datetime DatetimeHash EpochHash );
-   use Type::Utils;
+   use Type::Utils -all;
    use Types::Standard -types;
    
    class_type Datetime, { class => "DateTime" };
@@ -69,7 +71,7 @@ us to use them as barewords later on. (Note that in code which I<uses>
 our type library, the types will always be available as barewords. The
 declaration above just allows us to use them within the library itself.)
 
-   use Type::Utils;
+   use Type::Utils -all;
 
 Imports some utility functions from L<Type::Utils>. These will be useful
 for defining our types and the relationships between them.
@@ -86,6 +88,10 @@ people won't be able to re-import C<Str> from our library. If you actually
 want your library to I<extend> another library, do this instead:
 
    BEGIN { extends "Types::AnotherLibrary" };
+
+(Note: if your code breaks here when you upgrade from version 0.006 or
+below, saying that the 'extends' keyword has not been declared, just add
+'-all' after use Type::Utils.)
 
 OK, now we're ready to declare a few types.
 
@@ -205,6 +211,20 @@ compact/good/fast).
 
    declare NonEmptyHash, as HashLike,
       constraint => quote_sub q{ scalar values %$_ };
+
+Aside: it's been pointed out that "might not be as fast" above is a bit
+hand-wavy. When Type::Tiny does inlining from Sub::Quote coderefs, it needs
+to inline all the ancestor type constraints, and smush them together with
+C<< && >>. This may result in duplicate checks. For example, if 'MyArray'
+inherits from 'MyRef' which inherits from 'MyDef', the inlined code might
+end up as:
+
+   defined($_)              # check MyDef
+   && ref($_)               # check MyRef
+   && ref($_) eq 'ARRAY'    # check MyArray
+
+When just the last check would have been sufficient. A custom C<inline_as>
+allows you finer control over how the type constraint is inlined.
 
 =head2 Parameterized Constraints
 

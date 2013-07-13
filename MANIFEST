@@ -133,7 +133,6 @@ t/rt85911.t
 t/rt86004.t
 t/rt86233.t
 t/rt86239.t
-t/stdlib-inlined.t
 t/stdlib-mxtmlb-alike.t
 t/stdlib-optlist.t
 t/stdlib-overload.t

@@ -35,6 +35,10 @@ dist:project
 	];
 	dc:contributor    cpan:tobyink;
 	doap:bug-database <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>;
+	doap:category     [ rdfs:label "Type Library" ];
+	doap:category     [ rdfs:label "Schema" ];
+	doap:category     [ rdfs:label "Parameter Validation" ];
+	doap:category     [ rdfs:label "Parameter Checking" ];
 	doap:category     [ rdfs:label "Argument Validation" ];
 	doap:category     [ rdfs:label "Argument Checking" ];
 	doap:category     [ rdfs:label "Validation" ];
@@ -43,10 +47,6 @@ dist:project
 	doap:category     [ rdfs:label "Mouse" ];
 	doap:category     [ rdfs:label "Type Constraint" ];
 	doap:category     [ rdfs:label "Type Coercion" ];
-	doap:category     [ rdfs:label "Type Library" ];
-	doap:category     [ rdfs:label "Schema" ];
-	doap:category     [ rdfs:label "Parameter Validation" ];
-	doap:category     [ rdfs:label "Parameter Checking" ];
 	doap:created      "2013-03-23"^^xsd:date;
 	doap:developer    cpan:tobyink;
 	doap:download-page <https://metacpan.org/release/Type-Tiny>;
@@ -122,6 +122,7 @@ dist:project
 	doap:release      dist:v_0-015_01;
 	doap:release      dist:v_0-015_02;
 	doap:release      dist:v_0-015_03;
+	doap:release      dist:v_0-015_04;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1920,6 +1921,37 @@ dist:v_0-015_03
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.015_03.tar.gz>;
 	doap:revision     "0.015_03"^^xsd:string.
 
+dist:v_0-015_04
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.015_04"^^xsd:string;
+	dc:issued         "2013-07-13"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Mention in Type::Tiny::Manual::Libraries that the `extends` function is no longer exported by default; update example code.";
+			dcs:blame <urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>;
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86813>;
+			rdfs:seeAlso <https://github.com/tobyink/p5-type-tiny/pull/2>;
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Allow an inline_as block to return a list of strings (which are implictly joined with &&); allow the first item on the list to be undef, which is treated as the inlined parent type constraint.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86891>;
+			dcs:thanks cpan:timb;
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Clarify when inlining via Sub::Quote may be less efficient than hand-written inlining.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86893>;
+			dcs:thanks cpan:timb;
+		];
+		dcs:versus dist:v_0-015_03;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.015_04.tar.gz>;
+	doap:revision     "0.015_04"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -1980,6 +2012,12 @@ cpan:rsimoes
 	foaf:nick         "RSIMOES";
 	foaf:page         <https://metacpan.org/author/RSIMOES>.
 
+cpan:timb
+	a                 foaf:Person;
+	foaf:name         "Tim Bunce";
+	foaf:nick         "TIMB";
+	foaf:page         <https://metacpan.org/author/TIMB>.
+
 cpan:tobyink
 	a                 foaf:Person;
 	foaf:name         "Toby Inkster";
@@ -1992,6 +2030,10 @@ cpan:tokuhirom
 	foaf:name         "MATSUNO Tokuhiro";
 	foaf:nick         "TOKUHIROM";
 	foaf:page         <https://metacpan.org/author/TOKUHIROM>.
+
+<urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>
+	foaf:name         "Pierre Masci";
+	foaf:page         <http://www.perlmonks.org/?node_id=946673>.
 
 <http://dev.perl.org/licenses/>
 	dc:title          "the same terms as the perl 5 programming language system itself".
@@ -2035,6 +2077,21 @@ cpan:tokuhirom
 	a                 dbug:Issue;
 	dbug:id           "86383"^^xsd:string;
 	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86383>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/86813>
+	a                 dbug:Issue;
+	dbug:id           "86813"^^xsd:string;
+	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86813>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/86891>
+	a                 dbug:Issue;
+	dbug:id           "86891"^^xsd:string;
+	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86891>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/86893>
+	a                 dbug:Issue;
+	dbug:id           "86893"^^xsd:string;
+	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86893>.
 
 []
 	a                 nfo:FileDataObject;
