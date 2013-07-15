@@ -1,11 +1,11 @@
 package Exporter::TypeTiny;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.015_04';
+our $VERSION   = '0.015_05';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }

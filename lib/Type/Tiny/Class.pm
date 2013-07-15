@@ -1,12 +1,12 @@
 package Type::Tiny::Class;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.015_04';
+	$Type::Tiny::Class::VERSION   = '0.015_05';
 }
 
 use Scalar::Util qw< blessed >;

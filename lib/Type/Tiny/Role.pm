@@ -1,12 +1,12 @@
 package Type::Tiny::Role;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.015_04';
+	$Type::Tiny::Role::VERSION   = '0.015_05';
 }
 
 use Scalar::Util qw< blessed weaken >;

@@ -1,12 +1,12 @@
 package Type::Tiny::Intersection;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.015_04';
+	$Type::Tiny::Intersection::VERSION   = '0.015_05';
 }
 
 use Scalar::Util qw< blessed >;

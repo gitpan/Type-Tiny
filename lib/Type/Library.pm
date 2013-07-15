@@ -1,12 +1,12 @@
 package Type::Library;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.015_04';
+	$Type::Library::VERSION   = '0.015_05';
 }
 
 use Eval::TypeTiny qw< eval_closure >;

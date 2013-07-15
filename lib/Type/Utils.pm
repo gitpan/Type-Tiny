@@ -1,12 +1,12 @@
 package Type::Utils;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.015_04';
+	$Type::Utils::VERSION   = '0.015_05';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.015_04';
+our $VERSION   = '0.015_05';
 
 use Scalar::Util qw< blessed >;
 
@@ -118,9 +118,9 @@ sub _TypeTinyFromMoose
 {
 	my $t = $_[0];
 	
-	if ($t->can("tt_type") and my $tt = $t->tt_type)
+	if (ref $t->{"Types::TypeTiny::to_TypeTiny"})
 	{
-		return $tt;
+		return $t->{"Types::TypeTiny::to_TypeTiny"};
 	}
 	
 	my %opts;

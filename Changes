@@ -6,14 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.015_05  2013-07-15
+
+ - Experimentally drop required version of Perl from 5.8.1 to 5.6.1. I've
+   not been able to extensively test Type-Tiny on Perl 5.6.x, but I believe
+   it should mostly work. (The only feature that seems unlikely to work is
+   non-ASCII names for type constraints and coercions.)
+ - Stop monkey-patching Moose::Meta::TypeContraint; it's not necessary and
+   has never been documented.
+
 0.015_04  2013-07-13
 
- - (Bugfix Documentation) Allow an inline_as block to return a list of
-   strings (which are implictly joined with &&); allow the first item on
-   the list to be undef, which is treated as the inlined parent type
-   constraint.
-   Fixes RT#86891
-   ++$TIMB
  - (Bugfix Documentation) Clarify when inlining via Sub::Quote may be less
    efficient than hand-written inlining.
    Fixes RT#86893
@@ -23,6 +26,11 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
    code.
    Fixes RT#86813
    ++"Pierre Masci"
+ - (Bugfix) Allow an inline_as block to return a list of strings (which are
+   implictly joined with &&); allow the first item on the list to be undef,
+   which is treated as the inlined parent type constraint.
+   Fixes RT#86891
+   ++$TIMB
 
 0.015_03  2013-07-08
 

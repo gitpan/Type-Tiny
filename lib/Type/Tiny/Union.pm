@@ -1,12 +1,12 @@
 package Type::Tiny::Union;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.015_04';
+	$Type::Tiny::Union::VERSION   = '0.015_05';
 }
 
 use Scalar::Util qw< blessed >;

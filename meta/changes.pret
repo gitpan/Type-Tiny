@@ -756,7 +756,6 @@
 			seealso <https://github.com/tobyink/p5-type-tiny/pull/2>;
 		];
 		item [
-			a dcs:Documentation;
 			label "Allow an inline_as block to return a list of strings (which are implictly joined with &&); allow the first item on the list to be undef, which is treated as the inlined parent type constraint.";
 			dcs:thanks cpan:TIMB;
 			dcs:fixes RT#86891;
@@ -767,4 +766,12 @@
 			dcs:thanks cpan:TIMB;
 			dcs:fixes RT#86893;
 		];
+	].
+
+`Type-Tiny 0.015_05 cpan:TOBYINK`
+	issued  2013-07-15;
+	changeset [
+		dcs:versus `Type-Tiny 0.015_04 cpan:TOBYINK`;
+		item "Experimentally drop required version of Perl from 5.8.1 to 5.6.1. I've not been able to extensively test Type-Tiny on Perl 5.6.x, but I believe it should mostly work. (The only feature that seems unlikely to work is non-ASCII names for type constraints and coercions.)"^^Change;
+		item "Stop monkey-patching Moose::Meta::TypeContraint; it's not necessary and has never been documented."^^Change;
 	].

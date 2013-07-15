@@ -1,12 +1,12 @@
 package Type::Coercion;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.015_04';
+	$Type::Coercion::VERSION   = '0.015_05';
 }
 
 use Eval::TypeTiny qw<>;
