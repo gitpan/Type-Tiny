@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.016  2013-07-16
+
+ - (Documentation) Add some pod links.
+ - (Documentation) Updated NEWS file.
+
 0.015_05  2013-07-15
 
  - Experimentally drop required version of Perl from 5.8.1 to 5.6.1. I've

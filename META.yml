@@ -42,8 +42,8 @@ resources:
   homepage: https://metacpan.org/release/Type-Tiny
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-type-tiny
-version: 0.015_05
+version: 0.016
 x_contributors:
-  - 'Vyacheslav Matyukhin <mmcleric@cpan.org>'
   - 'Pierre Masci'
   - 'Diab Jerius <djerius@cpan.org>'
+  - 'Vyacheslav Matyukhin <mmcleric@cpan.org>'

@@ -39,7 +39,7 @@ SEE ALSO
         functions and methods.
 
     *   Other modules using Type::Tiny in interesting ways: Type::Tie,
-        Scalar::Does...
+        Scalar::Does, Set::Equivalence...
 
 TYPE::TINY VERSUS X
   Specio
