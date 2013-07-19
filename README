@@ -41,6 +41,33 @@ SEE ALSO
     *   Other modules using Type::Tiny in interesting ways: Type::Tie,
         Scalar::Does, Set::Equivalence...
 
+DEPENDENCIES
+    Type::Tiny requires at least Perl 5.6.1, though certain Unicode-related
+    features (e.g. non-ASCII type constraint names) may work better in newer
+    versions of Perl.
+
+    At run-time, Type::Tiny requires the following modules: B, B::Deparse,
+    Data::Dumper, Scalar::Util, Text::Balanced, base, overload, strict and
+    warnings. All of these come bundled with Perl itself. (Prior to Perl
+    5.8, Scalar::Util and Text::Balanced do not come bundled with Perl and
+    will need installing separately from the CPAN.)
+
+    Certain features require additional modules. Tying a variable to a type
+    constraint (e.g. "tie my $count, Int") requires Type::Tie; stack traces
+    on exceptions require Devel::StackTrace. The Reply::Plugin::TypeTiny
+    plugin for Reply requires Term::ANSIColor and (obviously) requires Reply
+    too.
+
+    The test suite additionally requires Test::More, Test::Fatal and
+    Test::Requires. Test::More comes bundled with Perl, but if you are using
+    a version of Perl older than 5.14, you will need to upgrade to at least
+    Test::More version 0.96. Test::Requires and Test::Fatal (plus Try::Tiny
+    which Test::Fatal depends on) are bundled with Type::Tiny in the "inc"
+    directory, so you do not need to install them separately.
+
+    Perl 5.6.x support is not well tested; if it proves too burdensome to
+    maintain, it may be dropped in a future release.
+
 TYPE::TINY VERSUS X
   Specio
     Type::Tiny is similar in aim to Specio. The major differences are

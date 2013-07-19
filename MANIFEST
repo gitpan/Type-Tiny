@@ -29,6 +29,7 @@ inc/Test/Fatal.pm
 inc/Test/Requires.pm
 inc/Try/Tiny.pm
 inc/YAML/Tiny.pm
+lib/Devel/TypeTiny/Perl56Compat.pm
 lib/Eval/TypeTiny.pm
 lib/Exporter/TypeTiny.pm
 lib/Reply/Plugin/TypeTiny.pm
@@ -87,6 +88,7 @@ t/coercion.t
 t/coercions-parameterized.t
 t/dwim-moose.t
 t/dwim-mouse.t
+t/eval-lexicalsubs.t
 t/eval.t
 t/exceptions-stack.t
 t/exceptions.t
@@ -150,6 +152,4 @@ t/type-role.t
 t/type-union.t
 t/type.t
 t/validationclass.t
-TODO
-TODO.mm
 SIGNATURE                                Public-key signature (added by MakeMaker)

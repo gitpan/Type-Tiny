@@ -5,8 +5,12 @@ use strict;
 use warnings;
 
 BEGIN {
+	if ($] < 5.008) { require Devel::TypeTiny::Perl56Compat };
+}
+
+BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.016';
+	$Type::Params::VERSION   = '0.017_01';
 }
 
 use B qw(perlstring);
@@ -23,10 +27,13 @@ use base qw< Exporter::TypeTiny >;
 our @EXPORT = qw( compile );
 our @EXPORT_OK = qw( validate Invocant );
 
-use constant Invocant => "Type::Tiny::Union"->new(
-	name             => "Invocant",
-	type_constraints => [Object, ClassName],
-);
+BEGIN {
+	my $Invocant = 'Type::Tiny::Union'->new(
+		name             => 'Invocant',
+		type_constraints => [Object, ClassName],
+	);
+	sub Invocant () { $Invocant };
+};
 
 #sub _exporter_expand_sub
 #{

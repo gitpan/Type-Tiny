@@ -25,6 +25,8 @@ dist:project
 		a nfo:FileDataObject;
 		nfo:fileName "lib/Type/Tiny/Manual.pod";
 	];
+	cpant:recommends  "Devel::StackTrace"^^cpant:dsWithoutVersion;
+	cpant:recommends  "Type::Tie"^^cpant:dsWithoutVersion;
 	cpant:test_requires "Test::More 0.96"^^cpant:dsWithVersion;
 	cpant:version_from [
 		a nfo:FileDataObject;
@@ -35,6 +37,9 @@ dist:project
 	];
 	dc:contributor    cpan:tobyink;
 	doap:bug-database <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>;
+	doap:category     [ rdfs:label "Moo" ];
+	doap:category     [ rdfs:label "Moose" ];
+	doap:category     [ rdfs:label "Mouse" ];
 	doap:category     [ rdfs:label "Type Constraint" ];
 	doap:category     [ rdfs:label "Type Coercion" ];
 	doap:category     [ rdfs:label "Type Library" ];
@@ -44,9 +49,6 @@ dist:project
 	doap:category     [ rdfs:label "Argument Validation" ];
 	doap:category     [ rdfs:label "Argument Checking" ];
 	doap:category     [ rdfs:label "Validation" ];
-	doap:category     [ rdfs:label "Moo" ];
-	doap:category     [ rdfs:label "Moose" ];
-	doap:category     [ rdfs:label "Mouse" ];
 	doap:created      "2013-03-23"^^xsd:date;
 	doap:developer    cpan:tobyink;
 	doap:download-page <https://metacpan.org/release/Type-Tiny>;
@@ -125,6 +127,7 @@ dist:project
 	doap:release      dist:v_0-015_04;
 	doap:release      dist:v_0-015_05;
 	doap:release      dist:v_0-016;
+	doap:release      dist:v_0-017_01;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -1934,6 +1937,7 @@ dist:v_0-015_04
 			rdfs:label "Mention in Type::Tiny::Manual::Libraries that the `extends` function is no longer exported by default; update example code.";
 			dcs:blame <urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>;
 			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86813>;
+			dcs:fixes <tdb:2013:https://github.com/tobyink/p5-type-tiny/issues/2>;
 			rdfs:seeAlso <https://github.com/tobyink/p5-type-tiny/pull/2>;
 		];
 		dcs:item [
@@ -1992,6 +1996,43 @@ dist:v_0-016
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.016.tar.gz>;
 	doap:revision     "0.016"^^xsd:string.
 
+dist:v_0-017_01
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.017_01"^^xsd:string;
+	dc:issued         "2013-07-19"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Update;
+			rdfs:label "Eval::TypeTiny now supports lexical subs under Perl 5.18.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Give an example of the default error messages thrown by Type::Tiny.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Work around lack of B::perlstring() function in Perl 5.6.x.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Improve examples of custom type constraint error message in Type::Utils and Type::Tiny::Manual::Libraries.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86892>;
+			dcs:thanks cpan:timb;
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Fix typo in Types::Standard 'regular exception' -> 'regular expression'.";
+			dcs:blame cpan:markstos;
+			dcs:fixes <tdb:2013:https://github.com/tobyink/p5-type-tiny/issues/4>;
+			rdfs:seeAlso <https://github.com/tobyink/p5-type-tiny/pull/4>;
+		];
+		dcs:versus dist:v_0-016;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.017_01.tar.gz>;
+	doap:revision     "0.017_01"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -2015,6 +2056,12 @@ cpan:ingy
 	foaf:name         "Ingy döt Net";
 	foaf:nick         "INGY";
 	foaf:page         <https://metacpan.org/author/INGY>.
+
+cpan:markstos
+	a                 foaf:Person;
+	foaf:name         "Mark Stosberg";
+	foaf:nick         "MARKSTOS";
+	foaf:page         <https://metacpan.org/author/MARKSTOS>.
 
 cpan:mmcleric
 	a                 foaf:Person;
@@ -2127,6 +2174,11 @@ cpan:tokuhirom
 	a                 dbug:Issue;
 	dbug:id           "86891"^^xsd:string;
 	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86891>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/86892>
+	a                 dbug:Issue;
+	dbug:id           "86892"^^xsd:string;
+	dbug:page         <https://rt.cpan.org/Ticket/Display.html?id=86892>.
 
 <http://purl.org/NET/cpan-uri/rt/ticket/86893>
 	a                 dbug:Issue;

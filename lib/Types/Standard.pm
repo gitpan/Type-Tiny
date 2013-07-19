@@ -1,11 +1,16 @@
 package Types::Standard;
 
+use 5.006001;
 use strict;
 use warnings;
 
 BEGIN {
+	if ($] < 5.008) { require Devel::TypeTiny::Perl56Compat };
+}
+
+BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.016';
+	$Types::Standard::VERSION   = '0.017_01';
 }
 
 use Type::Library -base;
@@ -1821,7 +1826,7 @@ a tied hash, use an intersection:
 
 =item C<< StrMatch[`a] >>
 
-A string that matches a regular exception:
+A string that matches a regular expression:
 
    declare "Distance",
       as StrMatch[ qr{^([0-9]+)\s*(mm|cm|m|km)$} ];

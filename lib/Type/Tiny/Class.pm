@@ -5,8 +5,12 @@ use strict;
 use warnings;
 
 BEGIN {
+	if ($] < 5.008) { require Devel::TypeTiny::Perl56Compat };
+}
+
+BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.016';
+	$Type::Tiny::Class::VERSION   = '0.017_01';
 }
 
 use Scalar::Util qw< blessed >;
