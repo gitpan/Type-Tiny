@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.017_02  2013-07-20
+
+ - (Bugfix) Further changes for Perl 5.6.x support.
+ - Hopefully improved workaround for missing B::perlstring() using
+   Data::Dumper instead of quotemeta().
+   ++$RIBASUSHI
+
 0.017_01  2013-07-19
 
  - (Bugfix Documentation) Fix typo in Types::Standard 'regular exception'

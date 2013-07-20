@@ -128,6 +128,7 @@ dist:project
 	doap:release      dist:v_0-015_05;
 	doap:release      dist:v_0-016;
 	doap:release      dist:v_0-017_01;
+	doap:release      dist:v_0-017_02;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2033,6 +2034,27 @@ dist:v_0-017_01
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.017_01.tar.gz>;
 	doap:revision     "0.017_01"^^xsd:string.
 
+dist:v_0-017_02
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.017_02"^^xsd:string;
+	dc:issued         "2013-07-20"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Hopefully improved workaround for missing B::perlstring() using Data::Dumper instead of quotemeta().";
+			dcs:thanks cpan:ribasushi;
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Further changes for Perl 5.6.x support.";
+		];
+		dcs:versus dist:v_0-017_01;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.017_02.tar.gz>;
+	doap:revision     "0.017_02"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -2086,6 +2108,12 @@ cpan:pjfl
 	foaf:name         "Peter Flanigan";
 	foaf:nick         "PJFL";
 	foaf:page         <https://metacpan.org/author/PJFL>.
+
+cpan:ribasushi
+	a                 foaf:Person;
+	foaf:name         "Peter Rabbitson";
+	foaf:nick         "RIBASUSHI";
+	foaf:page         <https://metacpan.org/author/RIBASUSHI>.
 
 cpan:rjbs
 	a                 foaf:Person;

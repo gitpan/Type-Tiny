@@ -1,13 +1,21 @@
 package Devel::TypeTiny::Perl56Compat;
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.017_01';
+our $VERSION   = '0.017_02';
 
 #### B doesn't provide perlstring() in 5.6. Monkey patch it.
 
 use B ();
-*B::perlstring = sub {
-	sprintf('"%s"', quotemeta($_[0]))
-} unless exists &B::perlstring;
+
+unless (exists &B::perlstring)
+{
+	require Data::Dumper;
+	my $d = 'Data::Dumper'->new([])->Indent(0)->Purity(0)->Pad('')->Useqq(1)->Terse(1)->Freezer('')->Toaster('');
+	*B::perlstring = sub {
+		my $perlstring = $d->Values([''.shift])->Dump;
+		($perlstring =~ /^"/) ? $perlstring : qq["$perlstring"];
+	};
+}
+
 push @B::EXPORT_OK, 'perlstring';
 
 #### Done!

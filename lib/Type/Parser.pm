@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.017_01';
+our $VERSION   = '0.017_02';
 
 # Token types
 # 
@@ -204,10 +204,10 @@ Evaluate: {
 	}
 	
 	my %precedence = (
-		+Type::Parser::COMMA     => 1,
-		+Type::Parser::UNION     => 2,
-		+Type::Parser::INTERSECT => 3,
-		+Type::Parser::NOT       => 4,
+		Type::Parser::COMMA()     , 1 ,
+		Type::Parser::UNION()     , 2 ,
+		Type::Parser::INTERSECT() , 3 ,
+		Type::Parser::NOT()       , 4 ,
 	);
 	
 	sub _parse_primary

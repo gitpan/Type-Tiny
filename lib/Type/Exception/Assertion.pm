@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Exception::Assertion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Exception::Assertion::VERSION   = '0.017_01';
+	$Type::Exception::Assertion::VERSION   = '0.017_02';
 }
 
 use base "Type::Exception";
@@ -122,7 +122,7 @@ sub _codefor
 	$b ||= do {
 		require B::Deparse;
 		my $tmp = "B::Deparse"->new;
-		$tmp->ambient_pragmas(strict => "all", warnings => "all");
+		$tmp->ambient_pragmas(strict => "all", warnings => "all") if $tmp->can('ambient_pragmas');
 		$tmp;
 	};
 	
