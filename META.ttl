@@ -130,6 +130,7 @@ dist:project
 	doap:release      dist:v_0-017_01;
 	doap:release      dist:v_0-017_02;
 	doap:release      dist:v_0-018;
+	doap:release      dist:v_0-019_01;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2070,6 +2071,26 @@ dist:v_0-018
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.018.tar.gz>;
 	doap:revision     "0.018"^^xsd:string.
+
+dist:v_0-019_01
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.019_01"^^xsd:string;
+	dc:issued         "2013-07-23"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Work around lack of B::perlstring() function in Perl 5.6.x in test suite.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Eval::TypeTiny now closes over variables properly.";
+		];
+		dcs:versus dist:v_0-018;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.019_01.tar.gz>;
+	doap:revision     "0.019_01"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

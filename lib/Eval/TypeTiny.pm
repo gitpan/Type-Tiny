@@ -14,7 +14,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.018';
+our $VERSION   = '0.019_01';
 our @EXPORT    = qw( eval_closure );
 our @EXPORT_OK = qw( HAS_LEXICAL_SUBS );
 
@@ -59,12 +59,7 @@ sub eval_closure
 	my $source    = join "\n" => (
 		"package Eval::TypeTiny::Sandbox$sandbox;",
 		"sub {",
-		map(
-			HAS_LEXICAL_SUBS
-				? _make_lexical_assignment($_, $i++)
-				: sprintf('my %s = %s{$_[%d]};', $_, substr($_, 0, 1), $i++),
-			@keys
-		),
+		map(_make_lexical_assignment($_, $i++), @keys),
 		$src,
 		"}",
 	);
@@ -84,24 +79,29 @@ sub eval_closure
 	return $compiler->(@{$args{environment}}{@keys});
 }
 
-HAS_LEXICAL_SUBS and eval <<'SUPPORT_LEXICAL_SUBS';
 my $tmp;
 sub _make_lexical_assignment
 {
 	my ($key, $index) = @_;
+	my $name = substr($key, 1);
+	
 	if (HAS_LEXICAL_SUBS and $key =~ /^\&/) {
 		$tmp++;
 		my $tmpname = '$__LEXICAL_SUB__'.$tmp;
-		my $name    = substr($key, 1);
 		return
 			"no warnings 'experimental::lexical_subs';".
 			"use feature 'lexical_subs';".
 			"my $tmpname = \$_[$index];".
 			"my sub $name { goto $tmpname };";
 	}
-	sprintf('my %s = %s{$_[%d]};', $key, substr($key, 0, 1), $index);
+	
+	sprintf(
+		'our %s; *%s = $_[%d];',
+		$key,
+		$name,
+		$index,
+	);
 }
-SUPPORT_LEXICAL_SUBS
 
 1;
 
