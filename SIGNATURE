@@ -16,15 +16,15 @@ Hash: SHA1
 
 SHA1 ffba79617e0a3973b8e686262c11356c9660fc80 .travis.yml
 SHA1 294505f858f11dd062e9916e3f50d88210a9ef54 CONTRIBUTING
-SHA1 c638705014b0695fe56180c6973dd40aa59547b1 COPYRIGHT
-SHA1 0242c3fd8276f6d3a33fb3cd19a65c55cd9e28d6 CREDITS
-SHA1 8edfbe2719f25533e516dc4ef17179900f8d84bd Changes
+SHA1 901e234dfaee732734397b9946aabc6271bd24e5 COPYRIGHT
+SHA1 88b53ba9c2118478cceff7fc2a6d5a8a94b53bfd CREDITS
+SHA1 e82af7a6cd7a1079223b317e9ebf56dfdebb54c0 Changes
 SHA1 937d452c5c4069f4cda9ffaf45a33f1eb5f060e8 LICENSE
 SHA1 ff865bface7d4548699bc2dc91291216765e9316 MANIFEST
-SHA1 52552ee65bcc4cadd6f8bef2c5d318fea656a062 META.ttl
-SHA1 ba8da89f7d5f69107c8920fe3a0bc8d30eb159f0 META.yml
+SHA1 4a6b72b0619924149b45cfa4bc1c6e55a99bb5c5 META.ttl
+SHA1 0b98e0513fa87f0cc165538d31f4000e98f61d50 META.yml
 SHA1 a76c4ed702e038cb5ce7bc89ac8036760099c670 Makefile.PL
-SHA1 a63d64e3f542201bcf9bd1ccfcde219401e55a90 NEWS
+SHA1 6d1b637a3b0081ac1ca708470e960ab2e6cfad11 NEWS
 SHA1 5ed17646a180117b56ced2ffc188ab4ac665c9d6 README
 SHA1 899a0efab4b5096bb91eb6c95cd8b3cdd9c40f6c examples/benchmark-coercions.pl
 SHA1 797286fcd93ea65440ba512e1b4076017e655020 examples/benchmark-constraints.pl
@@ -52,26 +52,26 @@ SHA1 85872fcf275a7868f858ca6ccc0e15cdaff8f8ac inc/Test/Fatal.pm
 SHA1 95d4da14025622f3a45f5e9b75b7b6860148f415 inc/Test/Requires.pm
 SHA1 75dd349355aff420c46d9e37802e39712b6309c2 inc/Try/Tiny.pm
 SHA1 feb933cefe2e3762e8322bd6071a2499f3440da1 inc/YAML/Tiny.pm
-SHA1 1ae0ace5136ed8fd27dc102b4d169eed4d75ab95 lib/Devel/TypeTiny/Perl56Compat.pm
-SHA1 47047534148c4df407eb64ac6ab9e2fe95a6a139 lib/Eval/TypeTiny.pm
-SHA1 a4dfb3a64f20866f084ed28c19bfaccad2781c90 lib/Exporter/TypeTiny.pm
-SHA1 51e13a829feadfd2242b81d9525decacae907165 lib/Reply/Plugin/TypeTiny.pm
-SHA1 a3244403a50d67a23c784181b228bcc94dd12302 lib/Test/TypeTiny.pm
-SHA1 23e643c0a4e20f7bc989b9bd0875f8ff6cec8590 lib/Type/Coercion.pm
-SHA1 79cde7239ea6d41d7b516b017d47b914be1ccc76 lib/Type/Coercion/Union.pm
-SHA1 a813bc138465e9571e4b6c525bb5fe4469f7b92f lib/Type/Exception.pm
-SHA1 f4f1137092a590282dfbde958cb50f90bf2d5ee0 lib/Type/Exception/Assertion.pm
-SHA1 0fc3c089d8133cdab0e30c7c2c129d2dd1c4cd23 lib/Type/Exception/Compilation.pm
-SHA1 c99f55ccbdfa5b96547181d152dcf87242ec421f lib/Type/Exception/WrongNumberOfParameters.pm
-SHA1 1de2802fb6f0bfdf2556c39ae6a5d90d6f2879ba lib/Type/Library.pm
-SHA1 ca301de5c832a651ad62922fc91cf95136313b07 lib/Type/Params.pm
-SHA1 08e37f822dd650e3ec2f555df2bc6b2765b5eb69 lib/Type/Parser.pm
-SHA1 90cb92b688612862f5d7f691c6f6c56258b30ba4 lib/Type/Registry.pm
-SHA1 82d9e9849916e75de8648819d529d6abc0cf8880 lib/Type/Tiny.pm
-SHA1 fb84ad90e51fc1841eb72400d16a990b043c466f lib/Type/Tiny/Class.pm
-SHA1 23bd5b0069d919eaf7c4bec53a0683e172866877 lib/Type/Tiny/Duck.pm
-SHA1 0e04f9d1c9b63e7296ce8312aea50636938d8b67 lib/Type/Tiny/Enum.pm
-SHA1 4ed413b2c2c9f52b0c282b00f2ac706844550b15 lib/Type/Tiny/Intersection.pm
+SHA1 e8aa13f7525b1995c85fddce563f703c01782f9d lib/Devel/TypeTiny/Perl56Compat.pm
+SHA1 7d9930f0d3b4f5bba19a4bd756127595142f8cd8 lib/Eval/TypeTiny.pm
+SHA1 17da4b9687b49c1795e8a09a53af6a5f60c30963 lib/Exporter/TypeTiny.pm
+SHA1 d06b4a8365910e9eb2b06f6230870535f3ed0362 lib/Reply/Plugin/TypeTiny.pm
+SHA1 32400f77f76cd35451d0f604fcdfedc7ef77b05e lib/Test/TypeTiny.pm
+SHA1 c9043dbbd17fb7a639632ab933b142cc878a32a0 lib/Type/Coercion.pm
+SHA1 429cc8889b54bf4cfa1c2bc7da6fd04aa2a295ae lib/Type/Coercion/Union.pm
+SHA1 a237aeb36cf46f1ced18da400662df54feab7e33 lib/Type/Exception.pm
+SHA1 1519a7edde96169804a5e62f9d52aa1f90880ca9 lib/Type/Exception/Assertion.pm
+SHA1 fc1d5fbfd1dea9774e04c51da2dba8d2fd525b45 lib/Type/Exception/Compilation.pm
+SHA1 a976d0fe0b82bf75f632caba1799ba8e97694653 lib/Type/Exception/WrongNumberOfParameters.pm
+SHA1 2afc9d3f6dc774dd30c1a1914663ebcb6a95d439 lib/Type/Library.pm
+SHA1 9e0a8eec53aae0271ba9a1f661b435c510aa68af lib/Type/Params.pm
+SHA1 f613725ba46cd1a9bd0eeae184ca32d23782fef9 lib/Type/Parser.pm
+SHA1 b8f736e6c751d58305efe393116cf61ab6580ee2 lib/Type/Registry.pm
+SHA1 86df79776f46e1ce02d6bd88f43273ce4e326422 lib/Type/Tiny.pm
+SHA1 470611943006d325ef5f5c6213573948274f8498 lib/Type/Tiny/Class.pm
+SHA1 85c3f442ce0341aa75e50be88d34a3aa086e3e26 lib/Type/Tiny/Duck.pm
+SHA1 6055c4df106657ed43ee452362a89d0f8c58a16f lib/Type/Tiny/Enum.pm
+SHA1 a836dd54f0d9c17b5b92085162f85657f4a8c9d6 lib/Type/Tiny/Intersection.pm
 SHA1 96142b082ec5990611b5dc3928dc7674ca548a44 lib/Type/Tiny/Manual.pod
 SHA1 b5c8ce3095a92013e27cea222bc3c9e35815ddb3 lib/Type/Tiny/Manual/Coercions.pod
 SHA1 7be726547105a9f6b8f24540834b3503a464eb12 lib/Type/Tiny/Manual/Libraries.pod
@@ -80,12 +80,12 @@ SHA1 a5d063f03a668b29a64725efa3e2d0b1b29ffda1 lib/Type/Tiny/Manual/UsingWithMoo.
 SHA1 196f1a0139e81d34d3d0411dbbe0239c87006927 lib/Type/Tiny/Manual/UsingWithMoose.pod
 SHA1 11989313f5c5e341e9a8adf84c56e19e0c3ecb8e lib/Type/Tiny/Manual/UsingWithMouse.pod
 SHA1 6f275259876e125860b5c547b42f1aa43422096a lib/Type/Tiny/Manual/UsingWithOther.pod
-SHA1 8f5c9114e24534d2427d2312caf147f02dae24d1 lib/Type/Tiny/Role.pm
-SHA1 de6e0e919bb2f00ee78471147b7e934e5d477030 lib/Type/Tiny/Union.pm
-SHA1 2ec2e872989a9da9472f89bf1fa27df402267ddd lib/Type/Utils.pm
-SHA1 6f62956bf16921422a70d2ac5318a18d1c9f2bb4 lib/Types/Standard.pm
-SHA1 e2339035f311f972988eb37a37faaf0a16fdd817 lib/Types/TypeTiny.pm
-SHA1 4c48cdcace9f4742e2f6f582503083c06360dcbf meta/changes.pret
+SHA1 7e327c9344feada8288ab9ca9d7ce8b393e80a9e lib/Type/Tiny/Role.pm
+SHA1 2de8afd929b17160ce6b40ea4dbd451bc08b7642 lib/Type/Tiny/Union.pm
+SHA1 2ad380ea3110b2a6f5b8c1319e28df6046592d34 lib/Type/Utils.pm
+SHA1 39c35c0ba4cf45cd9504e2c353b228d2baf06557 lib/Types/Standard.pm
+SHA1 a8f2363ef4ed349fcdfda0457fa6f6d64ee85bb4 lib/Types/TypeTiny.pm
+SHA1 b63449500974ad8f627fac8e680eb13dd2efb731 meta/changes.pret
 SHA1 44c50e98f08e14dbcf92f35026920a99d2f4acd2 meta/doap.pret
 SHA1 b342e3caba53311c0121218ab64d02a2f0957a46 meta/makefile.pret
 SHA1 39e654d17e476daa474202b52c1713c124e091c0 meta/people.pret
@@ -171,7 +171,7 @@ SHA1 c24de2f66695a2038341be5cea9bb8841d6ab1b4 t/validationclass.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlHus4EACgkQzr+BKGoqfTmYQwCfe9aacNjpwJ0dqEqZU8q8VC/o
-YPAAoKMvKEE5HmNPGKvo52tbiIP2+UjK
-=N1ea
+iEYEARECAAYFAlHu6BoACgkQzr+BKGoqfTlNzwCfU1Cusk5n2enCXj4QqqmAvJuP
+WiYAn2t5oLj1OsJ+upfVdzdv8eq+jEde
+=fxNh
 -----END PGP SIGNATURE-----
