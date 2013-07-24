@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.020';
+	$Type::Tiny::VERSION   = '0.021_01';
 }
 
 use Eval::TypeTiny ();
@@ -353,6 +353,47 @@ sub is_a_type_of
 	return unless blessed($other) && $other->isa("Type::Tiny");
 	
 	$self->equals($other) or $self->is_subtype_of($other);
+}
+
+sub strictly_equals
+{
+	my ($self, $other) = map Types::TypeTiny::to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
+	return unless blessed($other) && $other->isa("Type::Tiny");
+	$self->{uniq} == $other->{uniq};
+}
+
+sub is_strictly_subtype_of
+{
+	my ($self, $other) = map Types::TypeTiny::to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
+	return unless blessed($other) && $other->isa("Type::Tiny");
+
+	my $this = $self;
+	while (my $parent = $this->parent)
+	{
+		return !!1 if $parent->strictly_equals($other);
+		$this = $parent;
+	}
+	return;
+}
+
+sub is_strictly_supertype_of
+{
+	my ($self, $other) = map Types::TypeTiny::to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
+	return unless blessed($other) && $other->isa("Type::Tiny");
+	
+	$other->is_strictly_subtype_of($self);
+}
+
+sub is_strictly_a_type_of
+{
+	my ($self, $other) = map Types::TypeTiny::to_TypeTiny($_), @_;
+	return unless blessed($self)  && $self->isa("Type::Tiny");
+	return unless blessed($other) && $other->isa("Type::Tiny");
+	
+	$self->strictly_equals($other) or $self->is_strictly_subtype_of($other);
 }
 
 sub qualified_name
@@ -1085,6 +1126,23 @@ my behaviour as it seems more useful. >>
 
 Compare two types. See L<Moose::Meta::TypeConstraint> for what these all mean.
 (OK, Moose doesn't define C<is_supertype_of>, but you get the idea, right?)
+
+Note that these have a slightly DWIM side to them. If you create two
+L<Type::Tiny::Class> objects which test the same class, they're considered
+equal. And:
+
+   my $subtype_of_Num = Types::Standard::Num->create_child_type;
+   my $subtype_of_Int = Types::Standard::Int->create_child_type;
+   $subtype_of_Int->is_subtype_of( $subtype_of_Num );  # true
+
+=item C<< strictly_equals($other) >>, C<< is_strictly_subtype_of($other) >>, C<< is_strictly_supertype_of($other) >>, C<< is_strictly_a_type_of($other) >>
+
+Stricter versions of the type comparison functions. These only care about
+explicit inheritance via C<parent>.
+
+   my $subtype_of_Num = Types::Standard::Num->create_child_type;
+   my $subtype_of_Int = Types::Standard::Int->create_child_type;
+   $subtype_of_Int->is_strictly_subtype_of( $subtype_of_Num );  # false
 
 =item C<< check($value) >>
 
