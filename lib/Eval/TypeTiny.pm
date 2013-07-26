@@ -2,7 +2,10 @@ package Eval::TypeTiny;
 
 use strict;
 
-BEGIN { *HAS_LEXICAL_SUBS = ($] >= 5.018) ? sub(){!!1} : sub(){!!0} };
+BEGIN {
+	*HAS_LEXICAL_SUBS = ($] >= 5.018)                    ? sub(){!!1} : sub(){!!0};
+	*HAS_LEXICAL_VARS = eval { require Devel::LexAlias } ? sub(){!!1} : sub(){!!0};
+};
 
 sub _clean_eval
 {
@@ -14,9 +17,9 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.021_01';
+our $VERSION   = '0.021_02';
 our @EXPORT    = qw( eval_closure );
-our @EXPORT_OK = qw( HAS_LEXICAL_SUBS );
+our @EXPORT_OK = qw( HAS_LEXICAL_SUBS HAS_LEXICAL_VARS );
 
 sub import
 {
@@ -76,7 +79,14 @@ sub eval_closure
 		);
 	}
 	
-	return $compiler->(@{$args{environment}}{@keys});
+	my $code = $compiler->(@{$args{environment}}{@keys});
+
+	if (HAS_LEXICAL_VARS)
+	{
+		Devel::LexAlias::lexalias($code, $_, $args{environment}{$_}) for grep !/^\&/, @keys;
+	}
+	
+	return $code;
 }
 
 my $tmp;
@@ -95,13 +105,116 @@ sub _make_lexical_assignment
 			"my sub $name { goto $tmpname };";
 	}
 	
-	sprintf(
-		'our %s; *%s = $_[%d];',
-		$key,
-		$name,
-		$index,
-	);
+	if (HAS_LEXICAL_VARS) {
+		return "my $key;";
+	}
+	else {
+		my $tieclass = {
+			'@' => 'Eval::TypeTiny::_TieArray',
+			'%' => 'Eval::TypeTiny::_TieHash',
+			'$' => 'Eval::TypeTiny::_TieScalar',
+		}->{ substr($key, 0, 1) };
+		
+		return sprintf(
+			'tie(my(%s), "%s", $_[%d]);',
+			$key,
+			$tieclass,
+			$index,
+		);
+	}
 }
+
+HAS_LEXICAL_VARS or eval <<'FALLBACK';
+no warnings qw(void once uninitialized numeric);
+
+{
+	package #
+		Eval::TypeTiny::_TieArray;
+	require Tie::Array;
+	our @ISA = qw( Tie::StdArray );
+	sub TIEARRAY {
+		my $class = shift;
+		bless $_[0] => $class;
+	}
+	sub AUTOLOAD {
+		my $self = shift;
+		my ($method) = (our $AUTOLOAD =~ /(\w+)$/);
+		defined tied(@$self) and return tied(@$self)->$method(@_);
+		require Carp;
+		Carp::croak(qq[Can't call method "$method" on an undefined value]);
+	}
+	sub can {
+		my $self = shift;
+		my $code = $self->SUPER::can(@_)
+			|| (defined tied(@$self) and tied(@$self)->can(@_));
+		return $code;
+	}
+	use overload
+		q[bool]  => sub { !!   tied @{$_[0]} },
+		q[""]    => sub { '' . tied @{$_[0]} },
+		q[0+]    => sub { 0  + tied @{$_[0]} },
+		fallback => 1,
+	;
+}
+{
+	package #
+		Eval::TypeTiny::_TieHash;
+	require Tie::Hash;
+	our @ISA = qw( Tie::StdHash );
+	sub TIEHASH {
+		my $class = shift;
+		bless $_[0] => $class;
+	}
+	sub AUTOLOAD {
+		my $self = shift;
+		my ($method) = (our $AUTOLOAD =~ /(\w+)$/);
+		defined tied(%$self) and return tied(%$self)->$method(@_);
+		require Carp;
+		Carp::croak(qq[Can't call method "$method" on an undefined value]);
+	}
+	sub can {
+		my $self = shift;
+		my $code = $self->SUPER::can(@_)
+			|| (defined tied(%$self) and tied(%$self)->can(@_));
+		return $code;
+	}
+	use overload
+		q[bool]  => sub { !!   tied %{$_[0]} },
+		q[""]    => sub { '' . tied %{$_[0]} },
+		q[0+]    => sub { 0  + tied %{$_[0]} },
+		fallback => 1,
+	;
+}
+{
+	package #
+		Eval::TypeTiny::_TieScalar;
+	require Tie::Scalar;
+	our @ISA = qw( Tie::StdScalar );
+	sub TIESCALAR {
+		my $class = shift;
+		bless $_[0] => $class;
+	}
+	sub AUTOLOAD {
+		my $self = shift;
+		my ($method) = (our $AUTOLOAD =~ /(\w+)$/);
+		defined tied($$self) and return tied($$self)->$method(@_);
+		require Carp;
+		Carp::croak(qq[Can't call method "$method" on an undefined value]);
+	}
+	sub can {
+		my $self = shift;
+		my $code = $self->SUPER::can(@_)
+			|| (defined tied($$self) and tied($$self)->can(@_));
+		return $code;
+	}
+	use overload
+		q[bool]  => sub { !!   tied ${$_[0]} },
+		q[""]    => sub { '' . tied ${$_[0]} },
+		q[0+]    => sub { 0  + tied ${$_[0]} },
+		fallback => 1,
+	;
+}
+FALLBACK
 
 1;
 
@@ -134,7 +247,7 @@ function from L<Eval::Closure>:
 
 =head2 Constants
 
-The following constant may be exported, but is not exported by default.
+The following constants may be exported, but are not by default.
 
 =over
 
@@ -142,6 +255,13 @@ The following constant may be exported, but is not exported by default.
 
 Boolean indicating whether Eval::TypeTiny has support for lexical subs.
 (This feature requires Perl 5.18.)
+
+=item C<< HAS_LEXICAL_VARS >>
+
+Don't worry; closing over lexical variables in the closures is always
+supported! However, if this constant is true, it means that
+L<Devel::LexAlias> is available, which makes them slightly faster than
+the fallback solution which uses tied variables.
 
 =back
 

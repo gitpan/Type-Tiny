@@ -25,6 +25,7 @@ dist:project
 		a nfo:FileDataObject;
 		nfo:fileName "lib/Type/Tiny/Manual.pod";
 	];
+	cpant:recommends  "Devel::LexAlias 0.05"^^cpant:dsWithVersion;
 	cpant:recommends  "Devel::StackTrace"^^cpant:dsWithoutVersion;
 	cpant:recommends  "Type::Tie"^^cpant:dsWithoutVersion;
 	cpant:test_requires "Test::More 0.96"^^cpant:dsWithVersion;
@@ -133,6 +134,7 @@ dist:project
 	doap:release      dist:v_0-019_01;
 	doap:release      dist:v_0-020;
 	doap:release      dist:v_0-021_01;
+	doap:release      dist:v_0-021_02;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2136,6 +2138,22 @@ dist:v_0-021_01
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.021_01.tar.gz>;
 	doap:revision     "0.021_01"^^xsd:string.
+
+dist:v_0-021_02
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.021_02"^^xsd:string;
+	dc:issued         "2013-07-26"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Use real lexicals again for Eval::TypeTiny; this requires Devel::LexAlias, but there's a fallback to using tied variables.";
+		];
+		dcs:versus dist:v_0-021_01;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.021_02.tar.gz>;
+	doap:revision     "0.021_02"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

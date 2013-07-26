@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.021_02  2013-07-26
+
+ - Use real lexicals again for Eval::TypeTiny; this requires
+   Devel::LexAlias, but there's a fallback to using tied variables.
+
 0.021_01  2013-07-24
 
  - (Addition) Type::Tiny is_strictly_a_type_of method.

@@ -55,7 +55,8 @@ DEPENDENCIES
     Certain features require additional modules. Tying a variable to a type
     constraint (e.g. "tie my $count, Int") requires Type::Tie; stack traces
     on exceptions require Devel::StackTrace. The Reply::Plugin::TypeTiny
-    plugin for Reply requires Reply (obviously).
+    plugin for Reply requires Reply (obviously). Devel::LexAlias may
+    *slightly* increase the speed of some of Type::Tiny's compiled coderefs.
 
     The test suite additionally requires Test::More, Test::Fatal and
     Test::Requires. Test::More comes bundled with Perl, but if you are using

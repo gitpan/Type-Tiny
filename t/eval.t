@@ -72,6 +72,86 @@ my $closure2 = eval_closure(
 $closure2->();
 is($external, 42, 'closing over variables really really really works!');
 
+{
+	my $destroyed = 0;
+	
+	{
+		package MyIndicator;
+		sub DESTROY { $destroyed++ }
+	}
+	
+	{
+		my $number = bless \(my $foo), "MyIndicator";
+		$$number = 40;
+		my $closure = eval_closure(
+			source       => 'sub { $$xxx += 2 }',
+			environment  => { '$xxx' => \$number },
+		);
+		
+		$closure->();
+		
+		is($$number, 42);
+		is($destroyed, 0);
+	}
+	
+	is($destroyed, 1, 'closed over variables disappear on cue');
+}
+
+{
+	my @store;
+	
+	{
+		package MyTie;
+		use Tie::Scalar ();
+		our @ISA = 'Tie::StdScalar';
+		sub STORE {
+			my $self = shift;
+			push @store, $_[0];
+			$self->SUPER::STORE(@_);
+		}
+		sub my_method { 42 }
+	}
+	
+	tie(my($var), 'MyTie');
+	
+	$var = 1;
+	
+	my $closure = eval_closure(
+		source       => 'sub { $xxx = $_[0]; tied($xxx)->my_method }',
+		environment  => { '$xxx' => \$var },
+	);
+	
+	is($closure->(2), 42, 'can close over tied variables ... AUTOLOAD stuff');
+	$closure->(3);
+	
+	my $nother_closure = eval_closure(
+		source       => 'sub { tied($xxx)->can(@_) }',
+		environment  => { '$xxx' => \$var },
+	);
+	
+	ok( $nother_closure->('my_method'), '... can');
+	ok(!$nother_closure->('your_method'), '... !can');
+
+	is_deeply(
+		\@store,
+		[ 1 .. 3],
+		'... tie still works',
+	);
+
+	{
+		package OtherTie;
+		our @ISA = 'MyTie';
+		sub my_method { 666 }
+	}
+	
+	tie($var, 'OtherTie');
+	is($closure->(4), 666, '... can be retied');
+
+	untie($var);
+	my $e = exception { $closure->(5) };
+	like($e, qr{^Can't call method "my_method" on an undefined value}, '... can be untied');
+}
+
 my $e = exception { eval_closure(source => 'sub { 1 ]') };
 
 isa_ok(
