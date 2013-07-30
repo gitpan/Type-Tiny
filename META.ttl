@@ -135,6 +135,7 @@ dist:project
 	doap:release      dist:v_0-020;
 	doap:release      dist:v_0-021_01;
 	doap:release      dist:v_0-021_02;
+	doap:release      dist:v_0-021_03;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2154,6 +2155,26 @@ dist:v_0-021_02
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.021_02.tar.gz>;
 	doap:revision     "0.021_02"^^xsd:string.
+
+dist:v_0-021_03
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.021_03"^^xsd:string;
+	dc:issued         "2013-07-30"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Restore Eval::TypeTiny's pre-0.019_01 behaviour re closing over lexicals, but enable the 0.021_02 behaviour if alias=>1 option is passed in.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Improve compatibility between Type::Tiny and Moose attribute native traits.";
+		];
+		dcs:versus dist:v_0-021_02;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.021_03.tar.gz>;
+	doap:revision     "0.021_03"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.021_02';
+our $VERSION   = '0.021_03';
 
 use Scalar::Util qw< blessed >;
 
@@ -121,6 +121,12 @@ sub _TypeTinyFromMoose
 	if (ref $t->{"Types::TypeTiny::to_TypeTiny"})
 	{
 		return $t->{"Types::TypeTiny::to_TypeTiny"};
+	}
+	
+	if ($t->name ne '__ANON__') {
+		require Types::Standard;
+		my $ts = 'Types::Standard'->get_type($t->name);
+		return $ts if $ts->{_is_core};
 	}
 	
 	my %opts;

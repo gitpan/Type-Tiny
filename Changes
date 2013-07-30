@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.021_03  2013-07-30
+
+ - Improve compatibility between Type::Tiny and Moose attribute native
+   traits.
+ - Restore Eval::TypeTiny's pre-0.019_01 behaviour re closing over
+   lexicals, but enable the 0.021_02 behaviour if alias=>1 option is passed
+   in.
+
 0.021_02  2013-07-26
 
  - Use real lexicals again for Eval::TypeTiny; this requires
