@@ -6,6 +6,16 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.021_04  2013-07-30
+
+ - (Bugfix) Fix Type::Parser's handling of numeric parameters; they
+   shouldn't need quoting.
+ - (Bugfix) Fix Types::Standard::Dict differentiating between undef and not
+   exists.
+   Fixes RT#87443
+   ++$TIMB
+ - (Packaging) Add dependency on Exporter 5.57 for older versions of Perl.
+
 0.021_03  2013-07-30
 
  - Improve compatibility between Type::Tiny and Moose attribute native
@@ -345,7 +355,7 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
  - Type::Tiny::Union types now have an automatically calculated parent type
    constraint based on the most specific common parent type constraint.
 
-0.007_01  2013-06-01  # Happy birthday to me...
+0.007_01  2013-06-01  Happy birthday to me...
 
  - (Addition) Type::Parser.
  - (Addition) Types::Standard now has LaxNum/StrictNum type constraints,
@@ -598,7 +608,7 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
    Type::Tiny object from becoming out of sync with its equivalent Mouse or
    Moose constraint objects.
 
-0.001  2013-04-15  # First public release
+0.001  2013-04-15  First public release
 
  - (Addition) More test cases for Optional[`a] within Dict[`a].
  - (Bugfix) Some inline code assumed that it would be compiled in a package
@@ -720,6 +730,6 @@ Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
  - (Bugfix) Anchor enum regexps to beginning and end of string.
  - (Documentation) Beginnings of Type::Tiny::Manual.
 
-0.000_01  2013-04-02  # Developer preview
+0.000_01  2013-04-02  Developer preview
 
 

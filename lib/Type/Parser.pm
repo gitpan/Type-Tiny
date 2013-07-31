@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.021_03';
+our $VERSION   = '0.021_04';
 
 # Token types
 # 
@@ -347,6 +347,7 @@ Evaluate: {
 	package # hide from CPAN
 	Type::Parser::TokenStream;
 	
+	use Scalar::Util qw(looks_like_number);
 	use Text::Balanced qw(extract_quotelike);
 	
 	sub new
@@ -463,7 +464,7 @@ Evaluate: {
 			return bless([ Type::Parser::QUOTELIKE, $quotelike ], "Type::Parser::Token"),;
 		}
 		
-		if ($self->{remaining} =~ /^([\w:]+)/sm)
+		if ($self->{remaining} =~ /^([+-]?[\w:.+]+)/sm)
 		{
 			my $spelling = $1;
 			substr($self->{remaining}, 0, length $spelling) = "";
@@ -471,6 +472,10 @@ Evaluate: {
 			if ($spelling =~ /::$/sm)
 			{
 				return bless([ Type::Parser::CLASS, $spelling ], "Type::Parser::Token"),;
+			}
+			elsif (looks_like_number($spelling))
+			{
+				return bless([ Type::Parser::STRING, $spelling ], "Type::Parser::Token"),;
 			}
 			elsif ($self->{remaining} =~ /^\s*=>/sm) # peek ahead
 			{
