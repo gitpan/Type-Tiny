@@ -1,6 +1,11 @@
 package Devel::TypeTiny::Perl56Compat;
+
+use 5.006;
+use strict;
+use warnings;
+
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.021_04';
+our $VERSION   = '0.022';
 
 #### B doesn't provide perlstring() in 5.6. Monkey patch it.
 

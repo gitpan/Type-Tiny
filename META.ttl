@@ -150,6 +150,7 @@ dist:project
 	doap:release      dist:v_0-021_02;
 	doap:release      dist:v_0-021_03;
 	doap:release      dist:v_0-021_04;
+	doap:release      dist:v_0-022;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2215,6 +2216,29 @@ dist:v_0-021_04
 	dcs:released-by   cpan:tobyink;
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.021_04.tar.gz>;
 	doap:revision     "0.021_04"^^xsd:string.
+
+dist:v_0-022
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.022"^^xsd:string;
+	dc:issued         "2013-08-06"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "In Devel::TypeTiny::Perl56Compat, `use strict` and `use warnings`.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Improved implementations of is_subtype_of/is_strictly_subtype_of; better for subclassing.";
+		];
+		dcs:item [
+			a dcs:Documentation;
+			rdfs:label "Updated NEWS file.";
+		];
+		dcs:versus dist:v_0-021_04;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.022.tar.gz>;
+	doap:revision     "0.022"^^xsd:string.
 
 cpan:bowtie
 	a                 foaf:Person;

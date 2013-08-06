@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.021_04';
+	$Type::Tiny::VERSION   = '0.022';
 }
 
 use Eval::TypeTiny ();
@@ -337,13 +337,16 @@ sub is_subtype_of
 	return unless blessed($self)  && $self->isa("Type::Tiny");
 	return unless blessed($other) && $other->isa("Type::Tiny");
 
-	my $this = $self;
-	while (my $parent = $this->parent)
-	{
-		return !!1 if $parent->equals($other);
-		$this = $parent;
-	}
-	return;
+#	my $this = $self;
+#	while (my $parent = $this->parent)
+#	{
+#		return !!1 if $parent->equals($other);
+#		$this = $parent;
+#	}
+#	return;
+
+	return unless $self->has_parent;
+	$self->parent->equals($other) or $self->parent->is_subtype_of($other);
 }
 
 sub is_supertype_of
@@ -378,13 +381,16 @@ sub is_strictly_subtype_of
 	return unless blessed($self)  && $self->isa("Type::Tiny");
 	return unless blessed($other) && $other->isa("Type::Tiny");
 
-	my $this = $self;
-	while (my $parent = $this->parent)
-	{
-		return !!1 if $parent->strictly_equals($other);
-		$this = $parent;
-	}
-	return;
+#	my $this = $self;
+#	while (my $parent = $this->parent)
+#	{
+#		return !!1 if $parent->strictly_equals($other);
+#		$this = $parent;
+#	}
+#	return;
+
+	return unless $self->has_parent;
+	$self->parent->strictly_equals($other) or $self->parent->is_strictly_subtype_of($other);
 }
 
 sub is_strictly_supertype_of

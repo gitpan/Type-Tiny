@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.022  2013-08-06
+
+ - (Documentation) Updated NEWS file.
+ - Improved implementations of is_subtype_of/is_strictly_subtype_of; better
+   for subclassing.
+ - In Devel::TypeTiny::Perl56Compat, `use strict` and `use warnings`.
+
 0.021_04  2013-07-30
 
  - (Bugfix) Fix Type::Parser's handling of numeric parameters; they
