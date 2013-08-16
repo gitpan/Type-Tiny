@@ -151,6 +151,7 @@ dist:project
 	doap:release      dist:v_0-021_03;
 	doap:release      dist:v_0-021_04;
 	doap:release      dist:v_0-022;
+	doap:release      dist:v_0-023_01;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2240,6 +2241,23 @@ dist:v_0-022
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.022.tar.gz>;
 	doap:revision     "0.022"^^xsd:string.
 
+dist:v_0-023_01
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.023_01"^^xsd:string;
+	dc:issued         "2013-08-16"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix Moo -> Moose type inflation issue.";
+			dcs:thanks cpan:mattp;
+		];
+		dcs:versus dist:v_0-022;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.023_01.tar.gz>;
+	doap:revision     "0.023_01"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -2269,6 +2287,12 @@ cpan:markstos
 	foaf:name         "Mark Stosberg";
 	foaf:nick         "MARKSTOS";
 	foaf:page         <https://metacpan.org/author/MARKSTOS>.
+
+cpan:mattp
+	a                 foaf:Person;
+	foaf:name         "Matt Phillips";
+	foaf:nick         "MATTP";
+	foaf:page         <https://metacpan.org/author/MATTP>.
 
 cpan:mmcleric
 	a                 foaf:Person;

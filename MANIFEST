@@ -106,6 +106,7 @@ t/library-types.t
 t/match-on-type.t
 t/moo-coercion.t
 t/moo-exceptions.t
+t/moo-inflation-2.t
 t/moo-inflation.t
 t/moo.t
 t/moose-autott.t

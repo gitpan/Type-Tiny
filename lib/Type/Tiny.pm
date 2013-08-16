@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.022';
+	$Type::Tiny::VERSION   = '0.023_01';
 }
 
 use Eval::TypeTiny ();
@@ -132,8 +132,8 @@ sub new
 	
 	unless ($params{tmp})
 	{
-		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self }
-			if $self->has_library && !$self->is_anon;
+		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self };
+#			if $self->has_library && !$self->is_anon;
 		
 		$ALL_TYPES{ $self->{uniq} } = $self;
 		weaken($ALL_TYPES{ $self->{uniq} });
@@ -206,7 +206,7 @@ sub has_constraint_generator { exists $_[0]{constraint_generator} }
 sub has_inline_generator     { exists $_[0]{inline_generator} }
 sub has_coercion_generator   { exists $_[0]{coercion_generator} }
 sub has_parameters           { exists $_[0]{parameters} }
-sub has_message              { exists $_[0]{message} }
+sub has_message              { defined $_[0]{message} }
 sub has_deep_explanation     { exists $_[0]{deep_explanation} }
 
 sub _default_message         { $_[0]{_default_message} ||= $_[0]->_build_default_message }
