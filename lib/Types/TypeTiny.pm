@@ -4,11 +4,11 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.023_01';
+our $VERSION   = '0.023_02';
 
 use Scalar::Util qw< blessed >;
 
-our @EXPORT_OK = qw( CodeLike StringLike TypeTiny HashLike ArrayLike to_TypeTiny );
+our @EXPORT_OK = ( __PACKAGE__->type_names, qw/to_TypeTiny/ );
 
 my %cache;
 
@@ -35,6 +35,11 @@ sub get_type
 	my $type = $func->();
 	return $type if blessed($type) && $type->isa("Type::Tiny");
 	return;
+}
+
+sub type_names
+{
+	qw( CodeLike StringLike TypeTiny HashLike ArrayLike );
 }
 
 sub StringLike ()
@@ -316,6 +321,8 @@ works, for rough compatibility with a real L<Type::Library> type library.
 =item C<< meta >>
 
 =item C<< get_type($name) >>
+
+=item C<< type_names >>
 
 =back
 

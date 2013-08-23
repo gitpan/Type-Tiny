@@ -112,6 +112,7 @@ t/moo.t
 t/moose-autott.t
 t/moose-coercion.t
 t/moose.t
+t/moosextypes-extending.t
 t/moosextypes-more.t
 t/moosextypes.t
 t/mouse-coercion.t
@@ -131,6 +132,7 @@ t/params-optional.t
 t/params-positional.t
 t/params-slurpy.t
 t/parser.t
+t/registry-moosextypes.t
 t/registry.t
 t/rt85911.t
 t/rt86004.t

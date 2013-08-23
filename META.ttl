@@ -46,6 +46,22 @@ dist:project
 		deps:on "Devel::LexAlias 0.05"^^deps:CpanId;
 		rdfs:comment "Devel::LexAlias is useful for some Eval::TypeTiny features."@en;
 	];
+	deps:runtime-suggestion [
+		deps:on "Moose 2.0400"^^deps:CpanId;
+		rdfs:comment "Type::Tiny works nicely with Moose."@en;
+	];
+	deps:runtime-suggestion [
+		deps:on "Mouse 1.00"^^deps:CpanId;
+		rdfs:comment "Type::Tiny works nicely with Mouse."@en;
+	];
+	deps:runtime-suggestion [
+		deps:on "Moo 1.000000"^^deps:CpanId;
+		rdfs:comment "Type::Tiny works nicely with Moo."@en;
+	];
+	deps:runtime-suggestion [
+		deps:on "Reply"^^deps:CpanId;
+		rdfs:comment "Type::Tiny bundles a plugin for Reply."@en;
+	];
 	deps:test-requirement [
 		deps:on "Test::More 0.96"^^deps:CpanId;
 		rdfs:comment "I don't have the patience to maintain a test suite that runs on ancient versions of Test::More."@en;
@@ -152,6 +168,7 @@ dist:project
 	doap:release      dist:v_0-021_04;
 	doap:release      dist:v_0-022;
 	doap:release      dist:v_0-023_01;
+	doap:release      dist:v_0-023_02;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2258,6 +2275,42 @@ dist:v_0-023_01
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.023_01.tar.gz>;
 	doap:revision     "0.023_01"^^xsd:string.
 
+dist:v_0-023_02
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.023_02"^^xsd:string;
+	dc:issued         "2013-08-23"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Type::Registry now has an `add_type` method, for adding a single type constraint to a registry.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Registry's `add_types` method now supports importing MooseX::Types and MouseX::Types libraries.";
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Type::Utils' `extend` function now supports extending MooseX::Types and MouseX::Types libraries.";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Fix quoting in error messages which caused Type::Params to be unable to compile some coderefs.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/87846>;
+			dcs:thanks cpan:timb;
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Improve ugly type assertion failure messages when given structures of nested references.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/87999>;
+			dcs:thanks cpan:timb;
+		];
+		dcs:versus dist:v_0-023_01;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.023_02.tar.gz>;
+	doap:revision     "0.023_02"^^xsd:string.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -2426,6 +2479,16 @@ cpan:tokuhirom
 	a                 bugs:Issue;
 	bugs:id           "87443"^^xsd:string;
 	bugs:page         <https://rt.cpan.org/Ticket/Display.html?id=87443>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/87846>
+	a                 bugs:Issue;
+	bugs:id           "87846"^^xsd:string;
+	bugs:page         <https://rt.cpan.org/Ticket/Display.html?id=87846>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/87999>
+	a                 bugs:Issue;
+	bugs:id           "87999"^^xsd:string;
+	bugs:page         <https://rt.cpan.org/Ticket/Display.html?id=87999>.
 
 []
 	a                 nfo:FileDataObject;

@@ -6,6 +6,23 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.023_02  2013-08-23
+
+ - (Addition) Type::Registry now has an `add_type` method, for adding a
+   single type constraint to a registry.
+ - (Bugfix) Fix quoting in error messages which caused Type::Params to be
+   unable to compile some coderefs.
+   Fixes RT#87846
+   ++$TIMB
+ - (Bugfix) Improve ugly type assertion failure messages when given
+   structures of nested references.
+   Fixes RT#87999
+   ++$TIMB
+ - Type::Registry's `add_types` method now supports importing MooseX::Types
+   and MouseX::Types libraries.
+ - Type::Utils' `extend` function now supports extending MooseX::Types and
+   MouseX::Types libraries.
+
 0.023_01  2013-08-16
 
  - (Bugfix) Fix Moo -> Moose type inflation issue.

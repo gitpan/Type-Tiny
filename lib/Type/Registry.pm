@@ -6,13 +6,13 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.023_01';
+	$Type::Registry::VERSION   = '0.023_02';
 }
 
 use Exporter::TypeTiny qw( mkopt _croak );
 use Scalar::Util qw( refaddr );
 use Type::Parser qw( eval_type );
-use Types::TypeTiny qw( ArrayLike );
+use Types::TypeTiny qw( CodeLike ArrayLike to_TypeTiny );
 
 use base "Exporter::TypeTiny";
 our @EXPORT_OK = qw(t);
@@ -66,26 +66,83 @@ sub add_types
 	for my $opt (@$opts)
 	{
 		my ($lib, $types) = @_;
-		$types ||= [qw/-types/];
 		
 		$lib =~ s/^-/Types::/;
 		eval "require $lib";
-		$lib->isa("Type::Library") || $lib eq 'Types::TypeTiny'
-			or _croak("%s is not a type library", $lib);
-		
-		ArrayLike->check($types)
-			or _croak("Expected arrayref following '%s'; got %s", $lib, $types);
 		
 		my %hash;
-		$lib->import({into => \%hash}, @$types);
+		
+		if ($lib->isa("Type::Library") or $lib eq 'Types::TypeTiny')
+		{
+			$types ||= [qw/-types/];
+			ArrayLike->check($types)
+				or _croak("Expected arrayref following '%s'; got %s", $lib, $types);
+			
+			$lib->import({into => \%hash}, @$types);
+			$hash{$_} = &{$hash{$_}}() for keys %hash;
+		}
+		elsif ($lib->isa("MooseX::Types::Base"))
+		{
+			$types ||= [];
+			ArrayLike->check($types) && (@$types == 0)
+				or _croak("Library '%s' is a MooseX::Types type constraint library. No import options currently supported", $lib);
+			
+			require Moose::Util::TypeConstraints;
+			my $moosextypes = $lib->type_storage;
+			for my $name (sort keys %$moosextypes)
+			{
+				my $tt = to_TypeTiny(
+					Moose::Util::TypeConstraints::find_type_constraint($moosextypes->{$name})
+				);
+				$hash{$name} = $tt;
+			}
+		}
+		elsif ($lib->isa("MouseX::Types::Base"))
+		{
+			$types ||= [];
+			ArrayLike->check($types) && (@$types == 0)
+				or _croak("Library '%s' is a MouseX::Types type constraint library. No import options currently supported", $lib);
+			
+			require Mouse::Util::TypeConstraints;
+			my $moosextypes = $lib->type_storage;
+			for my $name (sort keys %$moosextypes)
+			{
+				my $tt = to_TypeTiny(
+					Mouse::Util::TypeConstraints::find_type_constraint($moosextypes->{$name})
+				);
+				$hash{$name} = $tt;
+			}
+		}
+		else
+		{
+			_croak("%s is not a type library", $lib);
+		}
 		
 		for my $key (sort keys %hash)
 		{
 			exists($self->{$key})
 				and _croak("Duplicate type name: %s", $key);
-			$self->{$key} = $hash{$key}->();
+			$self->{$key} = $hash{$key};
 		}
 	}
+	$self;
+}
+
+sub add_type
+{
+	my $self = shift;
+	my ($type, $name) = @_;
+	$type = to_TypeTiny($type);
+	$name ||= do {
+		$type->is_anon
+			and _croak("Expected named type constraint; got anonymous type constraint");
+		$type->name;
+	};
+	
+	exists($self->{$name})
+		and _croak("Duplicate type name: %s", $name);
+	
+	$self->{$name} = $type;
 	$self;
 }
 
@@ -264,6 +321,24 @@ Otherwise, imports all types from the library.
       -TypeTiny => ['HashLike'],
       -Standard => ['HashRef' => { -as => 'RealHash' }],
    );
+
+L<MooseX::Types> (and experimentally, L<MouseX::Types>) libraries can
+also be added this way, but I<< cannot be followed by an arrayref of
+types to import >>.
+
+=item C<< add_type($type, $name) >>
+
+The long-awaited singular form of C<add_types>. Given a type constraint
+object, adds it to the registry with a given name. The name may be
+omitted, in which case C<< $type->name >> is called, and Type::Registry
+will throw an error if C<< $type >> is anonymous. If a name is explicitly
+given, Type::Registry cares not one wit whether the type constraint is
+anonymous.
+
+This method can even add L<MooseX::Types> and L<MouseX::Types> type
+constraints; indeed anything that can be handled by L<Types::TypeTiny>'s
+C<to_TypeTiny> function. (Bear in mind that to_TypeTiny I<always> results
+in an anonymous type constraint, so C<< $name >> will be required.)
 
 =item C<< alias_type($oldname, $newname) >>
 

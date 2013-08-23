@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.023_01';
+	$Type::Params::VERSION   = '0.023_02';
 }
 
 use B qw(perlstring);
@@ -69,10 +69,10 @@ sub _mkslurpy
 			$i,
 		)
 		: sprintf(
-			'%s = (($#_-%d)%%2)==0 ? "Type::Exception::WrongNumberOfParameters"->throw(message => "Odd number of elements in %s") : +{ @_[%d..$#_] };',
+			'%s = (($#_-%d)%%2)==0 ? "Type::Exception::WrongNumberOfParameters"->throw(message => sprintf("Odd number of elements in %%s", %s)) : +{ @_[%d..$#_] };',
 			$name,
 			$i,
-			$tc,
+			perlstring("$tc"),
 			$i,
 			$i,
 		);
