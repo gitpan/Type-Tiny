@@ -5,12 +5,14 @@ use strict;
 use warnings;
 
 BEGIN {
+	eval { require re };
 	if ($] < 5.008) { require Devel::TypeTiny::Perl56Compat };
+	if ($] < 5.010) { require Devel::TypeTiny::Perl58Compat };
 }
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.023_02';
+	$Types::Standard::VERSION   = '0.023_03';
 }
 
 use Type::Library -base;
@@ -22,7 +24,7 @@ use Types::TypeTiny ();
 
 sub _is_class_loaded {
 	return !!0 if ref $_[0];
-	return !!0 if !defined $_[0];
+	return !!0 if not $_[0];
 	my $stash = do { no strict 'refs'; \%{"$_[0]\::"} };
 	return !!1 if exists $stash->{'ISA'};
 	return !!1 if exists $stash->{'VERSION'};
@@ -206,8 +208,8 @@ $meta->add_type({
 	name       => "RegexpRef",
 	_is_core   => 1,
 	parent     => $_ref,
-	constraint => sub { ref $_ eq "Regexp" },
-	inlined    => sub { "ref($_[1]) eq 'Regexp'" },
+	constraint => sub { ref($_) && !!re::is_regexp($_) },
+	inlined    => sub { "ref($_[1]) && !!re::is_regexp($_[1])" },
 });
 
 $meta->add_type({

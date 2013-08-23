@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Duck::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Duck::VERSION   = '0.023_02';
+	$Type::Tiny::Duck::VERSION   = '0.023_03';
 }
 
 use Scalar::Util qw< blessed >;
@@ -18,7 +18,7 @@ use base "Type::Tiny";
 sub new {
 	my $proto = shift;
 	
-	my %opts = @_;
+	my %opts = (@_==1) ? %{$_[0]} : @_;
 	_croak "Duck type constraints cannot have a parent constraint passed to the constructor" if exists $opts{parent};
 	_croak "Duck type constraints cannot have a constraint coderef passed to the constructor" if exists $opts{constraint};
 	_croak "Duck type constraints cannot have a inlining coderef passed to the constructor" if exists $opts{inlined};
@@ -54,6 +54,7 @@ sub _build_inlined
 
 sub _build_default_message
 {
+	no warnings 'uninitialized';
 	my $self = shift;
 	return sub { sprintf 'value "%s" did not pass type constraint', $_[0] } if $self->is_anon;
 	my $name = "$self";

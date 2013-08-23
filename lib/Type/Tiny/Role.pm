@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.023_02';
+	$Type::Tiny::Role::VERSION   = '0.023_03';
 }
 
 use Scalar::Util qw< blessed weaken >;
@@ -20,7 +20,7 @@ my %cache;
 sub new {
 	my $proto = shift;
 	
-	my %opts = @_;
+	my %opts = (@_==1) ? %{$_[0]} : @_;
 	_croak "Role type constraints cannot have a parent constraint passed to the constructor" if exists $opts{parent};
 	_croak "Role type constraints cannot have a constraint coderef passed to the constructor" if exists $opts{constraint};
 	_croak "Role type constraints cannot have a inlining coderef passed to the constructor" if exists $opts{inlined};

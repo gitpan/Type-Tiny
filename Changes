@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster <mailto:tobyink@cpan.org>
 
+0.023_03  2013-08-23
+
+ - (Bugfix) Constructors for some subclasses of Type::Tiny rejected
+   hashrefs of paramaters.
+   Fixes RT#88064
+   ++$BBYRD
+ - (Bugfix) Stop considering the empty string to be a valid package name.
+ - (Packaging) Include additional test cases stolen from Moose.
+ - Implementation of RegexpRef in Types::Standard is now closer to Moose's
+   implementation (accepts blessed Regexps).
+
 0.023_02  2013-08-23
 
  - (Addition) Type::Registry now has an `add_type` method, for adding a

@@ -1,4 +1,4 @@
-package Devel::TypeTiny::Perl56Compat;
+package Devel::TypeTiny::Perl58Compat;
 
 use 5.006;
 use strict;
@@ -7,22 +7,17 @@ use warnings;
 our $AUTHORITY = 'cpan:TOBYINK';
 our $VERSION   = '0.023_03';
 
-#### B doesn't provide perlstring() in 5.6. Monkey patch it.
+#### re doesn't provide is_regexp in Perl < 5.10
 
-use B ();
+eval 'require re';
 
-unless (exists &B::perlstring)
+unless (exists &re::is_regexp)
 {
-	my $d;
-	*B::perlstring = sub {
-		require Data::Dumper;
-		$d ||= 'Data::Dumper'->new([])->Indent(0)->Purity(0)->Pad('')->Useqq(1)->Terse(1)->Freezer('')->Toaster('');
-		my $perlstring = $d->Values([''.shift])->Dump;
-		($perlstring =~ /^"/) ? $perlstring : qq["$perlstring"];
+	require B;
+	*re::is_regexp = sub {
+		eval { B::svref_2object($_[0])->MAGIC->TYPE eq 'r' };
 	};
 }
-
-push @B::EXPORT_OK, 'perlstring';
 
 #### Done!
 
@@ -38,14 +33,14 @@ __END__
 
 =head1 NAME
 
-Devel::TypeTiny::Perl56Compat - shims to allow Type::Tiny to run on Perl 5.6.x
+Devel::TypeTiny::Perl58Compat - shims to allow Type::Tiny to run on Perl 5.8.x
 
 =head1 DESCRIPTION
 
 This is not considered part of Type::Tiny's public API.
 
-Currently this module just has one job: it patches L<B> to export a
-C<perlstring> function, as this was only added in Perl 5.8.0.
+Currently this module just has one job: it patches L<re> to provide a
+C<is_regexp> function, as this was only added in Perl 5.9.5.
 
 =head1 BUGS
 

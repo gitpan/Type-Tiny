@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.023_02';
+	$Type::Tiny::Class::VERSION   = '0.023_03';
 }
 
 use Scalar::Util qw< blessed >;
@@ -23,7 +23,7 @@ sub new {
 	my $proto = shift;
 	return $proto->class->new(@_) if blessed $proto; # DWIM
 	
-	my %opts = @_;
+	my %opts = (@_==1) ? %{$_[0]} : @_;
 	_croak "Class type constraints cannot have a parent constraint passed to the constructor" if exists $opts{parent};
 	_croak "Class type constraints cannot have a constraint coderef passed to the constructor" if exists $opts{constraint};
 	_croak "Class type constraints cannot have a inlining coderef passed to the constructor" if exists $opts{inlined};
@@ -56,6 +56,7 @@ sub _build_inlined
 
 sub _build_default_message
 {
+	no warnings 'uninitialized';
 	my $self = shift;
 	my $c = $self->class;
 	return sub { sprintf 'value "%s" did not pass type constraint (not isa %s)', $_[0], $c } if $self->is_anon;

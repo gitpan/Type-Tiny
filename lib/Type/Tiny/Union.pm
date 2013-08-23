@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.023_02';
+	$Type::Tiny::Union::VERSION   = '0.023_03';
 }
 
 use Scalar::Util qw< blessed >;
@@ -21,7 +21,7 @@ use base "Type::Tiny";
 sub new {
 	my $proto = shift;
 	
-	my %opts = @_;
+	my %opts = (@_==1) ? %{$_[0]} : @_;
 	_croak "Union type constraints cannot have a parent constraint passed to the constructor" if exists $opts{parent};
 	_croak "Union type constraints cannot have a constraint coderef passed to the constructor" if exists $opts{constraint};
 	_croak "Union type constraints cannot have a inlining coderef passed to the constructor" if exists $opts{inlined};

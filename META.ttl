@@ -169,6 +169,7 @@ dist:project
 	doap:release      dist:v_0-022;
 	doap:release      dist:v_0-023_01;
 	doap:release      dist:v_0-023_02;
+	doap:release      dist:v_0-023_03;
 	doap:repository   [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -2311,6 +2312,41 @@ dist:v_0-023_02
 	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.023_02.tar.gz>;
 	doap:revision     "0.023_02"^^xsd:string.
 
+dist:v_0-023_03
+	a                 cpant:DeveloperRelease;
+	a                 doap:Version;
+	dc:identifier     "Type-Tiny-0.023_03"^^xsd:string;
+	dc:issued         "2013-08-23"^^xsd:date;
+	dcs:changeset     [
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Constructors for some subclasses of Type::Tiny rejected hashrefs of paramaters.";
+			dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/88064>;
+			dcs:thanks cpan:bbyrd;
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Implementation of RegexpRef in Types::Standard is now closer to Moose's implementation (accepts blessed Regexps).";
+		];
+		dcs:item [
+			a dcs:Bugfix;
+			rdfs:label "Stop considering the empty string to be a valid package name.";
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Include additional test cases stolen from Moose.";
+		];
+		dcs:versus dist:v_0-023_02;
+	];
+	dcs:released-by   cpan:tobyink;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.023_03.tar.gz>;
+	doap:revision     "0.023_03"^^xsd:string.
+
+cpan:bbyrd
+	a                 foaf:Person;
+	foaf:nick         "BBYRD";
+	foaf:page         <https://metacpan.org/author/BBYRD>.
+
 cpan:bowtie
 	a                 foaf:Person;
 	foaf:name         "Kevin Dawson";
@@ -2489,6 +2525,11 @@ cpan:tokuhirom
 	a                 bugs:Issue;
 	bugs:id           "87999"^^xsd:string;
 	bugs:page         <https://rt.cpan.org/Ticket/Display.html?id=87999>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/88064>
+	a                 bugs:Issue;
+	bugs:id           "88064"^^xsd:string;
+	bugs:page         <https://rt.cpan.org/Ticket/Display.html?id=88064>.
 
 []
 	a                 nfo:FileDataObject;
