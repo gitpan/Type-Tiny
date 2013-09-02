@@ -1,12 +1,11 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Type-Tiny
-Upstream-Contact: Toby Inkster <tobyink@cpan.org>
+Upstream-Contact: Toby Inkster (TOBYINK) <tobyink@cpan.org>
 Source: https://metacpan.org/release/Type-Tiny
 
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
- inc/Module/Install/Contributors.pm
  lib/Devel/TypeTiny/Perl56Compat.pm
  lib/Devel/TypeTiny/Perl58Compat.pm
  lib/Eval/TypeTiny.pm
@@ -119,28 +118,23 @@ Files: examples/benchmark-coercions.pl
 Copyright: This software is copyright (c) 2013 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: META.json
+ META.yml
+ NEWS
+ README
+ dist.ini
+ doap.ttl
+ examples/benchmark-mkopt.pl
+ examples/benchmark-param-validation.pl
+Copyright: Copyright 2013 Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: CONTRIBUTING
  CREDITS
  Changes
  LICENSE
- META.ttl
  Makefile.PL
- NEWS
- README
- examples/benchmark-mkopt.pl
- examples/benchmark-param-validation.pl
- meta/changes.pret
- meta/doap.pret
- meta/makefile.pret
- meta/people.pret
- meta/rights.pret
-Copyright: Copyright 2013 Toby Inkster.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Module/Install.pm
- inc/Module/Install/Include.pm
- inc/Module/Install/Metadata.pm
-Copyright: Copyright 2002 - 2012 Brian Ingerson, Audrey Tang and Adam Kennedy.
+Copyright: Copyright 1970 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: t/rt85911.t
@@ -148,67 +142,38 @@ Files: t/rt85911.t
 Copyright: This software is copyright (c) 2013 by Diab Jerius.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Module/Install/TrustMetaYml.pm
- inc/Module/Package/Dist/RDF.pm
-Copyright: This software is copyright (c) 2011-2012 by Toby Inkster.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: t/rt86233.t
  t/rt86239.t
 Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: t/moose-std-types-tests.t
-Copyright: This software is copyright (c) 2013 by Infinity Interactive, Inc..
-License: GPL-1.0+ or Artistic-1.0
-
 Files: COPYRIGHT
+ SIGNATURE
 Copyright: None
 License: public-domain
-Comment: This file! Automatically generated.
 
-Files: .travis.yml
-Copyright: Unknown
-License: Unknown
-
-Files: inc/Test/Fatal.pm
-Copyright: Copyright 2013 Ricardo Signes.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: MANIFEST.SKIP
-Copyright: Copyright 2013 Ingy d�t Net.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/YAML/Tiny.pm
-Copyright: Copyright 2006 - 2012 Adam Kennedy.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/gh1.t
-Copyright: This software is copyright (c) 2013 by Richard Simões.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Module/Install/Package.pm
-Copyright: Copyright (c) 2011. Ingy doet Net.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Test/Requires.pm
-Copyright: Copyright 2013 MATSUNO Tokuhiro.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Module/Install/Base.pm
-Copyright: Copyright 2003, 2004 by Audrey Tang <autrijus@autrijus.org>.
+Files: t/moose-std-types-tests.t
+Copyright: This software is copyright (c) 2013 by Infinity Interactive, Inc..
 License: GPL-1.0+ or Artistic-1.0
 
 Files: t/oo-classinsideout.t
 Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Module/Install/Makefile.pm
-Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/gh1.t
+Copyright: This software is copyright (c) 2013 by Richard SimÃµes.
 License: GPL-1.0+ or Artistic-1.0
 
 License: Artistic-1.0
@@ -224,4 +189,3 @@ License: GPL-1.0
  This is free software, licensed under:
  
    The GNU General Public License, Version 1, February 1989
-
