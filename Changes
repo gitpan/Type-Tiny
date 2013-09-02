@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.025_02	2013-09-02
+
+ - (Addition) Type::Params now provides a multisig() function, allowing you
+   to define multiple function signatures, and attempt to validate @_
+   against them each in turn.
+   Fixes #88291.
+   Diab Jerius++
+   <https://rt.cpan.org/Ticket/Display.html?id=88291>
+ - (Packaging) functionparameters.t now requires Moo or Moose and is
+   skipped otherwise.
+
 0.025_01	2013-09-02
 
  - (Bugfix) The Tuple structured type was treating arrays with missing

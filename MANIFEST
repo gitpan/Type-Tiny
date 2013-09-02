@@ -107,6 +107,7 @@ t/params-carping.t
 t/params-coerce.t
 t/params-methods.t
 t/params-mixednamed.t
+t/params-multisig.t
 t/params-named.t
 t/params-noninline.t
 t/params-optional.t
