@@ -6,833 +6,954 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.025_03	2013-09-04
+
+ [ Documentation ]
+ - Document that multisig() accepts coderefs.
+
+ [ Packaging ]
+ - Use a newer version of RDF::DOAP to process this changelog.
+
 0.025_02	2013-09-02
 
- - (Addition) Type::Params now provides a multisig() function, allowing you
-   to define multiple function signatures, and attempt to validate @_
-   against them each in turn.
-   Fixes #88291.
+ [ Bug Fixes ]
+ - functionparameters.t now requires Moo or Moose and is skipped otherwise.
+
+ [ Other ]
+ - Added: Type::Params now provides a multisig() function, allowing you to
+   define multiple function signatures, and attempt to validate @_ against
+   them each in turn.
+   Fixes RT#88291.
    Diab Jerius++
    <https://rt.cpan.org/Ticket/Display.html?id=88291>
- - (Packaging) functionparameters.t now requires Moo or Moose and is
-   skipped otherwise.
 
 0.025_01	2013-09-02
 
- - (Bugfix) The Tuple structured type was treating arrays with missing
-   required elements as if they were present but undef.
-   Fixes #88277.
+ [ Bug Fixes ]
+ - The Tuple structured type was treating arrays with missing required
+   elements as if they were present but undef.
+   Fixes RT#88277.
    Steven Lee++
    <https://rt.cpan.org/Ticket/Display.html?id=88277>
- - (Change) Exporter::TypeTiny will now use method-style resolution when
-   searching for a sub to export.
- - (Change) Make Exporter::TypeTiny support generators with less
-   internals-hacking.
- - (Documentation) Document the internals of Exporter::TypeTiny.
- - (Packaging) Take advantage of dynamic_config to ask automated testers to
-   test Type::Tiny with Moose present, but only if the Type::Tiny version
-   number includes an underscore.
- - (Packaging) use Dist-Inkt
+
+ [ Documentation ]
+ - Document the internals of Exporter::TypeTiny.
+
+ [ Packaging ]
+ - Take advantage of dynamic_config to ask automated testers to test
+   Type::Tiny with Moose present, but only if the Type::Tiny version number
+   includes an underscore.
+ - use Dist-Inkt
+
+ [ Other ]
+ - Exporter::TypeTiny will now use method-style resolution when searching
+   for a sub to export.
+ - Make Exporter::TypeTiny support generators with less internals-hacking.
 
 0.024	2013-08-27
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.023_03	2013-08-23
 
- - (Bugfix) Constructors for some subclasses of Type::Tiny rejected
-   hashrefs of paramaters.
-   Fixes #88064.
-   BBYRD++
+ [ Bug Fixes ]
+ - Constructors for some subclasses of Type::Tiny rejected hashrefs of
+   paramaters.
+   Fixes RT#88064.
+   Brendan Byrd++
    <https://rt.cpan.org/Ticket/Display.html?id=88064>
- - (Bugfix) Stop considering the empty string to be a valid package name.
- - (Change) Implementation of RegexpRef in Types::Standard is now closer to
-   Moose's implementation (accepts blessed Regexps).
- - (Packaging) Include additional test cases stolen from Moose.
+ - Stop considering the empty string to be a valid package name.
+
+ [ Test Suite ]
+ - Include additional test cases stolen from Moose.
+
+ [ Other ]
+ - Implementation of RegexpRef in Types::Standard is now closer to Moose's
+   implementation (accepts blessed Regexps).
 
 0.023_02	2013-08-23
 
- - (Addition) Type::Registry now has an `add_type` method, for adding a
-   single type constraint to a registry.
- - (Bugfix) Fix quoting in error messages which caused Type::Params to be
-   unable to compile some coderefs.
-   Fixes #87846.
+ [ Bug Fixes ]
+ - Fix quoting in error messages which caused Type::Params to be unable to
+   compile some coderefs.
+   Fixes RT#87846.
    Tim Bunce++
    <https://rt.cpan.org/Ticket/Display.html?id=87846>
- - (Bugfix) Improve ugly type assertion failure messages when given
-   structures of nested references.
-   Fixes #87999.
+ - Improve ugly type assertion failure messages when given structures of
+   nested references.
+   Fixes RT#87999.
    Tim Bunce++
    <https://rt.cpan.org/Ticket/Display.html?id=87999>
- - (Change) Type::Registry's `add_types` method now supports importing
-   MooseX::Types and MouseX::Types libraries.
- - (Change) Type::Utils' `extend` function now supports extending
-   MooseX::Types and MouseX::Types libraries.
+
+ [ Other ]
+ - Added: Type::Registry now has an `add_type` method, for adding a single
+   type constraint to a registry.
+ - Type::Registry's `add_types` method now supports importing MooseX::Types
+   and MouseX::Types libraries.
+ - Type::Utils' `extend` function now supports extending MooseX::Types and
+   MouseX::Types libraries.
 
 0.023_01	2013-08-16
 
- - (Bugfix) Fix Moo -> Moose type inflation issue.
+ [ Bug Fixes ]
+ - Fix Moo -> Moose type inflation issue.
    Matt Phillips++
 
 0.022	2013-08-06
 
- - (Change) Improved implementations of
-   is_subtype_of/is_strictly_subtype_of; better for subclassing.
- - (Change) In Devel::TypeTiny::Perl56Compat, `use strict` and `use
-   warnings`.
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
+
+ [ Other ]
+ - Improved implementations of is_subtype_of/is_strictly_subtype_of; better
+   for subclassing.
+ - In Devel::TypeTiny::Perl56Compat, `use strict` and `use warnings`.
 
 0.021_04	2013-07-30
 
- - (Bugfix) Fix Type::Parser's handling of numeric parameters; they
-   shouldn't need quoting.
- - (Bugfix) Fix Types::Standard::Dict differentiating between undef and not
-   exists.
-   Fixes #87443.
+ [ Bug Fixes ]
+ - Fix Type::Parser's handling of numeric parameters; they shouldn't need
+   quoting.
+ - Fix Types::Standard::Dict differentiating between undef and not exists.
+   Fixes RT#87443.
    Tim Bunce++
    <https://rt.cpan.org/Ticket/Display.html?id=87443>
- - (Packaging) Add dependency on Exporter 5.57 for older versions of Perl.
+
+ [ Packaging ]
+ - Add dependency on Exporter 5.57 for older versions of Perl.
 
 0.021_03	2013-07-30
 
- - (Change) Improve compatibility between Type::Tiny and Moose attribute
-   native traits.
- - (Change) Restore Eval::TypeTiny's pre-0.019_01 behaviour re closing over
+ - Improve compatibility between Type::Tiny and Moose attribute native
+   traits.
+ - Restore Eval::TypeTiny's pre-0.019_01 behaviour re closing over
    lexicals, but enable the 0.021_02 behaviour if alias=>1 option is passed
    in.
 
 0.021_02	2013-07-26
 
- - (Change) Use real lexicals again for Eval::TypeTiny; this requires
+ - Use real lexicals again for Eval::TypeTiny; this requires
    Devel::LexAlias, but there's a fallback to using tied variables.
 
 0.021_01	2013-07-24
 
- - (Addition) Type::Tiny is_strictly_a_type_of method.
- - (Addition) Type::Tiny is_strictly_subtype_of method.
- - (Addition) Type::Tiny is_strictly_supertype_of method.
- - (Addition) Type::Tiny strictly_equals method.
+ - Added: Type::Tiny is_strictly_a_type_of method.
+ - Added: Type::Tiny is_strictly_subtype_of method.
+ - Added: Type::Tiny is_strictly_supertype_of method.
+ - Added: Type::Tiny strictly_equals method.
 
 0.020	2013-07-23
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.019_01	2013-07-23
 
- - (Bugfix) Eval::TypeTiny now closes over variables properly.
- - (Bugfix) Work around lack of B::perlstring() function in Perl 5.6.x in
-   test suite.
+ [ Bug Fixes ]
+ - Eval::TypeTiny now closes over variables properly.
+ - Work around lack of B::perlstring() function in Perl 5.6.x in test
+   suite.
 
 0.018	2013-07-21
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.017_02	2013-07-20
 
- - (Bugfix) Further changes for Perl 5.6.x support.
- - (Change) Hopefully improved workaround for missing B::perlstring() using
+ [ Bug Fixes ]
+ - Further changes for Perl 5.6.x support.
+
+ [ Other ]
+ - Hopefully improved workaround for missing B::perlstring() using
    Data::Dumper instead of quotemeta().
    Peter Rabbitson++
 
 0.017_01	2013-07-19
 
- - (Bugfix) Work around lack of B::perlstring() function in Perl 5.6.x.
- - (Documentation) Fix typo in Types::Standard 'regular exception' ->
-   'regular expression'.
+ [ Bug Fixes ]
+ - Work around lack of B::perlstring() function in Perl 5.6.x.
+
+ [ Documentation ]
+ - Fix typo in Types::Standard 'regular exception' -> 'regular expression'.
    Mark Stosberg++
    <https://github.com/tobyink/p5-type-tiny/pull/4>
- - (Documentation) Give an example of the default error messages thrown by
-   Type::Tiny.
- - (Documentation) Improve examples of custom type constraint error message
-   in Type::Utils and Type::Tiny::Manual::Libraries.
-   Fixes #86892.
+ - Give an example of the default error messages thrown by Type::Tiny.
+ - Improve examples of custom type constraint error message in Type::Utils
+   and Type::Tiny::Manual::Libraries.
+   Fixes RT#86892.
    Tim Bunce++
    <https://rt.cpan.org/Ticket/Display.html?id=86892>
- - (Update) Eval::TypeTiny now supports lexical subs under Perl 5.18.
+
+ [ Other ]
+ - Updated: Eval::TypeTiny now supports lexical subs under Perl 5.18.
 
 0.016	2013-07-16
 
- - (Documentation) Add some pod links.
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Add some pod links.
+ - Updated NEWS file.
 
 0.015_05	2013-07-15
 
- - (Change) Experimentally drop required version of Perl from 5.8.1 to
-   5.6.1. I've not been able to extensively test Type-Tiny on Perl 5.6.x,
-   but I believe it should mostly work. (The only feature that seems
-   unlikely to work is non-ASCII names for type constraints and coercions.)
- - (Change) Stop monkey-patching Moose::Meta::TypeContraint; it's not
-   necessary and has never been documented.
+ [ Packaging ]
+ - Experimentally drop required version of Perl from 5.8.1 to 5.6.1. I've
+   not been able to extensively test Type-Tiny on Perl 5.6.x, but I believe
+   it should mostly work. (The only feature that seems unlikely to work is
+   non-ASCII names for type constraints and coercions.)
+
+ [ Other ]
+ - Stop monkey-patching Moose::Meta::TypeContraint; it's not necessary and
+   has never been documented.
 
 0.015_04	2013-07-13
 
- - () Allow an inline_as block to return a list of strings (which are
-   implictly joined with &&); allow the first item on the list to be undef,
-   which is treated as the inlined parent type constraint.
-   Fixes #86891.
-   Tim Bunce++
-   <https://rt.cpan.org/Ticket/Display.html?id=86891>
- - (Documentation) Clarify when inlining via Sub::Quote may be less
-   efficient than hand-written inlining.
-   Fixes #86893.
+ [ Documentation ]
+ - Clarify when inlining via Sub::Quote may be less efficient than
+   hand-written inlining.
+   Fixes RT#86893.
    Tim Bunce++
    <https://rt.cpan.org/Ticket/Display.html?id=86893>
- - (Documentation) Mention in Type::Tiny::Manual::Libraries that the
-   `extends` function is no longer exported by default; update example
-   code.
-   Fixes #86813.
+ - Mention in Type::Tiny::Manual::Libraries that the `extends` function is
+   no longer exported by default; update example code.
+   Fixes RT#86813.
    Pierre Masci++
    <https://rt.cpan.org/Ticket/Display.html?id=86813>
    <https://github.com/tobyink/p5-type-tiny/pull/2>
 
 0.015_03	2013-07-08
 
- - (Addition) Implement TIESCALAR, TIEARRAY and TIEHASH methods for
-   Type::Tiny; this improves Type::Tie integration.
- - (Change) Slight speed improvements for `compile_match_on_type`.
- - (Change) The `dwim_type` function now prioritizes lookups within the
-   caller class' type registry over Types::Standard's built-in types.
+ - Added: Implement TIESCALAR, TIEARRAY and TIEHASH methods for Type::Tiny;
+   this improves Type::Tie integration.
+ - Slight speed improvements for `compile_match_on_type`.
+ - The `dwim_type` function now prioritizes lookups within the caller
+   class' type registry over Types::Standard's built-in types.
 
 0.015_02	2013-07-06
 
- - (Change) Better test cases for `dwim_type`.
- - (Change) Improvements to DWIMness of Type::Parser for the benefit of
-   `dwim_type`.
+ - Better test cases for `dwim_type`.
+ - Improvements to DWIMness of Type::Parser for the benefit of `dwim_type`.
 
 0.015_01	2013-07-05
 
- - (Addition) Type::Utils now provides a `dwim_type` function; this is
-   powered by a hidden Type::Registry::DWIM package.
- - (Change) Type::Parser can now pull in types from MooseX::Types libraries
+ - Added: Type::Utils now provides a `dwim_type` function; this is powered
+   by a hidden Type::Registry::DWIM package.
+ - Type::Parser can now pull in types from MooseX::Types libraries
    properly.
 
 0.014	2013-06-28
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.013_01	2013-06-27
 
- - (Addition) Type::Parser now provides a `extract_type` function which
-   parses a type constraint expression from the head of a string and
-   returns a Type::Tiny object, plus the tail of the string. (This is
-   designed to make it easier to use Type::Parser to parse things like
-   function signatures.)
- - (Change) Type::Parser's tokenization is now done on a pull basis,
-   allowing one-pass building of the AST.
- - (Removal) Type::Parser functions no longer accept an arrayref of tokens,
-   as they expect to pull tokens from a stream as required.
- - (Removal) Type::Parser no longer provides a `tokens` function as it no
-   longer pre-emptively tokenizes the whole string it is given.
+ - Added: Type::Parser now provides a `extract_type` function which parses
+   a type constraint expression from the head of a string and returns a
+   Type::Tiny object, plus the tail of the string. (This is designed to
+   make it easier to use Type::Parser to parse things like function
+   signatures.)
+ - Type::Parser's tokenization is now done on a pull basis, allowing
+   one-pass building of the AST.
 
 0.012	2013-06-25
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.011_03	2013-06-25
 
- - (Bugfix) Type::Tiny now overloads `cmp`. Necessary because Mouse does a
-   sort on type constraints in a union, and overload's fallback doesn't
-   seem to cover `cmp` on Perl prior to 5.12.
+ [ Bug Fixes ]
+ - Type::Tiny now overloads `cmp`. Necessary because Mouse does a sort on
+   type constraints in a union, and overload's fallback doesn't seem to
+   cover `cmp` on Perl prior to 5.12.
 
 0.011_02	2013-06-25
 
- - (Bugfix) Types::Standard 0.009_02 stopped including 'library' attribute
-   in its types, and thus broke MooX::late. Type::Library modified to make
+ [ Bug Fixes ]
+ - Types::Standard 0.009_02 stopped including 'library' attribute in its
+   types, and thus broke MooX::late. Type::Library modified to make
    'library' attribute more automatic, and less reliant on Type::Utils to
    do the right thing.
    Graham Knop++
 
 0.011_01	2013-06-25
 
- - (Addition) Types::Standard::to_TypeTiny now accepts any object
-   implementing the Type::API::Constraint or
-   Type::API::Constraint::Coercion interfaces. As
+ [ Bug Fixes ]
+ - B::SPECIAL-related fix.
+   Fixes RT#86383.
+   Peter Flanigan++
+   <https://rt.cpan.org/Ticket/Display.html?id=86383>
+ - Unions of Type::Tiny and Mouse::Meta::TypeConstraints now work properly.
+   This makes Type::Tiny and MouseX::Types play nice together (much like
+   Type::Tiny already plays nice with MooseX::Types).
+
+ [ Other ]
+ - Cleanups within Type::Coercion. Necessary because in some places the
+   entire type_coercion_map (including conversion coderefs) was passed
+   through Types::Standard::to_TypeTiny, when really only the type
+   constraints should have been.
+ - Types::Standard::to_TypeTiny now accepts any object implementing the
+   Type::API::Constraint or Type::API::Constraint::Coercion interfaces. As
    Mouse::Meta::TypeConstraint implements this interface, specific support
    for importing Mouse types has been dropped; the generic Type::API import
    'just works' for Mouse types.
- - (Addition) Types::Standard::to_TypeTiny now accepts unblessed coderefs
-   and converts them to type constraints. This allows things like `Int &
-   sub { $_ < 10 }` to work.
- - (Bugfix) B::SPECIAL-related fix.
-   Fixes #86383.
-   Peter Flanigan++
-   <https://rt.cpan.org/Ticket/Display.html?id=86383>
- - (Bugfix) Unions of Type::Tiny and Mouse::Meta::TypeConstraints now work
-   properly. This makes Type::Tiny and MouseX::Types play nice together
-   (much like Type::Tiny already plays nice with MooseX::Types).
- - (Change) Cleanups within Type::Coercion. Necessary because in some
-   places the entire type_coercion_map (including conversion coderefs) was
-   passed through Types::Standard::to_TypeTiny, when really only the type
-   constraints should have been.
+ - Types::Standard::to_TypeTiny now accepts unblessed coderefs and converts
+   them to type constraints. This allows things like `Int & sub { $_ < 10
+   }` to work.
 
 0.010	2013-06-24
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.009_07	2013-06-24
 
- - (Change) If a Type::Tiny object is instantiated with a Sub::Quote quoted
+ - If a Type::Tiny object is instantiated with a Sub::Quote quoted
    constraint coderef, and no inlined coderef, then Type::Tiny will use
    Sub::Quote to make an inlined coderef.
- - (Change) Subclasses of Type::Tiny reject 'inlined' coderef, just like
-   they already reject 'constraint' coderef.
- - (Change) Type::Params no longer uses Type::Utils.
- - (Change) Types::Standard::to_TypeTiny now sets 'display_name' instead of
-   'name' on generated type constraints.
- - (Packaging) Make rt86172.t an 'xt' test case because it's causing random
-   CPAN testers failures unrelated to the feature it's supposed to be
-   testing.
- - (Packaging) More test cases for interacting with MooseX::Types type
-   constraints.
+ - Subclasses of Type::Tiny reject 'inlined' coderef, just like they
+   already reject 'constraint' coderef.
+ - Type::Params no longer uses Type::Utils.
+ - Types::Standard::to_TypeTiny now sets 'display_name' instead of 'name'
+   on generated type constraints.
 
 0.009_06	2013-06-23
 
- - (Bugfix) Careful calling the DOES method (it doesn't exist in Perl 5.8).
+ [ Bug Fixes ]
+ - Careful calling the DOES method (it doesn't exist in Perl 5.8).
 
 0.009_05	2013-06-23
 
- - (Bugfix) Type::Registry does the AUTOLOAD thing, so ought to provide a
-   DESTROY method.
+ [ Bug Fixes ]
+ - Type::Registry does the AUTOLOAD thing, so ought to provide a DESTROY
+   method.
 
 0.009_04	2013-06-23
 
- - (Bugfix) Type::Tiny::Class shouldn't completely trust @ISA when
-   establishing parent class heirarchies.
- - (Change) Constructors for Type::Tiny subclasses no longer accept the
-   'constraint' parameter; it doesn't make sense.
- - (Update) Support Type::API interfaces.
+ [ Bug Fixes ]
+ - Type::Tiny::Class shouldn't completely trust @ISA when establishing
+   parent class heirarchies.
+
+ [ Other ]
+ - Constructors for Type::Tiny subclasses no longer accept the 'constraint'
+   parameter; it doesn't make sense.
+ - Updated: Support Type::API interfaces.
 
 0.009_03	2013-06-22
 
- - (Bugfix) Fix Types::Standard compilation errors under Perl 5.8.x.
+ [ Bug Fixes ]
+ - Fix Types::Standard compilation errors under Perl 5.8.x.
 
 0.009_02	2013-06-22
 
- - (Bugfix) Fix for compiled_checks for type constraints inheriting from
+ [ REGRESSIONS ]
+ - Types::Standard types no longer have 'library' attribute set; this
+   subtly breaks Moo type inflation, and breaks the MooX::late test suite
+   which relies on type inflation working correctly.
+
+ [ Bug Fixes ]
+ - Fix for compiled_checks for type constraints inheriting from
    Type::Tiny::Class, etc.
    Richard Simões++
- - (Change) Types::Standard no longer uses Type::Utils.
- - (Change) Various minor optimizations for Eval::TypeTiny, Type::Tiny,
-   etc.
- - (Regression) Types::Standard types no longer have 'library' attribute
-   set; this subtly breaks Moo type inflation, and breaks the MooX::late
-   test suite which relies on type inflation working correctly.
+
+ [ Other ]
+ - Types::Standard no longer uses Type::Utils.
+ - Various minor optimizations for Eval::TypeTiny, Type::Tiny, etc.
 
 0.009_01	2013-06-21
 
- - (Addition) Reply::Plugin::TypeTiny.
- - (Bugfix) Fix error messages from type constraints with null constraint
-   coderefs.
+ [ Bug Fixes ]
+ - Fix error messages from type constraints with null constraint coderefs.
+
+ [ Other ]
+ - Added: Reply::Plugin::TypeTiny.
 
 0.008	2013-06-21
 
- - (Documentation) Updated NEWS file.
+ [ Documentation ]
+ - Updated NEWS file.
 
 0.007_10	2013-06-21
 
- - (Addition) Type::Parser now exports a _std_eval function useful for
-   testing.
- - (Addition) Type::Parser now supports parentheses in its DSL.
- - (Bugfix) Fixed many small parsing bugs in Type::Parser.
- - (Bugfix) MooseX::Types objects used in Type::Tiny::Union,
+ [ Bug Fixes ]
+ - Fixed many small parsing bugs in Type::Parser.
+ - MooseX::Types objects used in Type::Tiny::Union,
    Type::Tiny::Intersection and parameterized Type::Tiny type constraints
    would break in some circumstances, as Types::TypeTiny::to_TypeTiny was
    failing to convert them to native Type::Tiny type constraints.
-   Fixes #86303.
+   Fixes RT#86303.
    <https://rt.cpan.org/Ticket/Display.html?id=86303>
- - (Change) Improved error messages from Type::Parser.
- - (Documentation) Document status of Type::Registry.
- - (Packaging) Better test cases for Type::Registry.
- - (Packaging) Test cases for Type::Parser.
+
+ [ Documentation ]
+ - Document status of Type::Registry.
+
+ [ Other ]
+ - Added: Type::Parser now exports a _std_eval function useful for testing.
+ - Improved error messages from Type::Parser.
+ - Type::Parser now supports parentheses in its DSL.
 
 0.007_09	2013-06-18
 
- - (Bugfix) Fix problems inlining Dict deep coercions where the target
-   constraint could not be inlined.
-   Fixes #86233.
+ [ Bug Fixes ]
+ - Fix problems inlining Dict deep coercions where the target constraint
+   could not be inlined.
+   Fixes RT#86233.
    Vyacheslav Matyukhin++
    <https://rt.cpan.org/Ticket/Display.html?id=86233>
- - (Bugfix) Fix unintuitive Dict deep coercions.
-   Fixes #86239.
+ - Fix unintuitive Dict deep coercions.
+   Fixes RT#86239.
    Vyacheslav Matyukhin++
    <https://rt.cpan.org/Ticket/Display.html?id=86239>
 
 0.007_08	2013-06-17
 
- - (Bugfix) Fix problem with interaction between constraints, coercions,
-   and Moose classes that inherit from Moo classes.
-   Fixes #86172.
+ [ Bug Fixes ]
+ - Fix problem with interaction between constraints, coercions, and Moose
+   classes that inherit from Moo classes.
+   Fixes RT#86172.
    Peter Flanigan++
    <https://rt.cpan.org/Ticket/Display.html?id=86172>
 
 0.007_07	2013-06-16
 
- - (Bugfix) Partly roll back prototype changes. Now we use `;$` for Perl
-   since 5.14, but `;@`, for older Perls that don't support `;$` so well.
+ [ Bug Fixes ]
+ - Partly roll back prototype changes. Now we use `;$` for Perl since 5.14,
+   but `;@`, for older Perls that don't support `;$` so well.
 
 0.007_06	2013-06-16
 
- - () Better prototypes (was `;@`, now `;$`) for parameterizable type
+ [ BACK COMPAT ]
+ - Better prototypes (was `;@`, now `;$`) for parameterizable type
    'constants' exported by type libraries.
    Matt S Trout++
- - (Addition) Type::Exception is now capable of supplying stack traces
+
+ [ Documentation ]
+ - Document the evaluation environment used by Eval::TypeTiny.
+ - Rearranged documentation for Type::Utils, avoiding previous split into
+   Moose-like and non-Moose-like functions.
+
+ [ Other ]
+ - Added: Type::Exception is now capable of supplying stack traces
    (requires Devel::StackTrace).
- - (Change) Exceptions thrown for Moo isa/coerce now indicate which
-   attribute was involved.
- - (Change) Type::Utils no longer exports 'extends' by default!!
- - (Documentation) Document the evaluation environment used by
-   Eval::TypeTiny.
- - (Documentation) Rearranged documentation for Type::Utils, avoiding
-   previous split into Moose-like and non-Moose-like functions.
+ - Exceptions thrown for Moo isa/coerce now indicate which attribute was
+   involved.
 
 0.007_05	2013-06-12
 
- - (Addition) Add match_on_type and compile_match_on_type to Type::Utils.
- - (Addition) Test cases for InstanceOf, ConsumerOf, HasMethods and Enum
-   types defined by Types::Standard.
- - (Change) Support '0' and '1' as shortcuts for Optional[Any] and Any in
+ [ Documentation ]
+ - Mention Scalar::Does and Type::Tie in manual.
+ - Vastly improved documentation for Type::Utils.
+ - Vastly improved documentation for Types::Standard.
+
+ [ Other ]
+ - Added: Add match_on_type and compile_match_on_type to Type::Utils.
+ - Support '0' and '1' as shortcuts for Optional[Any] and Any in
    Type::Params. (Not documented yet.)
- - (Documentation) Mention Scalar::Does and Type::Tie in manual.
- - (Documentation) Vastly improved documentation for Type::Utils.
- - (Documentation) Vastly improved documentation for Types::Standard.
 
 0.007_04	2013-06-09
 
- - (Bugfix) Overloading of `$type eq $type` now works in Perl 5.8.
-   Fixes #85895.
+ [ Bug Fixes ]
+ - Overloading of `$type eq $type` now works in Perl 5.8.
+   Fixes RT#85895.
    Vyacheslav Matyukhin++
    <https://rt.cpan.org/Ticket/Display.html?id=85895>
- - (Bugfix) The combination of Dict, Optional and coercions seems to have
-   been broken in certain circumstances.
-   Fixes #86001.
+ - The combination of Dict, Optional and coercions seems to have been
+   broken in certain circumstances.
+   Fixes RT#86001.
    Diab Jerius++
    <https://rt.cpan.org/Ticket/Display.html?id=86001>
 
 0.007_03	2013-06-08
 
- - (Bugfix) Inlining of certain deep Dict, Tuple and Map coercions was
-   broken, but Type::Params attempted to inline them anyway, leading to
-   death.
-   Fixes #85911.
+ [ Bug Fixes ]
+ - Inlining of certain deep Dict, Tuple and Map coercions was broken, but
+   Type::Params attempted to inline them anyway, leading to death.
+   Fixes RT#85911.
    Diab Jerius++
    <https://rt.cpan.org/Ticket/Display.html?id=85911>
- - (Documentation) Better document Type::Tiny's 'parents' method which
-   differs from the Moose method of the same name.
+
+ [ Documentation ]
+ - Better document Type::Tiny's 'parents' method which differs from the
+   Moose method of the same name.
 
 0.007_02	2013-06-04
 
- - (Addition) New constraints added to Types::Standard: InstanceOf,
-   ConsumerOf, HasMethods and Enum.
+ [ Documentation ]
+ - Improvements to Type::Tiny::Manual.
+ - Improvements to Type::Tiny::Manual::Params, including rewritten manual
+   processing section, and processing type constraints in function
+   signatures via Function::Parameters/Attribute::Constract.
+
+ [ Other ]
+ - Added: New constraints added to Types::Standard: InstanceOf, ConsumerOf,
+   HasMethods and Enum.
    Graham Knop++
- - (Change) Allow constraint_generators (for parameterizable type
-   constraints) to return full Type::Tiny objects instead of plain
-   coderefs.
- - (Change) Drop use of Carp in Type::Parser.
- - (Change) Type::Tiny::Class types now have an automatically calculated
-   parent type constraint based on @ISA.
- - (Change) Type::Tiny::Duck types now have a parent type constraint of
+ - Allow constraint_generators (for parameterizable type constraints) to
+   return full Type::Tiny objects instead of plain coderefs.
+ - Drop use of Carp in Type::Parser.
+ - Type::Tiny::Class types now have an automatically calculated parent type
+   constraint based on @ISA.
+ - Type::Tiny::Duck types now have a parent type constraint of
    Types::Standard::Object.
- - (Change) Type::Tiny::Enum types now have a parent type constraint of
+ - Type::Tiny::Enum types now have a parent type constraint of
    Types::Standard::Str.
- - (Change) Type::Tiny::Intersection types now have an arbitrary parent
-   type constraint.
- - (Change) Type::Tiny::Role types now have a parent type constraint of
-   Types::Standard::Object.
- - (Change) Type::Tiny::Union types now have an automatically calculated
-   parent type constraint based on the most specific common parent type
+ - Type::Tiny::Intersection types now have an arbitrary parent type
    constraint.
- - (Documentation) Improvements to Type::Tiny::Manual.
- - (Documentation) Improvements to Type::Tiny::Manual::Params, including
-   rewritten manual processing section, and processing type constraints in
-   function signatures via Function::Parameters/Attribute::Constract.
- - (Packaging) Test cases for usage with Function::Parameters.
+ - Type::Tiny::Role types now have a parent type constraint of
+   Types::Standard::Object.
+ - Type::Tiny::Union types now have an automatically calculated parent type
+   constraint based on the most specific common parent type constraint.
 
 0.007_01	2013-06-01	Happy birthday to me...
 
- - (Addition) Type::Parser.
- - (Addition) Types::Standard now has LaxNum/StrictNum type constraints,
-   and Num selects between them.
- - (Bugfix) Fix $VERSION defined in Type::Library.
- - (Change) Implemented Types::TypeTiny->meta->get_type.
- - (Change) Re-introduce Type::Registry, with improved parsing thanks to
+ [ Bug Fixes ]
+ - Fix $VERSION defined in Type::Library.
+
+ [ Packaging ]
+ - Generate README from Type::Tiny::Manual instead of Type::Tiny.
+
+ [ Other ]
+ - Added: Type::Parser.
+ - Added: Types::Standard now has LaxNum/StrictNum type constraints.
+ - Implemented Types::TypeTiny->meta->get_type.
+ - Re-introduce Type::Registry, with improved parsing thanks to
    Type::Parser.
- - (Packaging) Generate README from Type::Tiny::Manual instead of
-   Type::Tiny.
 
 0.006	2013-05-28
 
- - (Packaging) Exporter::TypeTiny::mkopt_hash now works.
+ [ Bug Fixes ]
+ - Exporter::TypeTiny::mkopt_hash now works.
 
 0.005_08	2013-05-28
 
- - (Packaging) Rearrange test cases; add 00-begin.t.
- - (Update) Use JSON::PP instead of JSON in test cases, because JSON::PP is
-   a core module since Perl 5.14.
-
 0.005_07	2013-05-28
 
- - (Addition) Add pure-Perl Mouse to examples/benchmark-constraints.pl.
- - (Bugfix) Assertions using the assert_return pattern were triggering
-   FATAL warnings when inlined with Sub::Quote. Inlined assertions are now
+ [ Bug Fixes ]
+ - Assertions using the assert_return pattern were triggering FATAL
+   warnings when inlined with Sub::Quote. Inlined assertions are now
    prefixed with 'no warnings "void";'.
+
+ [ Documentation ]
+ - Add pure-Perl Mouse to examples/benchmark-constraints.pl.
 
 0.005_06	2013-05-26
 
- - (Bugfix) Fix StrMatch to properly support regexps containing slashes.
- - (Change) Fold Types::Standard::DeepCoercion into Types::Standard.
+ [ Bug Fixes ]
+ - Fix StrMatch to properly support regexps containing slashes.
+
+ [ Other ]
+ - Fold Types::Standard::DeepCoercion into Types::Standard.
 
 0.005_05	2013-05-24
 
- - (Addition) Type::Tiny now has an assert_return method, which is used in
-   most places in preference to assert_valid.
- - (Change) Fix warnings under Perl 5.18.
- - (Removal) Removed Type::Registry from the release; it will return at a
+ [ Documentation ]
+ - Suggest newer version of Validation::Class.
+
+ [ Other ]
+ - Added: Type::Tiny now has an assert_return method, which is used in most
+   places in preference to assert_valid.
+ - Fix warnings under Perl 5.18.
+ - Removed: Removed Type::Registry from the release; it will return at a
    later date.
- - (Update) Suggest newer version of Validation::Class.
 
 0.005_04	2013-05-17
 
- - (Addition) Deep explanations for
-   Types::Standard::{Map,Maybe,Ref,Dict,Tuple} type constraint assertion
-   failures.
- - (Addition) Type::Exception::Compilation.
- - (Bugfix) Fixed bug in non-inlined code for Types::Standard::MkOpt.
- - (Change) All error conditions now throw exception objects instead of
-   string error messages.
- - (Change) Allow the slurpy tail of a Types::Standard::Tuple to be a
-   treated as a hashref rather than an arrayref.
- - (Change) Improved deep explanations for
+ [ Bug Fixes ]
+ - Fixed bug in non-inlined code for Types::Standard::MkOpt.
+
+ [ Other ]
+ - Added: Type::Exception::Compilation.
+ - All error conditions now throw exception objects instead of string error
+   messages.
+ - Allow the slurpy tail of a Types::Standard::Tuple to be a treated as a
+   hashref rather than an arrayref.
+ - Deep explanations for Types::Standard::{Map,Maybe,Ref,Dict,Tuple} type
+   constraint assertion failures.
+ - Improved deep explanations for
    Types::Standard::{ArrayRef,HashRef,ScalarRef}.
- - (Change) Test::TypeTiny performs more thorough testing if
-   EXTENDED_TESTING environment variable is set.
- - (Change) Throw exception if people attempt to set parent types for
+ - Test::TypeTiny performs more thorough testing if EXTENDED_TESTING
+   environment variable is set.
+ - Throw exception if people attempt to set parent types for
    Type::Tiny::{Class,Role,Duck,Enum,Union,Intersection}.
 
 0.005_03	2013-05-14
 
- - (Change) Many error conditions now throw exception objects instead of
-   string error messages.
- - (Removal) Bytes and Chars type constraints removed from Types::Standard.
- - (Removal) Decode and Encode coercions removed from Types::Standard.
+ - Many error conditions now throw exception objects instead of string
+   error messages.
+ - Removed: Bytes and Chars type constraints removed from Types::Standard.
+ - Removed: Decode and Encode coercions removed from Types::Standard.
 
 0.005_02	2013-05-14
 
- - (Documentation) Fix a typo in declare_coercion in
-   Type::Tiny::Manual::Coercions.
+ [ Documentation ]
+ - Fix a typo in declare_coercion in Type::Tiny::Manual::Coercions.
    Vyacheslav Matyukhin++
- - (Documentation) Link to Type::Tiny::Manual::Libraries instead of
-   non-existing Type::Tiny::Intro.
+ - Link to Type::Tiny::Manual::Libraries instead of non-existing
+   Type::Tiny::Intro.
    Vyacheslav Matyukhin++
 
 0.005_01	2013-05-07
 
- - (Addition) ArrayLike type added to Types::TypeTiny.
- - (Addition) Type::Registry.
- - (Bugfix) Type::Library should require Perl 5.8.1, not 5.8.3.
+ [ Bug Fixes ]
+ - Type::Library should require Perl 5.8.1, not 5.8.3.
+
+ [ Other ]
+ - Added: ArrayLike type added to Types::TypeTiny.
+ - Added: Type::Registry.
 
 0.004	2013-05-06
 
- - (Bugfix) Eval::Closure now strips line breaks and other unsavoury
-   characters from descriptions.
- - (Change) Minor updates to to_TypeTiny following Validation::Class
-   7.900048 release.
+ [ Bug Fixes ]
+ - Eval::Closure now strips line breaks and other unsavoury characters from
+   descriptions.
+
+ [ Other ]
+ - Minor updates to to_TypeTiny following Validation::Class 7.900048
+   release.
 
 0.003_16	2013-05-05
 
- - (Change) Minor updates to coderef overloading following Moo 1.002000
-   release.
- - (Change) Rename Types::Standard::AutomaticCoercion ->
+ [ Documentation ]
+ - Document that Map[`k,`v] has a deep coercion.
+ - Improve Type::Coercion documentation.
+
+ [ Other ]
+ - Minor updates to coderef overloading following Moo 1.002000 release.
+ - Rename Types::Standard::AutomaticCoercion ->
    Types::Standard::DeepCoercion.
- - (Change) Type::Params produces nicer error messages.
- - (Documentation) Document that Map[`k,`v] has a deep coercion.
- - (Documentation) Improve Type::Coercion documentation.
+ - Type::Params produces nicer error messages.
 
 0.003_15	2013-05-03
 
- - (Addition) Improvements to to_TypeTiny function, including accepting
+ - Improvements to to_TypeTiny function, including accepting
    Validation::Class::Simple objects.
 
 0.003_14	2013-05-03
 
-
 0.003_13	2013-05-03
 
- - () Fix typo in Type::Params documentation.
+ [ Bug Fixes ]
+ - Don't crash in old versions of Moose that have no
+   Class::MOP::_definition_context() function.
+
+ [ Documentation ]
+ - Fix typo in Type::Params documentation.
    Diab Jerius++
    <https://bitbucket.org/tobyink/p5-type-tiny/pull-request/1/fix-typo-in-d
    ocs/diff>
- - (Bugfix) Don't crash in old versions of Moose that have no
-   Class::MOP::_definition_context() function.
- - (Change) BAIL_OUT in test suite if 00-compile.t or 01-api.t fail.
- - (Change) Better documentation and tests of Moose/Mouse-compatible API.
+
+ [ Other ]
+ - Better documentation and tests of Moose/Mouse-compatible API.
 
 0.003_12	2013-05-01
 
- - () Type::Params validators now explicitly check the number of arguments
-   passed to them.
-   Vyacheslav Matyukhin++
-   <http://play-perl.org/quest/517efcef53a418983f000012>
- - (Bugfix) Sane behaviour for Types::Standard's 'slurpy' function when it
-   appears mid-list.
- - (Change) Allow people to use Carp::{confess,cluck,carp} with
-   Type::Params validators; default is still croak.
- - (Change) Improved Type::Params documentation.
+ [ Bug Fixes ]
+ - Sane behaviour for Types::Standard's 'slurpy' function when it appears
+   mid-list.
+
+ [ Other ]
+ - Allow people to use Carp::{confess,cluck,carp} with Type::Params
+   validators; default is still croak.
+ - Improved Type::Params documentation.
 
 0.003_11	2013-04-30
 
- - () Automatic coercion for parameterized Dict will no longer drop
-   key/value pairs to force a coercion.
-   Vyacheslav Matyukhin++
-   <http://play-perl.org/quest/51682ae05efa74c95c00001e>
- - () Automatic coercion for parameterized Tuple will no longer drop values
-   to force a coercion.
-   Vyacheslav Matyukhin++
-   <http://play-perl.org/quest/51682ae05efa74c95c00001e>
- - (Addition) Test cases for Eval::TypeTiny.
-
 0.003_10	2013-04-29
 
- - (Addition) Bundle Type::Params, which had previously appeared on CPAN in
-   a separate developer release.
- - (Addition) Much of the stringy eval stuff has been factored out to a new
-   module: Eval::TypeTiny.
- - (Addition) Type::Tiny::SUPPORT_SMARTMATCH constant.
- - (Change) General code tidy-up.
- - (Documentation) Improve Exporter::TypeTiny documentation.
- - (Documentation) Improve advice on inlining type constraints and
-   coercions.
- - (Packaging) Bump version of Test::More dependency fom 0.88 to 0.96.
+ [ Documentation ]
+ - Improve Exporter::TypeTiny documentation.
+ - Improve advice on inlining type constraints and coercions.
+
+ [ Packaging ]
+ - Bump version of Test::More dependency fom 0.88 to 0.96.
+
+ [ Other ]
+ - Added: Bundle Type::Params, which had previously appeared on CPAN in a
+   separate developer release.
+ - Added: New module, Eval::TypeTiny
+ - Added: Type::Tiny::SUPPORT_SMARTMATCH constant.
+ - General code tidy-up.
+ - Much of the stringy eval stuff has been factored out into
+   Eval::TypeTiny.
 
 0.003_09	2013-04-28
 
- - (Addition) 'Tied' type constraint added to Types::Standard.
- - (Change) If Mouse is already in memory, Type::Tiny will use its
-   super-fast XS subs to validate values when possible.
- - (Documentation) Document usage with Params::Check and Object::Accessor.
+ [ Documentation ]
+ - Document usage with Params::Check and Object::Accessor.
+
+ [ Other ]
+ - Added: 'Tied' type constraint added to Types::Standard.
+ - If Mouse is already in memory, Type::Tiny will use its super-fast XS
+   subs to validate values when possible.
 
 0.003_08	2013-04-26
 
- - (Addition) Test case using Exporter::TypeTiny with
+ [ Documentation ]
+ - More Exporter::TypeTiny docs, including usage with
    Sub::Exporter::Lexical.
- - (Change) ASCII-only strings are now accepted by the Chars constraint in
+
+ [ Other ]
+ - ASCII-only strings are now accepted by the Chars constraint in
    Types::Standard.
- - (Change) Type::Tiny, Type::Coercion and their subclasses no longer call
+ - Type::Tiny, Type::Coercion and their subclasses no longer call
    Types::TypeTiny->import method.
- - (Change) Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads
+ - Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads
    Exporter::TypeTiny when Types::TypeTiny->import is first called.
- - (Documentation) More Exporter::TypeTiny docs, including usage with
-   Sub::Exporter::Lexical.
 
 0.003_07	2013-04-26
 
- - (Bugfix) Fix method conflicts when exporting type constraints to roles.
+ [ Bug Fixes ]
+ - Fix method conflicts when exporting type constraints to roles.
    Kevin Dawson++
- - (Documentation) Document usage with Class::InsideOut.
- - (Documentation) Minor improvements to manual.
+
+ [ Documentation ]
+ - Document usage with Class::InsideOut.
+ - Minor improvements to manual.
 
 0.003_06	2013-04-25
 
- - (Addition) Types::TypeTiny::to_TypeTiny can now coerce from a
-   Mouse::Meta::TypeConstraint.
- - (Change) Add a bunch of stub methods to Type::Tiny and Type::Coercion in
-   order to make it less necessary to inflate to Moose/Mouse meta objects.
- - (Change) No longer need to add '-mouse' when importing types into Mouse
+ [ Documentation ]
+ - Add lots of stuff to Type::Tiny::Manual::UsingWithMouse.
+ - Document deep coercions (feature added in 0.003_01).
+
+ [ Other ]
+ - Add a bunch of stub methods to Type::Tiny and Type::Coercion in order to
+   make it less necessary to inflate to Moose/Mouse meta objects.
+ - No longer need to add '-mouse' when importing types into Mouse
    libraries. (Same change as what we did for Moose in 0.000_11.)
- - (Change) Various minor changes to Exporter::TypeTiny to make it more
+ - Types::TypeTiny::to_TypeTiny can now coerce from a
+   Mouse::Meta::TypeConstraint.
+ - Various minor changes to Exporter::TypeTiny to make it more
    Sub::Exporter compatible.
- - (Documentation) Add lots of stuff to Type::Tiny::Manual::UsingWithMouse.
- - (Documentation) Document deep coercions (feature added in 0.003_01).
 
 0.003_05	2013-04-19
 
- - (Addition) Allow coercions to accept parameters.
- - (Addition) Chars and Bytes types added to Types::Standard.
- - (Addition) Encode, Decode, Join and Split coercions added to
-   Types::Standard.
- - (Addition) Type::Tiny::Class now has a plus_constructors method.
- - (Bugfix) Prevent warnings (about 'my $val' masking a previously declared
+ [ Bug Fixes ]
+ - Prevent warnings (about 'my $val' masking a previously declared
    variable) when several Str checks are being inlined in close proximity,
    such as Tuple[Str,Str]
- - (Documentation) Document Exporter::TypeTiny.
- - (Documentation) Type::Tiny::Manual::Coercions.
+
+ [ Documentation ]
+ - Create a new manual page Type::Tiny::Manual::Coercions.
+ - Document Exporter::TypeTiny.
+
+ [ Other ]
+ - Added: Chars and Bytes types added to Types::Standard.
+ - Added: Encode, Decode, Join and Split coercions added to
+   Types::Standard.
+ - Added: Type::Tiny::Class now has a plus_constructors method.
+ - Allow coercions to accept parameters.
 
 0.003_04	2013-04-18
 
- - (Change) Factor out the sub exporting code scattered around (in
-   Type::Utils, Types::TypeTiny and Type::Library) into a single module,
+ - Factor out the sub exporting code scattered around (in Type::Utils,
+   Types::TypeTiny and Type::Library) into a single module,
    Exporter::TypeTiny.
 
 0.003_03	2013-04-17
 
- - (Addition) Add OptList data type to Types::Standard, plus MkOpt
-   coercion.
- - (Change) Make Type::Tiny's has_coercion method more DWIM.
- - (Change) When inflating Moo type constraints to Moose, don't
-   unnecessarily call 'moose_type' method.
+ - Added: Add OptList data type to Types::Standard, plus MkOpt coercion.
+ - Make Type::Tiny's has_coercion method more DWIM.
+ - When inflating Moo type constraints to Moose, don't unnecessarily call
+   'moose_type' method.
 
 0.003_02	2013-04-16
 
- - (Change) Avoid unnecessarily regenerating parameterized type
-   constraints.
- - (Documentation) Document how to process sub parameters with Type::Tiny,
-   and point people towards Type::Params.
+ [ Documentation ]
+ - Document how to process sub parameters with Type::Tiny, and point people
+   towards Type::Params.
+
+ [ Other ]
+ - Avoid unnecessarily regenerating parameterized type constraints.
 
 0.003_01	2013-04-16
 
- - (Addition) Allow subtypes to inherit coercions from their parent type
-   constraint. (They do not by default.)
- - (Addition) Build coercions automatically for certain type parameterized
+ [ Documentation ]
+ - Link from Test::TypeTiny to Test::Deep::Type.
+
+ [ Other ]
+ - Allow a Type::Tiny object to "freeze" its coercions. This prevents a
+   Type::Tiny object from becoming out of sync with its equivalent Mouse or
+   Moose constraint objects.
+ - Allow subtypes to inherit coercions from their parent type constraint.
+   (They do not by default.)
+ - Build coercions automatically for certain type parameterized
    constraints. Say there's a Num->Int coercion defined; then we should be
    able to coerce ArrayRef[Num]->ArrayRef[Int].
- - (Addition) Overload "+" operator for Type::Coercion and Type::Tiny
-   allows coercions to be added to each other, and added to type
-   constraints.
- - (Addition) Type::Library packages can now include "standalone"
-   Type::Coercion objects, not attached to a type constraint. These can be
-   exported on request.
- - (Change) Allow a Type::Tiny object to "freeze" its coercions. This
-   prevents a Type::Tiny object from becoming out of sync with its
-   equivalent Mouse or Moose constraint objects.
- - (Documentation) Link from Test::TypeTiny to Test::Deep::Type.
+ - Overload "+" operator for Type::Coercion and Type::Tiny allows coercions
+   to be added to each other, and added to type constraints.
+ - Type::Library packages can now include "standalone" Type::Coercion
+   objects, not attached to a type constraint. These can be exported on
+   request.
 
 0.002	2013-04-26
 
- - (Addition) Chars and Bytes types added to Types::Standard.
- - (Bugfix) Fix method conflicts when exporting type constraints to roles.
+ [ Bug Fixes ]
+ - Fix method conflicts when exporting type constraints to roles.
    Kevin Dawson++
- - (Bugfix) Prevent warnings (about 'my $val' masking a previously declared
+ - Prevent warnings (about 'my $val' masking a previously declared
    variable) when several Str checks are being inlined in close proximity,
    such as Tuple[Str,Str]
- - (Change) Avoid unnecessarily regenerating parameterized type
-   constraints.
- - (Change) Make Type::Tiny's has_coercion method more DWIM.
- - (Documentation) Link from Test::TypeTiny to Test::Deep::Type.
+
+ [ Documentation ]
+ - Link from Test::TypeTiny to Test::Deep::Type.
+
+ [ Other ]
+ - Added: Chars and Bytes types added to Types::Standard.
+ - Avoid unnecessarily regenerating parameterized type constraints.
+ - Make Type::Tiny's has_coercion method more DWIM.
 
 0.001	2013-04-15	First public release
 
- - (Addition) More test cases for Optional[`a] within Dict[`a].
- - (Bugfix) Some inline code assumed that it would be compiled in a package
-   that had 'blessed' imported.
- - (Bugfix) Some inline code wasn't wrapped in parentheses.
- - (Change) Improve test names generated by Test::TypeTiny; allow test
-   scripts to provide test names.
- - (Change) Parameterized type constraints in Types::Standard now do some
-   sanity checking on their arguments.
- - (Change) Weaken the reference from a Moose::Meta::TypeConstraint object
-   to its Type::Tiny origin.
- - (Documentation) Minor improvements.
+ [ Bug Fixes ]
+ - Some inline code assumed that it would be compiled in a package that had
+   'blessed' imported.
+ - Some inline code wasn't wrapped in parentheses.
+
+ [ Documentation ]
+ - Minor improvements.
+
+ [ Other ]
+ - Improve test names generated by Test::TypeTiny; allow test scripts to
+   provide test names.
+ - Parameterized type constraints in Types::Standard now do some sanity
+   checking on their arguments.
+ - Weaken the reference from a Moose::Meta::TypeConstraint object to its
+   Type::Tiny origin.
 
 0.000_12	2013-04-12
 
- - (Documentation) Fix minor typo.
+ [ Documentation ]
+ - Fix minor typo.
 
 0.000_11	2013-04-11
 
- - (Bugfix) Fix prototype for Type::Utils::as.
- - (Change) No longer need to pass '-moose' parameter when importing a
-   library into a Moose class; only Mouse needs that treatment now.
+ [ Bug Fixes ]
+ - Fix prototype for Type::Utils::as.
+
+ [ Other ]
+ - No longer need to pass '-moose' parameter when importing a library into
+   a Moose class; only Mouse needs that treatment now.
 
 0.000_10	2013-04-09
 
- - (Bugfix) Fix incorrect Test::Requires line in 'mouse-coercion.t'.
- - (Change) Improvements to has_coercion_for_{type,value} from
-   Type::Coercion.
+ [ Bug Fixes ]
+ - Fix incorrect Test::Requires line in 'mouse-coercion.t'.
+
+ [ Other ]
+ - Improvements to has_coercion_for_{type,value} from Type::Coercion.
 
 0.000_09	2013-04-08
 
- - (Addition) Bundle benchmarking scripts.
- - (Documentation) Fill in the Usage with Moose section of the fine manual.
- - (Packaging) Tidy up the 'examples' directory.
- - (Packaging) When generating Moose/Mouse constraints from Type::Tiny
-   objects, prefer to generate anonymous ones.
+ [ Documentation ]
+ - Bundle benchmarking scripts.
+ - Fill in the Usage with Moose section of the fine manual.
+
+ [ Packaging ]
+ - Tidy up the 'examples' directory.
+
+ [ Other ]
+ - When generating Moose/Mouse constraints from Type::Tiny objects, prefer
+   to generate anonymous ones.
 
 0.000_08	2013-04-07
 
- - (Addition) Types::TypeTiny::to_TypeTiny can be used to coerce a Moose
-   type constraint object to Type::Tiny.
- - (Change) Most parts of the API that accept Type::Tiny objects (e.g.
+ - Most parts of the API that accept Type::Tiny objects (e.g.
    Type::Utils::from()) now also accept Moose::Meta::TypeConstraint
    objects.
- - (Change) Rewrite most of the functions exported by Type::Library-based
-   type libraries to cope better with being used mid-list.
+ - Rewrite most of the functions exported by Type::Library-based type
+   libraries to cope better with being used mid-list.
+ - Types::TypeTiny::to_TypeTiny can be used to coerce a Moose type
+   constraint object to Type::Tiny.
 
 0.000_07	2013-04-06
 
- - (Addition) Type::Coercion::Union - automatically handles coercion to
-   union types.
- - (Bugfix) Fix inlining for Type::Tiny::Intersection.
- - (Bugfix) Fix inlining of certain conditionals into coercion code.
- - (Bugfix) Types within libraries, if accessed directly rather than
-   exported, did not accept parameters.
- - (Documentation) Document constructor for Type::Tiny::Class.
- - (Packaging) More test cases.
+ [ Bug Fixes ]
+ - Fix inlining for Type::Tiny::Intersection.
+ - Fix inlining of certain conditionals into coercion code.
+ - Types within libraries, if accessed directly rather than exported, did
+   not accept parameters.
+
+ [ Documentation ]
+ - Document constructor for Type::Tiny::Class.
+
+ [ Other ]
+ - Added: New module Type::Coercion::Union automatically handles coercion
+   to union types.
 
 0.000_06	2013-04-05
 
- - (Addition) In Moo, type assertions and coercions are now inlined.
-   Matt S Trout++
- - (Addition) Monkey patch Moose::Meta::TypeConstraint to be able to
-   retrieve Type::Tiny constraints from inflated Moose constraints.
- - (Addition) Type::Tiny now has an 'inline_assert' function.
- - (Change) Footprint reduction: Type::Tiny and Type::Coercion no longer
-   use if.pm.
- - (Change) Footprint reduction: Type::Tiny no longer triggers Perl to load
-   its Unicode tables (unless you create a type constraint with a non-ASCII
+ [ Documentation ]
+ - Improved documentation of parameterization attributes.
+ - Section in manual comparing Type::Tiny with various other type library
+   frameworks.
+ - Using Type::Tiny with Moo added to manual.
+
+ [ Other ]
+ - Added: Type::Tiny now has an 'inline_assert' function.
+ - Footprint reduction: Type::Tiny and Type::Coercion no longer use if.pm.
+ - Footprint reduction: Type::Tiny no longer triggers Perl to load its
+   Unicode tables (unless you create a type constraint with a non-ASCII
    type name).
- - (Change) Footprint reduction: Type::Tiny, Type::Library and Type::Coerce
-   no longer automatically load Types::Standard and Type::Utils.
- - (Documentation) Improved documentation of parameterization attributes.
- - (Documentation) Section in manual comparing Type::Tiny with various
-   other type library frameworks.
- - (Documentation) Using Type::Tiny with Moo added to manual.
- - (Packaging) More test cases.
+ - Footprint reduction: Type::Tiny, Type::Library and Type::Coerce no
+   longer automatically load Types::Standard and Type::Utils.
+ - In Moo, type assertions and coercions are now inlined.
+   Matt S Trout++
+ - Monkey patch Moose::Meta::TypeConstraint to be able to retrieve
+   Type::Tiny constraints from inflated Moose constraints.
 
 0.000_05	2013-04-04
 
- - (Addition) Factor out some functions from test suite into a new module:
-   Test::TypeTiny.
- - (Bugfix) Fix is_parameterized.
- - (Bugfix) Get Mouse coercions working.
- - (Change) Allow null type constraints with no parent type (e.g. 'Any' in
+ [ Bug Fixes ]
+ - Fix is_parameterized method.
+ - Get Mouse coercions working.
+
+ [ Other ]
+ - Allow null type constraints with no parent type (e.g. 'Any' in
    Types::Standard) to be inlined.
- - (Change) Don't die with full stack trace.
- - (Change) Rename Type::Standard module to Types::Standard.
- - (Change) Sanity checks for type constraint names.
- - (Change) Types::TypeTiny bootstrapping library now takes care of vaious
-   internal type checking requirements.
- - (Packaging) Rearrange test suite slightly.
+ - Don't die with full stack trace.
+ - Sanity checks for type constraint names.
+ - Types::TypeTiny bootstrapping library now takes care of vaious internal
+   type checking requirements.
 
 0.000_04	2013-04-03
 
- - (Addition) Finally implement Type::Coercion's has_coercion_for_type
-   method.
- - (Addition) Type::Tiny equals/is_subtype_of/is_supertype_of/is_a_type_of
+ - Added: Finally implement Type::Coercion's has_coercion_for_type method.
+ - Added: Type::Tiny equals/is_subtype_of/is_supertype_of/is_a_type_of
    methods for type constraint comparisons.
- - (Addition) Type::Tiny plus_coercions/minus_coercions/no_coercions
-   methods for creating subtypes with different sets of coercions.
- - (Change) Allow coercion code to be expressed as a string; quite a bit
-   faster.
- - (Change) Create and use compiled coercions; somewhat faster.
+ - Added: Type::Tiny plus_coercions/minus_coercions/no_coercions methods
+   for creating subtypes with different sets of coercions.
+ - Allow coercion code to be expressed as a string; quite a bit faster.
+ - Create and use compiled coercions; somewhat faster.
 
 0.000_03	2013-04-03
 
- - (Addition) Inlined type constraints for all of Type::Standard.
- - (Addition) Test cases for ScalarRef[`a].
- - (Bugfix) Fix the crashing t/moo-inflation.t test case.
- - (Change) Create and use compiled type constraint checks; much faster!
- - (Change) Make sure Type::Standard's Moose-like built-ins get inflated to
-   real Moose built-in types.
- - (Change) Use more unique stringification for %Moo::HandleMoose::TYPE_MAP
-   keys.
- - (Documentation) Document Type::Coercion's overloading.
+ [ Bug Fixes ]
+ - Fix the crashing t/moo-inflation.t test case.
+
+ [ Documentation ]
+ - Document Type::Coercion's overloading.
+
+ [ Other ]
+ - All of Type::Standard cannow be inlined.
+ - Create and use compiled type constraint checks; much faster!
+ - Make sure Type::Standard's Moose-like built-ins get inflated to real
+   Moose built-in types.
+ - Use more unique stringification for %Moo::HandleMoose::TYPE_MAP keys.
 
 0.000_02	2013-04-02
 
- - (Addition) StrMatch added to Type::Standard.
- - (Addition) use Type::Library -base
- - (Addition) use Type::Library -declare
- - (Bugfix) Anchor enum regexps to beginning and end of string.
- - (Documentation) Beginnings of Type::Tiny::Manual.
+ [ Bug Fixes ]
+ - Anchor enum regexps to beginning and end of string.
+
+ [ Documentation ]
+ - Beginnings of Type::Tiny::Manual.
+
+ [ Other ]
+ - Added: StrMatch added to Type::Standard.
+ - use Type::Library -base
+ - use Type::Library -declare
 
 0.000_01	2013-04-02	Developer preview
-

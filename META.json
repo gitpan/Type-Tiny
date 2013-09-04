@@ -42,6 +42,11 @@
             "ExtUtils::MakeMaker" : "6.17"
          }
       },
+      "develop" : {
+         "suggests" : {
+            "Dist::Inkt" : "0.007"
+         }
+      },
       "runtime" : {
          "recommends" : {
             "Devel::LexAlias" : "0.05",
@@ -64,107 +69,107 @@
    "provides" : {
       "Devel::TypeTiny::Perl56Compat" : {
          "file" : "lib/Devel/TypeTiny/Perl56Compat.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Devel::TypeTiny::Perl58Compat" : {
          "file" : "lib/Devel/TypeTiny/Perl58Compat.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Eval::TypeTiny" : {
          "file" : "lib/Eval/TypeTiny.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Exporter::TypeTiny" : {
          "file" : "lib/Exporter/TypeTiny.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Reply::Plugin::TypeTiny" : {
          "file" : "lib/Reply/Plugin/TypeTiny.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Test::TypeTiny" : {
          "file" : "lib/Test/TypeTiny.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Coercion" : {
          "file" : "lib/Type/Coercion.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Coercion::Union" : {
          "file" : "lib/Type/Coercion/Union.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Exception" : {
          "file" : "lib/Type/Exception.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Exception::Assertion" : {
          "file" : "lib/Type/Exception/Assertion.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Exception::Compilation" : {
          "file" : "lib/Type/Exception/Compilation.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Exception::WrongNumberOfParameters" : {
          "file" : "lib/Type/Exception/WrongNumberOfParameters.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Library" : {
          "file" : "lib/Type/Library.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Params" : {
          "file" : "lib/Type/Params.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Parser" : {
          "file" : "lib/Type/Parser.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Registry" : {
          "file" : "lib/Type/Registry.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny" : {
          "file" : "lib/Type/Tiny.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny::Class" : {
          "file" : "lib/Type/Tiny/Class.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny::Duck" : {
          "file" : "lib/Type/Tiny/Duck.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny::Enum" : {
          "file" : "lib/Type/Tiny/Enum.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny::Intersection" : {
          "file" : "lib/Type/Tiny/Intersection.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny::Role" : {
          "file" : "lib/Type/Tiny/Role.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Tiny::Union" : {
          "file" : "lib/Type/Tiny/Union.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Type::Utils" : {
          "file" : "lib/Type/Utils.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Types::Standard" : {
          "file" : "lib/Types/Standard.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       },
       "Types::TypeTiny" : {
          "file" : "lib/Types/TypeTiny.pm",
-         "version" : "0.025_02"
+         "version" : "0.025_03"
       }
    },
    "release_status" : "testing",
@@ -182,7 +187,7 @@
          "web" : "https://github.com/tobyink/p5-type-tiny"
       }
    },
-   "version" : "0.025_02",
+   "version" : "0.025_03",
    "x_contributors" : [
       "Diab Jerius (DJERIUS) <djerius@cpan.org>",
       "Vyacheslav Matyukhin (MMCLERIC) <mmcleric@cpan.org>",

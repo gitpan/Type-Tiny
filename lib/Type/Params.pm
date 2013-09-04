@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.025_02';
+	$Type::Params::VERSION   = '0.025_03';
 }
 
 use B qw(perlstring);
@@ -566,6 +566,42 @@ and trying them each (in their given order!) in an C<eval> block. The only
 slightly intelligent part is that it checks if C<< scalar(@_) >> fits into
 the signature properly (taking into account optional and slurpy parameters),
 and skips evals which couldn't possibly succeed.
+
+It's also possible to list coderefs as alternatives in C<multisig>:
+
+   state $check = multisig(
+      [ Int, ArrayRef ],
+      sub { ... },
+      [ HashRef, Num ],
+      [ CodeRef ],
+   );
+
+The coderef is expected to die if that alternative should be abandoned (and
+the next alternative tried), or return the list of accepted parameters. Here's
+a full example:
+
+   sub get_from {
+      state $check = multisig(
+         [ Int, ArrayRef ],
+         [ Str, HashRef ],
+         sub {
+            my ($meth, $obj);
+            die unless is_Object($obj);
+            die unless $obj->can($meth);
+            return ($meth, $obj);
+         },
+      );
+      my ($needle, $haystack) = $check->(@_);
+      
+      is_HashRef($haystack)  ? $haystack->{$needle} :
+      is_ArrayRef($haystack) ? $haystack->[$needle] :
+      is_Object($haystack)   ? $haystack->$needle   :
+      die;
+   }
+   
+   get_from(0, \@array);      # returns $array[0]
+   get_from('foo', \%hash);   # returns $hash{foo}
+   get_from('foo', $obj);     # returns $obj->foo
 
 =head1 COMPARISON WITH PARAMS::VALIDATE
 
