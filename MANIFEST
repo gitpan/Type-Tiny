@@ -77,6 +77,7 @@ t/exporter-roleconflict.t
 t/exporter.t
 t/functionparameters.t
 t/gh1.t
+t/leak.t
 t/lib/BiggerLib.pm
 t/lib/DemoLib.pm
 t/library-assert.t

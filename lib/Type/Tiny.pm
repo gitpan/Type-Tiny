@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.026';
+	$Type::Tiny::VERSION   = '0.027_01';
 }
 
 use Eval::TypeTiny ();
@@ -132,16 +132,25 @@ sub new
 	
 	unless ($params{tmp})
 	{
-		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $self };
-#			if $self->has_library && !$self->is_anon;
+		my $uniq = $self->{uniq};
 		
-		$ALL_TYPES{ $self->{uniq} } = $self;
-		weaken($ALL_TYPES{ $self->{uniq} });
+		$ALL_TYPES{$uniq} = $self;
+		weaken( $ALL_TYPES{$uniq} );
+		
+		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $ALL_TYPES{$uniq} };
 	}
 	
 	$self->{type_constraints} ||= undef;
 	
 	return $self;
+}
+
+sub DESTROY
+{
+	my $self = shift;
+	delete( $ALL_TYPES{$self->{uniq}} );
+	delete( $Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} );
+	return;
 }
 
 sub _clone
@@ -818,6 +827,12 @@ sub no_coercions
 	shift->_clone;
 }
 
+sub coercibles
+{
+	my $self = shift;
+	$self->has_coercion ? $self->coercion->_source_type_union : $self;
+}
+
 sub isa
 {
 	my $self = shift;
@@ -1205,6 +1220,12 @@ Attempt to coerce C<< $value >> to this type.
 
 Attempt to coerce C<< $value >> to this type. Throws an exception if this is
 not possible.
+
+=item C<< coercibles >>
+
+Return a type constraint which is the union of type constraints that can be
+coerced to this one (including this one). If this type constraint has no
+coercions, returns itself.
 
 =item C<< can_be_inlined >>
 

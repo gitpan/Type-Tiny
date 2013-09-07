@@ -5,7 +5,7 @@ use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.026';
+our $VERSION   = '0.027_01';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -471,6 +471,9 @@ which I'd built into Type::Library:
 
 And so I decided to factor out code that could be shared by all Type-Tiny's
 exporters into a single place.
+
+As of version 0.026, this module is also available as L<Exporter::Tiny>,
+distributed independently on CPAN.
 
 =head1 OBLIGATORY EXPORTER COMPARISON
 
