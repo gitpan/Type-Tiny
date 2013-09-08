@@ -6,10 +6,30 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.027_02	2013-09-08
+
+ [ Bug Fixes ]
+ - Restore Type::Tiny -> Moose -> Type::Tiny round-tripping broken in
+   previous release.
+
+ [ Documentation ]
+ - In Type::Tiny::Manual::Coercions, explain how to chain coercions.
+   <http://purl.org/NET/cpan-uri/rt/ticket/88452>
+
 0.027_01	2013-09-07
+
+ [ REGRESSIONS ]
+ - Weakening various references to fix memory leaks led to breaking
+   Type::Tiny -> Moose -> Type::Tiny round-tripping via
+   Types::TypeTiny::to_TypeTiny. Test cases for this marked TODO.
 
  [ Bug Fixes ]
  - Fixed some memory leaks. Still some work to do in this area.
+
+ [ Other ]
+ - Added `coercibles` method to Type::Tiny.
+   Diab Jerius++
+   <http://purl.org/NET/cpan-uri/rt/ticket/88452>
 
 0.026	2013-09-05
 
@@ -232,6 +252,14 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    <https://rt.cpan.org/Ticket/Display.html?id=86813>
    <https://github.com/tobyink/p5-type-tiny/pull/2>
 
+ [ Other ]
+ - Allow an inline_as block to return a list of strings (which are
+   implictly joined with &&); allow the first item on the list to be undef,
+   which is treated as the inlined parent type constraint.
+   Fixes RT#86891.
+   Tim Bunce++
+   <https://rt.cpan.org/Ticket/Display.html?id=86891>
+
 0.015_03	2013-07-08
 
  - Added: Implement TIESCALAR, TIEARRAY and TIEHASH methods for Type::Tiny;
@@ -258,6 +286,8 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Updated NEWS file.
 
 0.013_01	2013-06-27
+
+
 
  - Added: Type::Parser now provides a `extract_type` function which parses
    a type constraint expression from the head of a string and returns a
@@ -319,6 +349,8 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Updated NEWS file.
 
 0.009_07	2013-06-24
+
+
 
  - If a Type::Tiny object is instantiated with a Sub::Quote quoted
    constraint coderef, and no inlined coderef, then Type::Tiny will use
@@ -400,6 +432,8 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Document status of Type::Registry.
 
  [ Other ]
+
+
  - Added: Type::Parser now exports a _std_eval function useful for testing.
  - Improved error messages from Type::Parser.
  - Type::Parser now supports parentheses in its DSL.
@@ -445,6 +479,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    Moose-like and non-Moose-like functions.
 
  [ Other ]
+
  - Added: Type::Exception is now capable of supplying stack traces
    (requires Devel::StackTrace).
  - Exceptions thrown for Moo isa/coerce now indicate which attribute was
@@ -458,6 +493,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Vastly improved documentation for Types::Standard.
 
  [ Other ]
+
  - Added: Add match_on_type and compile_match_on_type to Type::Utils.
  - Support '0' and '1' as shortcuts for Optional[Any] and Any in
    Type::Params. (Not documented yet.)
@@ -497,6 +533,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    signatures via Function::Parameters/Attribute::Constract.
 
  [ Other ]
+
  - Added: New constraints added to Types::Standard: InstanceOf, ConsumerOf,
    HasMethods and Enum.
    Graham Knop++
@@ -525,6 +562,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Generate README from Type::Tiny::Manual instead of Type::Tiny.
 
  [ Other ]
+
  - Added: Type::Parser.
  - Added: Types::Standard now has LaxNum/StrictNum type constraints.
  - Implemented Types::TypeTiny->meta->get_type.
@@ -537,6 +575,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Exporter::TypeTiny::mkopt_hash now works.
 
 0.005_08	2013-05-28
+
+
+
+
 
 0.005_07	2013-05-28
 
@@ -655,6 +697,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    ocs/diff>
 
  [ Other ]
+
  - Better documentation and tests of Moose/Mouse-compatible API.
 
 0.003_12	2013-05-01
@@ -667,8 +710,22 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Allow people to use Carp::{confess,cluck,carp} with Type::Params
    validators; default is still croak.
  - Improved Type::Params documentation.
+ - Type::Params validators now explicitly check the number of arguments
+   passed to them.
+   Vyacheslav Matyukhin++
+   <http://play-perl.org/quest/517efcef53a418983f000012>
 
 0.003_11	2013-04-30
+
+
+ - Automatic coercion for parameterized Dict will no longer drop key/value
+   pairs to force a coercion.
+   Vyacheslav Matyukhin++
+   <http://play-perl.org/quest/51682ae05efa74c95c00001e>
+ - Automatic coercion for parameterized Tuple will no longer drop values to
+   force a coercion.
+   Vyacheslav Matyukhin++
+   <http://play-perl.org/quest/51682ae05efa74c95c00001e>
 
 0.003_10	2013-04-29
 
@@ -705,6 +762,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    Sub::Exporter::Lexical.
 
  [ Other ]
+
  - ASCII-only strings are now accepted by the Chars constraint in
    Types::Standard.
  - Type::Tiny, Type::Coercion and their subclasses no longer call
@@ -826,6 +884,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Minor improvements.
 
  [ Other ]
+
  - Improve test names generated by Test::TypeTiny; allow test scripts to
    provide test names.
  - Parameterized type constraints in Types::Standard now do some sanity
@@ -890,6 +949,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Document constructor for Type::Tiny::Class.
 
  [ Other ]
+
  - Added: New module Type::Coercion::Union automatically handles coercion
    to union types.
 
@@ -902,6 +962,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Using Type::Tiny with Moo added to manual.
 
  [ Other ]
+
  - Added: Type::Tiny now has an 'inline_assert' function.
  - Footprint reduction: Type::Tiny and Type::Coercion no longer use if.pm.
  - Footprint reduction: Type::Tiny no longer triggers Perl to load its
@@ -921,6 +982,9 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Get Mouse coercions working.
 
  [ Other ]
+
+
+
  - Allow null type constraints with no parent type (e.g. 'Any' in
    Types::Standard) to be inlined.
  - Don't die with full stack trace.
@@ -947,6 +1011,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Document Type::Coercion's overloading.
 
  [ Other ]
+
  - All of Type::Standard cannow be inlined.
  - Create and use compiled type constraint checks; much faster!
  - Make sure Type::Standard's Moose-like built-ins get inflated to real
