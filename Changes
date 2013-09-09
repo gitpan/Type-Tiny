@@ -6,12 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.027_04	2013-09-09
+
+ [ Test Suite ]
+ - The file t/moose-coercion.t was checking a particular Moose warning
+   message. In Moose 2.1100, this warning has been upgraded to an
+   exception. For now, disable that particular check.
+
 0.027_03	2013-09-09
 
  [ Bug Fixes ]
+ - Prevent Eval::TypeTiny from leaking stashes by recycling the sandbox.
+
+ [ Test Suite ]
  - Fix the ultra-finicky t/02-api.t to cope with changes to
    Moose::Meta::TypeConstraint API in Moose 2.1100.
- - Prevent Eval::TypeTiny from leaking stashes by recycling the sandbox.
 
 0.027_02	2013-09-08
 
