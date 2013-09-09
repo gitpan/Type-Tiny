@@ -226,7 +226,7 @@ package Monkey::Nuts;
 "Type::Exception"->throw(message => "Test");
 };
 
-#line 220 "exceptions.t"
+#line 230 "exceptions.t"
 is_deeply(
 	$e_where->context,
 	{
