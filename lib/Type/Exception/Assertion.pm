@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Exception::Assertion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Exception::Assertion::VERSION   = '0.027_04';
+	$Type::Exception::Assertion::VERSION   = '0.027_05';
 }
 
 use base "Type::Exception";
@@ -60,75 +60,28 @@ sub _build_message
 		: sprintf('%s did not pass type constraint', Type::Tiny::_dd($e->value))
 }
 
+sub to_string
+{
+	my $e = shift;
+	
+	my $explain = $e->explain;
+	my $msg     = $e->message;
+	
+	return $msg unless @{ $explain || [] };
+	
+	$msg .= "\n";
+	for my $line (@$explain) {
+		$msg .= "    $line\n";
+	}
+	
+	return $msg;
+}
+
 sub explain
 {
 	my $e = shift;
 	return [] unless $e->has_type;
-	$e->_explain($e->type);
-}
-
-sub _explain
-{
-	my $e = shift;
-	my ($type, $value, $varname) = @_;
-	$value   = $e->value                    if @_ < 2;
-	$varname = ref($e) ? $e->varname : '$_' if @_ < 3;
-	
-	return unless ref $type;
-	return if $type->check($value);
-	
-	if ($type->has_parent)
-	{
-		my $parent = $e->_explain($type->parent, $value, $varname);
-		return [
-			sprintf('"%s" is a subtype of "%s"', $type, $type->parent),
-			@$parent,
-		] if $parent;
-	}
-	
-	if ($type->is_parameterized and $type->parent->has_deep_explanation)
-	{
-		my $deep = $type->parent->deep_explanation->($type, $value, $varname);
-		return [
-			sprintf('%s did not pass type constraint "%s"%s', Type::Tiny::_dd($value), $type, $e->_displayvar($varname)),
-			@$deep,
-		] if $deep;
-	}
-	
-	return [
-		sprintf('%s did not pass type constraint "%s"%s', Type::Tiny::_dd($value), $type, $e->_displayvar($varname)),
-		sprintf('"%s" is defined as: %s', $type, $e->_codefor($type)),
-	];
-}
-
-sub _displayvar
-{
-	require Type::Tiny;
-	shift;
-	my ($varname) = @_;
-	return '' if $varname eq q{$_};
-	return sprintf(' (in %s)', $varname);
-}
-
-my $b;
-sub _codefor
-{
-	shift;
-	my $type = $_[0];
-	
-	return $type->inline_check('$_')
-		if $type->can_be_inlined;
-	
-	$b ||= do {
-		require B::Deparse;
-		my $tmp = "B::Deparse"->new;
-		$tmp->ambient_pragmas(strict => "all", warnings => "all") if $tmp->can('ambient_pragmas');
-		$tmp;
-	};
-	
-	my $code = $b->coderef2text($type->constraint);
-	$code =~ s/\s+/ /g;
-	return "sub $code";
+	$e->type->validate_explain($e->value, $e->varname);
 }
 
 1;

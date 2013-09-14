@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.027_05	2013-09-15
+
+ - Added: Provide a `validate_explain` method as part of Type::Tiny's
+   public API.
+ - Include a detailed explanation in the stringification of
+   Type::Exception::Assertion.
+ - Refactor the explanation generation mechanism.
+
 0.027_04	2013-09-09
 
  [ Test Suite ]

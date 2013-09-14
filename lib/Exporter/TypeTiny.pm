@@ -5,7 +5,7 @@ use strict;
 use warnings; no warnings qw(void once uninitialized numeric redefine);
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.027_04';
+our $VERSION   = '0.027_05';
 our @EXPORT_OK = qw< mkopt mkopt_hash _croak >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -473,7 +473,8 @@ And so I decided to factor out code that could be shared by all Type-Tiny's
 exporters into a single place.
 
 As of version 0.026, this module is also available as L<Exporter::Tiny>,
-distributed independently on CPAN.
+distributed independently on CPAN. The long-term future of the bundled
+L<Exporter::TypeTiny> module is uncertain.
 
 =head1 OBLIGATORY EXPORTER COMPARISON
 
@@ -531,6 +532,8 @@ Please report any bugs to
 L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 =head1 SEE ALSO
+
+L<Exporter::Tiny>.
 
 L<Type::Library>.
 
