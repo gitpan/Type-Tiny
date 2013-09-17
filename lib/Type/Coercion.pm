@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.027_05';
+	$Type::Coercion::VERSION   = '0.027_06';
 }
 
 use Eval::TypeTiny qw<>;
@@ -63,8 +63,8 @@ sub new
 	unless ($self->is_anon)
 	{
 		# First try a fast ASCII-only expression, but fall back to Unicode
-		$self->name =~ /^[A-Z][A-Za-z0-9_]+$/sm
-			or eval q( use 5.008; $self->name =~ /^\p{Lu}[\p{L}0-9_]+$/sm )
+		$self->name =~ /^_{0,2}[A-Z][A-Za-z0-9_]+$/sm
+			or eval q( use 5.008; $self->name =~ /^_{0,2}\p{Lu}[\p{L}0-9_]+$/sm )
 			or _croak '"%s" is not a valid coercion name', $self->name;
 	}
 	

@@ -6,6 +6,30 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.027_06	2013-09-18
+
+ [ Documentation ]
+ - Add a draft Stability Policy to Type::Tiny::Manual.
+
+ [ Other ]
+ - Added: Override `validate_explain` in all the bundled subclasses of
+   Type::Tiny.
+ - Added: Type::Coercion::FromMoose
+ - Added: Type::Tiny::Union now provides a `find_type_for` method which
+   should be compatible with Moose's equivalent method.
+ - Added: Type::Utils now provides an `english_list` function like
+   Moose::Util does. This was useful internally for implementing
+   `validate_explain` methods.
+ - Loosen the rules for Type::Tiny and Type::Coercion name attributes;
+   allow them to begin with one or two leading underscores.
+ - Memoize Types::TypeTiny::to_TypeTiny.
+ - Stop using base.pm.
+ - Type::Tiny::Union's compiled checks no longer close over the type
+   constraints which are in the union.
+ - Types::TypeTiny::to_TypeTiny now uses Type::Coercion::FromMoose to
+   ensure Moose type constraints converted to Type::Tiny constraints retain
+   their coercions.
+
 0.027_05	2013-09-15
 
  - Added: Provide a `validate_explain` method as part of Type::Tiny's

@@ -71,10 +71,12 @@ versions of Perl.
 
 At run-time, Type::Tiny requires the following modules: L<B>,
 L<B::Deparse>, L<Data::Dumper>, L<Scalar::Util>, L<Text::Balanced>,
-L<base>, L<overload>, L<strict> and L<warnings>. All of these come
-bundled with Perl itself. (Prior to Perl 5.8, L<Scalar::Util> and
+L<base>, L<mro>, L<overload>, L<strict> and L<warnings>. All of these
+come bundled with Perl itself. Prior to Perl 5.8, L<Scalar::Util> and
 L<Text::Balanced> do not come bundled with Perl and will need installing
-separately from the CPAN.)
+separately from the CPAN. Prior to Perl 5.10, L<Class::ISA> is used
+instead of L<mro>; this is bundled with Perl 5.8 and above, and available
+from CPAN for earlier versions of Perl.
 
 Certain features require additional modules. Tying a variable to a
 type constraint (e.g. C<< tie my $count, Int >>) requires L<Type::Tie>;
@@ -137,6 +139,40 @@ to C<< $type->check($value) >> except that C<< $type >> may be one of a list
 of pre-defined strings (instead of a Type::Tiny type constraint); or may be
 a package name in which case it will be assumed to be a role and checked with
 C<< $value->DOES($type) >>.
+
+=head1 STATUS
+
+=head2 Stability Policy
+
+The following stability policy is planned for Type::Tiny 1.000 and above.
+This milestone has not yet been reached.
+
+Type::Tiny 1.000 is considered stable. Any changes to the API that are big
+enough to I<require> changes to the test suite will be preceded by a I<< six
+month >> notice period, with the following exceptions:
+
+=over
+
+=item *
+
+Where a change is necessary to maintain compatibility with new releases
+of L<Moose>, L<Moo>, or Perl itself.
+
+=item *
+
+Where a change fixes a contradiction between the implementation and
+documentation of Type::Tiny.
+
+=item *
+
+Where a feature is explicitly documented as being "experimental" or
+"unstable".
+
+=item *
+
+Improvements to the text of error messages.
+
+=back
 
 =head1 BUGS
 

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.027_05';
+	$Type::Tiny::Intersection::VERSION   = '0.027_06';
 }
 
 use Scalar::Util qw< blessed >;
@@ -16,7 +16,8 @@ sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use overload q[@{}] => sub { $_[0]{type_constraints} ||= [] };
 
-use base "Type::Tiny";
+require Type::Tiny;
+our @ISA = 'Type::Tiny';
 
 sub new {
 	my $proto = shift;
@@ -47,11 +48,11 @@ sub _build_display_name
 
 sub _build_constraint
 {
-	my @tcs = @{+shift};
+	my @checks = map $_->compiled_check, @{+shift};
 	return sub
 	{
 		my $val = $_;
-		$_->check($val) || return for @tcs;
+		$_->($val) || return for @checks;
 		return !!1;
 	}
 }
@@ -77,6 +78,32 @@ sub parent
 {
 	$_[0]{type_constraints}[0];
 }
+
+sub validate_explain
+{
+	my $self = shift;
+	my ($value, $varname) = @_;
+	$varname = '$_' unless defined $varname;
+	
+	return undef if $self->check($value);
+	
+	require Type::Utils;
+	for my $type (@$self)
+	{
+		my $deep = $type->validate_explain($value, $varname);
+		return [
+			sprintf(
+				'"%s" requires that the value pass %s',
+				$self,
+				Type::Utils::english_list(map qq["$_"], @$self),
+			),
+			@$deep,
+		] if $deep;
+	}
+	
+	return ["Mysterious!"];
+}
+
 
 1;
 

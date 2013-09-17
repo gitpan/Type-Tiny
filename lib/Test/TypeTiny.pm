@@ -6,14 +6,16 @@ use warnings;
 use Test::More qw();
 use Scalar::Util qw(blessed);
 use Types::TypeTiny qw(to_TypeTiny);
-use base qw(Exporter::TypeTiny);
+
+require Exporter::TypeTiny;
+our @ISA = 'Exporter::TypeTiny';
 
 BEGIN {
 	*EXTENDED_TESTING = $ENV{EXTENDED_TESTING} ? sub(){!!1} : sub(){!!0};
 };
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.027_05';
+our $VERSION   = '0.027_06';
 our @EXPORT    = qw( should_pass should_fail ok_subtype );
 our @EXPORT_OK = qw( EXTENDED_TESTING );
 

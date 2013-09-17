@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.027_05';
+our $VERSION   = '0.027_06';
 
 # Token types
 # 
@@ -26,7 +26,9 @@ sub R_PAREN   () { "R_PAREN" };
 sub MYSTERY   () { "MYSTERY" };
 
 our @EXPORT_OK = qw( eval_type _std_eval parse );
-use base "Exporter::TypeTiny";
+
+require Exporter::TypeTiny;
+our @ISA = 'Exporter::TypeTiny';
 
 Evaluate: {
 	

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.027_05';
+	$Type::Library::VERSION   = '0.027_06';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -14,7 +14,8 @@ use Scalar::Util qw< blessed >;
 use Type::Tiny;
 use Types::TypeTiny qw< TypeTiny to_TypeTiny >;
 
-use base qw< Exporter::TypeTiny >;
+require Exporter::TypeTiny;
+our @ISA = 'Exporter::TypeTiny';
 
 BEGIN { *NICE_PROTOTYPES = ($] >= 5.014) ? sub () { !!1 } : sub () { !!0 } };
 

@@ -6,14 +6,15 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.027_05';
+	$Type::Tiny::Role::VERSION   = '0.027_06';
 }
 
 use Scalar::Util qw< blessed weaken >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
-use base "Type::Tiny";
+require Type::Tiny;
+our @ISA = 'Type::Tiny';
 
 my %cache;
 
@@ -55,9 +56,9 @@ sub _build_default_message
 {
 	my $self = shift;
 	my $c = $self->role;
-	return sub { sprintf 'value "%s" did not pass type constraint (not DOES %s)', $_[0], $c } if $self->is_anon;
+	return sub { sprintf '%s did not pass type constraint (not DOES %s)', Type::Tiny::_dd($_[0]), $c } if $self->is_anon;
 	my $name = "$self";
-	return sub { sprintf 'value "%s" did not pass type constraint "%s" (not DOES %s)', $_[0], $name, $c };
+	return sub { sprintf '%s did not pass type constraint "%s" (not DOES %s)', Type::Tiny::_dd($_[0]), $name, $c };
 }
 
 sub has_parent
@@ -69,6 +70,24 @@ sub parent
 {
 	require Types::Standard;
 	Types::Standard::Object();
+}
+
+sub validate_explain
+{
+	my $self = shift;
+	my ($value, $varname) = @_;
+	$varname = '$_' unless defined $varname;
+	
+	return undef if $self->check($value);
+	return ["Not a blessed reference"] unless blessed($value);
+	return ["Reference provides no DOES method to check roles"] unless $value->can('DOES');
+	
+	my $display_var = $varname eq q{$_} ? '' : sprintf(' (in %s)', $varname);
+	
+	return [
+		sprintf('"%s" requires that the reference does %s', $self, $self->role),
+		sprintf("The reference%s doesn't %s", $display_var, $self->role),
+	];
 }
 
 1;

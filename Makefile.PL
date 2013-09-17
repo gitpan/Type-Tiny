@@ -39,35 +39,36 @@ my $meta = {
                         test      => { requires => { "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "Devel::TypeTiny::Perl56Compat"            => { file => "lib/Devel/TypeTiny/Perl56Compat.pm", version => "0.027_05" },
-                        "Devel::TypeTiny::Perl58Compat"            => { file => "lib/Devel/TypeTiny/Perl58Compat.pm", version => "0.027_05" },
-                        "Eval::TypeTiny"                           => { file => "lib/Eval/TypeTiny.pm", version => "0.027_05" },
-                        "Exporter::TypeTiny"                       => { file => "lib/Exporter/TypeTiny.pm", version => "0.027_05" },
-                        "Reply::Plugin::TypeTiny"                  => { file => "lib/Reply/Plugin/TypeTiny.pm", version => "0.027_05" },
-                        "Test::TypeTiny"                           => { file => "lib/Test/TypeTiny.pm", version => "0.027_05" },
-                        "Type::Coercion"                           => { file => "lib/Type/Coercion.pm", version => "0.027_05" },
-                        "Type::Coercion::Union"                    => { file => "lib/Type/Coercion/Union.pm", version => "0.027_05" },
-                        "Type::Exception"                          => { file => "lib/Type/Exception.pm", version => "0.027_05" },
-                        "Type::Exception::Assertion"               => { file => "lib/Type/Exception/Assertion.pm", version => "0.027_05" },
-                        "Type::Exception::Compilation"             => { file => "lib/Type/Exception/Compilation.pm", version => "0.027_05" },
+                        "Devel::TypeTiny::Perl56Compat"            => { file => "lib/Devel/TypeTiny/Perl56Compat.pm", version => "0.027_06" },
+                        "Devel::TypeTiny::Perl58Compat"            => { file => "lib/Devel/TypeTiny/Perl58Compat.pm", version => "0.027_06" },
+                        "Eval::TypeTiny"                           => { file => "lib/Eval/TypeTiny.pm", version => "0.027_06" },
+                        "Exporter::TypeTiny"                       => { file => "lib/Exporter/TypeTiny.pm", version => "0.027_06" },
+                        "Reply::Plugin::TypeTiny"                  => { file => "lib/Reply/Plugin/TypeTiny.pm", version => "0.027_06" },
+                        "Test::TypeTiny"                           => { file => "lib/Test/TypeTiny.pm", version => "0.027_06" },
+                        "Type::Coercion"                           => { file => "lib/Type/Coercion.pm", version => "0.027_06" },
+                        "Type::Coercion::FromMoose"                => { file => "lib/Type/Coercion/FromMoose.pm", version => 0 },
+                        "Type::Coercion::Union"                    => { file => "lib/Type/Coercion/Union.pm", version => "0.027_06" },
+                        "Type::Exception"                          => { file => "lib/Type/Exception.pm", version => "0.027_06" },
+                        "Type::Exception::Assertion"               => { file => "lib/Type/Exception/Assertion.pm", version => "0.027_06" },
+                        "Type::Exception::Compilation"             => { file => "lib/Type/Exception/Compilation.pm", version => "0.027_06" },
                         "Type::Exception::WrongNumberOfParameters" => {
                                                                         file => "lib/Type/Exception/WrongNumberOfParameters.pm",
-                                                                        version => "0.027_05",
+                                                                        version => "0.027_06",
                                                                       },
-                        "Type::Library"                            => { file => "lib/Type/Library.pm", version => "0.027_05" },
-                        "Type::Params"                             => { file => "lib/Type/Params.pm", version => "0.027_05" },
-                        "Type::Parser"                             => { file => "lib/Type/Parser.pm", version => "0.027_05" },
-                        "Type::Registry"                           => { file => "lib/Type/Registry.pm", version => "0.027_05" },
-                        "Type::Tiny"                               => { file => "lib/Type/Tiny.pm", version => "0.027_05" },
-                        "Type::Tiny::Class"                        => { file => "lib/Type/Tiny/Class.pm", version => "0.027_05" },
-                        "Type::Tiny::Duck"                         => { file => "lib/Type/Tiny/Duck.pm", version => "0.027_05" },
-                        "Type::Tiny::Enum"                         => { file => "lib/Type/Tiny/Enum.pm", version => "0.027_05" },
-                        "Type::Tiny::Intersection"                 => { file => "lib/Type/Tiny/Intersection.pm", version => "0.027_05" },
-                        "Type::Tiny::Role"                         => { file => "lib/Type/Tiny/Role.pm", version => "0.027_05" },
-                        "Type::Tiny::Union"                        => { file => "lib/Type/Tiny/Union.pm", version => "0.027_05" },
-                        "Type::Utils"                              => { file => "lib/Type/Utils.pm", version => "0.027_05" },
-                        "Types::Standard"                          => { file => "lib/Types/Standard.pm", version => "0.027_05" },
-                        "Types::TypeTiny"                          => { file => "lib/Types/TypeTiny.pm", version => "0.027_05" },
+                        "Type::Library"                            => { file => "lib/Type/Library.pm", version => "0.027_06" },
+                        "Type::Params"                             => { file => "lib/Type/Params.pm", version => "0.027_06" },
+                        "Type::Parser"                             => { file => "lib/Type/Parser.pm", version => "0.027_06" },
+                        "Type::Registry"                           => { file => "lib/Type/Registry.pm", version => "0.027_06" },
+                        "Type::Tiny"                               => { file => "lib/Type/Tiny.pm", version => "0.027_06" },
+                        "Type::Tiny::Class"                        => { file => "lib/Type/Tiny/Class.pm", version => "0.027_06" },
+                        "Type::Tiny::Duck"                         => { file => "lib/Type/Tiny/Duck.pm", version => "0.027_06" },
+                        "Type::Tiny::Enum"                         => { file => "lib/Type/Tiny/Enum.pm", version => "0.027_06" },
+                        "Type::Tiny::Intersection"                 => { file => "lib/Type/Tiny/Intersection.pm", version => "0.027_06" },
+                        "Type::Tiny::Role"                         => { file => "lib/Type/Tiny/Role.pm", version => "0.027_06" },
+                        "Type::Tiny::Union"                        => { file => "lib/Type/Tiny/Union.pm", version => "0.027_06" },
+                        "Type::Utils"                              => { file => "lib/Type/Utils.pm", version => "0.027_06" },
+                        "Types::Standard"                          => { file => "lib/Types/Standard.pm", version => "0.027_06" },
+                        "Types::TypeTiny"                          => { file => "lib/Types/TypeTiny.pm", version => "0.027_06" },
                       },
   "release_status" => "testing",
   "resources"      => {
@@ -77,7 +78,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-type-tiny" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/Type-Tiny/project",
                       },
-  "version"        => "0.027_05",
+  "version"        => "0.027_06",
   "x_contributors" => [
                         "Diab Jerius (DJERIUS) <djerius\@cpan.org>",
                         "Vyacheslav Matyukhin (MMCLERIC) <mmcleric\@cpan.org>",
@@ -91,8 +92,9 @@ do {
 $meta->{prereqs}{runtime}{requires}{'Scalar::Util'}   = '1.13' if $] < 5.007003;
 $meta->{prereqs}{runtime}{requires}{'Text::Balanced'} = '1.95' if $] < 5.007003;
 $meta->{prereqs}{runtime}{requires}{'Exporter'}       = '5.57' if $] < 5.009001;
+$meta->{prereqs}{runtime}{requires}{'Class::ISA'}     = '0.32' if $] < 5.009005;
 
-if ( $ENV{AUTOMATED_TESTING} || $ENV{EXTENDED_TESTING} and $meta->{version} =~ /_/ )
+if ($ENV{EXTENDED_TESTING} and $meta->{version} =~ /_/)
 {
 	$meta->{prereqs}{test}{requires}{'Moose'} = '2.0600';
 }

@@ -6,14 +6,15 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.027_05';
+	$Type::Tiny::Enum::VERSION   = '0.027_06';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use overload q[@{}] => 'values';
 
-use base "Type::Tiny";
+require Type::Tiny;
+our @ISA = 'Type::Tiny';
 
 sub new
 {
@@ -82,8 +83,39 @@ sub has_parent
 sub parent
 {
 	require Types::Standard;
-	Types::Standard::Str();
+	Types::Standard::Defined();
 }
+
+sub validate_explain
+{
+	my $self = shift;
+	my ($value, $varname) = @_;
+	$varname = '$_' unless defined $varname;
+	
+	return undef if $self->check($value);
+	
+	require Type::Utils;
+	!defined($value) ? [
+		sprintf(
+			'"%s" requires that the value is defined',
+			$self,
+		),
+	] :
+	@$self < 13 ? [
+		sprintf(
+			'"%s" requires that the value is equal to %s',
+			$self,
+			Type::Utils::english_list(\"or", map B::perlstring($_), @$self),
+		),
+	] :
+	[
+		sprintf(
+			'"%s" requires that the value is one of an enumerated list of strings',
+			$self,
+		),
+	];
+}
+
 
 1;
 

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.027_05';
+	$Type::Registry::VERSION   = '0.027_06';
 }
 
 use Exporter::TypeTiny qw( mkopt _croak );
@@ -14,7 +14,7 @@ use Scalar::Util qw( refaddr );
 use Type::Parser qw( eval_type );
 use Types::TypeTiny qw( CodeLike ArrayLike to_TypeTiny );
 
-use base "Exporter::TypeTiny";
+our @ISA = 'Exporter::TypeTiny';
 our @EXPORT_OK = qw(t);
 
 sub _exporter_expand_sub

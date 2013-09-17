@@ -4,9 +4,9 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.027_05';
+our $VERSION   = '0.027_06';
 
-use Scalar::Util qw< blessed >;
+use Scalar::Util qw< blessed refaddr weaken >;
 
 our @EXPORT_OK = ( __PACKAGE__->type_names, qw/to_TypeTiny/ );
 
@@ -97,12 +97,16 @@ sub TypeTiny ()
 	);
 }
 
+my %ttt_cache;
+
 sub to_TypeTiny
 {
 	my $t = $_[0];
 	
 	return $t unless ref $t;
 	return $t if ref($t) =~ /^Type::Tiny\b/;
+	
+	return $ttt_cache{ refaddr($t) } if $ttt_cache{ refaddr($t) };
 	
 	if (my $class = blessed $t)
 	{
@@ -128,7 +132,8 @@ sub _TypeTinyFromMoose
 		return $t->{"Types::TypeTiny::to_TypeTiny"};
 	}
 	
-	if ($t->name ne '__ANON__') {
+	if ($t->name ne '__ANON__')
+	{
 		require Types::Standard;
 		my $ts = 'Types::Standard'->get_type($t->name);
 		return $ts if $ts->{_is_core};
@@ -143,7 +148,16 @@ sub _TypeTinyFromMoose
 	$opts{moose_type}   = $t;
 	
 	require Type::Tiny;
-	return "Type::Tiny"->new(%opts);
+	my $new = 'Type::Tiny'->new(%opts);
+	$ttt_cache{ refaddr($t) } = $new;
+	weaken($ttt_cache{ refaddr($t) });
+	
+	$new->{coercion} = do {
+		require Type::Coercion::FromMoose;
+		'Type::Coercion::FromMoose'->new(type_constraint => $new);
+	} if $t->has_coercion;
+	
+	return $new;
 }
 
 sub _TypeTinyFromValidationClass
@@ -195,6 +209,7 @@ sub _TypeTinyFromValidationClass
 		};
 	}
 	
+	require Type::Tiny;
 	my $new = "Type::Tiny"->new(%opts);
 	
 	$new->coercion->add_type_coercions(
@@ -209,6 +224,8 @@ sub _TypeTinyFromValidationClass
 		},
 	);
 	
+	$ttt_cache{ refaddr($t) } = $new;
+	weaken($ttt_cache{ refaddr($t) });
 	return $new;
 }
 
@@ -217,7 +234,6 @@ sub _TypeTinyFromGeneric
 	my $t = $_[0];
 	
 	# XXX - handle inlining??
-	# XXX - handle display_name????
 	
 	my %opts = (
 		constraint => sub { $t->check(@_ ? @_ : $_) },
@@ -230,15 +246,17 @@ sub _TypeTinyFromGeneric
 		if $t->can("has_coercion") && $t->has_coercion && $t->can("coerce");
 	
 	require Type::Tiny;
-	return "Type::Tiny"->new(%opts);
+	my $new = "Type::Tiny"->new(%opts);
+	$ttt_cache{ refaddr($t) } = $new;
+	weaken($ttt_cache{ refaddr($t) });
+	return $new;
 }
 
 sub _TypeTinyFromCodeRef
 {
 	my $t = $_[0];
 	
-	require Type::Tiny;
-	return "Type::Tiny"->new(
+	my %opts = (
 		constraint => sub {
 			return !!eval { $t->($_) };
 		},
@@ -248,6 +266,12 @@ sub _TypeTinyFromCodeRef
 			return sprintf('%s did not pass type constraint', Type::Tiny::_dd($_));
 		},
 	);
+
+	require Type::Tiny;
+	my $new = "Type::Tiny"->new(%opts);
+	$ttt_cache{ refaddr($t) } = $new;
+	weaken($ttt_cache{ refaddr($t) });
+	return $new;
 }
 
 1;

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.027_05';
+	$Type::Tiny::Union::VERSION   = '0.027_06';
 }
 
 use Scalar::Util qw< blessed >;
@@ -16,7 +16,8 @@ sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
 use overload q[@{}] => sub { $_[0]{type_constraints} ||= [] };
 
-use base "Type::Tiny";
+require Type::Tiny;
+our @ISA = 'Type::Tiny';
 
 sub new {
 	my $proto = shift;
@@ -56,11 +57,11 @@ sub _build_coercion
 
 sub _build_constraint
 {
-	my @tcs = @{+shift};
+	my @checks = map $_->compiled_check, @{+shift};
 	return sub
 	{
 		my $val = $_;
-		$_->check($val) && return !!1 for @tcs;
+		$_->($val) && return !!1 for @checks;
 		return;
 	}
 }
@@ -114,6 +115,38 @@ sub _build_parent
 	return;
 }
 
+sub find_type_for
+{
+	my @types = @{+shift};
+	for my $type (@types)
+	{
+		return $type if $type->check(@_);
+	}
+	return;
+}
+
+sub validate_explain
+{
+	my $self = shift;
+	my ($value, $varname) = @_;
+	$varname = '$_' unless defined $varname;
+	
+	return undef if $self->check($value);
+	
+	require Type::Utils;
+	return [
+		sprintf(
+			'"%s" requires that the value pass %s',
+			$self,
+			Type::Utils::english_list(\"or", map qq["$_"], @$self),
+		),
+		map {
+			$_->get_message($value),
+			map("    $_", @{ $_->validate_explain || []}),
+		} @$self
+	];
+}
+
 1;
 
 __END__
@@ -157,6 +190,17 @@ the constructor. Instead rely on the default.
 =item C<coercion>
 
 Will typically be a L<Type::Coercion::Union>.
+
+=back
+
+=head2 Methods
+
+=over
+
+=item C<< find_type_for($value) >>
+
+Returns the first individual type constraint in the union which
+C<< $value >> passes.
 
 =back
 

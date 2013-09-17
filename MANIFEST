@@ -11,7 +11,6 @@ Makefile.PL
 NEWS
 README
 SIGNATURE
-TODO
 dist.ini
 doap.ttl
 examples/benchmark-coercions.pl
@@ -29,6 +28,7 @@ lib/Exporter/TypeTiny.pm
 lib/Reply/Plugin/TypeTiny.pm
 lib/Test/TypeTiny.pm
 lib/Type/Coercion.pm
+lib/Type/Coercion/FromMoose.pm
 lib/Type/Coercion/Union.pm
 lib/Type/Exception.pm
 lib/Type/Exception/Assertion.pm

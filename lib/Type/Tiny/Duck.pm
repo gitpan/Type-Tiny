@@ -6,14 +6,15 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Duck::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Duck::VERSION   = '0.027_05';
+	$Type::Tiny::Duck::VERSION   = '0.027_06';
 }
 
 use Scalar::Util qw< blessed >;
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
 
-use base "Type::Tiny";
+require Type::Tiny;
+our @ISA = 'Type::Tiny';
 
 sub new {
 	my $proto = shift;
@@ -52,15 +53,6 @@ sub _build_inlined
 	};
 }
 
-sub _build_default_message
-{
-	no warnings 'uninitialized';
-	my $self = shift;
-	return sub { sprintf 'value "%s" did not pass type constraint', $_[0] } if $self->is_anon;
-	my $name = "$self";
-	return sub { sprintf 'value "%s" did not pass type constraint "%s"', $_[0], $name };
-}
-
 sub _instantiate_moose_type
 {
 	my $self = shift;
@@ -82,6 +74,28 @@ sub parent
 {
 	require Types::Standard;
 	Types::Standard::Object();
+}
+
+sub validate_explain
+{
+	my $self = shift;
+	my ($value, $varname) = @_;
+	$varname = '$_' unless defined $varname;
+	
+	return undef if $self->check($value);
+	return ["Not a blessed reference"] unless blessed($value);
+	
+	require Type::Utils;
+	return [
+		sprintf(
+			'"%s" requires that the reference can %s',
+			$self,
+			Type::Utils::english_list(map qq["$_"], @{$self->methods}),
+		),
+		map  sprintf('The reference cannot "%s"', $_),
+		grep !$value->can($_),
+		@{$self->methods}
+	];
 }
 
 1;

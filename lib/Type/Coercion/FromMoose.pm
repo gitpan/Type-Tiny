@@ -1,4 +1,4 @@
-package Type::Coercion::Union;
+package Type::Coercion::FromMoose;
 
 use 5.006001;
 use strict;
@@ -21,26 +21,25 @@ sub type_coercion_map
 {
 	my $self = shift;
 	
-	Types::TypeTiny::TypeTiny->assert_valid(my $type = $self->type_constraint);
-	$type->isa('Type::Tiny::Union')
-		or _croak "Type::Coercion::Union must be used in conjunction with Type::Tiny::Union";
-	
-	my @c;
-	for my $tc (@$type)
+	my @from = @{ $self->type_constraint->moose_type->coercion->type_coercion_map };
+
+	my @return;
+	while (@from)
 	{
-		next unless $tc->has_coercion;
-		push @c, @{$tc->coercion->type_coercion_map};
+		my ($type, $code) = splice(@from, 0, 2);
+		$type = Moose::Util::TypeConstraints::find_type_constraint($type)
+			unless ref $type;
+		push @return, Types::TypeTiny::to_TypeTiny($type), $code;
 	}
-	return \@c;
+	
+	return \@return;
 }
 
 sub add_type_coercions
 {
 	my $self = shift;
-	_croak "Adding coercions to Type::Coercion::Union not currently supported" if @_;
+	_croak "Adding coercions to Type::Coercion::FromMoose not currently supported" if @_;
 }
-
-# sub _build_moose_coercion ???
 
 1;
 
@@ -52,14 +51,16 @@ __END__
 
 =head1 NAME
 
-Type::Coercion::Union - a set of coercions to a union type constraint
+Type::Coercion::FromMoose - a set of coercions borrowed from Moose
 
 =head1 DESCRIPTION
 
 This package inherits from L<Type::Coercion>; see that for most documentation.
 The major differences are that C<add_type_coercions> always throws an
 exception, and the C<type_coercion_map> is automatically populated from
-the child constraints of the union type constraint.
+Moose.
+
+This is mostly for internal purposes.
 
 =head1 BUGS
 
@@ -70,7 +71,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 L<Type::Coercion>.
 
-L<Moose::Meta::TypeCoercion::Union>.
+L<Moose::Meta::TypeCoercion>.
 
 =head1 AUTHOR
 

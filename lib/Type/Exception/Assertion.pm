@@ -10,10 +10,11 @@ BEGIN {
 
 BEGIN {
 	$Type::Exception::Assertion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Exception::Assertion::VERSION   = '0.027_05';
+	$Type::Exception::Assertion::VERSION   = '0.027_06';
 }
 
-use base "Type::Exception";
+require Type::Exception;
+our @ISA = 'Type::Exception';
 
 sub type               { $_[0]{type} };
 sub value              { $_[0]{value} };

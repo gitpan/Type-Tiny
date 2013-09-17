@@ -13,6 +13,7 @@ Files: examples/benchmark-coercions.pl
  lib/Reply/Plugin/TypeTiny.pm
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
+ lib/Type/Coercion/FromMoose.pm
  lib/Type/Coercion/Union.pm
  lib/Type/Exception.pm
  lib/Type/Exception/Assertion.pm
@@ -123,7 +124,6 @@ License: GPL-1.0+ or Artistic-1.0
 Files: META.json
  META.yml
  NEWS
- TODO
  dist.ini
  doap.ttl
  examples/benchmark-mkopt.pl
@@ -140,6 +140,11 @@ Files: CONTRIBUTING
 Copyright: Copyright 1970 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: t/rt86233.t
+ t/rt86239.t
+Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: COPYRIGHT
  SIGNATURE
 Copyright: None
@@ -150,13 +155,16 @@ Files: t/rt85911.t
 Copyright: This software is copyright (c) 2013 by Diab Jerius.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: t/rt86233.t
- t/rt86239.t
-Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: t/oo-classinsideout.t
 Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: t/gh1.t
@@ -173,14 +181,6 @@ License: Unknown
 
 Files: t/moose-std-types-tests.t
 Copyright: This software is copyright (c) 2013 by Infinity Interactive, Inc..
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Test/Fatal.pm
-Copyright: Copyright 2013 Ricardo Signes.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
 
 License: Artistic-1.0

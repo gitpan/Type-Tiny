@@ -5,10 +5,11 @@ use warnings;
 
 BEGIN {
 	$Reply::Plugin::TypeTiny::AUTHORITY = 'cpan:TOBYINK';
-	$Reply::Plugin::TypeTiny::VERSION   = '0.027_05';
+	$Reply::Plugin::TypeTiny::VERSION   = '0.027_06';
 };
 
-use base 'Reply::Plugin';
+require Reply::Plugin;
+our @ISA = 'Reply::Plugin';
 
 use Scalar::Util qw(blessed);
 use Term::ANSIColor;
