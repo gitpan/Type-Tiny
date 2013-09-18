@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.027_06';
+	$Type::Utils::VERSION   = '0.027_07';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -67,10 +67,11 @@ sub extends
 			my $types = $lib->type_storage;
 			for my $name (sort keys %$types)
 			{
-				my $tt = Types::TypeTiny::to_TypeTiny(
-					Mouse::Util::TypeConstraints::find_type_constraint($types->{$name})
+				my $mouse = Mouse::Util::TypeConstraints::find_type_constraint($types->{$name});
+				my $tt    = Types::TypeTiny::to_TypeTiny($mouse);
+				$caller->add_type(
+					$tt->create_child_type(library => $caller, name => $name, coercion => $mouse->has_coercion ? 1 : 0)
 				);
-				$caller->add_type($tt->create_child_type(library => $caller, name => $name));
 			}
 		}
 		else
