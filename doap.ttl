@@ -4,7 +4,6 @@
 @prefix doap-bugs: <http://ontologi.es/doap-bugs#> .
 @prefix doap-changeset: <http://ontologi.es/doap-changeset#> .
 @prefix doap-deps: <http://ontologi.es/doap-deps#> .
-@prefix dt:    <http://ontologi.es/pretdsl#dt/> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix nfo:   <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
@@ -57,7 +56,7 @@
 	doap:maintainer      <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:name            "Type-Tiny";
 	doap:programming-language "Perl";
-	doap:release         <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_09>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_10>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_11>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_12>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-001>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-002>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_09>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_10>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_11>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_12>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_13>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_14>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_15>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_16>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-004>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-006>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_09>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_10>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-008>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-010>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-011_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-011_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-011_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-012>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-013_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-014>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-016>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-017_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-017_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-018>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-019_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-022>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-023_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-023_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-023_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-024>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-025_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-025_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-025_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-026>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_07>;
+	doap:release         <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_09>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_10>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_11>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_12>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-001>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-002>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_09>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_10>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_11>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_12>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_13>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_14>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_15>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_16>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-004>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-006>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_08>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_09>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_10>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-008>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-010>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-011_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-011_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-011_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-012>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-013_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-014>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-015_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-016>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-017_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-017_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-018>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-019_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-021_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-022>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-023_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-023_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-023_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-024>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-025_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-025_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-025_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-026>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_01>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_02>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_03>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_04>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_05>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_06>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_07>, <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_08>;
 	doap:repository      [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-type-tiny>;
@@ -106,6 +105,9 @@
 	dc:issued            "2013-04-03"^^xsd:date;
 	doap-changeset:changeset [
 		doap-changeset:item [
+			a doap-changeset:Change;
+			rdfs:label "Make sure Type::Standard's Moose-like built-ins get inflated to real Moose built-in types.";
+		], [
 			a doap-changeset:Documentation;
 			rdfs:label "Document Type::Coercion's overloading.";
 		], [
@@ -115,15 +117,15 @@
 			a doap-changeset:Change;
 			rdfs:label "All of Type::Standard cannow be inlined.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "Add test cases for ScalarRef[`a].";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Use more unique stringification for %Moo::HandleMoose::TYPE_MAP keys.";
 		], [
-			a doap-changeset:Change;
-			rdfs:label "Make sure Type::Standard's Moose-like built-ins get inflated to real Moose built-in types.";
-		], [
 			a doap-changeset:Bugfix, doap-changeset:Tests;
 			rdfs:label "Fix the crashing t/moo-inflation.t test case.";
-		], "Add test cases for ScalarRef[`a]."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_02>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -163,6 +165,15 @@
 	dc:issued            "2013-04-04"^^xsd:date;
 	doap-changeset:changeset [
 		doap-changeset:item [
+			a doap-changeset:Tests;
+			rdfs:label "Factor out some functions from test suite into a new module: Test::TypeTiny.";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Rearrange test suite slightly.";
+		], [
+			a doap-changeset:BackCompat;
+			rdfs:label "Rename Type::Standard module to Types::Standard.";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Types::TypeTiny bootstrapping library now takes care of vaious internal type checking requirements.";
 		], [
@@ -180,7 +191,7 @@
 		], [
 			a doap-changeset:Bugfix;
 			rdfs:label "Get Mouse coercions working.";
-		], "Factor out some functions from test suite into a new module: Test::TypeTiny."^^dt:Tests, "Rearrange test suite slightly."^^dt:Tests, "Rename Type::Standard module to Types::Standard."^^dt:BackCompat;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_04>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -195,6 +206,9 @@
 		doap-changeset:item [
 			a doap-changeset:Change;
 			rdfs:label "Monkey patch Moose::Meta::TypeConstraint to be able to retrieve Type::Tiny constraints from inflated Moose constraints.";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "More test cases.";
 		], [
 			a doap-changeset:Documentation;
 			rdfs:label "Improved documentation of parameterization attributes.";
@@ -220,7 +234,7 @@
 			a doap-changeset:Change;
 			rdfs:label "In Moo, type assertions and coercions are now inlined.";
 			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/mstrout>;
-		], "More test cases."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_05>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -233,6 +247,9 @@
 	dc:issued            "2013-04-06"^^xsd:date;
 	doap-changeset:changeset [
 		doap-changeset:item [
+			a doap-changeset:Tests;
+			rdfs:label "More test cases.";
+		], [
 			a doap-changeset:Documentation;
 			rdfs:label "Document constructor for Type::Tiny::Class.";
 		], [
@@ -247,7 +264,7 @@
 		], [
 			a doap-changeset:Bugfix;
 			rdfs:label "Fix inlining of certain conditionals into coercion code.";
-		], "More test cases."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_06>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -366,6 +383,9 @@
 			a doap-changeset:Bugfix;
 			rdfs:label "Some inline code wasn't wrapped in parentheses.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "More test cases for Optional[`a] within Dict[`a].";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Weaken the reference from a Moose::Meta::TypeConstraint object to its Type::Tiny origin.";
 		], [
@@ -374,7 +394,7 @@
 		], [
 			a doap-changeset:Change;
 			rdfs:label "Improve test names generated by Test::TypeTiny; allow test scripts to provide test names.";
-		], "More test cases for Optional[`a] within Dict[`a]."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-000_12>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -599,12 +619,15 @@
 			a doap-changeset:Documentation;
 			rdfs:label "More Exporter::TypeTiny docs, including usage with Sub::Exporter::Lexical.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "Add test case using Exporter::TypeTiny with Sub::Exporter::Lexical.";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Type::Tiny, Type::Coercion and their subclasses no longer call Types::TypeTiny->import method.";
 		], [
 			a doap-changeset:Change;
 			rdfs:label "Types::TypeTiny lazily loads Exporter::TypeTiny - i.e. it loads Exporter::TypeTiny when Types::TypeTiny->import is first called.";
-		], "Add test case using Exporter::TypeTiny with Sub::Exporter::Lexical."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_07>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -638,12 +661,6 @@
 	dc:issued            "2013-04-29"^^xsd:date;
 	doap-changeset:changeset [
 		doap-changeset:item [
-			a doap-changeset:Documentation;
-			rdfs:label "Improve Exporter::TypeTiny documentation.";
-		], [
-			a doap-changeset:Documentation;
-			rdfs:label "Improve advice on inlining type constraints and coercions.";
-		], [
 			a doap-changeset:Packaging;
 			rdfs:label "Bump version of Test::More dependency fom 0.88 to 0.96.";
 		], [
@@ -661,6 +678,12 @@
 		], [
 			a doap-changeset:Addition;
 			rdfs:label "Bundle Type::Params, which had previously appeared on CPAN in a separate developer release.";
+		], [
+			a doap-changeset:Documentation;
+			rdfs:label "Improve Exporter::TypeTiny documentation.";
+		], [
+			a doap-changeset:Documentation;
+			rdfs:label "Improve advice on inlining type constraints and coercions.";
 		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_09>;
 	];
@@ -674,6 +697,9 @@
 	dc:issued            "2013-04-30"^^xsd:date;
 	doap-changeset:changeset [
 		doap-changeset:item [
+			a doap-changeset:Tests;
+			rdfs:label "Test cases for Eval::TypeTiny.";
+		], [
 			rdfs:label "Automatic coercion for parameterized Dict will no longer drop key/value pairs to force a coercion.";
 			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/mmcleric>;
 			rdfs:seeAlso <http://play-perl.org/quest/51682ae05efa74c95c00001e>;
@@ -681,7 +707,7 @@
 			rdfs:label "Automatic coercion for parameterized Tuple will no longer drop values to force a coercion.";
 			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/mmcleric>;
 			rdfs:seeAlso <http://play-perl.org/quest/51682ae05efa74c95c00001e>;
-		], "Test cases for Eval::TypeTiny."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_10>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -694,14 +720,14 @@
 	dc:issued            "2013-05-01"^^xsd:date;
 	doap-changeset:changeset [
 		doap-changeset:item [
-			a doap-changeset:Bugfix;
-			rdfs:label "Sane behaviour for Types::Standard's 'slurpy' function when it appears mid-list.";
-		], [
 			a doap-changeset:Change;
 			rdfs:label "Allow people to use Carp::{confess,cluck,carp} with Type::Params validators; default is still croak.";
 		], [
 			a doap-changeset:Change;
 			rdfs:label "Improved Type::Params documentation.";
+		], [
+			a doap-changeset:Bugfix;
+			rdfs:label "Sane behaviour for Types::Standard's 'slurpy' function when it appears mid-list.";
 		], [
 			rdfs:label "Type::Params validators now explicitly check the number of arguments passed to them.";
 			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/mmcleric>;
@@ -725,11 +751,14 @@
 			a doap-changeset:Change;
 			rdfs:label "Better documentation and tests of Moose/Mouse-compatible API.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "BAIL_OUT in test suite if 00-compile.t or 01-api.t fail.";
+		], [
 			a doap-changeset:Documentation;
 			rdfs:label "Fix typo in Type::Params documentation.";
 			doap-changeset:blame <http://purl.org/NET/cpan-uri/person/djerius>;
 			rdfs:seeAlso <https://bitbucket.org/tobyink/p5-type-tiny/pull-request/1/fix-typo-in-docs/diff>;
-		], "BAIL_OUT in test suite if 00-compile.t or 01-api.t fail."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-003_12>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -968,7 +997,16 @@
 	dc:identifier        "Type-Tiny-0.005_08"^^xsd:string;
 	dc:issued            "2013-05-28"^^xsd:date;
 	doap-changeset:changeset [
-		doap-changeset:item "Add 00-begin.t."^^dt:Tests, "Rearrange test cases"^^dt:Tests, "Use JSON::PP instead of JSON in test cases, because JSON::PP is a core module since Perl 5.14."^^dt:Tests;
+		doap-changeset:item [
+			a doap-changeset:Tests;
+			rdfs:label "Use JSON::PP instead of JSON in test cases, because JSON::PP is a core module since Perl 5.14.";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Rearrange test cases";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Add 00-begin.t.";
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-005_07>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1009,12 +1047,15 @@
 			a doap-changeset:Addition;
 			rdfs:label "Types::Standard now has LaxNum/StrictNum type constraints.";
 		], [
+			a doap-changeset:BackCompat;
+			rdfs:label "Types::Standard's Num constraint is now a subtype of either LaxNum and StrictNum (depending on environment).";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Implemented Types::TypeTiny->meta->get_type.";
 		], [
 			a doap-changeset:Packaging;
 			rdfs:label "Generate README from Type::Tiny::Manual instead of Type::Tiny.";
-		], "Types::Standard's Num constraint is now a subtype of either LaxNum and StrictNum (depending on environment)."^^dt:BackCompat;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-006>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1035,6 +1076,9 @@
 		], [
 			a doap-changeset:Documentation;
 			rdfs:label "Improvements to Type::Tiny::Manual::Params, including rewritten manual processing section, and processing type constraints in function signatures via Function::Parameters/Attribute::Constract.";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Test cases for usage with Function::Parameters.";
 		], [
 			a doap-changeset:Change;
 			rdfs:label "Allow constraint_generators (for parameterizable type constraints) to return full Type::Tiny objects instead of plain coderefs.";
@@ -1060,7 +1104,7 @@
 			a doap-changeset:Addition;
 			rdfs:label "New constraints added to Types::Standard: InstanceOf, ConsumerOf, HasMethods and Enum.";
 			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/haarg>;
-		], "Test cases for usage with Function::Parameters."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_01>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1127,9 +1171,12 @@
 			a doap-changeset:Documentation;
 			rdfs:label "Mention Scalar::Does and Type::Tie in manual.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "Added test cases for InstanceOf, ConsumerOf, HasMethods and Enum types defined by Types::Standard.";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Support '0' and '1' as shortcuts for Optional[Any] and Any in Type::Params. (Not documented yet.)";
-		], "Added test cases for InstanceOf, ConsumerOf, HasMethods and Enum types defined by Types::Standard."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_04>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1155,9 +1202,12 @@
 			rdfs:label "Exceptions thrown for Moo isa/coerce now indicate which attribute was involved.";
 		], [
 			a doap-changeset:BackCompat;
+			rdfs:label "Type::Utils no longer exports 'extends' by default.";
+		], [
+			a doap-changeset:BackCompat;
 			rdfs:label "Better prototypes (was `;@`, now `;$`) for parameterizable type 'constants' exported by type libraries.";
 			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/mstrout>;
-		], "Type::Utils no longer exports 'extends' by default."^^dt:BackCompat;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_05>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1236,13 +1286,19 @@
 			a doap-changeset:Change;
 			rdfs:label "Improved error messages from Type::Parser.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "Add test cases for Type::Parser.";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Better test cases for Type::Registry.";
+		], [
 			a doap-changeset:Documentation;
 			rdfs:label "Document status of Type::Registry.";
 		], [
 			a doap-changeset:Bugfix;
 			rdfs:label "MooseX::Types objects used in Type::Tiny::Union, Type::Tiny::Intersection and parameterized Type::Tiny type constraints would break in some circumstances, as Types::TypeTiny::to_TypeTiny was failing to convert them to native Type::Tiny type constraints.";
 			doap-changeset:fixes <http://purl.org/NET/cpan-uri/rt/ticket/86303>;
-		], "Add test cases for Type::Parser."^^dt:Tests, "Better test cases for Type::Registry."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-007_09>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1383,15 +1439,21 @@
 			a doap-changeset:Change;
 			rdfs:label "Types::Standard::to_TypeTiny now sets 'display_name' instead of 'name' on generated type constraints.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "More test cases for interacting with MooseX::Types type constraints.";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "Type::Params no longer uses Type::Utils.";
 		], [
 			a doap-changeset:Change;
 			rdfs:label "Subclasses of Type::Tiny reject 'inlined' coderef, just like they already reject 'constraint' coderef.";
 		], [
+			a doap-changeset:Tests;
+			rdfs:label "Make rt86172.t an 'xt' test case because it's causing random CPAN testers failures unrelated to the feature it's supposed to be testing.";
+		], [
 			a doap-changeset:Change;
 			rdfs:label "If a Type::Tiny object is instantiated with a Sub::Quote quoted constraint coderef, and no inlined coderef, then Type::Tiny will use Sub::Quote to make an inlined coderef.";
-		], "Make rt86172.t an 'xt' test case because it's causing random CPAN testers failures unrelated to the feature it's supposed to be testing."^^dt:Tests, "More test cases for interacting with MooseX::Types type constraints."^^dt:Tests;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-009_06>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -1497,9 +1559,15 @@
 			a doap-changeset:Change;
 			rdfs:label "Type::Parser's tokenization is now done on a pull basis, allowing one-pass building of the AST.";
 		], [
+			a doap-changeset:BackCompat;
+			rdfs:label "Type::Parser no longer provides a `tokens` function as it no longer pre-emptively tokenizes the whole string it is given.";
+		], [
+			a doap-changeset:BackCompat;
+			rdfs:label "Type::Parser functions no longer accept an arrayref of tokens, as they expect to pull tokens from a stream as required.";
+		], [
 			a doap-changeset:Addition;
 			rdfs:label "Type::Parser now provides a `extract_type` function which parses a type constraint expression from the head of a string and returns a Type::Tiny object, plus the tail of the string. (This is designed to make it easier to use Type::Parser to parse things like function signatures.)";
-		], "Type::Parser functions no longer accept an arrayref of tokens, as they expect to pull tokens from a stream as required."^^dt:BackCompat, "Type::Parser no longer provides a `tokens` function as it no longer pre-emptively tokenizes the whole string it is given."^^dt:BackCompat;
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-012>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -2158,16 +2226,48 @@
 	doap-changeset:changeset [
 		doap-changeset:item [
 			a doap-changeset:Change;
-			rdfs:label "Also ensure Moose type constraints converted to Type::Tiny constraints retain their coercions.";
+			rdfs:label "Also ensure Mouse type constraints converted to Type::Tiny constraints retain their coercions.";
 		], [
 			a doap-changeset:Bugfix;
 			rdfs:label "Fix missing version number in Type::Coercion::FromMoose";
-		], "Changes to version numbers reported by 00-begin.t."^^dt:Tests;
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Changes to version numbers reported by 00-begin.t.";
+		];
 		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_06>;
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.027_07.tar.gz>;
 	doap:revision        "0.027_07"^^xsd:string.
+
+<http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_08>
+	a                    cpan-uri:DeveloperRelease, doap:Version;
+	dc:identifier        "Type-Tiny-0.027_08"^^xsd:string;
+	dc:issued            "2013-09-19"^^xsd:date;
+	doap-changeset:changeset [
+		doap-changeset:item [
+			a doap-changeset:Change;
+			rdfs:label "Explicitly overload boolification (always true!) in Type::Exception.";
+		], [
+			a doap-changeset:Bugfix;
+			rdfs:label "Type::Exception::Assertion changes from 0.027_05 are now conditional upon Perl version; only take effect on Perl 5.8+; they just weren't working on Perl 5.6.";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "More changes to version numbers reported by 00-begin.t.";
+		], [
+			a doap-changeset:Bugfix, doap-changeset:Documentation;
+			rdfs:label "Fix typo in changelog for previous developer release.";
+		], [
+			a doap-changeset:Bugfix, doap-changeset:Documentation;
+			rdfs:label "Fix typo in Type::Utils for coerce=>1 --> coercion=>1.";
+			doap-changeset:fixes <http://purl.org/NET/cpan-uri/rt/ticket/88798>;
+			doap-changeset:thanks <http://purl.org/NET/cpan-uri/person/djerius>;
+		];
+		doap-changeset:versus <http://purl.org/NET/cpan-uri/dist/Type-Tiny/v_0-027_07>;
+	];
+	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
+	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Type-Tiny-0.027_08.tar.gz>;
+	doap:revision        "0.027_08"^^xsd:string.
 
 <http://purl.org/NET/cpan-uri/person/bbyrd>
 	a                    foaf:Person;
@@ -2372,6 +2472,11 @@
 	a                    doap-bugs:Issue;
 	doap-bugs:id         "88452"^^xsd:string;
 	doap-bugs:page       <https://rt.cpan.org/Ticket/Display.html?id=88452>.
+
+<http://purl.org/NET/cpan-uri/rt/ticket/88798>
+	a                    doap-bugs:Issue;
+	doap-bugs:id         "88798"^^xsd:string;
+	doap-bugs:page       <https://rt.cpan.org/Ticket/Display.html?id=88798>.
 
 <urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>
 	foaf:name            "Pierre Masci";

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.027_07';
+	$Type::Utils::VERSION   = '0.027_08';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -592,7 +592,7 @@ types declared in the package will be automatically installed into the
 library.
 
 Hidden gem: if you're inheriting from a type constraint that includes some
-coercions, you can include C<< coerce => 1 >> in the C<< %options >> hash
+coercions, you can include C<< coercion => 1 >> in the C<< %options >> hash
 to inherit the coercions.
 
 =item C<< subtype $name, %options >>

@@ -6,14 +6,34 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.027_08	2013-09-19
+
+ [ Bug Fixes ]
+ - Fix typo in Type::Utils for coerce=>1 --> coercion=>1.
+   Fixes RT#88798.
+   Diab Jerius++
+   <https://rt.cpan.org/Ticket/Display.html?id=88798>
+ - Fix typo in changelog for previous developer release.
+ - Type::Exception::Assertion changes from 0.027_05 are now conditional
+   upon Perl version; only take effect on Perl 5.8+; they just weren't
+   working on Perl 5.6.
+
+ [ Test Suite ]
+ - More changes to version numbers reported by 00-begin.t.
+
+ [ Other ]
+ - Explicitly overload boolification (always true!) in Type::Exception.
+
 0.027_07	2013-09-18
 
  [ Bug Fixes ]
  - Fix missing version number in Type::Coercion::FromMoose
 
- [ Other ]
+ [ Test Suite ]
+ - Changes to version numbers reported by 00-begin.t.
 
- - Also ensure Moose type constraints converted to Type::Tiny constraints
+ [ Other ]
+ - Also ensure Mouse type constraints converted to Type::Tiny constraints
    retain their coercions.
 
 0.027_06	2013-09-18
@@ -345,8 +365,13 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
 0.013_01	2013-06-27
 
+ [ BACK COMPAT ]
+ - Type::Parser functions no longer accept an arrayref of tokens, as they
+   expect to pull tokens from a stream as required.
+ - Type::Parser no longer provides a `tokens` function as it no longer
+   pre-emptively tokenizes the whole string it is given.
 
-
+ [ Other ]
  - Added: Type::Parser now provides a `extract_type` function which parses
    a type constraint expression from the head of a string and returns a
    Type::Tiny object, plus the tail of the string. (This is designed to
@@ -408,8 +433,12 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
 0.009_07	2013-06-24
 
+ [ Test Suite ]
+ - Make rt86172.t an 'xt' test case because it's causing random CPAN
+   testers failures unrelated to the feature it's supposed to be testing.
+ - More test cases for interacting with MooseX::Types type constraints.
 
-
+ [ Other ]
  - If a Type::Tiny object is instantiated with a Sub::Quote quoted
    constraint coderef, and no inlined coderef, then Type::Tiny will use
    Sub::Quote to make an inlined coderef.
@@ -489,9 +518,11 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  [ Documentation ]
  - Document status of Type::Registry.
 
+ [ Test Suite ]
+ - Add test cases for Type::Parser.
+ - Better test cases for Type::Registry.
+
  [ Other ]
-
-
  - Added: Type::Parser now exports a _std_eval function useful for testing.
  - Improved error messages from Type::Parser.
  - Type::Parser now supports parentheses in its DSL.
@@ -530,6 +561,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Better prototypes (was `;@`, now `;$`) for parameterizable type
    'constants' exported by type libraries.
    Matt S Trout++
+ - Type::Utils no longer exports 'extends' by default.
 
  [ Documentation ]
  - Document the evaluation environment used by Eval::TypeTiny.
@@ -537,7 +569,6 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    Moose-like and non-Moose-like functions.
 
  [ Other ]
-
  - Added: Type::Exception is now capable of supplying stack traces
    (requires Devel::StackTrace).
  - Exceptions thrown for Moo isa/coerce now indicate which attribute was
@@ -550,8 +581,11 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Vastly improved documentation for Type::Utils.
  - Vastly improved documentation for Types::Standard.
 
- [ Other ]
+ [ Test Suite ]
+ - Added test cases for InstanceOf, ConsumerOf, HasMethods and Enum types
+   defined by Types::Standard.
 
+ [ Other ]
  - Added: Add match_on_type and compile_match_on_type to Type::Utils.
  - Support '0' and '1' as shortcuts for Optional[Any] and Any in
    Type::Params. (Not documented yet.)
@@ -590,8 +624,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    processing section, and processing type constraints in function
    signatures via Function::Parameters/Attribute::Constract.
 
- [ Other ]
+ [ Test Suite ]
+ - Test cases for usage with Function::Parameters.
 
+ [ Other ]
  - Added: New constraints added to Types::Standard: InstanceOf, ConsumerOf,
    HasMethods and Enum.
    Graham Knop++
@@ -613,6 +649,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
 0.007_01	2013-06-01	Happy birthday to me...
 
+ [ BACK COMPAT ]
+ - Types::Standard's Num constraint is now a subtype of either LaxNum and
+   StrictNum (depending on environment).
+
  [ Bug Fixes ]
  - Fix $VERSION defined in Type::Library.
 
@@ -620,7 +660,6 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Generate README from Type::Tiny::Manual instead of Type::Tiny.
 
  [ Other ]
-
  - Added: Type::Parser.
  - Added: Types::Standard now has LaxNum/StrictNum type constraints.
  - Implemented Types::TypeTiny->meta->get_type.
@@ -634,9 +673,11 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
 0.005_08	2013-05-28
 
-
-
-
+ [ Test Suite ]
+ - Add 00-begin.t.
+ - Rearrange test cases
+ - Use JSON::PP instead of JSON in test cases, because JSON::PP is a core
+   module since Perl 5.14.
 
 0.005_07	2013-05-28
 
@@ -754,8 +795,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    <https://bitbucket.org/tobyink/p5-type-tiny/pull-request/1/fix-typo-in-d
    ocs/diff>
 
- [ Other ]
+ [ Test Suite ]
+ - BAIL_OUT in test suite if 00-compile.t or 01-api.t fail.
 
+ [ Other ]
  - Better documentation and tests of Moose/Mouse-compatible API.
 
 0.003_12	2013-05-01
@@ -775,7 +818,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
 0.003_11	2013-04-30
 
+ [ Test Suite ]
+ - Test cases for Eval::TypeTiny.
 
+ [ Other ]
  - Automatic coercion for parameterized Dict will no longer drop key/value
    pairs to force a coercion.
    Vyacheslav Matyukhin++
@@ -819,8 +865,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - More Exporter::TypeTiny docs, including usage with
    Sub::Exporter::Lexical.
 
- [ Other ]
+ [ Test Suite ]
+ - Add test case using Exporter::TypeTiny with Sub::Exporter::Lexical.
 
+ [ Other ]
  - ASCII-only strings are now accepted by the Chars constraint in
    Types::Standard.
  - Type::Tiny, Type::Coercion and their subclasses no longer call
@@ -941,8 +989,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  [ Documentation ]
  - Minor improvements.
 
- [ Other ]
+ [ Test Suite ]
+ - More test cases for Optional[`a] within Dict[`a].
 
+ [ Other ]
  - Improve test names generated by Test::TypeTiny; allow test scripts to
    provide test names.
  - Parameterized type constraints in Types::Standard now do some sanity
@@ -1006,8 +1056,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  [ Documentation ]
  - Document constructor for Type::Tiny::Class.
 
- [ Other ]
+ [ Test Suite ]
+ - More test cases.
 
+ [ Other ]
  - Added: New module Type::Coercion::Union automatically handles coercion
    to union types.
 
@@ -1019,8 +1071,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    frameworks.
  - Using Type::Tiny with Moo added to manual.
 
- [ Other ]
+ [ Test Suite ]
+ - More test cases.
 
+ [ Other ]
  - Added: Type::Tiny now has an 'inline_assert' function.
  - Footprint reduction: Type::Tiny and Type::Coercion no longer use if.pm.
  - Footprint reduction: Type::Tiny no longer triggers Perl to load its
@@ -1035,14 +1089,19 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
 0.000_05	2013-04-04
 
+ [ BACK COMPAT ]
+ - Rename Type::Standard module to Types::Standard.
+
  [ Bug Fixes ]
  - Fix is_parameterized method.
  - Get Mouse coercions working.
 
+ [ Test Suite ]
+ - Factor out some functions from test suite into a new module:
+   Test::TypeTiny.
+ - Rearrange test suite slightly.
+
  [ Other ]
-
-
-
  - Allow null type constraints with no parent type (e.g. 'Any' in
    Types::Standard) to be inlined.
  - Don't die with full stack trace.
@@ -1068,8 +1127,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  [ Documentation ]
  - Document Type::Coercion's overloading.
 
- [ Other ]
+ [ Test Suite ]
+ - Add test cases for ScalarRef[`a].
 
+ [ Other ]
  - All of Type::Standard cannow be inlined.
  - Create and use compiled type constraint checks; much faster!
  - Make sure Type::Standard's Moose-like built-ins get inflated to real

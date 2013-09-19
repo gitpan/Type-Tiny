@@ -6,11 +6,12 @@ use warnings;
 
 BEGIN {
 	$Type::Exception::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Exception::VERSION   = '0.027_07';
+	$Type::Exception::VERSION   = '0.027_08';
 }
 
 use overload
 	q[""]    => sub { $_[0]->to_string },
+	q[bool]  => sub { 1 },
 	fallback => 1,
 ;
 
