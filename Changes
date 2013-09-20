@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.027_09	2013-09-20
+
+ [ Bug Fixes ]
+ - Fix whitespace in error messages.
+
+ [ Test Suite ]
+ - Skip leak.t on Perl 5.10.0.
+
 0.027_08	2013-09-19
 
  [ Bug Fixes ]
