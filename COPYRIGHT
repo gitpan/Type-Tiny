@@ -9,7 +9,6 @@ Files: examples/benchmark-coercions.pl
  lib/Devel/TypeTiny/Perl56Compat.pm
  lib/Devel/TypeTiny/Perl58Compat.pm
  lib/Eval/TypeTiny.pm
- lib/Exporter/TypeTiny.pm
  lib/Reply/Plugin/TypeTiny.pm
  lib/Test/TypeTiny.pm
  lib/Type/Coercion.pm
@@ -126,8 +125,8 @@ Files: META.json
  NEWS
  dist.ini
  doap.ttl
- examples/benchmark-mkopt.pl
  examples/benchmark-param-validation.pl
+ lib/Exporter/TypeTiny.pm
 Copyright: Copyright 2013 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
@@ -140,14 +139,14 @@ Files: CONTRIBUTING
 Copyright: Copyright 1970 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: t/rt86233.t
- t/rt86239.t
-Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: t/rt85911.t
  t/rt86004.t
 Copyright: This software is copyright (c) 2013 by Diab Jerius.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/rt86233.t
+ t/rt86239.t
+Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: COPYRIGHT
@@ -155,32 +154,32 @@ Files: COPYRIGHT
 Copyright: None
 License: public-domain
 
-Files: t/moose-std-types-tests.t
-Copyright: This software is copyright (c) 2013 by Infinity Interactive, Inc..
-License: GPL-1.0+ or Artistic-1.0
-
-Files: INSTALL
-Copyright: Unknown
-License: Unknown
-
-Files: t/gh1.t
-Copyright: This software is copyright (c) 2013 by Richard SimÃµes.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Test/Requires.pm
-Copyright: Copyright 2013 MATSUNO Tokuhiro.
+Files: t/oo-classinsideout.t
+Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Test/Fatal.pm
 Copyright: Copyright 2013 Ricardo Signes.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: t/oo-classinsideout.t
-Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
+Files: t/moose-std-types-tests.t
+Copyright: This software is copyright (c) 2013 by Infinity Interactive, Inc..
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/gh1.t
+Copyright: This software is copyright (c) 2013 by Richard SimÃµes.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: INSTALL
+Copyright: Unknown
+License: Unknown
+
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
 
 License: Artistic-1.0

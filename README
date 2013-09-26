@@ -3,8 +3,10 @@ NAME
 
 SYNOPSIS
     Type::Tiny is a small class for writing type constraints, inspired by
-    Moose's type constraint API. It has no non-core dependencies, and can be
-    used with Moose, Mouse and Moo (or none of the above).
+    Moose's type constraint API. It has only one non-core dependency (and even
+    that is simply a module that was previously distributed as part of
+    Type::Tiny but has since been spun off), and can be used with Moose, Mouse
+    and Moo (or none of the above).
 
     Type::Tiny is bundled with Type::Library a framework for organizing type
     constraints into collections.
@@ -44,12 +46,16 @@ DEPENDENCIES
     features (e.g. non-ASCII type constraint names) may work better in newer
     versions of Perl.
 
-    At run-time, Type::Tiny requires the following modules: B, B::Deparse,
-    Data::Dumper, Scalar::Util, Text::Balanced, base, mro, overload, strict
-    and warnings. All of these come bundled with Perl itself. Prior to Perl
-    5.8, Scalar::Util and Text::Balanced do not come bundled with Perl and
-    will need installing separately from the CPAN. Prior to Perl 5.10,
-    Class::ISA is used instead of mro; this is bundled with Perl 5.8 and
+    Type::Tiny requires Exporter::Tiny, a module that was previously bundled
+    in this distribution, but has since been spun off as a separate
+    distribution. Don't worry - it's quick and easy to install.
+
+    At run-time, Type::Tiny also requires the following modules: B,
+    B::Deparse, Data::Dumper, Scalar::Util, Text::Balanced, base, mro,
+    overload, strict and warnings. All of these come bundled with Perl itself.
+    Prior to Perl 5.8, Scalar::Util and Text::Balanced do not come bundled
+    with Perl and will need installing separately from the CPAN. Prior to Perl
+    5.10, Class::ISA is used instead of mro; this is bundled with Perl 5.8 and
     above, and available from CPAN for earlier versions of Perl.
 
     Certain features require additional modules. Tying a variable to a type
@@ -73,7 +79,8 @@ TYPE::TINY VERSUS X
     Type::Tiny is similar in aim to Specio. The major differences are
 
     *   Type::Tiny is "tiny" (Specio will eventually have fewer dependencies
-        than it currently does, but is unlikely to ever have zero);
+        than it currently does, but is unlikely to ever have as few as
+        Type::Tiny);
 
     *   Specio has a somewhat nicer API (better method names; less
         duplication), and its API is likely to improve further. Type::Tiny's

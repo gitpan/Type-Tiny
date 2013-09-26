@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.028';
+	$Type::Params::VERSION   = '0.029_01';
 }
 
 use B qw(perlstring);
@@ -23,8 +23,8 @@ use Type::Tiny::Union;
 use Types::Standard -types;
 use Types::TypeTiny qw(CodeLike ArrayLike to_TypeTiny);
 
-require Exporter::TypeTiny;
-our @ISA = 'Exporter::TypeTiny';
+require Exporter::Tiny;
+our @ISA = 'Exporter::Tiny';
 
 our @EXPORT = qw( compile );
 our @EXPORT_OK = qw( multisig validate Invocant );

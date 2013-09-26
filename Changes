@@ -6,6 +6,10 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.029_01	2013-09-26
+
+ - Replace Exporter::TypeTiny with Exporter::Tiny (an external dependency).
+
 0.028	2013-09-26
 
  [ Documentation ]

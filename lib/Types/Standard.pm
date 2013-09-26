@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.028';
+	$Types::Standard::VERSION   = '0.029_01';
 }
 
 use Type::Library -base;
@@ -1006,8 +1006,8 @@ $meta->add_coercion({
 	name               => "MkOpt",
 	type_constraint    => $meta->get_type("OptList"),
 	type_coercion_map  => [
-		$_arr,    q{ Exporter::TypeTiny::mkopt($_) },
-		$_hash,   q{ Exporter::TypeTiny::mkopt($_) },
+		$_arr,    q{ Exporter::Tiny::mkopt($_) },
+		$_hash,   q{ Exporter::Tiny::mkopt($_) },
 		$_undef,  q{ [] },
 	],
 });

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.028';
+our $VERSION   = '0.029_01';
 
 use Scalar::Util qw< blessed refaddr weaken >;
 
@@ -16,9 +16,9 @@ sub import
 {
 	# do the shuffle!
 	no warnings "redefine";
-	our @ISA = qw( Exporter::TypeTiny );
-	require Exporter::TypeTiny;
-	my $next = \&Exporter::TypeTiny::import;
+	our @ISA = qw( Exporter::Tiny );
+	require Exporter::Tiny;
+	my $next = \&Exporter::Tiny::import;
 	*import = $next;
 	goto $next;
 }

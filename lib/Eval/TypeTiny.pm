@@ -24,7 +24,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.028';
+our $VERSION   = '0.029_01';
 our @EXPORT    = qw( eval_closure );
 our @EXPORT_OK = qw( HAS_LEXICAL_SUBS HAS_LEXICAL_VARS );
 
@@ -32,9 +32,9 @@ sub import
 {
 	# do the shuffle!
 	no warnings "redefine";
-	our @ISA = qw( Exporter::TypeTiny );
-	require Exporter::TypeTiny;
-	my $next = \&Exporter::TypeTiny::import;
+	our @ISA = qw( Exporter::Tiny );
+	require Exporter::Tiny;
+	my $next = \&Exporter::Tiny::import;
 	*import = $next;
 	goto $next;
 }

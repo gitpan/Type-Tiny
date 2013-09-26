@@ -15,7 +15,6 @@ dist.ini
 doap.ttl
 examples/benchmark-coercions.pl
 examples/benchmark-constraints.pl
-examples/benchmark-mkopt.pl
 examples/benchmark-param-validation.pl
 examples/datetime-coercions.pl
 inc/Test/Fatal.pm

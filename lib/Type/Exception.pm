@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Exception::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Exception::VERSION   = '0.028';
+	$Type::Exception::VERSION   = '0.029_01';
 }
 
 use overload
@@ -19,7 +19,7 @@ our %CarpInternal;
 $CarpInternal{$_}++ for qw(
 	Eval::TypeTiny
 	Eval::TypeTiny::Sandbox
-	Exporter::TypeTiny
+	Exporter::Tiny
 	Test::TypeTiny
 	Type::Coercion
 	Type::Coercion::Union
