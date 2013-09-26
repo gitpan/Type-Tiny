@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.027_09';
+	$Type::Tiny::Role::VERSION   = '0.028';
 }
 
 use Scalar::Util qw< blessed weaken >;
@@ -123,13 +123,13 @@ trusts the object's C<DOES> method (see L<UNIVERSAL>).
 
 =item C<constraint>
 
-Unlike Type::Tiny, you should generally I<not> pass a constraint to the
-constructor. Instead rely on the default.
+Unlike Type::Tiny, you I<cannot> pass a constraint coderef to the constructor.
+Instead rely on the default.
 
 =item C<inlined>
 
-Unlike Type::Tiny, you should generally I<not> pass an inlining coderef to
-the constructor. Instead rely on the default.
+Unlike Type::Tiny, you I<cannot> pass an inlining coderef to the constructor.
+Instead rely on the default.
 
 =item C<parent>
 

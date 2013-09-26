@@ -7,7 +7,7 @@ my $meta = {
   "abstract"       => "tiny, yet Moo(se)-compatible type constraint",
   "author"         => ["Toby Inkster (TOBYINK) <tobyink\@cpan.org>"],
   "dynamic_config" => 1,
-  "generated_by"   => "Dist::Inkt::Profile::TOBYINK version 0.012, CPAN::Meta::Converter version 2.120921",
+  "generated_by"   => "Dist::Inkt::Profile::TOBYINK version 0.013, CPAN::Meta::Converter version 2.120921",
   "keywords"       => [
                         "Argument Checking",
                         "Argument Validation",
@@ -39,38 +39,38 @@ my $meta = {
                         test      => { requires => { "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "Devel::TypeTiny::Perl56Compat"            => { file => "lib/Devel/TypeTiny/Perl56Compat.pm", version => "0.027_09" },
-                        "Devel::TypeTiny::Perl58Compat"            => { file => "lib/Devel/TypeTiny/Perl58Compat.pm", version => "0.027_09" },
-                        "Eval::TypeTiny"                           => { file => "lib/Eval/TypeTiny.pm", version => "0.027_09" },
-                        "Exporter::TypeTiny"                       => { file => "lib/Exporter/TypeTiny.pm", version => "0.027_09" },
-                        "Reply::Plugin::TypeTiny"                  => { file => "lib/Reply/Plugin/TypeTiny.pm", version => "0.027_09" },
-                        "Test::TypeTiny"                           => { file => "lib/Test/TypeTiny.pm", version => "0.027_09" },
-                        "Type::Coercion"                           => { file => "lib/Type/Coercion.pm", version => "0.027_09" },
-                        "Type::Coercion::FromMoose"                => { file => "lib/Type/Coercion/FromMoose.pm", version => "0.027_09" },
-                        "Type::Coercion::Union"                    => { file => "lib/Type/Coercion/Union.pm", version => "0.027_09" },
-                        "Type::Exception"                          => { file => "lib/Type/Exception.pm", version => "0.027_09" },
-                        "Type::Exception::Assertion"               => { file => "lib/Type/Exception/Assertion.pm", version => "0.027_09" },
-                        "Type::Exception::Compilation"             => { file => "lib/Type/Exception/Compilation.pm", version => "0.027_09" },
+                        "Devel::TypeTiny::Perl56Compat"            => { file => "lib/Devel/TypeTiny/Perl56Compat.pm", version => 0.028 },
+                        "Devel::TypeTiny::Perl58Compat"            => { file => "lib/Devel/TypeTiny/Perl58Compat.pm", version => 0.028 },
+                        "Eval::TypeTiny"                           => { file => "lib/Eval/TypeTiny.pm", version => 0.028 },
+                        "Exporter::TypeTiny"                       => { file => "lib/Exporter/TypeTiny.pm", version => 0.028 },
+                        "Reply::Plugin::TypeTiny"                  => { file => "lib/Reply/Plugin/TypeTiny.pm", version => 0.028 },
+                        "Test::TypeTiny"                           => { file => "lib/Test/TypeTiny.pm", version => 0.028 },
+                        "Type::Coercion"                           => { file => "lib/Type/Coercion.pm", version => 0.028 },
+                        "Type::Coercion::FromMoose"                => { file => "lib/Type/Coercion/FromMoose.pm", version => 0.028 },
+                        "Type::Coercion::Union"                    => { file => "lib/Type/Coercion/Union.pm", version => 0.028 },
+                        "Type::Exception"                          => { file => "lib/Type/Exception.pm", version => 0.028 },
+                        "Type::Exception::Assertion"               => { file => "lib/Type/Exception/Assertion.pm", version => 0.028 },
+                        "Type::Exception::Compilation"             => { file => "lib/Type/Exception/Compilation.pm", version => 0.028 },
                         "Type::Exception::WrongNumberOfParameters" => {
                                                                         file => "lib/Type/Exception/WrongNumberOfParameters.pm",
-                                                                        version => "0.027_09",
+                                                                        version => 0.028,
                                                                       },
-                        "Type::Library"                            => { file => "lib/Type/Library.pm", version => "0.027_09" },
-                        "Type::Params"                             => { file => "lib/Type/Params.pm", version => "0.027_09" },
-                        "Type::Parser"                             => { file => "lib/Type/Parser.pm", version => "0.027_09" },
-                        "Type::Registry"                           => { file => "lib/Type/Registry.pm", version => "0.027_09" },
-                        "Type::Tiny"                               => { file => "lib/Type/Tiny.pm", version => "0.027_09" },
-                        "Type::Tiny::Class"                        => { file => "lib/Type/Tiny/Class.pm", version => "0.027_09" },
-                        "Type::Tiny::Duck"                         => { file => "lib/Type/Tiny/Duck.pm", version => "0.027_09" },
-                        "Type::Tiny::Enum"                         => { file => "lib/Type/Tiny/Enum.pm", version => "0.027_09" },
-                        "Type::Tiny::Intersection"                 => { file => "lib/Type/Tiny/Intersection.pm", version => "0.027_09" },
-                        "Type::Tiny::Role"                         => { file => "lib/Type/Tiny/Role.pm", version => "0.027_09" },
-                        "Type::Tiny::Union"                        => { file => "lib/Type/Tiny/Union.pm", version => "0.027_09" },
-                        "Type::Utils"                              => { file => "lib/Type/Utils.pm", version => "0.027_09" },
-                        "Types::Standard"                          => { file => "lib/Types/Standard.pm", version => "0.027_09" },
-                        "Types::TypeTiny"                          => { file => "lib/Types/TypeTiny.pm", version => "0.027_09" },
+                        "Type::Library"                            => { file => "lib/Type/Library.pm", version => 0.028 },
+                        "Type::Params"                             => { file => "lib/Type/Params.pm", version => 0.028 },
+                        "Type::Parser"                             => { file => "lib/Type/Parser.pm", version => 0.028 },
+                        "Type::Registry"                           => { file => "lib/Type/Registry.pm", version => 0.028 },
+                        "Type::Tiny"                               => { file => "lib/Type/Tiny.pm", version => 0.028 },
+                        "Type::Tiny::Class"                        => { file => "lib/Type/Tiny/Class.pm", version => 0.028 },
+                        "Type::Tiny::Duck"                         => { file => "lib/Type/Tiny/Duck.pm", version => 0.028 },
+                        "Type::Tiny::Enum"                         => { file => "lib/Type/Tiny/Enum.pm", version => 0.028 },
+                        "Type::Tiny::Intersection"                 => { file => "lib/Type/Tiny/Intersection.pm", version => 0.028 },
+                        "Type::Tiny::Role"                         => { file => "lib/Type/Tiny/Role.pm", version => 0.028 },
+                        "Type::Tiny::Union"                        => { file => "lib/Type/Tiny/Union.pm", version => 0.028 },
+                        "Type::Utils"                              => { file => "lib/Type/Utils.pm", version => 0.028 },
+                        "Types::Standard"                          => { file => "lib/Types/Standard.pm", version => 0.028 },
+                        "Types::TypeTiny"                          => { file => "lib/Types/TypeTiny.pm", version => 0.028 },
                       },
-  "release_status" => "testing",
+  "release_status" => "stable",
   "resources"      => {
                         bugtracker   => { web => "http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny" },
                         homepage     => "https://metacpan.org/release/Type-Tiny",
@@ -78,7 +78,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-type-tiny" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/Type-Tiny/project",
                       },
-  "version"        => "0.027_09",
+  "version"        => 0.028,
   "x_contributors" => [
                         "Diab Jerius (DJERIUS) <djerius\@cpan.org>",
                         "Vyacheslav Matyukhin (MMCLERIC) <mmcleric\@cpan.org>",
@@ -120,6 +120,7 @@ sub deps
 	{
 		for my $dep (keys %{$meta->{prereqs}{$stage}{requires}})
 		{
+			next if $dep eq 'perl';
 			my $ver = $meta->{prereqs}{$stage}{requires}{$dep};
 			$r{$dep} = $ver if !exists($r{$dep}) || $ver >= $r{$dep};
 		}
@@ -152,16 +153,19 @@ else
 }
 
 {
-	my $minperl = delete $WriteMakefileArgs{PREREQ_PM}{perl};
-	exists($WriteMakefileArgs{$_}) && delete($WriteMakefileArgs{$_}{perl})
-		for qw(BUILD_REQUIRES TEST_REQUIRES CONFIGURE_REQUIRES);
-	if ($minperl and $EUMM >= 6.48)
+	my ($minperl) = reverse sort(
+		grep defined && /^[0-9]+(\.[0-9]+)?$/,
+		map $meta->{prereqs}{$_}{requires}{perl},
+		qw( configure build runtime )
+	);
+	
+	if (defined($minperl))
 	{
-		$WriteMakefileArgs{MIN_PERL_VERSION} ||= $minperl;
-	}
-	elsif ($minperl)
-	{
-		die "Need Perl >= $minperl" unless $] >= $minperl;
+		die "Installing $meta->{name} requires Perl >= $minperl"
+			unless $] >= $minperl;
+		
+		$WriteMakefileArgs{MIN_PERL_VERSION} ||= $minperl
+			if $EUMM >= 6.48;
 	}
 }
 

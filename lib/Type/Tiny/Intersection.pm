@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.027_09';
+	$Type::Tiny::Intersection::VERSION   = '0.028';
 }
 
 use Scalar::Util qw< blessed >;
@@ -138,17 +138,18 @@ into the new intersection.
 
 =item C<constraint>
 
-Unlike Type::Tiny, you should generally I<not> pass a constraint to the
-constructor. Instead rely on the default.
+Unlike Type::Tiny, you I<cannot> pass a constraint coderef to the constructor.
+Instead rely on the default.
 
 =item C<inlined>
 
-Unlike Type::Tiny, you should generally I<not> pass an inlining coderef to
-the constructor. Instead rely on the default.
+Unlike Type::Tiny, you I<cannot> pass an inlining coderef to the constructor.
+Instead rely on the default.
 
 =item C<parent>
 
-Parent is automatically calculated, and cannot be passed to the constructor.
+Unlike Type::Tiny, you I<cannot> pass an inlining coderef to the constructor.
+A parent will instead be automatically calculated.
 
 (Technically any of the types in the intersection could be treated as a
 parent type; we choose the first arbitrarily.)

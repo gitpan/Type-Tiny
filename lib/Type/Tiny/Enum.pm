@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.027_09';
+	$Type::Tiny::Enum::VERSION   = '0.028';
 }
 
 sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
@@ -147,13 +147,13 @@ overloading) will be stringified in the constructor.
 
 =item C<constraint>
 
-Unlike Type::Tiny, you should generally I<not> pass a constraint to the
-constructor. Instead rely on the default.
+Unlike Type::Tiny, you I<cannot> pass a constraint coderef to the constructor.
+Instead rely on the default.
 
 =item C<inlined>
 
-Unlike Type::Tiny, you should generally I<not> pass an inlining coderef to
-the constructor. Instead rely on the default.
+Unlike Type::Tiny, you I<cannot> pass an inlining coderef to the constructor.
+Instead rely on the default.
 
 =item C<parent>
 

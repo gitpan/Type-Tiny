@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.028	2013-09-26
+
+ [ Documentation ]
+ - Note in documentation for Type::Tiny::Union, etc that
+   constraint/inlining coderefs not only should not be provided to the
+   constructor, but cannot!
+   Fixes RT#88655.
+   Brendan Byrd++
+   <https://rt.cpan.org/Ticket/Display.html?id=88655>
+ - Updated NEWS file.
+
 0.027_09	2013-09-20
 
  [ Bug Fixes ]
