@@ -6,10 +6,10 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.029_01';
+	$Type::Tiny::Enum::VERSION   = '0.029_02';
 }
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 use overload q[@{}] => 'values';
 
@@ -60,8 +60,8 @@ sub inline_check
 	my $self = shift;
 	my $regexp = join "|", map quotemeta, @$self;
 	$_[0] eq '$_'
-		? "(defined and m{\\A(?:$regexp)\\z})"
-		: "(defined($_[0]) and $_[0] =~ m{\\A(?:$regexp)\\z})";
+		? "(defined and !ref and m{\\A(?:$regexp)\\z})"
+		: "(defined($_[0]) and !ref($_[0]) and $_[0] =~ m{\\A(?:$regexp)\\z})";
 }
 
 sub _instantiate_moose_type
@@ -83,7 +83,7 @@ sub has_parent
 sub parent
 {
 	require Types::Standard;
-	Types::Standard::Defined();
+	Types::Standard::Str();
 }
 
 sub validate_explain

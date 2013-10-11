@@ -24,7 +24,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.029_01';
+our $VERSION   = '0.029_02';
 our @EXPORT    = qw( eval_closure );
 our @EXPORT_OK = qw( HAS_LEXICAL_SUBS HAS_LEXICAL_VARS );
 
@@ -58,8 +58,8 @@ sub eval_closure
 #		next if $k =~ /^\@/ && ref($args{environment}{$k}) eq q(ARRAY);
 #		next if $k =~ /^\%/ && ref($args{environment}{$k}) eq q(HASH);
 #		
-#		require Type::Exception;
-#		Type::Exception::croak("Expected a variable name and ref; got %s => %s", $k, $args{environment}{$k});
+#		require Error::TypeTiny;
+#		Error::TypeTiny::croak("Expected a variable name and ref; got %s => %s", $k, $args{environment}{$k});
 #	}
 	
 	my $sandpkg   = 'Eval::TypeTiny::Sandbox';
@@ -80,8 +80,8 @@ sub eval_closure
 	if ($e)
 	{
 		chomp $e;
-		require Type::Exception::Compilation;
-		"Type::Exception::Compilation"->throw(
+		require Error::TypeTiny::Compilation;
+		"Error::TypeTiny::Compilation"->throw(
 			code        => (ref $args{source} eq "ARRAY" ? join("\n", @{$args{source}}) : $args{source}),
 			errstr      => $e,
 			environment => $args{environment},
@@ -316,7 +316,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 =head1 SEE ALSO
 
-L<Eval::Closure>, L<Type::Exception::Compilation>.
+L<Eval::Closure>, L<Error::TypeTiny::Compilation>.
 
 =head1 AUTHOR
 

@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.029_01';
+	$Types::Standard::VERSION   = '0.029_02';
 }
 
 use Type::Library -base;
@@ -34,7 +34,7 @@ sub _is_class_loaded {
 	return !!0;
 }
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 no warnings;
 
@@ -42,7 +42,7 @@ BEGIN { *STRICTNUM = $ENV{PERL_TYPES_STANDARD_STRICTNUM} ? sub(){!!1} : sub(){!!
 
 my $meta = __PACKAGE__->meta;
 
-$meta->add_type({
+my $_any = $meta->add_type({
 	name       => "Any",
 	_is_core   => 1,
 	inlined    => sub { "!!1" },
@@ -52,6 +52,7 @@ my $_item = $meta->add_type({
 	name       => "Item",
 	_is_core   => 1,
 	inlined    => sub { "!!1" },
+	parent     => $_any,
 });
 
 $meta->add_type({

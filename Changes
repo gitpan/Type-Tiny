@@ -6,6 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.029_02	2013-09-26
+
+ [ BACK COMPAT ]
+ - Renamed the Type::Exception modules to Error::TypeTiny.
+
+ [ Documentation ]
+ - Fix typos in documentation of Error::TypeTiny package variables.
+
+ [ Other ]
+ - $Type::Tiny::DD package variable can now be used for a pluggable data
+   dumper coderef.
+ - Type::Tiny::Enum type constraints are now subtypes of
+   Types::Standard::Str; not Types::Standard::Defined.
+ - Types::Standard::Item is now a subtype of not Types::Standard::Any.
+
 0.029_01	2013-09-26
 
  - Replace Exporter::TypeTiny with Exporter::Tiny (an external dependency).

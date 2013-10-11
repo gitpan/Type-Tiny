@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.029_01';
+	$Type::Registry::VERSION   = '0.029_02';
 }
 
 use Exporter::Tiny qw( mkopt );
@@ -17,7 +17,7 @@ use Types::TypeTiny qw( CodeLike ArrayLike to_TypeTiny );
 our @ISA = 'Exporter::Tiny';
 our @EXPORT_OK = qw(t);
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 sub _exporter_expand_sub
 {

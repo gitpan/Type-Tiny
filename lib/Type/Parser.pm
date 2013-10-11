@@ -3,10 +3,10 @@ package Type::Parser;
 use strict;
 use warnings;
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.029_01';
+our $VERSION   = '0.029_02';
 
 # Token types
 # 

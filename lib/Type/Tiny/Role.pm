@@ -6,12 +6,12 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.029_01';
+	$Type::Tiny::Role::VERSION   = '0.029_02';
 }
 
 use Scalar::Util qw< blessed weaken >;
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 require Type::Tiny;
 our @ISA = 'Type::Tiny';

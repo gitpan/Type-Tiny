@@ -10,12 +10,12 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::Class::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Class::VERSION   = '0.029_01';
+	$Type::Tiny::Class::VERSION   = '0.029_02';
 }
 
 use Scalar::Util qw< blessed >;
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 require Type::Tiny;
 our @ISA = 'Type::Tiny';

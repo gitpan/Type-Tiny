@@ -22,6 +22,10 @@ inc/Test/Requires.pm
 inc/Try/Tiny.pm
 lib/Devel/TypeTiny/Perl56Compat.pm
 lib/Devel/TypeTiny/Perl58Compat.pm
+lib/Error/TypeTiny.pm
+lib/Error/TypeTiny/Assertion.pm
+lib/Error/TypeTiny/Compilation.pm
+lib/Error/TypeTiny/WrongNumberOfParameters.pm
 lib/Eval/TypeTiny.pm
 lib/Exporter/TypeTiny.pm
 lib/Reply/Plugin/TypeTiny.pm
@@ -29,10 +33,6 @@ lib/Test/TypeTiny.pm
 lib/Type/Coercion.pm
 lib/Type/Coercion/FromMoose.pm
 lib/Type/Coercion/Union.pm
-lib/Type/Exception.pm
-lib/Type/Exception/Assertion.pm
-lib/Type/Exception/Compilation.pm
-lib/Type/Exception/WrongNumberOfParameters.pm
 lib/Type/Library.pm
 lib/Type/Params.pm
 lib/Type/Parser.pm

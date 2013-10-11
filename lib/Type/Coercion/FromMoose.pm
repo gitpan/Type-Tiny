@@ -6,13 +6,13 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::FromMoose::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::FromMoose::VERSION   = '0.029_01';
+	$Type::Coercion::FromMoose::VERSION   = '0.029_02';
 }
 
 use Scalar::Util qw< blessed >;
 use Types::TypeTiny ();
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 require Type::Coercion;
 our @ISA = 'Type::Coercion';

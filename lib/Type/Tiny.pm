@@ -10,14 +10,14 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.029_01';
+	$Type::Tiny::VERSION   = '0.029_02';
 }
 
 use Eval::TypeTiny ();
 use Scalar::Util qw( blessed weaken refaddr isweak );
 use Types::TypeTiny ();
 
-sub _croak ($;@) { require Type::Exception; goto \&Type::Exception::croak }
+sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 sub _swap { $_[2] ? @_[1,0] : @_[0,1] }
 
@@ -175,14 +175,18 @@ sub _clone
 	$self->create_child_type(%opts);
 }
 
+our $DD;
 sub _dd
 {
+	@_ = $_ unless @_;
+	my ($value) = @_;
+	
+	goto $DD if ref($DD) eq q(CODE);
+	
 	require B;
 	
-	my $value = @_ ? $_[0] : $_;
-	
-	!defined $value      ? 'Undef' :
-	!ref $value          ? sprintf('Value %s', B::perlstring($value)) :
+	!defined $value ? 'Undef' :
+	!ref $value     ? sprintf('Value %s', B::perlstring($value)) :
 	do {
 		require Data::Dumper;
 		local $Data::Dumper::Indent   = 0;
@@ -622,12 +626,12 @@ sub inline_assert
 
 sub _failed_check
 {
-	require Type::Exception::Assertion;
+	require Error::TypeTiny::Assertion;
 	
 	my ($self, $name, $value, %attrs) = @_;
 	$self = $ALL_TYPES{$self} unless ref $self;
 	
-	my $exception_class = delete($attrs{exception_class}) || "Type::Exception::Assertion";
+	my $exception_class = delete($attrs{exception_class}) || "Error::TypeTiny::Assertion";
 	
 	if ($self)
 	{
@@ -1173,7 +1177,7 @@ A coderef which generates a new L<Type::Coercion> object based on parameters.
 
 =item C<< deep_explanation >>
 
-This API is not finalized. Coderef used by L<Type::Exception::Assertion> to
+This API is not finalized. Coderef used by L<Error::TypeTiny::Assertion> to
 peek inside parameterized types and figure out why a value doesn't pass the
 constraint.
 
@@ -1458,6 +1462,22 @@ C<plus_fallback_coercions> as appropriate.
 
 Indicates whether the smart match overload is supported on your
 version of Perl.
+
+=back
+
+=head2 Package Variables
+
+=over
+
+=item C<< $Type::Tiny::DD >>
+
+This in undef by default but may be set to a coderef that Type::Tiny
+and related modules will use to dump data structures in things like
+error messages. Otherwise Type::Tiny uses it's own routine to dump data
+structures.
+
+This is a package variable (rather than get/set class methods) to allow
+for easy localization.
 
 =back
 
