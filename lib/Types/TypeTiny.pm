@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.029_02';
+our $VERSION   = '0.029_03';
 
 use Scalar::Util qw< blessed refaddr weaken >;
 
@@ -20,7 +20,10 @@ sub import
 	require Exporter::Tiny;
 	my $next = \&Exporter::Tiny::import;
 	*import = $next;
-	goto $next;
+	my $class = shift;
+	my $opts  = { ref($_[0]) ? %{+shift} : () };
+	$opts->{into} ||= scalar(caller);
+	return $class->$next($opts, @_);
 }
 
 sub meta

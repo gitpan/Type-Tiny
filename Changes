@@ -6,7 +6,20 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
-0.029_02	2013-09-26
+0.029_03	2013-10-17
+
+ [ Bug Fixes ]
+ - Older versions of Scalar::Util::looks_like_number return true for undef;
+   work around them.
+
+ [ Other ]
+ - Fix segfault on Perl 5.8.1 to 5.8.3. (And possibly some other 5.8.x
+   Perls.) Caused by the combination of eval and goto.
+   Dagfinn Ilmari Mannsåker++
+   Graham Knop++
+   Peter Rabbitson++
+
+0.029_02	2013-10-11
 
  [ BACK COMPAT ]
  - Renamed the Type::Exception modules to Error::TypeTiny.

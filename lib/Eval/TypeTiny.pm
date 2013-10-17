@@ -24,7 +24,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.029_02';
+our $VERSION   = '0.029_03';
 our @EXPORT    = qw( eval_closure );
 our @EXPORT_OK = qw( HAS_LEXICAL_SUBS HAS_LEXICAL_VARS );
 
@@ -36,7 +36,10 @@ sub import
 	require Exporter::Tiny;
 	my $next = \&Exporter::Tiny::import;
 	*import = $next;
-	goto $next;
+	my $class = shift;
+	my $opts  = { ref($_[0]) ? %{+shift} : () };
+	$opts->{into} ||= scalar(caller);
+	return $class->$next($opts, @_);
 }
 
 use warnings;
