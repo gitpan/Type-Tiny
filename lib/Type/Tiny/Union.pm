@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Union::VERSION   = '0.029_03';
+	$Type::Tiny::Union::VERSION   = '0.029_04';
 }
 
 use Scalar::Util qw< blessed >;
@@ -142,7 +142,7 @@ sub validate_explain
 		),
 		map {
 			$_->get_message($value),
-			map("    $_", @{ $_->validate_explain || []}),
+			map("    $_", @{ $_->validate_explain($value) || []}),
 		} @$self
 	];
 }
