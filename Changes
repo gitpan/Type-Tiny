@@ -6,6 +6,18 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.030	2013-10-18
+
+ [ Documentation ]
+ - Updated NEWS file.
+
+ [ Test Suite ]
+ - Skip leak.t on Perl < 5.10.1. Type-Tiny does have some memory leaks in
+   particular older versions of Perl: 5.8.8 and 5.10.0 are known to be
+   problematic, but 5.8.9 seems fine. Ultimately it would be nice to get
+   these fixed, but in the mean time skipping the test case makes the
+   distribution easier to install.
+
 0.029_04	2013-10-17
 
  [ Bug Fixes ]
