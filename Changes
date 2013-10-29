@@ -6,6 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.031_01	2013-10-28
+
+ [ Bug Fixes ]
+ - Differentiate Tuple[] vs Tuple, and Dict[] vs Dict.
+   Fixes RT#89696.
+   Benct Philip Jonsson++
+   <https://rt.cpan.org/Ticket/Display.html?id=89696>
+
+ [ Documentation ]
+ - Improved documentation for Types::TypeTiny.
+
+ [ Test Suite ]
+ - Adjustments to cope with newer Moose is-class-loaded heuristics.
+ - Check Moose exception objects with isa rather than regexp matching.
+
 0.030	2013-10-18
 
  [ Documentation ]
