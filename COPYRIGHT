@@ -139,11 +139,6 @@ Files: CONTRIBUTING
 Copyright: Copyright 1970 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: COPYRIGHT
- SIGNATURE
-Copyright: None
-License: public-domain
-
 Files: t/rt85911.t
  t/rt86004.t
 Copyright: This software is copyright (c) 2013 by Diab Jerius.
@@ -154,6 +149,23 @@ Files: t/rt86233.t
 Copyright: This software is copyright (c) 2013 by Vyacheslav Matyukhin.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: COPYRIGHT
+ SIGNATURE
+Copyright: None
+License: public-domain
+
+Files: t/oo-classinsideout.t
+Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: INSTALL
+Copyright: Unknown
+License: Unknown
+
 Files: t/moose-std-types-tests.t
 Copyright: This software is copyright (c) 2013 by Infinity Interactive, Inc..
 License: GPL-1.0+ or Artistic-1.0
@@ -162,20 +174,8 @@ Files: t/gh1.t
 Copyright: This software is copyright (c) 2013 by Richard SimÃµes.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: INSTALL
-Copyright: Unknown
-License: Unknown
-
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: inc/Test/Requires.pm
 Copyright: Copyright 2013 MATSUNO Tokuhiro.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/oo-classinsideout.t
-Copyright: This software is copyright (c) 2013 by David Golden, Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Test/Fatal.pm

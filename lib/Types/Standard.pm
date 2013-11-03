@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.031_02';
+	$Types::Standard::VERSION   = '0.031_03';
 }
 
 use Type::Library -base;
@@ -1251,6 +1251,13 @@ $lib->get_type("Map")->{coercion_generator} = sub
 # XXX - also Maybe[`a]?
 # XXX - does not seem quite right
 $lib->get_type("Optional")->{coercion_generator} = sub
+{
+	my ($parent, $child, $param) = @_;
+	return unless $param->has_coercion;
+	return $param->coercion;
+};
+
+$lib->get_type("Maybe")->{coercion_generator} = sub
 {
 	my ($parent, $child, $param) = @_;
 	return unless $param->has_coercion;
