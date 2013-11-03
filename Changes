@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.031_04	2013-11-03
+
+ [ Bug Fixes ]
+ - Type::Parser 0.031_02 introduced a bug under Perl 5.6.x where we relied
+   on the existence (or not) of a hash item being affected by `local`; this
+   was implemented in Perl 5.8.0. Work around this problem by checking
+   definedness instead.
+
 0.031_03	2013-11-03
 
  - Added: Deep coercions for Maybe[`a].
