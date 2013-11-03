@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.031_02	2013-11-03
+
+ - Type::Parser now differentiates between Tuple[] and Tuple too.
+ - Type::Parser only treats a comma as an operator within a
+   parameterization now, and is thus now able to parse types from the head
+   of a string which is a comma-separated list of types.
+
 0.031_01	2013-10-28
 
  [ Bug Fixes ]

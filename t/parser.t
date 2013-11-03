@@ -54,6 +54,7 @@ types_equal("Tied['Foo']", Tied["Foo"]);
 
 note "Parameterization";
 types_equal("Int[]", Int, "empty parameterization against non-parameterizable type");
+types_equal("Tuple[]", Tuple[], "empty parameterization against parameterizble type");
 types_equal("ArrayRef[]", ArrayRef, "empty parameterization against parameterizable type");
 types_equal("ArrayRef[Int]", ArrayRef[Int], "parameterized type");
 types_equal("Ref['HASH']", Ref['HASH'], "string parameter (singles)");
@@ -131,6 +132,9 @@ like(
 note "Tail retention";
 my ($ast, $remaining) = parse("ArrayRef   [DateTime::]  |HashRef[ Int|\tDateTime::]|CodeRef monkey nuts ");
 is($remaining, " monkey nuts ", "remainder is ok");
+
+($ast, $remaining) = parse("Int, Str");
+is($remaining, ", Str", "comma can indicate beginning of remainder");
 
 note "Parsing edge cases";
 is_deeply(

@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.031_01';
+our $VERSION   = '0.031_02';
 
 # Token types
 # 
@@ -106,8 +106,10 @@ Evaluate: {
 		
 		if ($node->{type} eq "parameterized")
 		{
-			return _eval_type($node->{base}, $reg) unless $node->{params};
-			return _eval_type($node->{base}, $reg)->parameterize(_eval_type($node->{params}, $reg));
+			my $base = _eval_type($node->{base}, $reg);
+			
+			return $base unless $base->is_parameterizable || $node->{params};
+			return $base->parameterize($node->{params} ? _eval_type($node->{params}, $reg) : ());
 		}
 		
 		if ($node->{type} eq "primary" and $node->{token}->type eq CLASS)
@@ -205,8 +207,8 @@ Evaluate: {
 		bless { @_ }, $class;
 	}
 	
-	my %precedence = (
-		Type::Parser::COMMA()     , 1 ,
+	our %precedence = (
+#		Type::Parser::COMMA()     , 1 ,
 		Type::Parser::UNION()     , 2 ,
 		Type::Parser::INTERSECT() , 3 ,
 		Type::Parser::NOT()       , 4 ,
@@ -254,6 +256,8 @@ Evaluate: {
 			my $base = { type  => "primary", token => $tokens->eat(Type::Parser::TYPE) };
 			$tokens->eat(Type::Parser::L_BRACKET);
 			$tokens->assert_not_empty;
+			
+			local $precedence{ Type::Parser::COMMA() } = 1;
 			
 			my $params = undef;
 			if ($tokens->peek(0)->type eq Type::Parser::R_BRACKET)
