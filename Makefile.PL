@@ -30,9 +30,15 @@ my $meta = {
   "name"           => "Type-Tiny",
   "no_index"       => { directory => ["eg", "examples", "inc", "t", "xt"] },
   "prereqs"        => {
-                        configure => { requires => { "ExtUtils::MakeMaker" => 6.17 } },
+                        configure => {
+                                       requires => {
+                                         "CPAN::Meta::Requirements" => "2.000",
+                                         "ExtUtils::MakeMaker"      => 6.17,
+                                       },
+                                     },
                         develop   => { suggests => { "Dist::Inkt" => 0.007 } },
                         runtime   => {
+                                       conflicts  => { "Kavorka" => "<= 0.013", "Types::ReadOnly" => "<= 0.001" },
                                        recommends => {
                                                        "Devel::LexAlias" => 0.05,
                                                        "Devel::StackTrace" => 0,
@@ -45,36 +51,36 @@ my $meta = {
                         test      => { requires => { "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "Devel::TypeTiny::Perl56Compat"            => { file => "lib/Devel/TypeTiny/Perl56Compat.pm", version => "0.031_04" },
-                        "Devel::TypeTiny::Perl58Compat"            => { file => "lib/Devel/TypeTiny/Perl58Compat.pm", version => "0.031_04" },
-                        "Error::TypeTiny"                          => { file => "lib/Error/TypeTiny.pm", version => "0.031_04" },
-                        "Error::TypeTiny::Assertion"               => { file => "lib/Error/TypeTiny/Assertion.pm", version => "0.031_04" },
-                        "Error::TypeTiny::Compilation"             => { file => "lib/Error/TypeTiny/Compilation.pm", version => "0.031_04" },
+                        "Devel::TypeTiny::Perl56Compat"            => { file => "lib/Devel/TypeTiny/Perl56Compat.pm", version => "0.031_05" },
+                        "Devel::TypeTiny::Perl58Compat"            => { file => "lib/Devel/TypeTiny/Perl58Compat.pm", version => "0.031_05" },
+                        "Error::TypeTiny"                          => { file => "lib/Error/TypeTiny.pm", version => "0.031_05" },
+                        "Error::TypeTiny::Assertion"               => { file => "lib/Error/TypeTiny/Assertion.pm", version => "0.031_05" },
+                        "Error::TypeTiny::Compilation"             => { file => "lib/Error/TypeTiny/Compilation.pm", version => "0.031_05" },
                         "Error::TypeTiny::WrongNumberOfParameters" => {
                                                                         file => "lib/Error/TypeTiny/WrongNumberOfParameters.pm",
-                                                                        version => "0.031_04",
+                                                                        version => "0.031_05",
                                                                       },
-                        "Eval::TypeTiny"                           => { file => "lib/Eval/TypeTiny.pm", version => "0.031_04" },
-                        "Exporter::TypeTiny"                       => { file => "lib/Exporter/TypeTiny.pm", version => "0.031_04" },
-                        "Reply::Plugin::TypeTiny"                  => { file => "lib/Reply/Plugin/TypeTiny.pm", version => "0.031_04" },
-                        "Test::TypeTiny"                           => { file => "lib/Test/TypeTiny.pm", version => "0.031_04" },
-                        "Type::Coercion"                           => { file => "lib/Type/Coercion.pm", version => "0.031_04" },
-                        "Type::Coercion::FromMoose"                => { file => "lib/Type/Coercion/FromMoose.pm", version => "0.031_04" },
-                        "Type::Coercion::Union"                    => { file => "lib/Type/Coercion/Union.pm", version => "0.031_04" },
-                        "Type::Library"                            => { file => "lib/Type/Library.pm", version => "0.031_04" },
-                        "Type::Params"                             => { file => "lib/Type/Params.pm", version => "0.031_04" },
-                        "Type::Parser"                             => { file => "lib/Type/Parser.pm", version => "0.031_04" },
-                        "Type::Registry"                           => { file => "lib/Type/Registry.pm", version => "0.031_04" },
-                        "Type::Tiny"                               => { file => "lib/Type/Tiny.pm", version => "0.031_04" },
-                        "Type::Tiny::Class"                        => { file => "lib/Type/Tiny/Class.pm", version => "0.031_04" },
-                        "Type::Tiny::Duck"                         => { file => "lib/Type/Tiny/Duck.pm", version => "0.031_04" },
-                        "Type::Tiny::Enum"                         => { file => "lib/Type/Tiny/Enum.pm", version => "0.031_04" },
-                        "Type::Tiny::Intersection"                 => { file => "lib/Type/Tiny/Intersection.pm", version => "0.031_04" },
-                        "Type::Tiny::Role"                         => { file => "lib/Type/Tiny/Role.pm", version => "0.031_04" },
-                        "Type::Tiny::Union"                        => { file => "lib/Type/Tiny/Union.pm", version => "0.031_04" },
-                        "Type::Utils"                              => { file => "lib/Type/Utils.pm", version => "0.031_04" },
-                        "Types::Standard"                          => { file => "lib/Types/Standard.pm", version => "0.031_04" },
-                        "Types::TypeTiny"                          => { file => "lib/Types/TypeTiny.pm", version => "0.031_04" },
+                        "Eval::TypeTiny"                           => { file => "lib/Eval/TypeTiny.pm", version => "0.031_05" },
+                        "Exporter::TypeTiny"                       => { file => "lib/Exporter/TypeTiny.pm", version => "0.031_05" },
+                        "Reply::Plugin::TypeTiny"                  => { file => "lib/Reply/Plugin/TypeTiny.pm", version => "0.031_05" },
+                        "Test::TypeTiny"                           => { file => "lib/Test/TypeTiny.pm", version => "0.031_05" },
+                        "Type::Coercion"                           => { file => "lib/Type/Coercion.pm", version => "0.031_05" },
+                        "Type::Coercion::FromMoose"                => { file => "lib/Type/Coercion/FromMoose.pm", version => "0.031_05" },
+                        "Type::Coercion::Union"                    => { file => "lib/Type/Coercion/Union.pm", version => "0.031_05" },
+                        "Type::Library"                            => { file => "lib/Type/Library.pm", version => "0.031_05" },
+                        "Type::Params"                             => { file => "lib/Type/Params.pm", version => "0.031_05" },
+                        "Type::Parser"                             => { file => "lib/Type/Parser.pm", version => "0.031_05" },
+                        "Type::Registry"                           => { file => "lib/Type/Registry.pm", version => "0.031_05" },
+                        "Type::Tiny"                               => { file => "lib/Type/Tiny.pm", version => "0.031_05" },
+                        "Type::Tiny::Class"                        => { file => "lib/Type/Tiny/Class.pm", version => "0.031_05" },
+                        "Type::Tiny::Duck"                         => { file => "lib/Type/Tiny/Duck.pm", version => "0.031_05" },
+                        "Type::Tiny::Enum"                         => { file => "lib/Type/Tiny/Enum.pm", version => "0.031_05" },
+                        "Type::Tiny::Intersection"                 => { file => "lib/Type/Tiny/Intersection.pm", version => "0.031_05" },
+                        "Type::Tiny::Role"                         => { file => "lib/Type/Tiny/Role.pm", version => "0.031_05" },
+                        "Type::Tiny::Union"                        => { file => "lib/Type/Tiny/Union.pm", version => "0.031_05" },
+                        "Type::Utils"                              => { file => "lib/Type/Utils.pm", version => "0.031_05" },
+                        "Types::Standard"                          => { file => "lib/Types/Standard.pm", version => "0.031_05" },
+                        "Types::TypeTiny"                          => { file => "lib/Types/TypeTiny.pm", version => "0.031_05" },
                       },
   "release_status" => "testing",
   "resources"      => {
@@ -84,12 +90,14 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-type-tiny" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/Type-Tiny/project",
                       },
-  "version"        => "0.031_04",
+  "version"        => "0.031_05",
+  "x_breaks"       => { "Kavorka" => 0.013, "Types::ReadOnly" => 0.001 },
   "x_contributors" => [
                         "Diab Jerius (DJERIUS) <djerius\@cpan.org>",
                         "Vyacheslav Matyukhin (MMCLERIC) <mmcleric\@cpan.org>",
                         "Pierre Masci",
                         "Mark Stosberg (MARKSTOS) <markstos\@cpan.org>",
+                        "David Steinbrunner <dsteinbrunner\@pobox.com>",
                       ],
 };
 
@@ -106,6 +114,30 @@ if ($ENV{EXTENDED_TESTING} and $meta->{version} =~ /_/)
 }
 
 };
+for my $stage (keys %{$meta->{prereqs}})
+{
+	my $conflicts = $meta->{prereqs}{$stage}{conflicts} or next;
+	require CPAN::Meta::Requirements;
+	$conflicts = 'CPAN::Meta::Requirements'->from_string_hash($conflicts);
+	
+	for my $module ($conflicts->required_modules)
+	{
+		eval "require $module" or next;
+		my $installed = eval(sprintf('$%s::VERSION', $module));
+		$conflicts->accepts_module($module, $installed) or next;
+		
+		my $message = "\n".
+			"** This version of $meta->{name} conflicts with the version of\n".
+			"** module $module ($installed) you have installed.\n";
+		die($message . "\n" . "Bailing out")
+			if $stage eq 'build' || $stage eq 'configure';
+		
+		$message .= "**\n".
+			"** It's strongly recommended that you update it after\n".
+			"** installing this version of $meta->{name}.\n";
+		warn("$message\n");
+	}
+}
 
 my %WriteMakefileArgs = (
 	ABSTRACT   => $meta->{abstract},

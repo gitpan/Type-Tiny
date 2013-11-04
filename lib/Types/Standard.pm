@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.031_04';
+	$Types::Standard::VERSION   = '0.031_05';
 }
 
 use Type::Library -base;
@@ -441,7 +441,7 @@ $meta->add_type({
 	},
 });
 
-$meta->add_type({
+my $_map = $meta->add_type({
 	name       => "Map",
 	parent     => $_hash,
 	constraint_generator => sub
@@ -679,11 +679,14 @@ $meta->add_type({
 	parent     => $_hash,
 	name_generator => sub
 	{
-		my ($s, %a) = @_;
-		sprintf('%s[%s]', $s, join q[,], map sprintf("%s=>%s", $_, $a{$_}), sort keys %a);
+		my ($s, @p) = @_;
+		my $l = ref($p[-1]) eq q(HASH) ? pop(@p)->{slurpy} : undef;
+		my %a = @p;
+		sprintf('%s[%s%s]', $s, join(q[,], map sprintf("%s=>%s", $_, $a{$_}), sort keys %a), $l ? ",slurpy $l" : '');
 	},
 	constraint_generator => sub
 	{
+		my $slurpy = ref($_[-1]) eq q(HASH) ? pop(@_)->{slurpy} : undef;
 		my %constraints = @_;
 		
 		while (my ($k, $v) = each %constraints)
@@ -696,7 +699,17 @@ $meta->add_type({
 		return sub
 		{
 			my $value = $_[0];
-			exists($constraints{$_}) || return for sort keys %$value;
+			if ($slurpy)
+			{
+				my %tmp = map {
+					exists($constraints{$_}) ? () : ($_ => $value->{$_})
+				} keys %$value;
+				return unless $slurpy->check(\%tmp);
+			}
+			else
+			{
+				exists($constraints{$_}) || return for sort keys %$value;
+			}
 			for (sort keys %constraints) {
 				my $c = $constraints{$_};
 				return unless exists($value->{$_}) || $c->is_strictly_a_type_of(Optional());
@@ -709,12 +722,32 @@ $meta->add_type({
 	{
 		# We can only inline a parameterized Dict if all the
 		# constraints inside can be inlined.
+		
+		my $slurpy = ref($_[-1]) eq q(HASH) ? pop(@_)->{slurpy} : undef;
+		return if $slurpy && !$slurpy->can_be_inlined;
+		
+		# Is slurpy a very loose type constraint?
+		# i.e. Any, Item, Defined, Ref, or HashRef
+		my $slurpy_is_any = $slurpy && $_hash->is_a_type_of( $slurpy );
+		
+		# Is slurpy a parameterized Map, or expressable as a parameterized Map?
+		my $slurpy_is_map = $slurpy
+			&& $slurpy->is_parameterized
+			&& ((
+				$slurpy->parent->strictly_equals($_map)
+				&& $slurpy->parameters
+			)||(
+				$slurpy->parent->strictly_equals($_hash)
+				&& [ $_any, $slurpy->parameters->[0] ]
+			));
+		
 		my %constraints = @_;
 		for my $c (values %constraints)
 		{
 			next if $c->can_be_inlined;
 			return;
 		}
+		
 		my $regexp = join "|", map quotemeta, sort keys %constraints;
 		return sub
 		{
@@ -722,7 +755,23 @@ $meta->add_type({
 			my $h = $_[1];
 			join " and ",
 				"ref($h) eq 'HASH'",
-				"not(grep !/^($regexp)\$/, keys \%{$h})",
+				( $slurpy_is_any ? '1'
+				: $slurpy_is_map ? do {
+					'(not grep {'
+					."my \$v = ($h)->{\$_};"
+					.sprintf(
+						'not((%s) and (%s))',
+						$slurpy_is_map->[0]->inline_check('$_'),
+						$slurpy_is_map->[1]->inline_check('$v'),
+					) ."} keys \%{$h})"
+				}
+				: $slurpy ? do {
+					'do {'
+					. "my \$slurpy_tmp = +{ map /\\A(?:$regexp)\\z/ ? () : (\$_ => ($h)->{\$_}), keys \%{$h} };"
+					. $slurpy->inline_check('$slurpy_tmp')
+					. '}'
+				}
+				: "not(grep !/\\A(?:$regexp)\\z/, keys \%{$h})" ),
 				( map {
 					my $k = B::perlstring($_);
 					$constraints{$_}->is_strictly_a_type_of( Optional() )
@@ -734,15 +783,11 @@ $meta->add_type({
 	deep_explanation => sub {
 		require B;
 		my ($type, $value, $varname) = @_;
-		my %constraints = @{ $type->parameters };
+		my @params = @{ $type->parameters };
 		
-		for my $k (sort keys %$value)
-		{
-			return [
-				sprintf('"%s" does not allow key %s to appear in hash', $type, B::perlstring($k))
-			] unless exists $constraints{$k};
-		}
-		
+		my $slurpy = ref($params[-1]) eq q(HASH) ? pop(@params)->{slurpy} : undef;
+		my %constraints = @params;
+				
 		for my $k (sort keys %constraints)
 		{
 			next if $constraints{$k}->parent == Optional() && !exists $value->{$k};
@@ -756,6 +801,28 @@ $meta->add_type({
 				sprintf('"%s" constrains value at key %s of hash with "%s"', $type, B::perlstring($k), $constraints{$k}),
 				@{ $constraints{$k}->validate_explain($value->{$k}, sprintf('%s->{%s}', $varname, B::perlstring($k))) },
 			];
+		}
+		
+		if ($slurpy)
+		{
+			my %tmp = map {
+				exists($constraints{$_}) ? () : ($_ => $value->{$_})
+			} keys %$value;
+			
+			my $explain = $slurpy->validate_explain(\%tmp, '$slurpy');
+			return [
+				sprintf('"%s" requires the hashref of additional key/value pairs to conform to "%s"', $type, $slurpy),
+				@$explain,
+			] if $explain;
+		}
+		else
+		{
+			for my $k (sort keys %$value)
+			{
+				return [
+					sprintf('"%s" does not allow key %s to appear in hash', $type, B::perlstring($k))
+				] unless exists $constraints{$k};
+			}
 		}
 		
 		return;
@@ -1268,6 +1335,7 @@ my $label_counter = 0;
 our ($keycheck_counter, @KEYCHECK) = -1;
 $lib->get_type("Dict")->{coercion_generator} = sub
 {
+	my $slurpy = ref($_[-1]) eq q(HASH) ? pop(@_)->{slurpy} : undef;
 	my ($parent, $child, %dict) = @_;
 	my $C = "Type::Coercion"->new(type_constraint => $child);
 	
@@ -1278,6 +1346,8 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 		$all_inlinable = 0 if $tc->has_coercion && !$tc->coercion->can_be_inlined;
 		last if!$all_inlinable;
 	}
+	$all_inlinable = 0 if $slurpy && !$slurpy->can_be_inlined;
+	$all_inlinable = 0 if $slurpy && $slurpy->has_coercion && !$slurpy->coercion->can_be_inlined;
 	
 	if ($all_inlinable)
 	{
@@ -1291,7 +1361,23 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 			my @code;
 			push @code, 'do { my ($orig, $return_orig, %tmp, %new) = ($_, 0);';
 			push @code,       "$label: {";
-			push @code,       sprintf('($_ =~ $%s::KEYCHECK[%d])||(($return_orig = 1), last %s) for sort keys %%$orig;', __PACKAGE__, $keycheck_counter, $label);
+			if ($slurpy)
+			{
+				push @code, sprintf('my $slurped = +{ map +($_=~$%s::KEYCHECK[%d])?():($_=>$orig->{$_}), keys %%$orig };', __PACKAGE__, $keycheck_counter);
+				if ($slurpy->has_coercion)
+				{
+					push @code, sprintf('my $coerced = %s;', $slurpy->coercion->inline_coercion('$slurped'));
+					push @code, sprintf('((%s)&&(%s))?(%%new=%%$coerced):(($return_orig = 1), last %s);', $_hash->inline_check('$coerced'), $slurpy->inline_check('$coerced'), $label);
+				}
+				else
+				{
+					push @code, sprintf('(%s)?(%%new=%%$slurped):(($return_orig = 1), last %s);', $slurpy->inline_check('$slurped'), $label);
+				}
+			}
+			else
+			{
+				push @code, sprintf('($_ =~ $%s::KEYCHECK[%d])||(($return_orig = 1), last %s) for sort keys %%$orig;', __PACKAGE__, $keycheck_counter, $label);
+			}
 			for my $k (keys %dict)
 			{
 				my $ct = $dict{$k};
@@ -1342,10 +1428,33 @@ $lib->get_type("Dict")->{coercion_generator} = sub
 			$parent => sub {
 				my $value = @_ ? $_[0] : $_;
 				my %new;
-				for my $k (keys %$value)
+				
+				if ($slurpy)
 				{
-					return $value unless exists $dict{$k};
+					my %slurped = map exists($dict{$_}) ? () : ($_ => $value->{$_}), keys %$value;
+					
+					if ($slurpy->check(\%slurped))
+					{
+						%new = %slurped;
+					}
+					elsif ($slurpy->has_coercion)
+					{
+						my $coerced = $slurpy->coerce(\%slurped);
+						$slurpy->check($coerced) ? (%new = %$coerced) : (return $value);
+					}
+					else
+					{
+						return $value;
+					}
 				}
+				else
+				{
+					for my $k (keys %$value)
+					{
+						return $value unless exists $dict{$k};
+					}
+				}
+
 				for my $k (keys %dict)
 				{
 					my $ct = $dict{$k};
