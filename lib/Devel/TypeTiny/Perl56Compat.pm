@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.031_05';
+our $VERSION   = '0.032';
 
 #### B doesn't provide perlstring() in 5.6. Monkey patch it.
 
@@ -15,6 +15,7 @@ unless (exists &B::perlstring)
 {
 	my $d;
 	*B::perlstring = sub {
+		no warnings 'uninitialized';
 		require Data::Dumper;
 		$d ||= 'Data::Dumper'->new([])->Indent(0)->Purity(0)->Pad('')->Useqq(1)->Terse(1)->Freezer('')->Toaster('');
 		my $perlstring = $d->Values([''.shift])->Dump;
