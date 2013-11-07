@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.032';
+	$Types::Standard::VERSION   = '0.033_01';
 }
 
 use Type::Library -base;
@@ -2055,6 +2055,9 @@ ranges (e.g. C<< PositiveInteger[maxInclusive=>10] >> and so on.
 
 L<Types::Encodings> provides C<Bytes> and C<Chars> type constraints that
 were formerly found in Types::Standard.
+
+L<Types::Common::Numeric> and L<Types::Common::String> provide replacements
+for L<MooseX::Types::Common>.
 
 =head1 AUTHOR
 

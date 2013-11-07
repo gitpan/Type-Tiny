@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.032';
+	$Type::Params::VERSION   = '0.033_01';
 }
 
 use B qw(perlstring);
@@ -40,6 +40,8 @@ BEGIN {
 sub _mkslurpy
 {
 	my ($name, $type, $tc, $i) = @_;
+	$name = 'local $_' if $name eq '$_';
+	
 	$type eq '@'
 		? sprintf(
 			'%s = [ @_[%d..$#_] ];',

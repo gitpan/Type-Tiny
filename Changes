@@ -6,6 +6,22 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.033_01	2013-11-07
+
+ [ Bug Fixes ]
+ - Type::Params now localizes $_ before trying to assign anything to it.
+   Fixes RT#90096.
+   <https://rt.cpan.org/Ticket/Display.html?id=90096>
+
+ [ Test Suite ]
+ - Test case using a Type::Params compiled check within the scope of a
+   read-only $_ variable.
+   Samuel Kaufman++
+
+ [ Other ]
+ - Added: Types::Common::Numeric
+ - Added: Types::Common::String
+
 0.032	2013-11-05	Remember, remember the fifth of November
 
  [ Bug Fixes ]
@@ -585,6 +601,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  [ Test Suite ]
  - Make rt86172.t an 'xt' test case because it's causing random CPAN
    testers failures unrelated to the feature it's supposed to be testing.
+   <http://purl.org/NET/cpan-uri/rt/ticket/86172>
  - More test cases for interacting with MooseX::Types type constraints.
 
  [ Other ]
@@ -689,6 +706,10 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    Vyacheslav Matyukhin++
    <https://rt.cpan.org/Ticket/Display.html?id=86239>
 
+ [ Test Suite ]
+ - Bundle various tests for deep Dict coercions.
+   Vyacheslav Matyukhin++
+
 0.007_08	2013-06-17
 
  [ Bug Fixes ]
@@ -697,6 +718,11 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
    Fixes RT#86172.
    Peter Flanigan++
    <https://rt.cpan.org/Ticket/Display.html?id=86172>
+
+ [ Test Suite ]
+ - Bundle test for interaction between constraints, coercions, and Moose
+   classes that inherit from Moo classes.
+   Peter Flanigan++
 
 0.007_07	2013-06-16
 

@@ -53,6 +53,8 @@ lib/Type/Tiny/Manual/UsingWithOther.pod
 lib/Type/Tiny/Role.pm
 lib/Type/Tiny/Union.pm
 lib/Type/Utils.pm
+lib/Types/Common/Numeric.pm
+lib/Types/Common/String.pm
 lib/Types/Standard.pm
 lib/Types/TypeTiny.pm
 t/00-begin.t
@@ -67,6 +69,10 @@ t/coercion-modifiers.t
 t/coercion-union.t
 t/coercion.t
 t/coercions-parameterized.t
+t/common-coerce.t
+t/common-numeric.t
+t/common-string.t
+t/common-unicode.t
 t/dwim-moose.t
 t/dwim-mouse.t
 t/eval-lexicalsubs.t
@@ -122,6 +128,7 @@ t/rt85911.t
 t/rt86004.t
 t/rt86233.t
 t/rt86239.t
+t/rt90096.t
 t/stdlib-mxtmlb-alike.t
 t/stdlib-optlist.t
 t/stdlib-overload.t
