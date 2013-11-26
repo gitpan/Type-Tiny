@@ -6,6 +6,12 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.033_02	2013-11-26
+
+ - Split out some of the longer parts of Types::Standard into other modules
+   that will be loaded on demand; this shaves about 20% off the load time
+   of Types::Standard.
+
 0.033_01	2013-11-07
 
  [ Bug Fixes ]

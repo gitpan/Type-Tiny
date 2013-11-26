@@ -56,6 +56,12 @@ lib/Type/Utils.pm
 lib/Types/Common/Numeric.pm
 lib/Types/Common/String.pm
 lib/Types/Standard.pm
+lib/Types/Standard/ArrayRef.pm
+lib/Types/Standard/Dict.pm
+lib/Types/Standard/HashRef.pm
+lib/Types/Standard/Map.pm
+lib/Types/Standard/ScalarRef.pm
+lib/Types/Standard/Tuple.pm
 lib/Types/TypeTiny.pm
 t/00-begin.t
 t/01-compile.t
