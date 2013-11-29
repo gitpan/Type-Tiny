@@ -6,6 +6,24 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.033_03	2013-11-26
+
+ [ Bug Fixes ]
+ - Fix bug in Type::Params::multisig with regard to slurpy parameters.
+   Fixes RT#90865.
+   Diab Jerius++
+   <https://rt.cpan.org/Ticket/Display.html?id=90865>
+
+ [ Documentation ]
+ - Make Error::TypeTiny::Assertion's explain method act more according to
+   documentation.
+   Fixes RT#90867.
+   Diab Jerius++
+   <https://rt.cpan.org/Ticket/Display.html?id=90867>
+
+ [ Packaging ]
+ - Recommend Sub::Name in META.json.
+
 0.033_02	2013-11-26
 
  - Split out some of the longer parts of Types::Standard into other modules

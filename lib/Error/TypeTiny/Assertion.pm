@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Error::TypeTiny::Assertion::AUTHORITY = 'cpan:TOBYINK';
-	$Error::TypeTiny::Assertion::VERSION   = '0.033_02';
+	$Error::TypeTiny::Assertion::VERSION   = '0.033_03';
 }
 
 require Error::TypeTiny;
@@ -89,7 +89,7 @@ sub _build_message
 sub explain
 {
 	my $e = shift;
-	return [] unless $e->has_type;
+	return undef unless $e->has_type;
 	$e->type->validate_explain($e->value, $e->varname);
 }
 
