@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.033_03';
+	$Type::Utils::VERSION   = '0.033_04';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -47,6 +47,8 @@ sub extends
 		{
 			$caller->add_type( $lib->get_type($_) )
 				for sort $lib->meta->type_names;
+			$caller->add_coercion( $lib->get_coercion($_) )
+				for sort $lib->meta->coercion_names;
 		}
 		elsif ($lib->isa('MooseX::Types::Base'))
 		{

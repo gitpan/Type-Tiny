@@ -94,6 +94,7 @@ t/leak.t
 t/lib/BiggerLib.pm
 t/lib/DemoLib.pm
 t/library-assert.t
+t/library-inheritance.t
 t/library-is.t
 t/library-to.t
 t/library-types.t
@@ -134,6 +135,7 @@ t/rt85911.t
 t/rt86004.t
 t/rt86233.t
 t/rt86239.t
+t/rt90096-2.t
 t/rt90096.t
 t/stdlib-mxtmlb-alike.t
 t/stdlib-optlist.t
