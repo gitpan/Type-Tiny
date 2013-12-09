@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.034	2013-12-09
+
+ [ Documentation ]
+ - Updated NEWS file.
+
 0.033_04	2013-12-06
 
  [ Test Suite ]
