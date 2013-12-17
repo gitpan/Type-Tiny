@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.034';
+	$Type::Tiny::VERSION   = '0.035_01';
 }
 
 use Eval::TypeTiny ();
@@ -974,7 +974,7 @@ sub compile_type_constraint    { shift->compiled_check }
 sub _actually_compile_type_constraint   { shift->_build_compiled_check }
 sub hand_optimized_type_constraint      { shift->{hand_optimized_type_constraint} }
 sub has_hand_optimized_type_constraint  { exists(shift->{hand_optimized_type_constraint}) }
-sub type_parameter             { my @p = @{ shift->parameters || [] }; @p==1 ? $p[0] : @p }
+sub type_parameter             { (shift->parameters || [])->[0] }
 
 # some stuff for Mouse-compatible API
 sub __is_parameterized         { shift->is_parameterized(@_) }
