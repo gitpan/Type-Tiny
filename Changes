@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.037_01	2013-12-24
+
+ [ Bug Fixes ]
+ - Fix a Type::Params/B problem on Perl 5.6.x.
+
 0.036	2013-12-21
 
  [ Documentation ]
