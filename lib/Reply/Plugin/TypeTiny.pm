@@ -5,7 +5,7 @@ use warnings;
 
 BEGIN {
 	$Reply::Plugin::TypeTiny::AUTHORITY = 'cpan:TOBYINK';
-	$Reply::Plugin::TypeTiny::VERSION   = '0.037_01';
+	$Reply::Plugin::TypeTiny::VERSION   = '0.037_02';
 };
 
 require Reply::Plugin;
@@ -65,6 +65,11 @@ __END__
 =head1 NAME
 
 Reply::Plugin::TypeTiny - improved type constraint exceptions in Reply
+
+=head1 STATUS
+
+This module is not covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

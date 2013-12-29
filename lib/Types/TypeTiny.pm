@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.037_01';
+our $VERSION   = '0.037_02';
 
 use Scalar::Util qw< blessed refaddr weaken >;
 
@@ -310,6 +310,11 @@ __END__
 =head1 NAME
 
 Types::TypeTiny - type constraints used internally by Type::Tiny
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

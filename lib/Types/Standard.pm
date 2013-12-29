@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.037_01';
+	$Types::Standard::VERSION   = '0.037_02';
 }
 
 use Type::Library -base;
@@ -752,6 +752,11 @@ __END__
 =head1 NAME
 
 Types::Standard - bundled set of built-in types for Type::Tiny
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

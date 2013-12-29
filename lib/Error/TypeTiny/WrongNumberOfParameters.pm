@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Error::TypeTiny::WrongNumberOfParameters::AUTHORITY = 'cpan:TOBYINK';
-	$Error::TypeTiny::WrongNumberOfParameters::VERSION   = '0.037_01';
+	$Error::TypeTiny::WrongNumberOfParameters::VERSION   = '0.037_02';
 }
 
 require Error::TypeTiny;
@@ -67,6 +67,11 @@ __END__
 =head1 NAME
 
 Error::TypeTiny::WrongNumberOfParameters - exception for Type::Params
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

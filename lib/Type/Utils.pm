@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.037_01';
+	$Type::Utils::VERSION   = '0.037_02';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -564,6 +564,11 @@ Type::Utils - utility functions to make defining and using type constraints a li
    
    coerce "AllCaps",
       from "Str", via { uc($_) };
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

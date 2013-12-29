@@ -41,6 +41,8 @@ SEE ALSO
     *   Other modules using Type::Tiny in interesting ways: Type::Tie,
         Scalar::Does, Set::Equivalence...
 
+    *   Type::Tiny maintenance policies - the stability policy.
+
 DEPENDENCIES
     Type::Tiny requires at least Perl 5.6.1, though certain Unicode-related
     features (e.g. non-ASCII type constraint names) may work better in newer
@@ -105,26 +107,6 @@ TYPE::TINY VERSUS X
     pre-defined strings (instead of a Type::Tiny type constraint); or may be a
     package name in which case it will be assumed to be a role and checked
     with `$value->DOES($type)`.
-
-STATUS
-  Stability Policy
-    The following stability policy is planned for Type::Tiny 1.000 and above.
-    This milestone has not yet been reached.
-
-    Type::Tiny 1.000 is considered stable. Any changes to the API that are big
-    enough to *require* changes to the test suite will be preceded by a *six
-    month* notice period, with the following exceptions:
-
-    *   Where a change is necessary to maintain compatibility with new
-        releases of Moose, Moo, or Perl itself.
-
-    *   Where a change fixes a contradiction between the implementation and
-        documentation of Type::Tiny.
-
-    *   Where a feature is explicitly documented as being "experimental" or
-        "unstable".
-
-    *   Improvements to the text of error messages.
 
 BUGS
     Please report any bugs to

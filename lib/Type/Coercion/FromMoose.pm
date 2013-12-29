@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::FromMoose::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::FromMoose::VERSION   = '0.037_01';
+	$Type::Coercion::FromMoose::VERSION   = '0.037_02';
 }
 
 use Scalar::Util qw< blessed >;
@@ -52,6 +52,12 @@ __END__
 =head1 NAME
 
 Type::Coercion::FromMoose - a set of coercions borrowed from Moose
+
+=head1 STATUS
+
+This module is considered part of Type-Tiny's internals. It is not
+covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

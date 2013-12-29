@@ -11,7 +11,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Common::String::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Common::String::VERSION   = '0.037_01';
+	$Types::Common::String::VERSION   = '0.037_02';
 }
 
 use Type::Library -base, -declare => qw(
@@ -145,6 +145,11 @@ __END__
 =head1 NAME
 
 Types::Common::String - drop-in replacement for MooseX::Types::Common::String
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

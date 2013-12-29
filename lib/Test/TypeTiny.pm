@@ -15,7 +15,7 @@ BEGIN {
 };
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.037_01';
+our $VERSION   = '0.037_02';
 our @EXPORT    = qw( should_pass should_fail ok_subtype );
 our @EXPORT_OK = qw( EXTENDED_TESTING matchfor );
 
@@ -158,6 +158,11 @@ Test::TypeTiny - useful functions for testing the efficacy of type constraints
    ok_subtype(Number, Integer);
    
    done_testing;
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

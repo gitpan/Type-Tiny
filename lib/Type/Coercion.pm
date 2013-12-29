@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.037_01';
+	$Type::Coercion::VERSION   = '0.037_02';
 }
 
 use Eval::TypeTiny qw<>;
@@ -503,6 +503,11 @@ __END__
 =head1 NAME
 
 Type::Coercion - a set of coercions to a particular target type constraint
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

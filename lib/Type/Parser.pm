@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.037_01';
+our $VERSION   = '0.037_02';
 
 # Token types
 # 
@@ -532,6 +532,11 @@ Type::Parser - parse type constraint strings
  $type->check(10);        # true
  $type->check([1..4]);    # true
  $type->check({foo=>1});  # false
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

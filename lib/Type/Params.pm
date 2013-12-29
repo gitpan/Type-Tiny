@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Params::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Params::VERSION   = '0.037_01';
+	$Type::Params::VERSION   = '0.037_02';
 }
 
 use B qw();
@@ -292,6 +292,11 @@ Type::Params - Params::Validate-like parameter validation using Type::Tiny type 
  }
  
  deposit_monies("12-34-56", "11223344", 1.2, 3, 99.99);
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

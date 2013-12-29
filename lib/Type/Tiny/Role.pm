@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Role::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Role::VERSION   = '0.037_01';
+	$Type::Tiny::Role::VERSION   = '0.037_02';
 }
 
 use Scalar::Util qw< blessed weaken >;
@@ -101,6 +101,11 @@ __END__
 =head1 NAME
 
 Type::Tiny::Role - type constraints based on the "DOES" method
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

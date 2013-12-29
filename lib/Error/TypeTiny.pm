@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Error::TypeTiny::AUTHORITY = 'cpan:TOBYINK';
-	$Error::TypeTiny::VERSION   = '0.037_01';
+	$Error::TypeTiny::VERSION   = '0.037_02';
 }
 
 use overload
@@ -137,6 +137,11 @@ Error::TypeTiny - exceptions for Type::Tiny and friends
       warn Dumper($exception->explain)
          if $exception->isa("Error::TypeTiny::Assertion");
    };
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.037_01';
+	$Type::Library::VERSION   = '0.037_02';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -351,6 +351,11 @@ Type::Library - tiny, yet Moo(se)-compatible type libraries
       use Types::Mine qw(Number);
       has favourite_number => (is => "ro", isa => Number);
    }
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

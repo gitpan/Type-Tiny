@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::ScalarRef::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::ScalarRef::VERSION   = '0.037_01';
+	$Types::Standard::ScalarRef::VERSION   = '0.037_02';
 }
 
 use Types::Standard ();
@@ -112,6 +112,12 @@ __END__
 =head1 NAME
 
 Types::Standard::ScalarRef - internals for the Types::Standard ScalarRef type constraint
+
+=head1 STATUS
+
+This module is considered part of Type-Tiny's internals. It is not
+covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

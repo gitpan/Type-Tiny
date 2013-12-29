@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Duck::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Duck::VERSION   = '0.037_01';
+	$Type::Tiny::Duck::VERSION   = '0.037_02';
 }
 
 use Scalar::Util qw< blessed >;
@@ -109,6 +109,11 @@ __END__
 =head1 NAME
 
 Type::Tiny::Duck - type constraints based on the "can" method
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

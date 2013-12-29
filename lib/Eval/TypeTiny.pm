@@ -24,7 +24,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.037_01';
+our $VERSION   = '0.037_02';
 our @EXPORT    = qw( eval_closure );
 our @EXPORT_OK = qw( HAS_LEXICAL_SUBS HAS_LEXICAL_VARS );
 
@@ -242,15 +242,22 @@ __END__
 
 =encoding utf-8
 
-=for stopwords pragmas
+=for stopwords pragmas coderefs
 
 =head1 NAME
 
 Eval::TypeTiny - utility to evaluate a string of Perl code in a clean environment
 
+=head1 STATUS
+
+This module is considered part of Type-Tiny's internals. It is not
+covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
+
 =head1 DESCRIPTION
 
-This is not considered part of Type::Tiny's public API.
+This module is used by Type::Tiny to compile coderefs from strings of
+Perl code, and hashrefs of variables to close over.
 
 =head2 Functions
 

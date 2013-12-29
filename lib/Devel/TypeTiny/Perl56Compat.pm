@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.037_01';
+our $VERSION   = '0.037_02';
 
 #### B doesn't provide perlstring() in 5.6. Monkey patch it.
 
@@ -40,6 +40,12 @@ __END__
 =head1 NAME
 
 Devel::TypeTiny::Perl56Compat - shims to allow Type::Tiny to run on Perl 5.6.x
+
+=head1 STATUS
+
+This module is considered part of Type-Tiny's internals. It is not
+covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

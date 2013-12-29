@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::Union::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::Union::VERSION   = '0.037_01';
+	$Type::Coercion::Union::VERSION   = '0.037_02';
 }
 
 use Scalar::Util qw< blessed >;
@@ -53,6 +53,11 @@ __END__
 =head1 NAME
 
 Type::Coercion::Union - a set of coercions to a union type constraint
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

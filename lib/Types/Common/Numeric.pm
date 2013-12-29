@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Common::Numeric::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Common::Numeric::VERSION   = '0.037_01';
+	$Types::Common::Numeric::VERSION   = '0.037_02';
 }
 
 use Type::Library -base, -declare => qw(
@@ -108,6 +108,11 @@ __END__
 =head1 NAME
 
 Types::Common::Numeric - drop-in replacement for MooseX::Types::Common::Numeric
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

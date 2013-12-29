@@ -46,6 +46,7 @@ lib/Type/Tiny/Manual.pod
 lib/Type/Tiny/Manual/Coercions.pod
 lib/Type/Tiny/Manual/Libraries.pod
 lib/Type/Tiny/Manual/Params.pod
+lib/Type/Tiny/Manual/Policies.pod
 lib/Type/Tiny/Manual/UsingWithMoo.pod
 lib/Type/Tiny/Manual/UsingWithMoose.pod
 lib/Type/Tiny/Manual/UsingWithMouse.pod

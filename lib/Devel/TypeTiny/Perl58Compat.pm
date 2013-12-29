@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.037_01';
+our $VERSION   = '0.037_02';
 
 #### re doesn't provide is_regexp in Perl < 5.10
 
@@ -34,6 +34,12 @@ __END__
 =head1 NAME
 
 Devel::TypeTiny::Perl58Compat - shims to allow Type::Tiny to run on Perl 5.8.x
+
+=head1 STATUS
+
+This module is considered part of Type-Tiny's internals. It is not
+covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

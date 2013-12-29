@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Error::TypeTiny::Assertion::AUTHORITY = 'cpan:TOBYINK';
-	$Error::TypeTiny::Assertion::VERSION   = '0.037_01';
+	$Error::TypeTiny::Assertion::VERSION   = '0.037_02';
 }
 
 require Error::TypeTiny;
@@ -104,6 +104,11 @@ __END__
 =head1 NAME
 
 Error::TypeTiny::Assertion - exception when a value fails a type constraint
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

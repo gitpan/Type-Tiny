@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::Map::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::Map::VERSION   = '0.037_01';
+	$Types::Standard::Map::VERSION   = '0.037_02';
 }
 
 use Types::Standard ();
@@ -147,6 +147,12 @@ __END__
 =head1 NAME
 
 Types::Standard::Map - internals for the Types::Standard Map type constraint
+
+=head1 STATUS
+
+This module is considered part of Type-Tiny's internals. It is not
+covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 

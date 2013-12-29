@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.037_01';
+	$Type::Tiny::VERSION   = '0.037_02';
 }
 
 use Eval::TypeTiny ();
@@ -1028,6 +1028,11 @@ Type::Tiny - tiny, yet Moo(se)-compatible type constraint
       use Mouse;
       has favourite_number => (is => "ro", isa => $NUM);
    }
+
+=head1 STATUS
+
+This module is covered by the
+L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 =head1 DESCRIPTION
 
