@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.037_02';
+	$Type::Tiny::VERSION   = '0.037_03';
 }
 
 use Eval::TypeTiny ();
@@ -137,7 +137,9 @@ sub new
 		$ALL_TYPES{$uniq} = $self;
 		weaken( $ALL_TYPES{$uniq} );
 		
-		$Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} = sub { $ALL_TYPES{$uniq} };
+		package # no index
+			Moo::HandleMoose;
+		$Moo::HandleMoose::TYPE_MAP{$self} = sub { $ALL_TYPES{$uniq} };
 	}
 	
 	if (ref($params{coercion}) eq q(CODE))
@@ -163,7 +165,9 @@ sub DESTROY
 {
 	my $self = shift;
 	delete( $ALL_TYPES{$self->{uniq}} );
-	delete( $Moo::HandleMoose::TYPE_MAP{overload::StrVal($self)} );
+	package # no index
+		Moo::HandleMoose;
+	delete( $Moo::HandleMoose::TYPE_MAP{$self} );
 	return;
 }
 
