@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_01	2014-01-21
+
+ [ Documentation ]
+ - The preferred IRC channel for support is now #moops.
+
+ [ Test Suite ]
+ - Restructure the 't' directory.
+
+ [ Other ]
+ - Removed: Exporter::TypeTiny.
+
 0.038	2014-01-01
 
  [ Documentation ]
