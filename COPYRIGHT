@@ -158,12 +158,6 @@ Files: NEWS
 Copyright: Copyright 2013 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: t/40-regression/rt85911.t
- t/40-regression/rt86004.t
- t/40-regression/rt90096-2.t
-Copyright: This software is copyright (c) 2013-2014 by Diab Jerius.
-License: GPL-1.0+ or Artistic-1.0
-
 Files: examples/benchmark-coercions.pl
  examples/benchmark-constraints.pl
  examples/datetime-coercions.pl
@@ -176,34 +170,25 @@ Files: META.json
 Copyright: Copyright 2014 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: t/40-regression/rt85911.t
+ t/40-regression/rt86004.t
+ t/40-regression/rt90096-2.t
+Copyright: This software is copyright (c) 2013-2014 by Diab Jerius.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: COPYRIGHT
  SIGNATURE
 Copyright: None
 License: public-domain
 
+Files: t/20-unit/Test-TypeTiny/basic.t
+ t/20-unit/Test-TypeTiny/extended.t
+Copyright: This software is copyright (c) 2014 by Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: t/40-regression/rt86233.t
  t/40-regression/rt86239.t
 Copyright: This software is copyright (c) 2013-2014 by Vyacheslav Matyukhin.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/30-integration/Class-InsideOut/basic.t
-Copyright: This software is copyright (c) 2013-2014 by David Golden, Toby Inkster.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Test/Requires.pm
-Copyright: Copyright 2013 MATSUNO Tokuhiro.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/99-moose-std-types-test.t
-Copyright: This software is copyright (c) 2013-2014 by Infinity Interactive, Inc..
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/40-regression/rt90096.t
-Copyright: This software is copyright (c) 2013-2014 by Samuel Kaufman.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Test/Fatal.pm
@@ -212,6 +197,26 @@ License: GPL-1.0+ or Artistic-1.0
 
 Files: t/40-regression/gh1.t
 Copyright: This software is copyright (c) 2013-2014 by Richard SimÃµes.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/30-integration/Class-InsideOut/basic.t
+Copyright: This software is copyright (c) 2013-2014 by David Golden, Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2013 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/99-moose-std-types-test.t
+Copyright: This software is copyright (c) 2013-2014 by Infinity Interactive, Inc..
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/40-regression/rt90096.t
+Copyright: This software is copyright (c) 2013-2014 by Samuel Kaufman.
 License: GPL-1.0+ or Artistic-1.0
 
 License: Artistic-1.0

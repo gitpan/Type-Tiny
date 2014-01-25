@@ -71,6 +71,8 @@ t/20-unit/Error-TypeTiny-Assertion/basic.t
 t/20-unit/Error-TypeTiny/stacktrace.t
 t/20-unit/Eval-TypeTiny/basic.t
 t/20-unit/Eval-TypeTiny/lexical-subs.t
+t/20-unit/Test-TypeTiny/basic.t
+t/20-unit/Test-TypeTiny/extended.t
 t/20-unit/Type-Coercion-Union/basic.t
 t/20-unit/Type-Coercion/basic.t
 t/20-unit/Type-Coercion/frozen.t
