@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.039_02';
+	$Type::Utils::VERSION   = '0.039_03';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -278,6 +278,10 @@ sub declare_coercion
 			push @C, map { ref($_) ? to_TypeTiny($_) : $meta->get_type($_)||$_ } shift;
 			push @C, shift;
 		}
+	}
+	else
+	{
+		@C = @_;
 	}
 	
 	$c->add_type_coercions(@C);

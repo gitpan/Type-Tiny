@@ -154,6 +154,9 @@ t/40-regression/rt86233.t
 t/40-regression/rt86239.t
 t/40-regression/rt90096-2.t
 t/40-regression/rt90096.t
+t/40-regression/rt92571-2.t
+t/40-regression/rt92571.t
+t/40-regression/rt92591.t
 t/99-moose-std-types-test.t
 t/README
 t/TODO
