@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_04	2014-02-05
+
+ - Make overloaded ops on parameterized type constraints work more
+   consistently between Perl above and below 5.14, reducing the need for
+   parenthesizing complex type constraint expresssions.
+   Graham Knop++
+   <https://github.com/tobyink/p5-type-tiny/pull/8>
+
 0.039_03	2014-02-05
 
  [ Bug Fixes ]

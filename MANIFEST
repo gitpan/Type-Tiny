@@ -52,6 +52,7 @@ lib/Type/Tiny/Manual/UsingWithMouse.pod
 lib/Type/Tiny/Manual/UsingWithOther.pod
 lib/Type/Tiny/Role.pm
 lib/Type/Tiny/Union.pm
+lib/Type/Tiny/_HalfOp.pm
 lib/Type/Utils.pm
 lib/Types/Common/Numeric.pm
 lib/Types/Common/String.pm
@@ -105,6 +106,7 @@ t/20-unit/Type-Tiny-Enum/basic.t
 t/20-unit/Type-Tiny-Intersection/basic.t
 t/20-unit/Type-Tiny-Role/basic.t
 t/20-unit/Type-Tiny-Union/basic.t
+t/20-unit/Type-Tiny-_HalfOp/overload-precedence.t
 t/20-unit/Type-Tiny/arithmetic.t
 t/20-unit/Type-Tiny/basic.t
 t/20-unit/Type-Tiny/coercion-modifiers.t

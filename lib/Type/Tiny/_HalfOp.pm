@@ -1,27 +1,33 @@
-package Devel::TypeTiny::Perl58Compat;
+package Type::Tiny::_HalfOp;
 
-use 5.006;
+use 5.006001;
 use strict;
 use warnings;
 
-our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.039_04';
-
-#### re doesn't provide is_regexp in Perl < 5.10
-
-eval 'require re';
-
-unless (exists &re::is_regexp)
-{
-	require B;
-	*re::is_regexp = sub {
-		eval { B::svref_2object($_[0])->MAGIC->TYPE eq 'r' };
-	};
+BEGIN {
+	$Type::Tiny::_HalfOp::AUTHORITY = 'cpan:TOBYINK';
+	$Type::Tiny::_HalfOp::VERSION   = '0.039_04';
 }
 
-#### Done!
+use overload ();
 
-5.6;
+sub new {
+	my ($class, $op, $param, $type) = @_;
+	bless {
+		op    => $op,
+		param => $param,
+		type  => $type,
+	}, $class;
+}
+
+sub complete {
+	my ($self, $type) = @_;
+	my $complete_type = $type->parameterize(@{$self->{param}});
+	my $method = overload::Method($complete_type, $self->{op});
+	$complete_type->$method($self->{type});
+}
+
+1;
 
 __END__
 
@@ -33,7 +39,7 @@ __END__
 
 =head1 NAME
 
-Devel::TypeTiny::Perl58Compat - shims to allow Type::Tiny to run on Perl 5.8.x
+Type::Tiny::_HalfOp - half-completed overloaded operation
 
 =head1 STATUS
 
@@ -45,8 +51,23 @@ L<Type-Tiny stability policy|Type::Tiny::Manual::Policies/"STABILITY">.
 
 This is not considered part of Type::Tiny's public API.
 
-Currently this module just has one job: it patches L<re> to provide a
-C<is_regexp> function, as this was only added in Perl 5.9.5.
+It is a class representing a half-completed overloaded operation.
+
+=head2 Constructor
+
+=over
+
+=item C<< new($operation, $param, $type) >>
+
+=back
+
+=head2 Method
+
+=over
+
+=item C<< complete($type) >>
+
+=back
 
 =head1 BUGS
 
@@ -55,11 +76,11 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>.
 
 =head1 AUTHOR
 
-Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
+Graham Knop E<lt>haarg@cpan.orgE<gt>.
 
 =head1 COPYRIGHT AND LICENCE
 
-This software is copyright (c) 2013-2014 by Toby Inkster.
+This software is copyright (c) 2014 by Graham Knop.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.039_03';
+	$Type::Library::VERSION   = '0.039_04';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -83,6 +83,7 @@ sub _mksub
 		? sprintf(
 			q{
 				sub (%s) {
+					return $_[0]->complete($type) if ref($_[0]) eq 'Type::Tiny::_HalfOp';
 					my $params; $params = shift if ref($_[0]) eq q(ARRAY);
 					my $t = $params ? $type->parameterize(@$params) : $type;
 					@_ && wantarray ? return($t%s, @_) : return $t%s;
@@ -467,8 +468,7 @@ This allows constructs like:
 
    ArrayRef[Int] | HashRef[Int]
 
-... to "just work". Sadly, this constant is false on Perl < 5.14, and
-expressions like the above need lots of parentheses to do what you mean.
+... to "just work".
 
 =back
 
