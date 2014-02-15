@@ -6,6 +6,10 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_05	2014-02-15
+
+ - Apply the Type::Tiny::_HalfOp trick to overloaded addition too.
+
 0.039_04	2014-02-05
 
  - Make overloaded ops on parameterized type constraints work more
