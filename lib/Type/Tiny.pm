@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.039_05';
+	$Type::Tiny::VERSION   = '0.039_06';
 }
 
 use Eval::TypeTiny ();
@@ -22,7 +22,7 @@ sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 sub _swap { $_[2] ? @_[1,0] : @_[0,1] }
 
 BEGIN {
-	($] > 5.010001)
+	($] < 5.010001)
 		? eval q{ sub SUPPORT_SMARTMATCH () { !!0 } }
 		: eval q{ sub SUPPORT_SMARTMATCH () { !!1 } };
 	($] >= 5.014)
@@ -1009,8 +1009,8 @@ sub _unite                     { require Type::Tiny::Union; "Type::Tiny::Union"-
 
 # Hooks for Type::Tie
 sub TIESCALAR  { require Type::Tie; unshift @_, 'Type::Tie::SCALAR'; goto \&Type::Tie::SCALAR::TIESCALAR };
-sub TIEARRAY   { require Type::Tie; unshift @_, 'Type::Tie::ARRAY';  goto \&Type::Tie::SCALAR::TIEARRAY };
-sub TIEHASH    { require Type::Tie; unshift @_, 'Type::Tie::HASH';   goto \&Type::Tie::SCALAR::TIEHASH };
+sub TIEARRAY   { require Type::Tie; unshift @_, 'Type::Tie::ARRAY';  goto \&Type::Tie::ARRAY::TIEARRAY };
+sub TIEHASH    { require Type::Tie; unshift @_, 'Type::Tie::HASH';   goto \&Type::Tie::HASH::TIEHASH };
 
 1;
 

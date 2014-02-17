@@ -111,6 +111,7 @@ t/20-unit/Type-Tiny/arithmetic.t
 t/20-unit/Type-Tiny/basic.t
 t/20-unit/Type-Tiny/coercion-modifiers.t
 t/20-unit/Type-Tiny/parameterization.t
+t/20-unit/Type-Tiny/smartmatch.t
 t/20-unit/Type-Tiny/syntax.t
 t/20-unit/Type-Utils/dwim-moose.t
 t/20-unit/Type-Utils/dwim-mouse.t
@@ -147,8 +148,11 @@ t/30-integration/Mouse/basic.t
 t/30-integration/Mouse/coercion.t
 t/30-integration/MouseX-Types/basic.t
 t/30-integration/Object-Accessor/basic.t
+t/30-integration/Return-Type/basic.t
 t/30-integration/Sub-Quote/basic.t
+t/30-integration/Type-Tie/basic.t
 t/30-integration/Validation-Class-Simple/basic.t
+t/30-integration/match-simple/basic.t
 t/40-regression/gh1.t
 t/40-regression/rt85911.t
 t/40-regression/rt86004.t

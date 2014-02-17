@@ -6,6 +6,20 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_06	2014-02-17
+
+ [ Bug Fixes ]
+ - Type::Tiny's SUPPORT_SMARTMATCH constant was broken; fixed now.
+ - Type::Tiny's TIEARRAY and TIEHASH methods were broken; fixed now.
+
+ [ Test Suite ]
+ - Enable some old tests that had been disabled as not-yet-implemented for
+   parameterized type constraints; the feature they test was implemented
+   ages ago.
+ - Test integration with Return::Type.
+ - Test integration with Type::Tie.
+ - Test integration with match::simple.
+
 0.039_05	2014-02-15
 
  - Apply the Type::Tiny::_HalfOp trick to overloaded addition too.
