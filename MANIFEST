@@ -133,6 +133,7 @@ t/30-integration/Exporter-Tiny/basic.t
 t/30-integration/Exporter-Tiny/installer.t
 t/30-integration/Exporter-Tiny/role-conflict.t
 t/30-integration/Function-Parameters/basic.t
+t/30-integration/Kavorka/basic.t
 t/30-integration/Moo/basic.t
 t/30-integration/Moo/coercion.t
 t/30-integration/Moo/exceptions.t
