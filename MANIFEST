@@ -68,12 +68,15 @@ t/00-begin.t
 t/01-compile.t
 t/02-api.t
 t/03-leak.t
+t/20-unit/Devel-TypeTiny-Perl56Compat/basic.t
+t/20-unit/Devel-TypeTiny-Perl58Compat/basic.t
 t/20-unit/Error-TypeTiny-Assertion/basic.t
 t/20-unit/Error-TypeTiny/stacktrace.t
 t/20-unit/Eval-TypeTiny/basic.t
 t/20-unit/Eval-TypeTiny/lexical-subs.t
 t/20-unit/Test-TypeTiny/basic.t
 t/20-unit/Test-TypeTiny/extended.t
+t/20-unit/Type-Coercion-FromMoose/basic.t
 t/20-unit/Type-Coercion-Union/basic.t
 t/20-unit/Type-Coercion/basic.t
 t/20-unit/Type-Coercion/frozen.t
@@ -139,6 +142,8 @@ t/30-integration/Moo/coercion.t
 t/30-integration/Moo/exceptions.t
 t/30-integration/Moo/inflation.t
 t/30-integration/Moo/inflation2.t
+t/30-integration/Moops/basic.t
+t/30-integration/Moops/library-keyword.t
 t/30-integration/Moose/accept-moose-types.t
 t/30-integration/Moose/basic.t
 t/30-integration/Moose/coercion.t
@@ -151,6 +156,7 @@ t/30-integration/MouseX-Types/basic.t
 t/30-integration/Object-Accessor/basic.t
 t/30-integration/Return-Type/basic.t
 t/30-integration/Sub-Quote/basic.t
+t/30-integration/Switcheroo/basic.t
 t/30-integration/Type-Tie/basic.t
 t/30-integration/Validation-Class-Simple/basic.t
 t/30-integration/match-simple/basic.t

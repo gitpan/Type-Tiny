@@ -6,6 +6,20 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_09	2014-02-25
+
+ [ Documentation ]
+ - Update Type::Tiny::Manual::Params to mention Kavorka, and newer features
+   of Function::Parameters.
+
+ [ Test Suite ]
+ - Test integration with Moops.
+ - Test integration with Switcheroo.
+ - Test that coercions attached to Moose type constraints get inherited by
+   Type::Tiny when they are inhaled.
+ - Unit tests for Devel::TypeTiny::Perl56Compat.
+ - Unit tests for Devel::TypeTiny::Perl58Compat.
+
 0.039_08	2014-02-24
 
  [ Test Suite ]
