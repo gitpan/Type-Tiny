@@ -6,6 +6,16 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_10	2014-03-10
+
+ [ Documentation ]
+ - Document the benefits of freezing coercions, and of defining coercions
+   either within the type library, or via $type->plus_coercions.
+
+ [ Other ]
+ - $type->plus_coercions and friends now return objects with frozen
+   coercions.
+
 0.039_09	2014-02-25
 
  [ Documentation ]
