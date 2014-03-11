@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.039_11	2014-03-11
+
+ [ Test Suite ]
+ - Because of changes to Data::Dumper in Perl 5.19.x, the test suite was
+   previously skipping some Dumper-based test cases depending on Perl
+   version. However, Dumper is dual-lifed, so older versions of Perl may
+   have shiny, new Dumpers. Skip test cases based on Data::Dumper version
+   instead.
+
 0.039_10	2014-03-10
 
  [ Documentation ]
