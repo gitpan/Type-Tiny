@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.039_11';
+	$Type::Utils::VERSION   = '0.039_12';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -159,12 +159,14 @@ sub inline_as (&;@)
 sub class_type
 {
 	my $name = ref($_[0]) ? undef : shift;
-	my %opts = %{ +shift };
+	my %opts = %{ shift or {} };
 	
 	if (defined $name)
 	{
 		$opts{name}  = $name unless exists $opts{name};
 		$opts{class} = $name unless exists $opts{class};
+		
+		$opts{name} =~ s/:://g;
 	}
 	
 	$opts{bless} = "Type::Tiny::Class";
@@ -176,12 +178,14 @@ sub class_type
 sub role_type
 {
 	my $name = ref($_[0]) ? undef : shift;
-	my %opts = %{ +shift };
+	my %opts = %{ shift or {} };
 	
 	if (defined $name)
 	{
-		$opts{name}  = $name unless exists $opts{name};
-		$opts{role}  = $name unless exists $opts{role};
+		$opts{name} = $name unless exists $opts{name};
+		$opts{role} = $name unless exists $opts{role};
+		
+		$opts{name} =~ s/:://g;
 	}
 	
 	$opts{bless} = "Type::Tiny::Role";
@@ -193,7 +197,7 @@ sub role_type
 sub duck_type
 {
 	my $name    = ref($_[0]) ? undef : shift;
-	my @methods = @{ +shift };
+	my @methods = @{ shift or [] };
 	
 	my %opts;
 	$opts{name} = $name if defined $name;
@@ -208,7 +212,7 @@ sub duck_type
 sub enum
 {
 	my $name   = ref($_[0]) ? undef : shift;
-	my @values = @{ +shift };
+	my @values = @{ shift or [] };
 	
 	my %opts;
 	$opts{name} = $name if defined $name;
@@ -223,7 +227,7 @@ sub enum
 sub union
 {
 	my $name = ref($_[0]) ? undef : shift;
-	my @tcs  = @{ +shift };
+	my @tcs  = @{ shift or [] };
 	
 	my %opts;
 	$opts{name} = $name if defined $name;
@@ -238,7 +242,7 @@ sub union
 sub intersection
 {
 	my $name = ref($_[0]) ? undef : shift;
-	my @tcs  = @{ +shift };
+	my @tcs  = @{ shift or [] };
 	
 	my %opts;
 	$opts{name} = $name if defined $name;
@@ -699,13 +703,29 @@ Moose/Mouse/Moo.
 
 =item C<< class_type { class => $package, %options } >>
 
+=item C<< class_type $name >>
+
 Shortcut for declaring a L<Type::Tiny::Class> type constraint.
+
+If C<< $package >> is omitted, is assumed to be the same as C<< $name >>.
+If C<< $name >> contains "::" (which would be an invalid name as far as
+L<Type::Tiny> is concerned), this will be removed.
+
+So for example, C<< class_type("Foo::Bar") >> declares a L<Type::Tiny::Class>
+type constraint named "FooBar" which constrains values to objects blessed
+into the "Foo::Bar" package.
 
 =item C<< role_type $name, { role => $package, %options } >>
 
 =item C<< role_type { role => $package, %options } >>
 
+=item C<< role_type $name >>
+
 Shortcut for declaring a L<Type::Tiny::Role> type constraint.
+
+If C<< $package >> is omitted, is assumed to be the same as C<< $name >>.
+If C<< $name >> contains "::" (which would be an invalid name as far as
+L<Type::Tiny> is concerned), this will be removed.
 
 =item C<< duck_type $name, \@methods >>
 
