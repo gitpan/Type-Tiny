@@ -160,6 +160,8 @@ t/30-integration/Switcheroo/basic.t
 t/30-integration/Type-Tie/basic.t
 t/30-integration/Validation-Class-Simple/basic.t
 t/30-integration/match-simple/basic.t
+t/40-regression/73f51e2d.pl
+t/40-regression/73f51e2d.t
 t/40-regression/gh1.t
 t/40-regression/rt85911.t
 t/40-regression/rt86004.t
