@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.040';
+	$Type::Tiny::VERSION   = '0.041_01';
 }
 
 use Eval::TypeTiny ();
@@ -34,7 +34,6 @@ use overload
 	q("")      => sub { caller =~ m{^(Moo::HandleMoose|Sub::Quote)} ? overload::StrVal($_[0]) : $_[0]->display_name },
 	q(bool)    => sub { 1 },
 	q(&{})     => "_overload_coderef",
-	q(+)       => sub { $_[2] ? $_[1]->plus_coercions($_[0]) : $_[0]->plus_fallback_coercions($_[1]) },
 	q(|)       => sub {
 		my @tc = _swap @_;
 		if (!_FIXED_PRECEDENCE && !blessed $tc[0] && ref $tc[0] eq 'ARRAY') {
@@ -852,17 +851,49 @@ sub _build_mouse_type
 	return $r;
 }
 
+sub _process_coercion_list
+{
+	my $self = shift;
+	
+	my @pairs;
+	while (@_)
+	{
+		my $next = shift;
+		if (blessed($next) and $next->isa('Type::Coercion') and $next->is_parameterized)
+		{
+			push @pairs => (
+				@{ $next->_reparameterize($self)->type_coercion_map }
+			);
+		}
+		elsif (blessed($next) and $next->can('type_coercion_map'))
+		{
+			push @pairs => (
+				@{ $next->type_coercion_map },
+			);
+		}
+		elsif (ref($next) eq q(ARRAY))
+		{
+			unshift @_, @$next;
+		}
+		else
+		{
+			push @pairs => (
+				Types::TypeTiny::to_TypeTiny($next),
+				shift,
+			);
+		}
+	}
+	
+	return @pairs;
+}
+
 sub plus_coercions
 {
 	my $self = shift;
 	
-	my @more = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
-		? @{ $_[0]->type_coercion_map }
-		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
-	
 	my $new = $self->_clone;
 	$new->coercion->add_type_coercions(
-		@more,
+		$self->_process_coercion_list(@_),
 		@{$self->coercion->type_coercion_map},
 	);
 	$new->coercion->freeze;
@@ -873,14 +904,10 @@ sub plus_fallback_coercions
 {
 	my $self = shift;
 	
-	my @more = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
-		? @{ $_[0]->type_coercion_map }
-		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
-	
 	my $new = $self->_clone;
 	$new->coercion->add_type_coercions(
 		@{$self->coercion->type_coercion_map},
-		@more,
+		$self->_process_coercion_list(@_),
 	);
 	$new->coercion->freeze;
 	return $new;
@@ -890,9 +917,8 @@ sub minus_coercions
 {
 	my $self = shift;
 	
-	my @not = (@_==1 && blessed($_[0]) && $_[0]->can('type_coercion_map'))
-		? grep(blessed($_)&&$_->isa("Type::Tiny"), @{ $_[0]->type_coercion_map })
-		: (@_==1 && ref $_[0]) ? @{$_[0]} : @_;
+	my $new = $self->_clone;
+	my @not = grep Types::TypeTiny::TypeTiny->check($_), $self->_process_coercion_list($new, @_);
 	
 	my @keep;
 	my $c = $self->coercion->type_coercion_map;
@@ -910,8 +936,7 @@ sub minus_coercions
 		
 		push @keep, $c->[$i], $c->[$i+1] if $keep_this;
 	}
-
-	my $new = $self->_clone;
+	
 	$new->coercion->add_type_coercions(@keep);
 	$new->coercion->freeze;
 	return $new;
@@ -1483,12 +1508,11 @@ See L<Type::Tiny::Union>.
 The C<< & >> operator is overloaded to build the intersection of two type
 constraints. See L<Type::Tiny::Intersection>.
 
-=item *
-
-The C<< + >> operator is overloaded to call C<plus_coercions> or
-C<plus_fallback_coercions> as appropriate.
-
 =back
+
+Previous versions of Type::Tiny would overload the C<< + >> operator to
+call C<plus_coercions> or C<plus_fallback_coercions> as appropriate.
+Support for this was dropped after 0.040.
 
 =head2 Constants
 
