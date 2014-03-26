@@ -6,6 +6,25 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.041_02	2014-03-26
+
+ [ Bug Fixes ]
+ - Fix Type::Tiny::Duck's inlining of code when given the variable name
+   `$_`.
+   Fixes RT#94196.
+   Diab Jerius++
+   <https://rt.cpan.org/Ticket/Display.html?id=94196>
+
+ [ Documentation ]
+ - Type::Tiny::Manual links to various parts of the test suite to document
+   concepts. These links had grown stale and have now been updated.
+ - Updated NEWS file.
+
+ [ Test Suite ]
+ - Prevent 20-unit/Type-Registry/moosextypes.t from failing due to too old
+   MooseX::Types::Common - just skip the test script if MXTC is older than
+   0.001004.
+
 0.041_01	2014-03-17
 
  [ BACK COMPAT ]
