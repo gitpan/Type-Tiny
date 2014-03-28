@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.041_02';
+	$Types::Standard::VERSION   = '0.041_03';
 }
 
 use Type::Library -base;
@@ -37,6 +37,15 @@ sub _is_class_loaded {
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 my $meta = __PACKAGE__->meta;
+
+# Stringable and LazyLoad are optimizations that complicate
+# this module somewhat, but they have led to performance
+# improvements. If Types::Standard wasn't such a key type
+# library, I wouldn't use them. I strongly discourage anybody
+# from using them in their own code. If you're looking for
+# examples of how to write a type library sanely, you're
+# better off looking at the code for Types::Common::Numeric
+# and Types::Common::String.
 
 sub Stringable (&)
 {
