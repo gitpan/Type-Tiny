@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.041_04';
+	$Type::Coercion::VERSION   = '0.042';
 }
 
 use Eval::TypeTiny qw<>;
@@ -614,7 +614,7 @@ the coercion into the package.
 
 =back
 
-=head3 Attributes related to parameterizable and parameterized types
+=head3 Attributes related to parameterizable and parameterized coercions
 
 The following attributes are used for parameterized coercions, but are not
 fully documented because they may change in the near future:
