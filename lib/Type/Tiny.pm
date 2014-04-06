@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.042';
+	$Type::Tiny::VERSION   = '0.043_01';
 }
 
 use Eval::TypeTiny ();
@@ -138,8 +138,10 @@ sub new
 		$params{inlined} = sub {
 			my ($self, $var) = @_;
 			my $code = Sub::Quote::inlinify(
-				$var eq q($_) ? $perlstring : "local \$_ = $var; $perlstring",
+				$perlstring,
 				$var,
+				$var eq q($_) ? '' : "local \$_ = $var;",
+				1,
 			);
 			$code = sprintf('%s and %s', $self->parent->inline_check($var), $code) if $self->has_parent;
 			return $code;
