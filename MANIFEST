@@ -113,6 +113,7 @@ t/20-unit/Type-Tiny-_HalfOp/overload-precedence.t
 t/20-unit/Type-Tiny/arithmetic.t
 t/20-unit/Type-Tiny/basic.t
 t/20-unit/Type-Tiny/coercion-modifiers.t
+t/20-unit/Type-Tiny/my-methods.t
 t/20-unit/Type-Tiny/parameterization.t
 t/20-unit/Type-Tiny/smartmatch.t
 t/20-unit/Type-Tiny/syntax.t
