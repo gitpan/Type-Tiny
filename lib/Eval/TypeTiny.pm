@@ -9,8 +9,11 @@ BEGIN {
 {
 	my $hlv;
 	sub HAS_LEXICAL_VARS () {
-		$hlv = !! eval { require Devel::LexAlias } unless defined $hlv;
-		return $hlv;
+		$hlv = !! eval {
+			require Devel::LexAlias;
+			exists(&Devel::LexAlias::lexalias);
+		} unless defined $hlv;
+		$hlv;
 	}
 }
 
@@ -24,7 +27,7 @@ sub _clean_eval
 }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.043_02';
+our $VERSION   = '0.043_03';
 our @EXPORT    = qw( eval_closure );
 our @EXPORT_OK = qw( HAS_LEXICAL_SUBS HAS_LEXICAL_VARS );
 

@@ -71,8 +71,10 @@ t/03-leak.t
 t/20-unit/Devel-TypeTiny-Perl56Compat/basic.t
 t/20-unit/Devel-TypeTiny-Perl58Compat/basic.t
 t/20-unit/Error-TypeTiny-Assertion/basic.t
+t/20-unit/Error-TypeTiny/basic.t
 t/20-unit/Error-TypeTiny/stacktrace.t
 t/20-unit/Eval-TypeTiny/basic.t
+t/20-unit/Eval-TypeTiny/fallback-aliases.t
 t/20-unit/Eval-TypeTiny/lexical-subs.t
 t/20-unit/Test-TypeTiny/basic.t
 t/20-unit/Test-TypeTiny/extended.t
@@ -83,6 +85,7 @@ t/20-unit/Type-Coercion/frozen.t
 t/20-unit/Type-Coercion/inlining.t
 t/20-unit/Type-Coercion/parameterized.t
 t/20-unit/Type-Library/assert.t
+t/20-unit/Type-Library/errors.t
 t/20-unit/Type-Library/inheritance.t
 t/20-unit/Type-Library/is.t
 t/20-unit/Type-Library/to.t
@@ -117,6 +120,7 @@ t/20-unit/Type-Tiny/my-methods.t
 t/20-unit/Type-Tiny/parameterization.t
 t/20-unit/Type-Tiny/smartmatch.t
 t/20-unit/Type-Tiny/syntax.t
+t/20-unit/Type-Utils/classifier.t
 t/20-unit/Type-Utils/dwim-moose.t
 t/20-unit/Type-Utils/dwim-mouse.t
 t/20-unit/Type-Utils/match-on-type.t

@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.043_02';
+	$Type::Tiny::VERSION   = '0.043_03';
 }
 
 use Eval::TypeTiny ();
@@ -179,6 +179,17 @@ sub new
 	}
 	
 	$self->{type_constraints} ||= undef;
+	
+	if ($params{my_methods} and eval { require Sub::Name })
+	{
+		for my $key (keys %{$params{my_methods}})
+		{
+			Sub::Name::subname(
+				sprintf("%s::my_%s", $self->qualified_name, $key),
+				$params{my_methods}{$key},
+			);
+		}
+	}
 	
 	return $self;
 }

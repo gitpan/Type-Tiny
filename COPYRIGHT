@@ -53,8 +53,10 @@ Files: examples/benchmark-coercions.pl
  t/02-api.t
  t/03-leak.t
  t/20-unit/Error-TypeTiny-Assertion/basic.t
+ t/20-unit/Error-TypeTiny/basic.t
  t/20-unit/Error-TypeTiny/stacktrace.t
  t/20-unit/Eval-TypeTiny/basic.t
+ t/20-unit/Eval-TypeTiny/fallback-aliases.t
  t/20-unit/Eval-TypeTiny/lexical-subs.t
  t/20-unit/Type-Coercion-Union/basic.t
  t/20-unit/Type-Coercion/basic.t
@@ -62,6 +64,7 @@ Files: examples/benchmark-coercions.pl
  t/20-unit/Type-Coercion/inlining.t
  t/20-unit/Type-Coercion/parameterized.t
  t/20-unit/Type-Library/assert.t
+ t/20-unit/Type-Library/errors.t
  t/20-unit/Type-Library/inheritance.t
  t/20-unit/Type-Library/is.t
  t/20-unit/Type-Library/to.t
@@ -139,6 +142,7 @@ Files: t/20-unit/Devel-TypeTiny-Perl56Compat/basic.t
  t/20-unit/Type-Coercion-FromMoose/basic.t
  t/20-unit/Type-Tiny/my-methods.t
  t/20-unit/Type-Tiny/smartmatch.t
+ t/20-unit/Type-Utils/classifier.t
  t/30-integration/Kavorka/basic.t
  t/30-integration/Return-Type/basic.t
  t/30-integration/Switcheroo/basic.t
@@ -209,40 +213,40 @@ Files: t/40-regression/rt86233.t
 Copyright: This software is copyright (c) 2013-2014 by Vyacheslav Matyukhin.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Try/Tiny.pm
-Copyright: Copyright 2013 Yuval Kogman.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/99-moose-std-types-test.t
-Copyright: This software is copyright (c) 2013-2014 by Infinity Interactive, Inc..
-License: GPL-1.0+ or Artistic-1.0
-
 Files: t/40-regression/rt90096.t
 Copyright: This software is copyright (c) 2013-2014 by Samuel Kaufman.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: t/30-integration/Class-InsideOut/basic.t
-Copyright: This software is copyright (c) 2013-2014 by David Golden, Toby Inkster.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: examples/datetime-coercions.pl
-Copyright: This software is copyright (c) 2013 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: t/40-regression/gh1.t
 Copyright: This software is copyright (c) 2013-2014 by Richard SimÃµes.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Test/Fatal.pm
-Copyright: Copyright 2013 Ricardo Signes.
+Files: inc/Test/Requires.pm
+Copyright: Copyright 2013 MATSUNO Tokuhiro.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: examples/datetime-coercions.pl
+Copyright: This software is copyright (c) 2013 by Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: t/99-moose-std-types-test.t
+Copyright: This software is copyright (c) 2013-2014 by Infinity Interactive, Inc..
 License: GPL-1.0+ or Artistic-1.0
 
 Files: dist.ini
 Copyright: Copyright 2013 Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
-Files: inc/Test/Requires.pm
-Copyright: Copyright 2013 MATSUNO Tokuhiro.
+Files: t/30-integration/Class-InsideOut/basic.t
+Copyright: This software is copyright (c) 2013-2014 by David Golden, Toby Inkster.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Try/Tiny.pm
+Copyright: Copyright 2014 Yuval Kogman.
+License: GPL-1.0+ or Artistic-1.0
+
+Files: inc/Test/Fatal.pm
+Copyright: Copyright 2013 Ricardo Signes.
 License: GPL-1.0+ or Artistic-1.0
 
 License: Artistic-1.0
