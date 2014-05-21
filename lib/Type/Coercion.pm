@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.043_04';
+	$Type::Coercion::VERSION   = '0.043_05';
 }
 
 use Eval::TypeTiny qw<>;
@@ -404,7 +404,7 @@ sub _codelike_type_coercion_map
 		}
 		else
 		{
-			Eval::TypeTiny::eval_closure(
+			push @new, Eval::TypeTiny::eval_closure(
 				source      => sprintf('sub { local $_ = $_[0]; %s }', $converter),
 				description => sprintf("temporary compiled converter from '%s'", $type),
 			);

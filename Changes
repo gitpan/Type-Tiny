@@ -6,6 +6,32 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.043_05	2014-05-21
+
+ [ Bug Fixes ]
+ - Fix inflation of Type::Coercion objects to Moose::Meta::TypeCoercion
+   when some of the coercion routines are given as strings.
+
+ [ Documentation ]
+ - Document the is_*, to_*, and assert_* functions in
+   Type::Tiny::Manual::Libraries.
+   Alexander Hartmaier++
+ - Mention coercion=>1 and why it is useful in
+   Type::Tiny::Manual::Coercions.
+   Alexander Hartmaier++
+
+ [ Test Suite ]
+ - Integration tests for MooseX::Getopt.
+   Alexander Hartmaier++
+
+ [ Other ]
+ - Detect missing comma in declaration of type constraints using
+   Type::Utils a la `declare Foo as Bar`, and print a warning.
+   Tim Bunce++
+ - No longer need to inflate a Type::Tiny object to
+   Moose::Meta::TypeConstraint in order to give an answer to
+   $type->isa('Moose::Meta::TypeConstraint::Union').
+
 0.043_04	2014-05-21
 
  [ Test Suite ]

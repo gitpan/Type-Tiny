@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.043_04';
+	$Type::Tiny::VERSION   = '0.043_05';
 }
 
 use Eval::TypeTiny ();
@@ -996,18 +996,19 @@ sub isa
 {
 	my $self = shift;
 	
-	if ($INC{"Moose.pm"} and ref($self))
+	if ($INC{"Moose.pm"} and ref($self) and $_[0] =~ /^MooseX?::Meta::(.+)$/)
 	{
-		return !!1                       if $_[0] eq 'Moose::Meta::TypeConstraint';
-		return $self->is_parameterized   if $_[0] eq 'Moose::Meta::TypeConstraint::Parameterized';
-		return $self->is_parameterizable if $_[0] eq 'Moose::Meta::TypeConstraint::Parameterizable';
+		my $meta = $1;
+		
+		return !!1                             if $meta eq 'TypeConstraint';
+		return $self->is_parameterized         if $meta eq 'TypeConstraint::Parameterized';
+		return $self->is_parameterizable       if $meta eq 'TypeConstraint::Parameterizable';
+		return $self->isa('Type::Tiny::Union') if $meta eq 'TypeConstraint::Union';
+		
+		my $inflate = $self->moose_type;
+		return $inflate->isa(@_);
 	}
 	
-	if ($INC{"Moose.pm"} and ref($self) and $_[0] =~ /^Moose/ and my $r = $self->moose_type->isa(@_))
-	{
-		return $r;
-	}
-
 	if ($INC{"Mouse.pm"} and ref($self) and $_[0] eq 'Mouse::Meta::TypeConstraint')
 	{
 		return !!1;

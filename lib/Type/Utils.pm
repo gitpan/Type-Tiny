@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.043_04';
+	$Type::Utils::VERSION   = '0.043_05';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -90,6 +90,11 @@ sub declare
 	if (@_ % 2 == 0)
 	{
 		%opts = @_;
+		if (@_==2 and $_[0]=~ /^_*[A-Z]/ and $_[1] =~ /^[0-9]+$/)
+		{
+			require Carp;
+			Carp::carp("Possible missing comma after 'declare $_[0]'");
+		}
 	}
 	else
 	{
