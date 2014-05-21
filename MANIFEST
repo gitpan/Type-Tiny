@@ -152,6 +152,7 @@ t/30-integration/Moops/library-keyword.t
 t/30-integration/Moose/accept-moose-types.t
 t/30-integration/Moose/basic.t
 t/30-integration/Moose/coercion.t
+t/30-integration/Moose/native-attribute-traits.t
 t/30-integration/MooseX-Types/basic.t
 t/30-integration/MooseX-Types/extending.t
 t/30-integration/MooseX-Types/more.t
