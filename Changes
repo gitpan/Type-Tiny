@@ -6,6 +6,17 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.045_01	2014-06-30
+
+ [ Bug Fixes ]
+ - Ensure that when a Type::Tiny object is inflated into a
+   Moose::Meta::TypeConstraint, inlining still happens via Type::Tiny.
+   omega++
+ - Workaround strange behaviour of exists() function when applied to @_ on
+   Perl older than 5.20 which caused some uses of Optional[Foo] to accept
+   an explicit undef.
+   Caleb Cushing++
+
 0.044	2014-06-03
 
  [ Documentation ]
