@@ -17,6 +17,7 @@ examples/benchmark-coercions.pl
 examples/benchmark-constraints.pl
 examples/benchmark-param-validation.pl
 examples/datetime-coercions.pl
+examples/versus-scalar-validation.pl
 inc/Test/Fatal.pm
 inc/Test/Requires.pm
 inc/Try/Tiny.pm
