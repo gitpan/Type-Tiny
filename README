@@ -66,6 +66,11 @@ DEPENDENCIES
     for Reply requires Reply (obviously). Devel::LexAlias may *slightly*
     increase the speed of some of Type::Tiny's compiled coderefs.
 
+    Type::Tiny::XS is not required, but if available provides a speed boost
+    for some type checks. (Setting the environment variable
+    `PERL_TYPE_TINY_XS` to false, or setting `PERL_ONLY` to true will suppress
+    the use of Type::Tiny::XS, even if it is available.)
+
     The test suite additionally requires Test::More, Test::Fatal and
     Test::Requires. Test::More comes bundled with Perl, but if you are using a
     version of Perl older than 5.14, you will need to upgrade to at least

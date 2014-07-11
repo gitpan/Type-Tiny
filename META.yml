@@ -41,111 +41,112 @@ optional_features: {}
 provides:
   Devel::TypeTiny::Perl56Compat:
     file: lib/Devel/TypeTiny/Perl56Compat.pm
-    version: 0.045_02
+    version: 0.045_03
   Devel::TypeTiny::Perl58Compat:
     file: lib/Devel/TypeTiny/Perl58Compat.pm
-    version: 0.045_02
+    version: 0.045_03
   Error::TypeTiny:
     file: lib/Error/TypeTiny.pm
-    version: 0.045_02
+    version: 0.045_03
   Error::TypeTiny::Assertion:
     file: lib/Error/TypeTiny/Assertion.pm
-    version: 0.045_02
+    version: 0.045_03
   Error::TypeTiny::Compilation:
     file: lib/Error/TypeTiny/Compilation.pm
-    version: 0.045_02
+    version: 0.045_03
   Error::TypeTiny::WrongNumberOfParameters:
     file: lib/Error/TypeTiny/WrongNumberOfParameters.pm
-    version: 0.045_02
+    version: 0.045_03
   Eval::TypeTiny:
     file: lib/Eval/TypeTiny.pm
-    version: 0.045_02
+    version: 0.045_03
   Reply::Plugin::TypeTiny:
     file: lib/Reply/Plugin/TypeTiny.pm
-    version: 0.045_02
+    version: 0.045_03
   Test::TypeTiny:
     file: lib/Test/TypeTiny.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Coercion:
     file: lib/Type/Coercion.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Coercion::FromMoose:
     file: lib/Type/Coercion/FromMoose.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Coercion::Union:
     file: lib/Type/Coercion/Union.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Library:
     file: lib/Type/Library.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Params:
     file: lib/Type/Params.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Parser:
     file: lib/Type/Parser.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Registry:
     file: lib/Type/Registry.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny:
     file: lib/Type/Tiny.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny::Class:
     file: lib/Type/Tiny/Class.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny::Duck:
     file: lib/Type/Tiny/Duck.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny::Enum:
     file: lib/Type/Tiny/Enum.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny::Intersection:
     file: lib/Type/Tiny/Intersection.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny::Role:
     file: lib/Type/Tiny/Role.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Tiny::Union:
     file: lib/Type/Tiny/Union.pm
-    version: 0.045_02
+    version: 0.045_03
   Type::Utils:
     file: lib/Type/Utils.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Common::Numeric:
     file: lib/Types/Common/Numeric.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Common::String:
     file: lib/Types/Common/String.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard:
     file: lib/Types/Standard.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard::ArrayRef:
     file: lib/Types/Standard/ArrayRef.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard::Dict:
     file: lib/Types/Standard/Dict.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard::HashRef:
     file: lib/Types/Standard/HashRef.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard::Map:
     file: lib/Types/Standard/Map.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard::ScalarRef:
     file: lib/Types/Standard/ScalarRef.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::Standard::Tuple:
     file: lib/Types/Standard/Tuple.pm
-    version: 0.045_02
+    version: 0.045_03
   Types::TypeTiny:
     file: lib/Types/TypeTiny.pm
-    version: 0.045_02
+    version: 0.045_03
 recommends:
   Devel::LexAlias: '0.05'
   Devel::StackTrace: '0'
   Sub::Name: '0'
   Type::Tie: '0'
+  Type::Tiny::XS: '0.003'
   perl: '5.010001'
 requires:
   Exporter::Tiny: '0.026'
@@ -156,7 +157,7 @@ resources:
   homepage: https://metacpan.org/release/Type-Tiny
   license: http://dev.perl.org/licenses/
   repository: git://github.com/tobyink/p5-type-tiny.git
-version: 0.045_02
+version: 0.045_03
 x_breaks:
   Kavorka: '0.013'
   Types::ReadOnly: '0.001'

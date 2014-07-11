@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION   = '0.045_02';
+	$Type::Tiny::VERSION   = '0.045_03';
 }
 
 use Eval::TypeTiny ();
@@ -338,23 +338,6 @@ sub _build_compiled_check
 	if ($self->_is_null_constraint and $self->has_parent)
 	{
 		return $self->parent->compiled_check;
-	}
-	
-	if ($INC{'Mouse/Util.pm'} and Mouse::Util::MOUSE_XS())
-	{
-		require Mouse::Util::TypeConstraints;
-		
-		if ($self->{_is_core})
-		{
-			my $xs = "Mouse::Util::TypeConstraints"->can($self->name);
-			return $xs if $xs;
-		}
-		elsif ($self->is_parameterized and $self->has_parent
-		and $self->parent->{_is_core} and $self->parent->name =~ /^(ArrayRef|HashRef|Maybe)$/)
-		{
-			my $xs = "Mouse::Util::TypeConstraints"->can("_parameterize_".$self->parent->name."_for");
-			return $xs->($self->parameters->[0]) if $xs;
-		}
 	}
 	
 	return Eval::TypeTiny::eval_closure(
@@ -762,7 +745,7 @@ sub parameterize
 	local $_ = $_[0];
 	my $P;
 	
-	my $constraint = $self->constraint_generator->(@_);
+	my ($constraint, $compiled) = $self->constraint_generator->(@_);
 	
 	if (Types::TypeTiny::TypeTiny->check($constraint))
 	{
@@ -775,6 +758,8 @@ sub parameterize
 			display_name => $self->name_generator->($self, @_),
 			parameters   => [@_],
 		);
+		$options{compiled_type_constraint} = $compiled
+			if $compiled;
 		$options{inlined} = $self->inline_generator->(@_)
 			if $self->has_inline_generator;
 		exists $options{$_} && !defined $options{$_} && delete $options{$_}

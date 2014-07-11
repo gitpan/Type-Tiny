@@ -6,10 +6,30 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.045_03	2014-07-11
+
+ [ REGRESSIONS ]
+ - The Mouse XS stuff introduced in Type-Tiny 0.003_09 has been partially
+   removed. (I do plan on restoring it, and improving it.)
+
+ [ Documentation ]
+ - Update benchmark scripts, showing results with/without Type::Tiny::XS.
+
+ [ Test Suite ]
+ - When testing equivalence between Types::Standard types and core Moose
+   types, don't test `Num` because Types::Standard provides two different
+   implementations for it.
+
+ [ Other ]
+ - Type::Tiny::XS is now used (if available) to speed up some of the
+   Types::Standard type constraints, plus Type::Tiny::Class and
+   Type::Tiny::Duck.
+
 0.045_02	2014-07-10
 
  [ Bug Fixes ]
- - Include benchmark/example of Type::Params versus Scalar::Validation.
+ - Remove outdated references to the overloaded + operator from
+   Types::Standard documentation.
    Fixes RT#96379.
    Diab Jerius++
    <https://rt.cpan.org/Ticket/Display.html?id=96379>
