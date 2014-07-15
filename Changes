@@ -6,6 +6,24 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.045_04	2014-07-15
+
+ [ Bug Fixes ]
+ - Type::Params was warning about additional arguments passed to sprintf
+   under Perl blead. The additional argument has been removed.
+
+ [ Documentation ]
+ - Updated NEWS file.
+
+ [ Test Suite ]
+ - Cope with changes to Type::Tie error messages introduced in Type::Tie
+   0.008.
+ - Fix warnings in 30-integration/Moose/native-attribute-traits.t when run
+   under perl -w.
+   Peter Karman++
+ - Generally stop testing the contents of error messages produced by
+   external modules!
+
 0.045_03	2014-07-11
 
  [ REGRESSIONS ]
