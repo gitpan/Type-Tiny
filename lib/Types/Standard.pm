@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.045_04';
+	$Types::Standard::VERSION   = '0.045_05';
 }
 
 use Type::Library -base;
@@ -391,6 +391,8 @@ $meta->$add_core_type({
 		my $param = Types::TypeTiny::to_TypeTiny(shift);
 		Types::TypeTiny::TypeTiny->check($param)
 			or _croak("Parameter to Maybe[`a] expected to be a type constraint; got $param");
+		
+		# TODO: xsubs
 		
 		return sub
 		{

@@ -6,6 +6,21 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.045_05	2014-07-18
+
+ [ Bug Fixes ]
+ - More sensible use of Sub::Name in Type::Library.
+
+ [ Documentation ]
+ - Added a Type::Tiny::Manual::Optimization perldoc page.
+
+ [ Other ]
+ - Added: Type::Tiny now has a `where` method which is a shortcut for
+   creating a child type with a constraint coderef.
+ - Added: Type::Tiny now has an `of` method which is a shortcut for
+   `parameterize` which I can never spell properly.
+ - Restore and improve Mouse XS stuff dropped in Type-Tiny 0.045_03.
+
 0.045_04	2014-07-15
 
  [ Bug Fixes ]

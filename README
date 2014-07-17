@@ -39,7 +39,9 @@ SEE ALSO
         functions and methods.
 
     *   Other modules using Type::Tiny in interesting ways: Type::Tie,
-        Scalar::Does, Set::Equivalence...
+        Test::Mocha, Scalar::Does, Set::Equivalence...
+
+    *   Optimization - squeeze the most out of your CPU.
 
     *   Type::Tiny maintenance policies - the stability policy.
 

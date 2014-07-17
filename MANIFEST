@@ -45,6 +45,7 @@ lib/Type/Tiny/Intersection.pm
 lib/Type/Tiny/Manual.pod
 lib/Type/Tiny/Manual/Coercions.pod
 lib/Type/Tiny/Manual/Libraries.pod
+lib/Type/Tiny/Manual/Optimization.pod
 lib/Type/Tiny/Manual/Params.pod
 lib/Type/Tiny/Manual/Policies.pod
 lib/Type/Tiny/Manual/UsingWithMoo.pod
@@ -119,6 +120,7 @@ t/20-unit/Type-Tiny/basic.t
 t/20-unit/Type-Tiny/coercion-modifiers.t
 t/20-unit/Type-Tiny/my-methods.t
 t/20-unit/Type-Tiny/parameterization.t
+t/20-unit/Type-Tiny/shortcuts.t
 t/20-unit/Type-Tiny/smartmatch.t
 t/20-unit/Type-Tiny/syntax.t
 t/20-unit/Type-Utils/classifier.t
