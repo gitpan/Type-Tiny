@@ -139,6 +139,8 @@ t/20-unit/Types-Standard/overload.t
 t/20-unit/Types-Standard/strmatch.t
 t/20-unit/Types-Standard/structured.t
 t/20-unit/Types-Standard/tied.t
+t/20-unit/Types-TypeTiny/basic.t
+t/20-unit/Types-TypeTiny/coercion.t
 t/30-integration/Class-InsideOut/basic.t
 t/30-integration/Exporter-Tiny/basic.t
 t/30-integration/Exporter-Tiny/installer.t

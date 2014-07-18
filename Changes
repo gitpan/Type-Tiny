@@ -6,6 +6,20 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.046	2014-07-18
+
+ [ Bug Fixes ]
+ - Fix for Types::TypeTiny::to_TypeTiny($coderef) when Sub::Quote is loaded
+   but not used.
+ - Undef no longer passes the Types::TypeTiny::StringLike type constraint.
+
+ [ Test Suite ]
+ - Add test cases for Types::TypeTiny (the library of type constraints used
+   internally by Type::Tiny).
+
+ [ Other ]
+ - Minor optimizations to Types::TypeTiny::to_TypeTiny.
+
 0.045_05	2014-07-18
 
  [ Bug Fixes ]
