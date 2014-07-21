@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.046';
+	$Types::Standard::VERSION   = '0.047_01';
 }
 
 use Type::Library -base;
@@ -20,32 +20,11 @@ use Type::Library -base;
 our @EXPORT_OK = qw( slurpy );
 
 use Scalar::Util qw( blessed looks_like_number );
+use Type::Tiny ();
 use Types::TypeTiny ();
 
 BEGIN {
-	my $try_xs =
-		exists($ENV{PERL_TYPE_TINY_XS}) ? !!$ENV{PERL_TYPE_TINY_XS} :
-		exists($ENV{PERL_ONLY})         ?  !$ENV{PERL_ONLY} :
-		1;
-	
-	my $use_xs = 0;
-	$try_xs and eval {
-		require Type::Tiny::XS;
-		'Type::Tiny::XS'->VERSION('0.003');
-		$use_xs++;
-	};
-	
-	*_USE_XS = $use_xs
-		? sub () { !!1 }
-		: sub () { !!0 };
-	
-	*_USE_MOUSE = $try_xs
-		? sub () { $INC{'Mouse/Util.pm'} and Mouse::Util::MOUSE_XS() }
-		: sub () { !!0 };
-};
-
-BEGIN {
-	*_is_class_loaded = _USE_XS
+	*_is_class_loaded = Type::Tiny::_USE_XS
 		? \&Type::Tiny::XS::Util::is_class_loaded
 		: sub {
 			return !!0 if ref $_[0];
@@ -63,22 +42,26 @@ BEGIN {
 my $add_core_type = sub {
 	my $meta = shift;
 	my ($typedef) = @_;
-	$typedef->{_is_core} = 1;
 	
 	my $name = $typedef->{name};
 	my ($xsub, $xsubname);
 	
-	if ( _USE_XS
+	# We want Map and Tuple to be XSified, even if they're not
+	# really core.
+	$typedef->{_is_core} = 1
+		unless $name eq 'Map' || $name eq 'Tuple';
+
+	if ( Type::Tiny::_USE_XS
 	and not ($name eq 'RegexpRef') ) {
 		$xsub     = Type::Tiny::XS::get_coderef_for($name);
 		$xsubname = Type::Tiny::XS::get_subname_for($name);
 	}
 		
-	elsif ( _USE_MOUSE
+	elsif ( Type::Tiny::_USE_MOUSE
 	and not ($name eq 'RegexpRef' or $name eq 'Int' or $name eq 'Object') ) {
 		require Mouse::Util::TypeConstraints;
 		$xsub     = "Mouse::Util::TypeConstraints"->can($name);
-		$xsubname = "Mouse::Util::TypeConstraints::$name";
+		$xsubname = "Mouse::Util::TypeConstraints::$name" if $xsub;
 	}
 	
 	$typedef->{compiled_type_constraint} = $xsub if $xsub;
@@ -428,7 +411,7 @@ $meta->$add_core_type({
 	},
 });
 
-my $_map = $meta->add_type({
+my $_map = $meta->$add_core_type({
 	name       => "Map",
 	parent     => $_hash,
 	constraint_generator => LazyLoad(Map => 'constraint_generator'),
@@ -508,7 +491,7 @@ sub slurpy {
 	wantarray ? (+{ slurpy => $t }, @_) : +{ slurpy => $t };
 }
 
-$meta->add_type({
+$meta->$add_core_type({
 	name       => "Tuple",
 	parent     => $_arr,
 	name_generator => sub

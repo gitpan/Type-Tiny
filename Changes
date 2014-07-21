@@ -6,6 +6,33 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.047_01	2014-07-21
+
+ [ Bug Fixes ]
+ - Fix a silly test case that was relying on Exporter::Tiny to always load
+   B.pm. (Current versions of Exporter::Tiny do load B.pm, but future
+   versions might not.)
+
+ [ Documentation ]
+ - Better document which type constraints will be accelerated by
+   Type::Tiny::XS and Mouse.
+
+ [ Other ]
+ - Type::Tiny::Enum is now XS-accelerated.
+   <https://gist.github.com/tobyink/dfdf9bb826a530781e3d>
+ - Types::Common::Numeric::PositiveInt is now XS-accelerated.
+   <https://gist.github.com/tobyink/dcc15cf283c90c749501>
+ - Types::Common::Numeric::PositiveOrZeroInt is now XS-accelerated.
+   <https://gist.github.com/tobyink/dcc15cf283c90c749501>
+ - Types::Common::String::NonEmptyStr is now XS-accelerated.
+   <https://gist.github.com/tobyink/dcc15cf283c90c749501>
+ - Types::Standard::Map is now XS-accelerated.
+   <https://gist.github.com/tobyink/e733f839cecc0dd193a6>
+ - Types::Standard::Tuple is now XS-accelerated.
+   <https://gist.github.com/tobyink/e733f839cecc0dd193a6>
+ - Unify _USE_XS/_USE_MOUSE logic in Type::Tiny. (It was previously
+   scattered across Types::Standard and various other modules.)
+
 0.046	2014-07-18
 
  [ Bug Fixes ]
