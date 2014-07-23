@@ -85,12 +85,10 @@ distribution. Don't worry - it's quick and easy to install.
 
 At run-time, Type::Tiny also requires the following modules: L<B>,
 L<B::Deparse>, L<Data::Dumper>, L<Scalar::Util>, L<Text::Balanced>,
-L<base>, L<mro>, L<overload>, L<strict> and L<warnings>. All of these
-come bundled with Perl itself. Prior to Perl 5.8, L<Scalar::Util> and
-L<Text::Balanced> do not come bundled with Perl and will need installing
-separately from the CPAN. Prior to Perl 5.10, L<Class::ISA> is used
-instead of L<mro>; this is bundled with Perl 5.8 and above, and available
-from CPAN for earlier versions of Perl.
+L<overload>, L<strict> and L<warnings>. All of these come bundled with
+Perl itself. Prior to Perl 5.8, L<Scalar::Util> and L<Text::Balanced>
+do not come bundled with Perl and will need installing separately from
+the CPAN.
 
 Certain features require additional modules. Tying a variable to a
 type constraint (e.g. C<< tie my $count, Int >>) requires L<Type::Tie>;
@@ -111,9 +109,6 @@ upgrade to at least Test::More version 0.96. Test::Requires and
 Test::Fatal (plus Try::Tiny which Test::Fatal depends on) are bundled
 with Type::Tiny in the C<inc> directory, so you do not need to
 install them separately.
-
-Perl 5.6.x support is not well tested; if it proves too burdensome
-to maintain, it may be dropped in a future release. 
 
 =head1 TYPE::TINY VERSUS X
 

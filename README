@@ -55,12 +55,10 @@ DEPENDENCIES
     distribution. Don't worry - it's quick and easy to install.
 
     At run-time, Type::Tiny also requires the following modules: B,
-    B::Deparse, Data::Dumper, Scalar::Util, Text::Balanced, base, mro,
-    overload, strict and warnings. All of these come bundled with Perl itself.
-    Prior to Perl 5.8, Scalar::Util and Text::Balanced do not come bundled
-    with Perl and will need installing separately from the CPAN. Prior to Perl
-    5.10, Class::ISA is used instead of mro; this is bundled with Perl 5.8 and
-    above, and available from CPAN for earlier versions of Perl.
+    B::Deparse, Data::Dumper, Scalar::Util, Text::Balanced, overload, strict
+    and warnings. All of these come bundled with Perl itself. Prior to Perl
+    5.8, Scalar::Util and Text::Balanced do not come bundled with Perl and
+    will need installing separately from the CPAN.
 
     Certain features require additional modules. Tying a variable to a type
     constraint (e.g. `tie my $count, Int`) requires Type::Tie; stack traces on
@@ -79,9 +77,6 @@ DEPENDENCIES
     Test::More version 0.96. Test::Requires and Test::Fatal (plus Try::Tiny
     which Test::Fatal depends on) are bundled with Type::Tiny in the `inc`
     directory, so you do not need to install them separately.
-
-    Perl 5.6.x support is not well tested; if it proves too burdensome to
-    maintain, it may be dropped in a future release.
 
 TYPE::TINY VERSUS X
   Specio

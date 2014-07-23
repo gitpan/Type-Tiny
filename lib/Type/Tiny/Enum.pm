@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Enum::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Enum::VERSION   = '0.047_01';
+	$Type::Tiny::Enum::VERSION   = '0.047_02';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -31,7 +31,7 @@ sub new
 		@{ ref $opts{values} eq "ARRAY" ? $opts{values} : [$opts{values}] };
 	$opts{values} = [sort keys %tmp];
 	
-	if (Type::Tiny::_USE_XS and not grep /\W/, @{$opts{values}})
+	if (Type::Tiny::_USE_XS and not grep /[^-\w]/, @{$opts{values}})
 	{
 		my $enum = join ",", @{$opts{values}};
 		my $xsub = Type::Tiny::XS::get_coderef_for("Enum[$enum]");

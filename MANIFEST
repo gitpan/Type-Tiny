@@ -73,6 +73,8 @@ t/03-leak.t
 t/20-unit/Devel-TypeTiny-Perl56Compat/basic.t
 t/20-unit/Devel-TypeTiny-Perl58Compat/basic.t
 t/20-unit/Error-TypeTiny-Assertion/basic.t
+t/20-unit/Error-TypeTiny-Compilation/basic.t
+t/20-unit/Error-TypeTiny-WrongNumberOfParameters/basic.t
 t/20-unit/Error-TypeTiny/basic.t
 t/20-unit/Error-TypeTiny/stacktrace.t
 t/20-unit/Eval-TypeTiny/basic.t
@@ -108,11 +110,14 @@ t/20-unit/Type-Parser/moosextypes.t
 t/20-unit/Type-Registry/basic.t
 t/20-unit/Type-Registry/moosextypes.t
 t/20-unit/Type-Tiny-Class/basic.t
+t/20-unit/Type-Tiny-Class/errors.t
 t/20-unit/Type-Tiny-Class/plus-constructors.t
 t/20-unit/Type-Tiny-Duck/basic.t
 t/20-unit/Type-Tiny-Enum/basic.t
+t/20-unit/Type-Tiny-Enum/errors.t
 t/20-unit/Type-Tiny-Intersection/basic.t
 t/20-unit/Type-Tiny-Role/basic.t
+t/20-unit/Type-Tiny-Role/errors.t
 t/20-unit/Type-Tiny-Union/basic.t
 t/20-unit/Type-Tiny-_HalfOp/overload-precedence.t
 t/20-unit/Type-Tiny/arithmetic.t
@@ -123,6 +128,8 @@ t/20-unit/Type-Tiny/parameterization.t
 t/20-unit/Type-Tiny/shortcuts.t
 t/20-unit/Type-Tiny/smartmatch.t
 t/20-unit/Type-Tiny/syntax.t
+t/20-unit/Type-Tiny/to-moose.t
+t/20-unit/Type-Tiny/to-mouse.t
 t/20-unit/Type-Utils/classifier.t
 t/20-unit/Type-Utils/dwim-moose.t
 t/20-unit/Type-Utils/dwim-mouse.t
@@ -186,6 +193,7 @@ t/40-regression/rt92571-2.t
 t/40-regression/rt92571.t
 t/40-regression/rt92591.t
 t/40-regression/rt94196.t
+t/40-regression/ttxs-gh1.t
 t/99-moose-std-types-test.t
 t/README
 t/TODO
