@@ -4,7 +4,7 @@
 
 =head1 PURPOSE
 
-Tests L<Error::TypeTiny>.
+Tests L<Error::TypeTiny::Assertion>.
 
 =head1 AUTHOR
 
@@ -181,6 +181,38 @@ TODO: {
 	);
 }
 
+TODO: {
+	require Data::Dumper;
+	local $TODO =
+		(Data::Dumper->VERSION < 2.121) ? "Data::Dumper too old" :
+		undef;
+	
+	my $Ext   = (StrMatch[qr/^x_/])->create_child_type(name => 'Ext');
+	my $dict2 = Dict[foo => ArrayRef, slurpy Map[$Ext, Int]];
+	ok(
+		$dict2->({ foo => [], x_bar => 1, x_baz => 2 }),
+		"$dict2 works ok it seems",
+	);
+	
+	my $e = exception { $dict2->({foo => [], x_bar => 1, x_baz => []}) };
+	is_deeply(
+		$e->explain,
+		[
+			'Reference {"foo" => [],"x_bar" => 1,"x_baz" => []} did not pass type constraint "Dict[foo=>ArrayRef,slurpy Map[Ext,Int]]"',
+			'"Dict[foo=>ArrayRef,slurpy Map[Ext,Int]]" requires the hashref of additional key/value pairs to conform to "Map[Ext,Int]"',
+			'Reference {"x_bar" => 1,"x_baz" => []} did not pass type constraint "Map[Ext,Int]" (in $slurpy)',
+			'"Map[Ext,Int]" constrains each value in the hash with "Int"',
+			'"Int" is a subtype of "Num"',
+			'"Num" is a subtype of "'.$supernum.'"',
+			'"'.$supernum.'" is a subtype of "Str"',
+			'"Str" is a subtype of "Value"',
+			'Reference [] did not pass type constraint "Value" (in $slurpy->{"x_baz"})',
+			'"Value" is defined as: (defined($_) and not ref($_))'
+		],
+		"$dict2 explanation, given {foo => [], x_bar => 1, x_baz => []}",
+	) or diag explain($e->explain);
+}
+
 my $AlwaysFail = Any->create_child_type(constraint => sub { 0 });
 
 is_deeply(
@@ -192,38 +224,64 @@ is_deeply(
 	'$AlwaysFail explanation, given 1',
 );
 
-my $SlurpyThing = Tuple[ Num, slurpy Map[Int, ArrayRef] ];
+my $TupleOf1 = Tuple[ Int ];
 
 is_deeply(
-	(exception { $SlurpyThing->(1) })->explain,
+	(exception { $TupleOf1->([1,2]) })->explain,
 	[
-		'"Tuple[Num,slurpy Map[Int,ArrayRef]]" is a subtype of "Tuple"',
-		'"Tuple" is a subtype of "ArrayRef"',
-		'"ArrayRef" is a subtype of "Ref"',
-		'Value "1" did not pass type constraint "Ref"',
-		'"Ref" is defined as: (!!ref($_))',
+		'Reference [1,2] did not pass type constraint "Tuple[Int]"',
+		'"Tuple[Int]" expects at most 1 values in the array',
+		'2 values found; too many',
 	],
-	'$SlurpyThing explanation, given 1',
+	'$TupleOf1 explanation, given [1,2]',
 );
 
 TODO: {
+	require Data::Dumper;
 	local $TODO =
-		(Data::Dumper->VERSION > 2.145) ? "Data::Dumper output changed after 2.145" :
 		(Data::Dumper->VERSION < 2.121) ? "Data::Dumper too old" :
 		undef;
+		
+	my $SlurpyThing = Tuple[ Num, slurpy Map[Str, ArrayRef] ];
 	
 	is_deeply(
-		(exception { $SlurpyThing->([1.1, 2 => "Hello"]) })->explain,
+		(exception { $SlurpyThing->(1) })->explain,
 		[
-			'Reference ["1.1",2,"Hello"] did not pass type constraint "Tuple[Num,slurpy Map[Int,ArrayRef]]"',
-			'Array elements from index 1 are slurped into a hashref which is constrained with "Map[Int,ArrayRef]"',
-			'Reference {2 => "Hello"} did not pass type constraint "Map[Int,ArrayRef]" (in $SLURPY)',
-			'"Map[Int,ArrayRef]" constrains each value in the hash with "ArrayRef"',
+			'"Tuple[Num,slurpy Map[Str,ArrayRef]]" is a subtype of "Tuple"',
+			'"Tuple" is a subtype of "ArrayRef"',
 			'"ArrayRef" is a subtype of "Ref"',
-			'Value "Hello" did not pass type constraint "Ref" (in $SLURPY->{"2"})',
+			'Value "1" did not pass type constraint "Ref"',
 			'"Ref" is defined as: (!!ref($_))',
 		],
-		'$SlurpyThing explanation, given [1.1, 2 => "Hello"]',
+		'$SlurpyThing explanation, given 1',
+	);
+	
+	is_deeply(
+		(exception { $SlurpyThing->([[]]) })->explain,
+		[
+			'Reference [[]] did not pass type constraint "Tuple[Num,slurpy Map[Str,ArrayRef]]"',
+			'"Tuple[Num,slurpy Map[Str,ArrayRef]]" constrains value at index 0 of array with "Num"',
+			'"Num" is a subtype of "'.$supernum.'"',
+			'"'.$supernum.'" is a subtype of "Str"',
+			'"Str" is a subtype of "Value"',
+			'Reference [] did not pass type constraint "Value" (in $_->[0])',
+			'"Value" is defined as: (defined($_) and not ref($_))',
+		],
+		'$SlurpyThing explanation, given [[]]',
+	);
+	
+	is_deeply(
+		(exception { $SlurpyThing->([1.1, yeah => "Hello"]) })->explain,
+		[
+			'Reference ["1.1","yeah","Hello"] did not pass type constraint "Tuple[Num,slurpy Map[Str,ArrayRef]]"',
+			'Array elements from index 1 are slurped into a hashref which is constrained with "Map[Str,ArrayRef]"',
+			'Reference {"yeah" => "Hello"} did not pass type constraint "Map[Str,ArrayRef]" (in $SLURPY)',
+			'"Map[Str,ArrayRef]" constrains each value in the hash with "ArrayRef"',
+			'"ArrayRef" is a subtype of "Ref"',
+			'Value "Hello" did not pass type constraint "Ref" (in $SLURPY->{"yeah"})',
+			'"Ref" is defined as: (!!ref($_))',
+		],
+		'$SlurpyThing explanation, given [1.1, yeah => "Hello"]',
 	);
 }
 

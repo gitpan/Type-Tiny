@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY   = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION     = '0.047_02';
+	$Type::Tiny::VERSION     = '0.047_03';
 	$Type::Tiny::XS_VERSION  = '0.010';
 }
 
@@ -1009,7 +1009,7 @@ sub isa
 {
 	my $self = shift;
 	
-	if ($INC{"Moose.pm"} and ref($self) and $_[0] =~ /^MooseX?::Meta::(.+)$/)
+	if ($INC{"Moose.pm"} and ref($self) and $_[0] =~ /^(?:Class::MOP|MooseX?::Meta)::(.+)$/)
 	{
 		my $meta = $1;
 		

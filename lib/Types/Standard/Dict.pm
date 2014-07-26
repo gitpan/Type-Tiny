@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::Dict::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::Dict::VERSION   = '0.047_02';
+	$Types::Standard::Dict::VERSION   = '0.047_03';
 }
 
 use Types::Standard ();
@@ -97,7 +97,8 @@ sub __inline_generator
 				'(not grep {'
 				."my \$v = ($h)->{\$_};"
 				.sprintf(
-					'not((%s) and (%s))',
+					'not((/\\A(?:%s)\\z/) or ((%s) and (%s)))',
+					$regexp,
 					$slurpy_is_map->[0]->inline_check('$_'),
 					$slurpy_is_map->[1]->inline_check('$v'),
 				) ."} keys \%{$h})"

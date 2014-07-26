@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::Tuple::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::Tuple::VERSION   = '0.047_02';
+	$Types::Standard::Tuple::VERSION   = '0.047_03';
 }
 
 use Type::Tiny ();
@@ -139,11 +139,11 @@ sub __deep_explanation
 	}
 	@constraints = map Types::TypeTiny::to_TypeTiny($_), @constraints;
 	
-	if ($#constraints < $#$value and not $slurpy)
+	if (@constraints < @$value and not $slurpy)
 	{
 		return [
-			sprintf('"%s" expects at most %d values in the array', $type, $#constraints),
-			sprintf('%d values found; too many', $#$value),
+			sprintf('"%s" expects at most %d values in the array', $type, scalar(@constraints)),
+			sprintf('%d values found; too many', scalar(@$value)),
 		];
 	}
 	
