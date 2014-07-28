@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Tiny::Intersection::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Tiny::Intersection::VERSION   = '0.047_03';
+	$Type::Tiny::Intersection::VERSION   = '0.047_04';
 }
 
 use Scalar::Util qw< blessed >;
@@ -141,7 +141,8 @@ sub validate_explain
 		] if $deep;
 	}
 	
-	return ["Mysterious!"];
+	# This should never happen...
+	return;  # uncoverable statement
 }
 
 

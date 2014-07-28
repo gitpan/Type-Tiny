@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.047_03';
+	$Type::Registry::VERSION   = '0.047_04';
 }
 
 use Exporter::Tiny qw( mkopt );
@@ -152,7 +152,9 @@ sub alias_type
 {
 	my $self = shift;
 	my ($old, @new) = @_;
-	$self->{$_} = $self->{$old} for @new;
+	my $lookup = eval { $self->lookup($old) }
+		or _croak("Expected existing type constraint name; got '$old'");
+	$self->{$_} = $lookup for @new;
 	$self;
 }
 
@@ -208,6 +210,8 @@ __END__
 Type::Registry - a glorified hashref for looking up type constraints
 
 =head1 SYNOPSIS
+
+=for test_synopsis no warnings qw(misc);
 
    package Foo::Bar;
    

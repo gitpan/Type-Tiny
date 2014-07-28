@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Utils::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Utils::VERSION   = '0.047_03';
+	$Type::Utils::VERSION   = '0.047_04';
 }
 
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
@@ -348,19 +348,16 @@ sub match_on_type
 	
 	while (@_)
 	{
-		my ($type, $code);
+		my $code;
 		if (@_ == 1)
 		{
-			require Types::Standard;
-			($type, $code) = (Types::Standard::Any(), shift);
+			$code = shift;
 		}
 		else
 		{
-			($type, $code) = splice(@_, 0, 2);
-			TypeTiny->($type);
+			(my($type), $code) = splice(@_, 0, 2);
+			TypeTiny->($type)->check($value) or next;
 		}
-		
-		$type->check($value) or next;
 		
 		if (StringLike->check($code))
 		{
@@ -1003,7 +1000,8 @@ This function is not exported by default.
 
 By default, all of the functions documented above are exported, except
 C<subtype> and C<type> (prefer C<declare> instead), C<extends>, C<dwim_type>,
-and C<match_on_type>/C<compile_match_on_type>.
+C<match_on_type>/C<compile_match_on_type>, C<classifier>, and
+C<english_list>.
 
 This module uses L<Exporter::Tiny>; see the documentation of that module
 for tips and tricks importing from Type::Utils.

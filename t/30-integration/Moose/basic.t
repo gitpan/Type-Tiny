@@ -91,16 +91,24 @@ is(
 
 note "Coercion...";
 
+my $coercion;
 {
 	package TmpNS1;
 	use Moose::Util::TypeConstraints;
+	use Scalar::Util qw(refaddr);
 	subtype 'MyInt', as 'Int';
 	coerce 'MyInt', from 'ArrayRef', via { scalar(@$_) };
 	
-	my $type = Types::TypeTiny::to_TypeTiny(find_type_constraint('MyInt'));
+	my $orig = find_type_constraint('MyInt');
+	my $type = Types::TypeTiny::to_TypeTiny($orig);
 	
 	::ok($type->has_coercion, 'types converted from Moose retain coercions');
 	::is($type->coerce([qw/a b c/]), 3, '... which work');
+	
+	::is(refaddr($type->moose_type), refaddr($orig), '... refaddr matches');
+	::is(refaddr($type->coercion->moose_coercion), refaddr($orig->coercion), '... coercion refaddr matches');
+	
+	$coercion = $type->coercion;
 }
 
 note "Introspection, comparisons, conversions...";
@@ -146,6 +154,35 @@ isa_ok(
 	Types::Standard::ArrayRef() | Types::Standard::Int(),
 	'Moose::Meta::TypeConstraint::Union',
 	'ArrayRef|Int',
+);
+
+isa_ok(
+	$coercion,
+	'Moose::Meta::TypeCoercion',
+	'MyInt->coercion',
+);
+
+$coercion = do {
+	my $arrayref = Types::Standard::ArrayRef()->plus_coercions(
+		Types::Standard::ScalarRef(), sub { [$$_] },
+	);
+	my $int = Types::Standard::Int()->plus_coercions(
+		Types::Standard::Num(), sub { int($_) },
+	);
+	my $array_or_int = $arrayref | $int;
+	$array_or_int->coercion;
+};
+
+isa_ok(
+	$coercion,
+	'Moose::Meta::TypeCoercion',
+	'(ArrayRef|Int)->coercion',
+);
+
+isa_ok(
+	$coercion,
+	'Moose::Meta::TypeCoercion::Union',
+	'(ArrayRef|Int)->coercion',
 );
 
 ok(
@@ -261,5 +298,41 @@ is(
 	Scalar::Util::refaddr( $intersect->Types::TypeTiny::to_TypeTiny->moose_type->Types::TypeTiny::to_TypeTiny->moose_type->Types::TypeTiny::to_TypeTiny ),
 	'round-tripping between ->moose_type and ->Types::TypeTiny::to_TypeTiny preserves reference address'
 );
+
+note "Method pass-through";
+
+{
+	local *Moose::Meta::TypeConstraint::dummy_1 = sub {
+		42;
+	};
+	local *Moose::Meta::TypeCoercion::dummy_3 = sub {
+		666;
+	};
+	
+	is(Types::Standard::Int()->dummy_1, 42, 'method pass-through');
+	like(
+		exception { Types::Standard::Int()->dummy_2 },
+		qr/^Can't locate object method "dummy_2"/,
+		'... but not non-existant method',
+	);
+
+	ok(
+		Types::Standard::Int()->can('dummy_1') && !Types::Standard::Int()->can('dummy_2'),
+		'... and `can` works ok',
+	);
+	
+	my $int = Types::Standard::Int()->plus_coercions(Types::Standard::Any(),q[999]);
+	is($int->coercion->dummy_3, 666, 'method pass-through for coercions');
+	like(
+		exception { $int->coercion->dummy_4 },
+		qr/^Can't locate object method "dummy_4"/,
+		'... but not non-existant method',
+	);
+	
+	ok(
+		$int->coercion->can('dummy_3') && !$int->coercion->can('dummy_4'),
+		'... and `can` works ok',
+	);
+}
 
 done_testing;

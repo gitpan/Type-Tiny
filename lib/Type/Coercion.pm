@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.047_03';
+	$Type::Coercion::VERSION   = '0.047_04';
 }
 
 use Eval::TypeTiny qw<>;
@@ -468,9 +468,12 @@ sub isa
 		return !!1;
 	}
 	
-	if ($INC{"Moose.pm"} and blessed($self) and $_[0] =~ /^Moose/ and my $r = $self->moose_coercion->isa(@_))
+	if ($INC{"Moose.pm"}
+	and blessed($self)
+	and $_[0] =~ /^(Class::MOP|MooseX?)::/)
 	{
-		return $r;
+		my $r = $self->moose_coercion->isa(@_);
+		return $r if $r;
 	}
 	
 	$self->SUPER::isa(@_);
@@ -483,7 +486,9 @@ sub can
 	my $can = $self->SUPER::can(@_);
 	return $can if $can;
 	
-	if ($INC{"Moose.pm"} and blessed($self) and my $method = $self->moose_coercion->can(@_))
+	if ($INC{"Moose.pm"}
+	and blessed($self)
+	and my $method = $self->moose_coercion->can(@_))
 	{
 		return sub { $method->(shift->moose_coercion, @_) };
 	}

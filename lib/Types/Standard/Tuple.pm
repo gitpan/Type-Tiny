@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::Tuple::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::Tuple::VERSION   = '0.047_03';
+	$Types::Standard::Tuple::VERSION   = '0.047_04';
 }
 
 use Type::Tiny ();
@@ -174,7 +174,8 @@ sub __deep_explanation
 		];
 	}
 	
-	return;
+	# This should never happen...
+	return;  # uncoverable statement
 }
 
 my $label_counter = 0;

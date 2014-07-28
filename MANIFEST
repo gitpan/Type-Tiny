@@ -83,12 +83,16 @@ t/20-unit/Eval-TypeTiny/fallback-aliases.t
 t/20-unit/Eval-TypeTiny/lexical-subs.t
 t/20-unit/Test-TypeTiny/basic.t
 t/20-unit/Test-TypeTiny/extended.t
+t/20-unit/Test-TypeTiny/matchfor.t
 t/20-unit/Type-Coercion-FromMoose/basic.t
+t/20-unit/Type-Coercion-FromMoose/errors.t
 t/20-unit/Type-Coercion-Union/basic.t
 t/20-unit/Type-Coercion/basic.t
+t/20-unit/Type-Coercion/esoteric.t
 t/20-unit/Type-Coercion/frozen.t
 t/20-unit/Type-Coercion/inlining.t
 t/20-unit/Type-Coercion/parameterized.t
+t/20-unit/Type-Coercion/smartmatch.t
 t/20-unit/Type-Coercion/typetiny-constructor.t
 t/20-unit/Type-Library/assert.t
 t/20-unit/Type-Library/errors.t
@@ -141,6 +145,7 @@ t/20-unit/Type-Utils/classifier.t
 t/20-unit/Type-Utils/dwim-moose.t
 t/20-unit/Type-Utils/dwim-mouse.t
 t/20-unit/Type-Utils/match-on-type.t
+t/20-unit/Type-Utils/warnings.t
 t/20-unit/Types-Common-Numeric/basic.t
 t/20-unit/Types-Common-String/basic.t
 t/20-unit/Types-Common-String/coerce.t
@@ -155,6 +160,7 @@ t/20-unit/Types-Standard/structured.t
 t/20-unit/Types-Standard/tied.t
 t/20-unit/Types-TypeTiny/basic.t
 t/20-unit/Types-TypeTiny/coercion.t
+t/20-unit/Types-TypeTiny/meta.t
 t/30-integration/Class-InsideOut/basic.t
 t/30-integration/Exporter-Tiny/basic.t
 t/30-integration/Exporter-Tiny/installer.t
@@ -184,6 +190,8 @@ t/30-integration/MouseX-Types/extending.t
 t/30-integration/Object-Accessor/basic.t
 t/30-integration/Return-Type/basic.t
 t/30-integration/Sub-Quote/basic.t
+t/30-integration/Sub-Quote/unquote-coercions.t
+t/30-integration/Sub-Quote/unquote-constraints.t
 t/30-integration/Switcheroo/basic.t
 t/30-integration/Type-Tie/basic.t
 t/30-integration/Validation-Class-Simple/archaic.t

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Types::Standard::ScalarRef::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::ScalarRef::VERSION   = '0.047_03';
+	$Types::Standard::ScalarRef::VERSION   = '0.047_04';
 }
 
 use Types::Standard ();
@@ -57,7 +57,8 @@ sub __deep_explanation
 		];
 	}
 	
-	return;
+	# This should never happen...
+	return;  # uncoverable statement
 }
 
 sub __coercion_generator

@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.047_03';
+	$Type::Library::VERSION   = '0.047_04';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -323,6 +323,9 @@ __END__
 Type::Library - tiny, yet Moo(se)-compatible type libraries
 
 =head1 SYNOPSIS
+
+=for test_synopsis
+BEGIN { die "SKIP: crams multiple modules into single example" };
 
    package Types::Mine {
       use Scalar::Util qw(looks_like_number);
