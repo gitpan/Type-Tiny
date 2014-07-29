@@ -6,6 +6,18 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.047_05	2014-07-29	Sanity++
+
+ [ Documentation ]
+ - Improve the documentation of Optional[] and slurpy.
+
+ [ Other ]
+ - A far saner implementation of Optional[].
+ - A slightly saner implementation of Types::TypeTiny's meta methods.
+ - Optimizations for slurpy Any.
+ - When slurping the tail of a Tuple into a hashref, check it's an even
+   number of elements.
+
 0.047_04	2014-07-28	The 98% Coverage Release
 
  [ Documentation ]

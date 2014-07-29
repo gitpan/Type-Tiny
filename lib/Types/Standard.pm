@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.047_04';
+	$Types::Standard::VERSION   = '0.047_05';
 }
 
 use Type::Library -base;
@@ -457,15 +457,14 @@ my $_Optional = $meta->add_type({
 		Types::TypeTiny::TypeTiny->check($param)
 			or _croak("Parameter to Optional[`a] expected to be a type constraint; got $param");
 		
-		sub { exists($_[0]) ? $param->check($_[0]) : !!1 }
+		sub { $param->check($_[0]) }
 	},
 	inline_generator => sub {
 		my $param = shift;
 		return unless $param->can_be_inlined;
 		return sub {
 			my $v = $_[1];
-			my $param_check = $param->inline_check($v);
-			"!exists($v) or $param_check";
+			$param->inline_check($v);
 		};
 	},
 	deep_explanation => sub {
@@ -1088,15 +1087,44 @@ optional and may be omitted (but not necessarily set to an explicit undef).
 C<< Dict[name => Str, id => Optional[Int]] >> allows C<< { name => "Bob" } >>
 but not C<< { name => "Bob", id => "BOB" } >>.
 
+Note that any use of C<< Optional[`a] >> outside the context of
+parameterized C<Dict> and C<Slurpy> type constraints makes little sense,
+and its behaviour is undefined. (An exception: it is used by
+L<Type::Params> for a similar purpose to how it's used in C<Tuple>.)
+
 =back
 
-This module also exports a C<slurpy> function, which can be used as follows:
+This module also exports a C<slurpy> function, which can be used as
+follows.
+
+It can cause additional trailing values in a C<Tuple> to be slurped
+into a structure and validated. For example, slurping into an ArrayRef:
 
    my $type = Tuple[Str, slurpy ArrayRef[Int]];
    
    $type->( ["Hello"] );                # ok
    $type->( ["Hello", 1, 2, 3] );       # ok
    $type->( ["Hello", [1, 2, 3]] );     # not ok
+
+Or into a hashref:
+
+   my $type2 = Tuple[Str, slurpy Map[Int, RegexpRef]];
+   
+   $type2->( ["Hello"] );                               # ok
+   $type2->( ["Hello", 1, qr/one/i, 2, qr/two/] );      # ok
+
+It can cause additional values in a C<Dict> to be slurped into a
+hashref and validated:
+
+   my $type3 = Dict[ values => ArrayRef, slurpy HashRef[Str] ];
+   
+   $type3->( { values => [] } );                        # ok
+   $type3->( { values => [], name => "Foo" } );         # ok
+   $type3->( { values => [], name => [] } );            # not ok
+
+In either C<Tuple> or C<Dict>, C<< slurpy Any >> can be used to indicate
+that additional values are acceptable, but should not be constrained in
+any way. (C<< slurpy Any >> is an optimized code path.)
 
 =begin trustme
 

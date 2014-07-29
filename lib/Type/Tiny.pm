@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY   = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION     = '0.047_04';
+	$Type::Tiny::VERSION     = '0.047_05';
 	$Type::Tiny::XS_VERSION  = '0.010';
 }
 
@@ -200,8 +200,6 @@ sub new
 		$self->{coercion} = $self->_build_coercion;
 		$self->coercion->add_type_coercions(@$arr);
 	}
-	
-	$self->{type_constraints} ||= undef;
 	
 	if ($params{my_methods} and eval { require Sub::Name })
 	{
