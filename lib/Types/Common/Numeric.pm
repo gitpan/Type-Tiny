@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Common::Numeric::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Common::Numeric::VERSION   = '0.047_05';
+	$Types::Common::Numeric::VERSION   = '0.047_06';
 }
 
 use Type::Library -base, -declare => qw(
@@ -117,7 +117,9 @@ $meta->add_type(
 	inlined    => sub { undef, qq($_ >= -9), qq($_ <= 9) },
 	message    => sub { "Must be a single digit" },
 );
- 
+
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__

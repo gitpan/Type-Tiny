@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY   = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION     = '0.047_05';
+	$Type::Tiny::VERSION     = '0.047_06';
 	$Type::Tiny::XS_VERSION  = '0.010';
 }
 
@@ -148,7 +148,7 @@ sub new
 		$params{parent}->has_coercion
 			or _croak "coercion => 1 requires type to have a direct parent with a coercion";
 		
-		$params{coercion} = $params{parent}->coercion;
+		$params{coercion} = $params{parent}->coercion->type_coercion_map;
 	}
 	
 	if (!exists $params{inlined}
@@ -800,6 +800,8 @@ sub parameterize
 		$param_cache{$key} = $P;
 		weaken($param_cache{$key});
 	}
+	
+	$P->coercion->freeze;
 	
 	return $P;
 }

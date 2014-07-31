@@ -12,7 +12,7 @@ BEGIN {
 
 BEGIN {
 	$Types::Standard::AUTHORITY = 'cpan:TOBYINK';
-	$Types::Standard::VERSION   = '0.047_05';
+	$Types::Standard::VERSION   = '0.047_06';
 }
 
 use Type::Library -base;
@@ -893,6 +893,8 @@ $meta->add_coercion({
 	},
 });
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -1088,7 +1090,7 @@ C<< Dict[name => Str, id => Optional[Int]] >> allows C<< { name => "Bob" } >>
 but not C<< { name => "Bob", id => "BOB" } >>.
 
 Note that any use of C<< Optional[`a] >> outside the context of
-parameterized C<Dict> and C<Slurpy> type constraints makes little sense,
+parameterized C<Dict> and C<Tuple> type constraints makes little sense,
 and its behaviour is undefined. (An exception: it is used by
 L<Type::Params> for a similar purpose to how it's used in C<Tuple>.)
 

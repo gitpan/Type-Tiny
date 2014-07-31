@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.047_05';
+	$Type::Coercion::VERSION   = '0.047_06';
 }
 
 use Eval::TypeTiny qw<>;
@@ -162,12 +162,14 @@ sub is_anon
 	$self->name eq "__ANON__";
 }
 
-sub _clear_compiled_coercion {
+sub _clear_compiled_coercion
+{
 	delete $_[0]{_overload_coderef};
 	delete $_[0]{compiled_coercion};
 }
 
-sub freeze { $_[0]{frozen} = 1; $_[0] }
+sub freeze                    { $_[0]{frozen} = 1; $_[0] }
+sub i_really_want_to_unfreeze { $_[0]{frozen} = 0; $_[0] }
 
 sub coerce
 {
@@ -731,8 +733,18 @@ is C<< $_ >>.
 
 =item C<< freeze >>
 
-Sets the C<frozen> attribute to true. There is no C<unfreeze>. Called
-automatically by L<Type::Tiny> sometimes.
+Sets the C<frozen> attribute to true. Called automatically by L<Type::Tiny>
+sometimes.
+
+=item C<< i_really_want_to_unfreeze >>
+
+If you really want to unfreeze a coercion, call this method.
+
+Don't call this method. It will potentially lead to subtle bugs.
+
+This method is considered unstable; future versions of Type::Tiny may
+alter its behaviour (e.g. to throw an exception if it has been detected
+that unfreezing this particular coercion will cause bugs).
 
 =back
 

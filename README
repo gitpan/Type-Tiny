@@ -55,10 +55,10 @@ DEPENDENCIES
     distribution. Don't worry - it's quick and easy to install.
 
     At run-time, Type::Tiny also requires the following modules: B,
-    B::Deparse, Data::Dumper, Scalar::Util, Text::Balanced, overload, strict
-    and warnings. All of these come bundled with Perl itself. Prior to Perl
-    5.8, Scalar::Util and Text::Balanced do not come bundled with Perl and
-    will need installing separately from the CPAN.
+    B::Deparse, Carp, Data::Dumper, Scalar::Util, Text::Balanced, overload,
+    strict and warnings. All of these come bundled with Perl itself. Prior to
+    Perl 5.8, Scalar::Util and Text::Balanced do not come bundled with Perl
+    and will need installing separately from the CPAN.
 
     Certain features require additional modules. Tying a variable to a type
     constraint (e.g. `tie my $count, Int`) requires Type::Tie; stack traces on
@@ -77,6 +77,12 @@ DEPENDENCIES
     Test::More version 0.96. Test::Requires and Test::Fatal (plus Try::Tiny
     which Test::Fatal depends on) are bundled with Type::Tiny in the `inc`
     directory, so you do not need to install them separately.
+
+    If using Type::Tiny in conjunction with Moo, then at least Moo 1.001000 is
+    recommended. If using Type::Tiny with Moose, then at least Moose 2.0600 is
+    recommended. If using Type::Tiny with Mouse, then at least Mouse 1.00 is
+    recommended. Type::Tiny is mostly untested against older versions of these
+    packages.
 
 TYPE::TINY VERSUS X
   Specio

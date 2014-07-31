@@ -84,7 +84,7 @@ bundled in this distribution, but has since been spun off as a separate
 distribution. Don't worry - it's quick and easy to install.
 
 At run-time, Type::Tiny also requires the following modules: L<B>,
-L<B::Deparse>, L<Data::Dumper>, L<Scalar::Util>, L<Text::Balanced>,
+L<B::Deparse>, L<Carp>, L<Data::Dumper>, L<Scalar::Util>, L<Text::Balanced>,
 L<overload>, L<strict> and L<warnings>. All of these come bundled with
 Perl itself. Prior to Perl 5.8, L<Scalar::Util> and L<Text::Balanced>
 do not come bundled with Perl and will need installing separately from
@@ -109,6 +109,12 @@ upgrade to at least Test::More version 0.96. Test::Requires and
 Test::Fatal (plus Try::Tiny which Test::Fatal depends on) are bundled
 with Type::Tiny in the C<inc> directory, so you do not need to
 install them separately.
+
+If using Type::Tiny in conjunction with L<Moo>, then at least Moo
+1.001000 is recommended. If using Type::Tiny with L<Moose>, then at
+least Moose 2.0600 is recommended. If using Type::Tiny with L<Mouse>,
+then at least Mouse 1.00 is recommended. Type::Tiny is mostly
+untested against older versions of these packages.
 
 =head1 TYPE::TINY VERSUS X
 

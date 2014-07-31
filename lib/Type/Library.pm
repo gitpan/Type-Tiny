@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Library::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Library::VERSION   = '0.047_05';
+	$Type::Library::VERSION   = '0.047_06';
 }
 
 use Eval::TypeTiny qw< eval_closure >;
@@ -308,6 +308,15 @@ sub coercion_names
 	keys %{ $meta->{coercions} };
 }
 
+sub make_immutable
+{
+	my $meta = shift->meta;
+	for my $type (values %{$meta->{types}}) {
+		$type->coercion->freeze;
+	}
+	1;
+}
+
 1;
 
 __END__
@@ -339,6 +348,8 @@ BEGIN { die "SKIP: crams multiple modules into single example" };
       );
       
       __PACKAGE__->meta->add_type($NUM);
+      
+      __PACKAGE__->meta->make_immutable;
    }
       
    package Ermintrude {
@@ -459,6 +470,11 @@ List all standalone coercions defined by the library.
 =item C<< import(@args) >>
 
 Type::Library-based libraries are exporters.
+
+=item C<< make_immutable >>
+
+A shortcut for calling C<< $type->coercion->freeze >> on every
+type constraint in the library.
 
 =back
 

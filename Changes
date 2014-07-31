@@ -6,6 +6,34 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.047_06	2014-07-31	What made the Queen go all ice crazy?
+
+ [ Bug Fixes ]
+ - Bugfix in coercion inheritance where the child's type_coercion_map
+   arrayref would end up as a reference to the parent's type_coercion_map.
+   (Which was not good.)
+
+ [ Test Suite ]
+ - More Type::Registry test cases.
+
+ [ Other ]
+ - Added: Type::Coercion now has a i_really_want_to_unfreeze method.
+ - Added: Type::Library now has a make_immutable method
+ - Coercions for the types defined in Types::Common::Numeric are now
+   frozen.
+ - Coercions for the types defined in Types::Common::String are now frozen.
+ - Coercions for the types defined in Types::Standard are now frozen.
+ - Parameterized types now have their coercions frozen automatically, so
+   you can no longer add coercions to, say, ArrayRef[Int]. However, you can
+   create a subtype of ArrayRef[Int] and add coercions to that.
+   Michael G Schwern++
+   <http://purl.org/NET/cpan-uri/rt/ticket/97516>
+ - Type::Registry now has methods for creating
+   union/intersection/class/role type constraints. Type::Parser delegates
+   to these, making it potentially reusable outside Type::Tiny by simply
+   passing it an alternative type registry object.
+ - Type::Registry/Type::Parser will now auto-load MouseX::Types libraries.
+
 0.047_05	2014-07-29	Sanity++
 
  [ Documentation ]

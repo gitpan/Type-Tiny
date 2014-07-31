@@ -11,7 +11,6 @@ Makefile.PL
 NEWS
 README
 SIGNATURE
-TODO
 dist.ini
 doap.ttl
 examples/benchmark-coercions.pl
@@ -114,6 +113,7 @@ t/20-unit/Type-Params/slurpy.t
 t/20-unit/Type-Parser/basic.t
 t/20-unit/Type-Parser/moosextypes.t
 t/20-unit/Type-Registry/basic.t
+t/20-unit/Type-Registry/methods.t
 t/20-unit/Type-Registry/moosextypes.t
 t/20-unit/Type-Registry/mousextypes.t
 t/20-unit/Type-Tiny-Class/basic.t
@@ -152,6 +152,7 @@ t/20-unit/Types-Common-String/coerce.t
 t/20-unit/Types-Common-String/unicode.t
 t/20-unit/Types-Standard/basic.t
 t/20-unit/Types-Standard/deep-coercions.t
+t/20-unit/Types-Standard/lockdown.t
 t/20-unit/Types-Standard/mxtmlb-alike.t
 t/20-unit/Types-Standard/optlist.t
 t/20-unit/Types-Standard/overload.t

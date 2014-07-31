@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Registry::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Registry::VERSION   = '0.047_05';
+	$Type::Registry::VERSION   = '0.047_06';
 }
 
 use Exporter::Tiny qw( mkopt );
@@ -173,11 +173,85 @@ sub simple_lookup
 	return;
 }
 
+sub foreign_lookup
+{
+	my $self = shift;
+	
+	return $self->simple_lookup($_[0], 1)
+		unless $_[0] =~ /^(.+)::(\w+)$/;
+	
+	my $library  = $1;
+	my $typename = $2;
+	
+	eval "require $library;";
+	
+	if ( $library->isa('MooseX::Types::Base') )
+	{
+		require Moose::Util::TypeConstraints;
+		my $type = Moose::Util::TypeConstraints::find_type_constraint(
+			$library->get_type($typename)
+		) or return;
+		return to_TypeTiny($type);
+	}
+	
+	if ( $library->isa('MouseX::Types::Base') )
+	{
+		require Mouse::Util::TypeConstraints;
+		my $sub  = $library->can($typename) or return;
+		my $type = Mouse::Util::TypeConstraints::find_type_constraint($sub->()) or return;
+		return to_TypeTiny($type);
+	}
+	
+	if ( $library->can("get_type") )
+	{
+		my $type = $library->get_type($typename);
+		return to_TypeTiny($type);
+	}
+	
+	return;
+}
+
 sub lookup
 {
 	my $self = shift;
 	
 	$self->simple_lookup(@_) or eval_type($_[0], $self);
+}
+
+sub make_union
+{
+	my $self = shift;
+	my (@types) = @_;
+	
+	require Type::Tiny::Union;
+	return "Type::Tiny::Union"->new(type_constraints => \@types);
+}
+
+sub make_intersection
+{
+	my $self = shift;
+	my (@types) = @_;
+	
+	require Type::Tiny::Intersection;
+	return "Type::Tiny::Intersection"->new(type_constraints => \@types);
+}
+
+sub make_class_type
+{
+	my $self = shift;
+	my ($class) = @_;
+	
+	require Type::Tiny::Class;
+	return "Type::Tiny::Class"->new(class => $class);
+}
+
+sub make_role_type
+{
+	my $self = shift;
+	my ($role) = @_;
+	
+	require Type::Tiny::Role;
+	return "Type::Tiny::Role"->new(role => $role);
 }
 
 sub AUTOLOAD
@@ -356,6 +430,11 @@ Look up a type in the registry by name.
 
 Returns undef if not found.
 
+=item C<< foreign_lookup($name) >>
+
+Like C<simple_lookup>, but if the type name contains "::", will attempt
+to load it from a type library. (And will attempt to load that module.)
+
 =item C<< lookup($name) >>
 
 Look up by name, with a DSL.
@@ -374,6 +453,13 @@ The DSL can be summed up as:
    Foo::Bar::      class type
 
 Croaks if not found.
+
+=item C<< make_union(@constraints) >>,
+C<< make_intersection(@constraints) >>,
+C<< make_class_type($class) >>,
+C<< make_role_type($role) >>
+
+Convenience methods for creating certain common type constraints.
 
 =item C<< AUTOLOAD >>
 
