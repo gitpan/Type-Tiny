@@ -15,19 +15,19 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 33317486c4fa2cf7fec85bf92ed38ac0f64233a0 CONTRIBUTING
-SHA1 617de5991ed516edb0d010aebd25ffa1710609e0 COPYRIGHT
-SHA1 716b0adaea52a47eb7df8c9ed91f0850e35580c0 CREDITS
-SHA1 904cf960a9dab2bf7f32001fcc22be173cb080a4 Changes
+SHA1 dd3e1e1f575eca656b07d3df2d5147e75637e588 COPYRIGHT
+SHA1 9965f3da3e1385af0580326b95db5fac773f698d CREDITS
+SHA1 b6369b087134e0fe91fe9482970a99f50ab76403 Changes
 SHA1 ad40a11542937daa751b38225d43868322a073cc INSTALL
 SHA1 34f5e12514b91055de4b164a1f2327ef5c30ba53 LICENSE
 SHA1 dcc3ddc8b15d8a0bf416ad7aebeeea2b2084c970 MANIFEST
-SHA1 926f8a5a518346bf9bed9d6fd06819f7533236cd META.json
-SHA1 a054c115843644310d7c613373165f10d68825db META.yml
-SHA1 9c32ffc453c8788e4757544f8c504d9f96c53ff5 Makefile.PL
+SHA1 9110cdfecb12892b41556d2bdf8c962c9fe0db0f META.json
+SHA1 cd6f336e72e8a125d13fe268ff6380db3125c25d META.yml
+SHA1 1fc6cc97cad75cd292b38f50e6814364fd79216c Makefile.PL
 SHA1 dea0a96a7d7c69dda28e9fff602ae03c986f9c65 NEWS
 SHA1 618818969d163bfaff6515c6d8bfca8b208ef4f3 README
 SHA1 eeed84a123dd7a29ae3be4700cd6d1daeb6c1c68 dist.ini
-SHA1 5ea5074e4e1d7a0eb7ba83d80a28c0aa816569a5 doap.ttl
+SHA1 6bb73bfc609303d8ebb184e0ad13232f28db8abb doap.ttl
 SHA1 8287b47d25816131e3cc423250538c5565f89407 examples/benchmark-coercions.pl
 SHA1 e9b329c6285d83681bff3e4c2ecbb56089999d57 examples/benchmark-constraints.pl
 SHA1 83ba80a1a71b01fa18933c1e0f97de9eba965247 examples/benchmark-param-validation.pl
@@ -36,27 +36,27 @@ SHA1 2aacb4150fc74604496079f9ac21968325ac5f3b examples/versus-scalar-validation.
 SHA1 8b3c5d366a0a716096617c9e14a100c1948fd159 inc/Test/Fatal.pm
 SHA1 95d4da14025622f3a45f5e9b75b7b6860148f415 inc/Test/Requires.pm
 SHA1 e7088f7483bdffb64be359be205927c3d6639ffe inc/Try/Tiny.pm
-SHA1 30d990c94803f515fa99f09dbbb4a964bfa4f52c lib/Devel/TypeTiny/Perl56Compat.pm
-SHA1 1e205cccf4896a642c7ec0946e7c99ab1ae3bdd7 lib/Devel/TypeTiny/Perl58Compat.pm
-SHA1 e512843cce8ab784a4ce9dd88f57d1e03d6f1262 lib/Error/TypeTiny.pm
-SHA1 ec9649e81f09e2716cc951a72e109b28409893c5 lib/Error/TypeTiny/Assertion.pm
-SHA1 fd25afff0ba3aaa05d3272edd160abf0aa2e2c29 lib/Error/TypeTiny/Compilation.pm
-SHA1 feee4145bdf606c6e9f95283e9b5ffd11c9607f3 lib/Error/TypeTiny/WrongNumberOfParameters.pm
-SHA1 a244ca6ba45e8f4e679b33341682db05e24067b5 lib/Eval/TypeTiny.pm
-SHA1 a4a6d11957005b23ba90becb40252b8609486864 lib/Reply/Plugin/TypeTiny.pm
-SHA1 4b028498df59861bb1a5fcd03e0a55bd0d3d39d9 lib/Test/TypeTiny.pm
-SHA1 e21a43e27d904b0213f7549fbc61cc46de8efe25 lib/Type/Coercion.pm
-SHA1 b207afd115ddebac345c61e418f645d3868f2778 lib/Type/Coercion/FromMoose.pm
-SHA1 4fc1e1d36f689fde0358ef2a4b355644862409b7 lib/Type/Coercion/Union.pm
-SHA1 d6b07fd5d52ee78c4513dffb70d93972c8cc260c lib/Type/Library.pm
-SHA1 7752968b0fe57fce56fd1b1e7cf4d0547d8c50bc lib/Type/Params.pm
-SHA1 94b45e3cce23afc51913d19d5071388723a4ed62 lib/Type/Parser.pm
-SHA1 a26c17462887720e78931e509c7d10bb97c3dcf4 lib/Type/Registry.pm
-SHA1 3f489619c973137688fa26fbed4bec794c9fefd1 lib/Type/Tiny.pm
-SHA1 ac061dd9507f9a2ad7523c2dc45e30cbb4bd6303 lib/Type/Tiny/Class.pm
-SHA1 a71298375e30293568429ec0d9209f4d4dc01849 lib/Type/Tiny/Duck.pm
-SHA1 39e589e50ae312d5b2b547ab18e88f61af914489 lib/Type/Tiny/Enum.pm
-SHA1 53e355f57d40acabde62f45c09dfea578a2e9c78 lib/Type/Tiny/Intersection.pm
+SHA1 5afae21757602dd064ba9866a077381c53ac0dfd lib/Devel/TypeTiny/Perl56Compat.pm
+SHA1 88a0e4b93e7e7e2bc03f201a63c5004abb18c157 lib/Devel/TypeTiny/Perl58Compat.pm
+SHA1 386e9fe5debbfad71b2662919894099c59ea5bbb lib/Error/TypeTiny.pm
+SHA1 d027da826efb53c58a24463d64a85a8fb4a1d97f lib/Error/TypeTiny/Assertion.pm
+SHA1 f2e39c93b51a03c76b83ed81a1bdbc62c2e82d19 lib/Error/TypeTiny/Compilation.pm
+SHA1 31f3358dcf0870717adced8da56d8355b0eea0f4 lib/Error/TypeTiny/WrongNumberOfParameters.pm
+SHA1 c929669ed28be70092b3cb84f7458b7a0ee461b3 lib/Eval/TypeTiny.pm
+SHA1 770748185141ee57f2a96f139d0016822b0cced7 lib/Reply/Plugin/TypeTiny.pm
+SHA1 2d45808368a82bf90eb6f349b9179d2fc8df40da lib/Test/TypeTiny.pm
+SHA1 919e56f6cf4e742370e758f1a38fb13cf6e2124c lib/Type/Coercion.pm
+SHA1 dc90f9e44d629e7657b1cbf0cf0acf604161f56d lib/Type/Coercion/FromMoose.pm
+SHA1 c7f824b65e45bc2e41398af8c9f05e95906104bc lib/Type/Coercion/Union.pm
+SHA1 10f6aab4ef7b4f8a3bc3b73ff0b0efc3ccdd436a lib/Type/Library.pm
+SHA1 bd7d35cd6f2d9f87fc7b043851130d8a061f131d lib/Type/Params.pm
+SHA1 b5a18761511a548f872c4a73c3b6833c9fdb4394 lib/Type/Parser.pm
+SHA1 bdca8a31f165c3c146292e1329f7d9a0739cf0c6 lib/Type/Registry.pm
+SHA1 d94b50f0cf64047daf5db5db304116e001f4d35e lib/Type/Tiny.pm
+SHA1 4f7ca9cef909a202c56477903eadca72ccd84915 lib/Type/Tiny/Class.pm
+SHA1 b1d627f8f2115465234d51b9bc3e376e3ed3fae1 lib/Type/Tiny/Duck.pm
+SHA1 a19e508978056a6c23422037e6f4e28dc5151835 lib/Type/Tiny/Enum.pm
+SHA1 8ce0ae817799c8069d49b32b7ffede2a2c59157b lib/Type/Tiny/Intersection.pm
 SHA1 76f16ec3fba03876fc35d6dcb2ffc57891e22ec9 lib/Type/Tiny/Manual.pod
 SHA1 dceafbbe3e3a9e91d1e9d478440f0f32c5cc6fae lib/Type/Tiny/Manual/Coercions.pod
 SHA1 aa6d56fb6fc50a9293948ea4f03995f017ece254 lib/Type/Tiny/Manual/Libraries.pod
@@ -67,20 +67,20 @@ SHA1 538a98526021155738a1ea71f147b08fabe0b037 lib/Type/Tiny/Manual/UsingWithMoo.
 SHA1 5fdab93e0ea7f0f9c7ce7ad39998c6955501a14e lib/Type/Tiny/Manual/UsingWithMoose.pod
 SHA1 109c23dbf76531e4a23a65cda08de6af75448dc5 lib/Type/Tiny/Manual/UsingWithMouse.pod
 SHA1 1fd37d82d30838ab4bd057f1cb633e20a22e96ff lib/Type/Tiny/Manual/UsingWithOther.pod
-SHA1 b07e73840d5bf36e54e03d2d9403ecac663edc15 lib/Type/Tiny/Role.pm
-SHA1 54a44e66a13dacfff79c77724bd4ed0db431ee76 lib/Type/Tiny/Union.pm
-SHA1 d4aca4ec73be304c778206351459503426035c37 lib/Type/Tiny/_HalfOp.pm
-SHA1 62b14d48a7ddf429efe6a03be4c69d012866cee7 lib/Type/Utils.pm
-SHA1 1f0cebb583ba5d060d832a31db7a433fdf81ffcd lib/Types/Common/Numeric.pm
-SHA1 41b4f062b7d2a69f7d50a200300c2b0194d24805 lib/Types/Common/String.pm
-SHA1 4b9936bdae306c157cf31bc9fec52f45dd75ef05 lib/Types/Standard.pm
-SHA1 f5a71faafbab5c182ee1e4367cbee89c57ce75e3 lib/Types/Standard/ArrayRef.pm
-SHA1 8145b922493f84ef2e23423817301dc79e8a5983 lib/Types/Standard/Dict.pm
-SHA1 891b9f7ba5b9d7fbb50fa1e639ee6fe2e7bc471c lib/Types/Standard/HashRef.pm
-SHA1 acb31f454ae68d1d6384ed90e2755f2edd80a543 lib/Types/Standard/Map.pm
-SHA1 dfe0f4a70bf2b5973af52c914b36c30d3d2137a4 lib/Types/Standard/ScalarRef.pm
-SHA1 125ac4fca92e5dfcc90cb91024578d82ef7abab5 lib/Types/Standard/Tuple.pm
-SHA1 2e1cab0931097fa93c81e47e9920bcc6513a10d4 lib/Types/TypeTiny.pm
+SHA1 bf8a1a91bcc38ce6c96fff1aae05c8d7dbdcbae6 lib/Type/Tiny/Role.pm
+SHA1 671b6fbcb6b411f148090714985c09de3dfd5579 lib/Type/Tiny/Union.pm
+SHA1 ada19efc48250aa4b9c257ed973b2eb04bfc1e33 lib/Type/Tiny/_HalfOp.pm
+SHA1 e26658dc8a51c0330c316213a8a6466f57fdac9c lib/Type/Utils.pm
+SHA1 5882f2f2aa82c5c906446bf90c83bc98957e899a lib/Types/Common/Numeric.pm
+SHA1 7b17b9078c96b2123af6b67eb8e6b8685696e5cb lib/Types/Common/String.pm
+SHA1 343fcf88ca31f27522beee24652ef53a9519189a lib/Types/Standard.pm
+SHA1 5fb3142d77b8e3c456ca6db16637062da35fd4b1 lib/Types/Standard/ArrayRef.pm
+SHA1 1ed80da7b5d6cda7fad3ded17dad1e2174a142a9 lib/Types/Standard/Dict.pm
+SHA1 4a801668889840a2dcd0ba9bbc01060a92c3cfb4 lib/Types/Standard/HashRef.pm
+SHA1 060f7e5ec79ec99936a0d15bac9cc1f2a55bc279 lib/Types/Standard/Map.pm
+SHA1 3ddd3fdfbf3fbbf20e43baa4ea20573461b1fe75 lib/Types/Standard/ScalarRef.pm
+SHA1 8342ba5f1ecffffa37c51b5e0310f3692c2ef8e2 lib/Types/Standard/Tuple.pm
+SHA1 b3f99a9fde02a1cbcd7388349b5dd7b5447c6f99 lib/Types/TypeTiny.pm
 SHA1 b9af35d9d0a3328fedc80c5824da06ca69409589 t/00-begin.t
 SHA1 d3f403cf1bde842588e66107eeae2c34290dab72 t/01-compile.t
 SHA1 6424dbcb52e79c715b37ccc836fea197525f057e t/02-api.t
@@ -125,7 +125,7 @@ SHA1 dde47da443721ff3de875f54caf3d28ba65a175b t/20-unit/Type-Params/noninline.t
 SHA1 c9448d6a10b48482190b539654a99c045f5a78b0 t/20-unit/Type-Params/optional.t
 SHA1 c8e9a92b55d3736b30b1d4047e09f5aea6643004 t/20-unit/Type-Params/positional.t
 SHA1 50a6fd10075064da20c3c005e8d3fc6c40f4c240 t/20-unit/Type-Params/slurpy.t
-SHA1 7895e1a0db239fc18b24c28fee0df3dfd27f5296 t/20-unit/Type-Parser/basic.t
+SHA1 bbd2de4c0d54ace67af445284ad4dedd6b58e885 t/20-unit/Type-Parser/basic.t
 SHA1 01c99c359538df250677906ec24fd931b82dcbd1 t/20-unit/Type-Parser/moosextypes.t
 SHA1 9dad0a098f5a4cb7aca03635ee433879e059a0cd t/20-unit/Type-Registry/basic.t
 SHA1 e9acc3dd2f3725aae2f6e1a595cf539e3859e6d9 t/20-unit/Type-Registry/methods.t
@@ -237,7 +237,7 @@ SHA1 f846fa57aa90c0c55aeee735368cb9dd4015b77a t/not-covered.pl
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEARECAAYFAlPar2cACgkQzr+BKGoqfTllmACdGF2BijdvnayNshK3hT2cWsX8
-mtIAn1PA6zioUoJ7QzYBeWnoesu2Z284
-=oWXC
+iEYEARECAAYFAlPfvFYACgkQzr+BKGoqfTnv1gCfaOSYVhuECPfB/QsJqafiuHMm
+jdsAniz5UJ0u1wI15t5k8692paaw7aSl
+=SDtw
 -----END PGP SIGNATURE-----

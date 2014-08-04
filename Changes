@@ -6,6 +6,18 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.047_07	2014-08-04
+
+ [ Bug Fixes ]
+ - The extract_type function was missing from Type::Parser's @EXPORT_OK
+   list.
+
+ [ Test Suite ]
+ - Test cases for Type::Parser::extract_type.
+
+ [ Other ]
+ - Parameterized Maybe constraints are now XS-accelerated.
+
 0.047_06	2014-07-31	What made the Queen go all ice crazy?
 
  [ Bug Fixes ]
@@ -18,7 +30,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
  [ Other ]
  - Added: Type::Coercion now has a i_really_want_to_unfreeze method.
- - Added: Type::Library now has a make_immutable method
+ - Added: Type::Library now has a make_immutable method.
  - Coercions for the types defined in Types::Common::Numeric are now
    frozen.
  - Coercions for the types defined in Types::Common::String are now frozen.
