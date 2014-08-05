@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::FromMoose::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::FromMoose::VERSION   = '0.047_07';
+	$Type::Coercion::FromMoose::VERSION   = '0.047_08';
 }
 
 use Scalar::Util qw< blessed >;
@@ -61,6 +61,11 @@ sub _build_moose_coercion
 	}
 	
 	$self->SUPER::_build_moose_coercion(@_);
+}
+
+sub can_be_inlined
+{
+	0;
 }
 
 1;

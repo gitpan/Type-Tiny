@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.047_07';
+	$Type::Coercion::VERSION   = '0.047_08';
 }
 
 use Eval::TypeTiny qw<>;
@@ -300,6 +300,9 @@ sub _build_compiled_coercion
 sub can_be_inlined
 {
 	my $self = shift;
+	
+	return unless $self->frozen;
+	
 	return
 		if $self->has_type_constraint
 		&& !$self->type_constraint->can_be_inlined;
