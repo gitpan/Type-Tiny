@@ -6,6 +6,29 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.047_09	2014-08-12
+
+ [ Bug Fixes ]
+ - Fix documentation typo.
+   Benct Philip Jonsson++
+
+ [ Documentation ]
+ - Improvements and clarifications to Type::Coercion documentation.
+
+ [ Test Suite ]
+ - Add tests for Error::TypeTiny::Assertion's predicate methods.
+ - Add tests for Type::Coercion's i_really_want_to_unfreeze method.
+
+ [ Other ]
+ - Better integration between Type::Library and Type::Registry. If you
+   import a type constraint from a Type::Library-based module, it will
+   automatically be inserted into your modules' type registry.
+ - The to_Foo functions exported by Type::Library-based modules are now
+   significantly faster. (But only if the type's coercion is frozen.)
+ - Type::Utils::dwim_type now takes into account what OO framework the
+   caller is using (Moose or Mouse) if it needs to fall back to asking the
+   OO framework about a type constraint.
+
 0.047_08	2014-08-05	Sanity++
 
  [ Bug Fixes ]
@@ -164,7 +187,7 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
  [ Other ]
  - Allow Enums containing hyphens to be accelerated by Type::Tiny::XS.
- - Test::Tiny::Class should stop using Class::ISA. Instead, if mro.pm is
+ - Type::Tiny::Class should stop using Class::ISA. Instead, if mro.pm is
    not available, use a private sub stolen from MRO::Compat.
  - Type::Tiny::Intersection is now XS-accelerated.
    <https://gist.github.com/tobyink/71eab715ac16178cbcfb>

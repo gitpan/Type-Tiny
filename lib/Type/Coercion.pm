@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$Type::Coercion::AUTHORITY = 'cpan:TOBYINK';
-	$Type::Coercion::VERSION   = '0.047_08';
+	$Type::Coercion::VERSION   = '0.047_09';
 }
 
 use Eval::TypeTiny qw<>;
@@ -594,8 +594,7 @@ the output of coercion coderefs is expected to conform to).
 
 =item C<type_coercion_map>
 
-Arrayref of source-type/code pairs. Don't set this in the constructor; use
-the C<add_type_coercions> method instead.
+Arrayref of source-type/code pairs.
 
 =item C<frozen>
 
@@ -651,7 +650,7 @@ default lazily-built return values.
 
 Coderef to coerce a value (C<< $_[0] >>).
 
-The general point of this attribute is that you should not set it, and
+The general point of this attribute is that you should not set it, but
 rely on the lazily-built default. Type::Coerce will usually generate a
 pretty fast coderef, inlining all type constraint checks, etc.
 
@@ -722,6 +721,8 @@ Returns the coerced value.
 
 =head3 Coercion code definition methods
 
+These methods all return C<< $self >> so are suitable for chaining.
+
 =over
 
 =item C<< add_type_coercions($type1, $code1, ...) >>
@@ -733,6 +734,11 @@ Coercion codes can be expressed as either a string of Perl code (this
 includes objects which overload stringification), or a coderef (or object
 that overloads coderefification). In either case, the value to be coerced
 is C<< $_ >>.
+
+C<< add_type_coercions($coercion_object) >> also works, and can be used
+to copy coercions from another type constraint:
+
+   $type->coercion->add_type_coercions($othertype->coercion)->freeze;
 
 =item C<< freeze >>
 

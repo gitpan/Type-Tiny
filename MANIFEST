@@ -112,6 +112,7 @@ t/20-unit/Type-Params/positional.t
 t/20-unit/Type-Params/slurpy.t
 t/20-unit/Type-Parser/basic.t
 t/20-unit/Type-Parser/moosextypes.t
+t/20-unit/Type-Registry/automagic.t
 t/20-unit/Type-Registry/basic.t
 t/20-unit/Type-Registry/methods.t
 t/20-unit/Type-Registry/moosextypes.t
@@ -142,6 +143,7 @@ t/20-unit/Type-Tiny/syntax.t
 t/20-unit/Type-Tiny/to-moose.t
 t/20-unit/Type-Tiny/to-mouse.t
 t/20-unit/Type-Utils/classifier.t
+t/20-unit/Type-Utils/dwim-both.t
 t/20-unit/Type-Utils/dwim-moose.t
 t/20-unit/Type-Utils/dwim-mouse.t
 t/20-unit/Type-Utils/match-on-type.t
