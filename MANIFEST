@@ -11,6 +11,7 @@ Makefile.PL
 NEWS
 README
 SIGNATURE
+TODO
 dist.ini
 doap.ttl
 examples/benchmark-coercions.pl
