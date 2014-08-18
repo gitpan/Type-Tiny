@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+1.000002	2014-08-18
+
+ [ Bug Fixes ]
+ - Fix for overloaded operation fallback on Perl 5.10.x.
+   Fixes RT#98113.
+   Dagfinn Ilmari Mannsåker++
+   Peter Flanigan++
+   <https://rt.cpan.org/Ticket/Display.html?id=98113>
+
 1.000001	2014-08-18
 
  [ Bug Fixes ]

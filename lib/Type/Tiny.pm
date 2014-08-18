@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY   = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION     = '1.000001';
+	$Type::Tiny::VERSION     = '1.000002';
 	$Type::Tiny::XS_VERSION  = '0.010';
 }
 
@@ -86,8 +86,10 @@ use overload
 	fallback   => 1,
 ;
 BEGIN {
-	overload->import(q(~~) => sub { $_[0]->check($_[1]) })
-		if Type::Tiny::SUPPORT_SMARTMATCH;
+	overload->import(
+		q(~~)    => sub { $_[0]->check($_[1]) },
+		fallback => 1, # 5.10 loses the fallback otherwise
+	) if Type::Tiny::SUPPORT_SMARTMATCH;
 }
 
 sub _overload_coderef
