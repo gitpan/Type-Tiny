@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+1.000001	2014-08-18
+
+ [ Bug Fixes ]
+ - Changes to dwim_type() in 0.047_09 broke the fallback to creating class
+   types in some circumstances. This broke the MooX::late test suite, and
+   some usages of MooX::late.
+   Shlomi Fish++
+
 1.000000	2014-08-16	Happy CPAN Day!
 
  [ Documentation ]
