@@ -6,6 +6,15 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+1.000003	2014-08-28
+
+ [ Bug Fixes ]
+ - Fix for coercions to parameterized Dict including a mixture of
+   inlineable and non-inlineable optional values.
+   Fixes RT#98362.
+   Gianni Ceccarelli++
+   <https://rt.cpan.org/Ticket/Display.html?id=98362>
+
 1.000002	2014-08-18
 
  [ Bug Fixes ]
@@ -118,6 +127,11 @@ Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
  - Type::Registry/Type::Parser will now auto-load MouseX::Types libraries.
 
 0.047_05	2014-07-29	Sanity++
+
+ [ REGRESSIONS ]
+ - Introduced bug concerning coercions to parameterized Dicts with a
+   mixture of inlineable and non-inlineable optional values.
+   <http://purl.org/NET/cpan-uri/rt/ticket/98362>
 
  [ Documentation ]
  - Improve the documentation of Optional[] and slurpy.
