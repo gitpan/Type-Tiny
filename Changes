@@ -6,6 +6,19 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+1.000004	2014-09-02
+
+ [ Bug Fixes ]
+ - Fix for Type::Registry::DWIM.
+   Fixes RT#98458.
+   Marcel Montes++
+   <https://rt.cpan.org/Ticket/Display.html?id=98458>
+ - Fix issues with coercions and native attribute traits with some oldish
+   versions of Moose on oldish versions of Perl.
+   Fixes RT#98159.
+   Peter Flanigan++
+   <https://rt.cpan.org/Ticket/Display.html?id=98159>
+
 1.000003	2014-08-28
 
  [ Bug Fixes ]
