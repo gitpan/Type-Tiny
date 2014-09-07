@@ -6,6 +6,40 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+1.001_000	2014-09-07
+
+ [ Bug Fixes ]
+ - Fix for Type::Registry::DWIM.
+   Fixes RT#98458.
+   Marcel Montes++
+   <https://rt.cpan.org/Ticket/Display.html?id=98458>
+ - Fix issues with coercions and native attribute traits with some oldish
+   versions of Moose on oldish versions of Perl.
+   Fixes RT#98159.
+   Peter Flanigan++
+   <https://rt.cpan.org/Ticket/Display.html?id=98159>
+
+ [ Documentation ]
+ - Updated NEWS file.
+ - Updated TODO file.
+ - Updates to Type::Tiny::Manual::UsingWithMoose,
+   Type::Tiny::Manual::UsingWithMoo, and
+   Type::Tiny::Manual::UsingWithMouse.
+
+ [ Test Suite ]
+ - Make some of the test case skip_all bits more ambitious; test older
+   versions of Moose and Moo than we were testing before.
+
+ [ Other ]
+ - Added: Type::Params now provides `compile_named` and `validate_named`
+   functions which do the same thing as `compile` and `validate` but are
+   better for named arguments.
+ - Updated: If Sub::Name is unavailable, but the shiny new core Sub::Util
+   is available, then use it instead.
+ - Updated: Want Type::Tiny::XS 0.011.
+ - `Type::Utils::dwim_type` now allows more control over fallback
+   behaviours.
+
 1.000004	2014-09-02
 
  [ Bug Fixes ]

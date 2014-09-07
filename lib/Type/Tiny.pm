@@ -10,8 +10,8 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY   = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION     = '1.000004';
-	$Type::Tiny::XS_VERSION  = '0.010';
+	$Type::Tiny::VERSION     = '1.001_000';
+	$Type::Tiny::XS_VERSION  = '0.011';
 }
 
 use Eval::TypeTiny ();
@@ -119,6 +119,7 @@ our %ALL_TYPES;
 
 my $QFS;
 my $uniq = 1;
+my $subname;
 sub new
 {
 	my $class  = shift;
@@ -203,14 +204,19 @@ sub new
 		$self->coercion->add_type_coercions(@$arr);
 	}
 	
-	if ($params{my_methods} and eval { require Sub::Name })
+	if ($params{my_methods})
 	{
-		for my $key (keys %{$params{my_methods}})
+		$subname =
+			eval { require Sub::Name } ? \&Sub::Name::subname :
+			eval { require Sub::Util } ? \&Sub::Util::set_subname :
+			0
+			if not defined $subname;
+		if ($subname)
 		{
-			Sub::Name::subname(
-				sprintf("%s::my_%s", $self->qualified_name, $key),
-				$params{my_methods}{$key},
-			);
+			$subname->(
+				sprintf("%s::my_%s", $self->qualified_name, $_),
+				$params{my_methods}{$_},
+			) for keys %{$params{my_methods}};
 		}
 	}
 	
