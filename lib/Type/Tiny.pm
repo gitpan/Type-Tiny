@@ -10,7 +10,7 @@ BEGIN {
 
 BEGIN {
 	$Type::Tiny::AUTHORITY   = 'cpan:TOBYINK';
-	$Type::Tiny::VERSION     = '1.001_000';
+	$Type::Tiny::VERSION     = '1.001_001';
 	$Type::Tiny::XS_VERSION  = '0.011';
 }
 
@@ -207,8 +207,8 @@ sub new
 	if ($params{my_methods})
 	{
 		$subname =
-			eval { require Sub::Name } ? \&Sub::Name::subname :
 			eval { require Sub::Util } ? \&Sub::Util::set_subname :
+			eval { require Sub::Name } ? \&Sub::Name::subname :
 			0
 			if not defined $subname;
 		if ($subname)
