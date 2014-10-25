@@ -102,6 +102,7 @@ t/20-unit/Type-Library/types.t
 t/20-unit/Type-Params/badsigs.t
 t/20-unit/Type-Params/carping.t
 t/20-unit/Type-Params/coerce.t
+t/20-unit/Type-Params/compile-named.t
 t/20-unit/Type-Params/methods.t
 t/20-unit/Type-Params/mixednamed.t
 t/20-unit/Type-Params/multisig.t
@@ -180,6 +181,7 @@ t/30-integration/Moops/basic.t
 t/30-integration/Moops/library-keyword.t
 t/30-integration/Moose/accept-moose-types.t
 t/30-integration/Moose/basic.t
+t/30-integration/Moose/coercion-more.t
 t/30-integration/Moose/coercion.t
 t/30-integration/Moose/inflate-then-inline.t
 t/30-integration/Moose/native-attribute-traits.t
