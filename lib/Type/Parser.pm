@@ -6,7 +6,7 @@ use warnings;
 sub _croak ($;@) { require Error::TypeTiny; goto \&Error::TypeTiny::croak }
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '1.001_001';
+our $VERSION   = '1.000005';
 
 # Token types
 # 
@@ -343,6 +343,7 @@ Evaluate: {
 	Type::Parser::TokenStream;
 	
 	use Scalar::Util qw(looks_like_number);
+	use Text::Balanced qw(extract_quotelike);
 	
 	sub new
 	{
@@ -453,13 +454,9 @@ Evaluate: {
 			return $punctuation{$spelling};
 		}
 		
-		if ($self->{remaining} =~ /\A\s*[q'"]/sm)
+		if (my $quotelike = extract_quotelike $self->{remaining})
 		{
-			require Text::Balanced;
-			if (my $quotelike = Text::Balanced::extract_quotelike($self->{remaining}))
-			{
-				return bless([ Type::Parser::QUOTELIKE, $quotelike ], "Type::Parser::Token"),;
-			}
+			return bless([ Type::Parser::QUOTELIKE, $quotelike ], "Type::Parser::Token"),;
 		}
 		
 		if ($self->{remaining} =~ /^([+-]?[\w:.+]+)/sm)

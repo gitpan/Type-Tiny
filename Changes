@@ -6,14 +6,18 @@ Home page:    <https://metacpan.org/release/Type-Tiny>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Type-Tiny>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
-1.001_001	2014-09-19
+1.000005	2014-10-25
 
- - Lazy-load Text::Balanced in Type::Parser. (Many parses don't even need
-   it.)
- - Lazy-load Type::Tiny::Union in Type::Params.
- - Updated: Prefer Sub::Util over Sub::Name. (The former is smaller.)
+ [ Bug Fixes ]
+ - Fix short-circuiting optimizations for parameterized HashRef, ArrayRef,
+   ScalarRef, and Map type constraints.
+   Fixes RT#99312.
+   Marcel Timmerman++
+   <https://rt.cpan.org/Ticket/Display.html?id=99312>
 
-1.001_000	Unknown
+ [ Test Suite ]
+ - Fix annoying warning message in test suite with recent versions of
+   Exporter::Tiny.
 
 1.000004	2014-09-02
 
